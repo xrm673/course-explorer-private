@@ -1,0 +1,42 @@
+"0","teacher_cards <- remDr$findElements(using=""xpath"",""//a[starts-with(@class, 'TeacherCard__StyledTeacherCard')]"")"
+"0","teacher_urls <- map(teacher_cards, ~.$getElementAttribute(""href"") %>% unlist())"
+"2","Warning in class(object) <- ""environment"" :"
+"2","
+ "
+"2"," Setting class(x) to ""environment"" sets attribute to NULL; result will no longer be an S4 object
+"
+"2","Warning in class(object) <- ""environment"" :"
+"2","
+ "
+"2"," Setting class(x) to ""environment"" sets attribute to NULL; result will no longer be an S4 object
+"
+"2","Warning in class(object) <- ""environment"" :"
+"2","
+ "
+"2"," Setting class(x) to ""environment"" sets attribute to NULL; result will no longer be an S4 object
+"
+"2","Warning in class(object) <- ""environment"" :"
+"2","
+ "
+"2"," Setting class(x) to ""environment"" sets attribute to NULL; result will no longer be an S4 object
+"
+"2","Warning in class(object) <- ""environment"" :"
+"2","
+ "
+"2"," Setting class(x) to ""environment"" sets attribute to NULL; result will no longer be an S4 object
+"
+"2","Warning in class(object) <- ""environment"" :"
+"2","
+ "
+"2"," Setting class(x) to ""environment"" sets attribute to NULL; result will no longer be an S4 object
+"
+"2","Warning in class(object) <- ""environment"" :"
+"2","
+ "
+"2"," Setting class(x) to ""environment"" sets attribute to NULL; result will no longer be an S4 object
+"
+"2","Warning in class(object) <- ""environment"" :"
+"2","
+ "
+"2"," Setting class(x) to ""environment"" sets attribute to NULL; result will no longer be an S4 object
+"

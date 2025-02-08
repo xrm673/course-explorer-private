@@ -1,0 +1,2 @@
+"0","teacher_cards <- remDr$findElements(using=""xpath"",""//a[starts-with(@class, 'TeacherCard__StyledTeacherCard')]"")"
+"0","teacher_urls <- map(teacher_cards, ~.$getElementAttribute(""href"") %>% unlist())"

@@ -1,0 +1,40 @@
+"0",""
+"0","while (TRUE) {"
+"0","  # Try to find the ""Show More"" professors button"
+"0","  load_more <- tryCatch("
+"0","    remDr$findElement(using = ""xpath"", ""//button[text()='Show More']""),"
+"0","    error = function(e) NULL"
+"0","  )"
+"0",""
+"0","  # If the button is not found, break the loop"
+"0","  if (is.null(load_more)) {"
+"0","    message(""No more 'Show More' professors button found. Stopping..."")"
+"0","    break"
+"0","  }"
+"0",""
+"0","  # Try clicking the button"
+"0","  tryCatch("
+"0","    {"
+"0","      load_more$clickElement()"
+"0","      y_position <- load_more$getElementLocation()$y - 300"
+"0","      remDr$executeScript(sprintf(""window.scrollTo(0,%f)"",y_position))"
+"0","      Sys.sleep(0.5)  # Small delay to allow content to load"
+"0","    },"
+"0","    error = function(e) {"
+"0","      message(""Button is no longer clickable. Stopping..."")"
+"0","      break"
+"0","    }"
+"0","  )"
+"0","}"
+"2","
+Selenium message:The element with the reference 5e49b300-21a2-4d9f-bdf2-8c12205e4ffa is stale; either its node document is not the active document, or it is no longer connected to the DOM
+For documentation on this error, please visit: https://www.seleniumhq.org/exceptions/stale_element_reference.html
+Build info: version: '4.0.0-alpha-2', revision: 'f148142cf8', time: '2019-07-01T21:30:10'
+System info: host: 'RUMINGXU-THINKB', ip: '10.48.13.236', os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '23.0.2'
+Driver info: driver.version: unknown
+
+"
+"2","Button is no longer clickable. Stopping...
+"
+"2","Error in value[[3L]](cond) : no loop for break/next, jumping to top level
+"
