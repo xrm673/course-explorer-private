@@ -3,7 +3,7 @@ Author: Raymond Xu
 Date: January 1, 2025
 """
 import unittest
-import data.course_data.get as get
+import parseText
 
 class TestParsePrerequisites(unittest.TestCase):
     def test_one_nonote(self):
@@ -11,7 +11,7 @@ class TestParsePrerequisites(unittest.TestCase):
         only one course
         """
         text = "MATH 1110 or equivalent."
-        self.assertEqual(get.parse_prerequisites(text), [["MATH1110"],False])
+        self.assertEqual(parseText.convert_prerequisites(text), [["MATH1110"],False])
 
     def test_multiple(self):
         """
@@ -23,7 +23,7 @@ class TestParsePrerequisites(unittest.TestCase):
         )
         expected = [['MATH2210', 'MATH2940'], ['MATH1120', 'MATH1920'],
         ['CS4620'], ['PHYS1112'],False]
-        self.assertCountEqual(get.parse_prerequisites(text), expected)
+        self.assertCountEqual(parseText.convert_prerequisites(text), expected)
 
     def test_parentheses(self):
         """
@@ -39,7 +39,7 @@ class TestParsePrerequisites(unittest.TestCase):
         expected = [['BTRY3080', 'CS2800', 'ECON3130', 'ENGRD2700', 'MATH4710'],
         ['MATH2210', 'MATH2230', 'MATH2310', 'MATH2940'], ['MATH1910',
         'MATH1120'], ['CS2110', 'CS2112'],True]
-        self.assertCountEqual(get.parse_prerequisites(text), expected)
+        self.assertCountEqual(parseText.convert_prerequisites(text), expected)
 
     def test_for(self):
         """
@@ -49,7 +49,7 @@ class TestParsePrerequisites(unittest.TestCase):
         "PHIL 2310; for CS majors: Elementary Python and CS 2800.")
         expected = [['CS1110', 'CS1112', 'CS1133'],
         ['LING1101', 'CS2800', 'PHIL2310'],True]
-        self.assertCountEqual(get.parse_prerequisites(text), expected)
+        self.assertCountEqual(parseText.convert_prerequisites(text), expected)
 
     def test_or(self):
         """
@@ -57,7 +57,7 @@ class TestParsePrerequisites(unittest.TestCase):
         """
         text = ("MATH 2210, MATH 2230, MATH 2310, MATH 2940, or equivalent.")
         expected = [['MATH2210', 'MATH2230', 'MATH2310', 'MATH2940'],False]
-        self.assertCountEqual(get.parse_prerequisites(text), expected)
+        self.assertCountEqual(parseText.convert_prerequisites(text), expected)
 
     def test_note(self):
         """
@@ -73,7 +73,7 @@ class TestParsePrerequisites(unittest.TestCase):
 
         expected = [['MATH2210', 'MATH2230', 'MATH2310', 'MATH2940'],
         ['CS2800'], ['CS2110', 'CS2112'],True]
-        self.assertCountEqual(get.parse_prerequisites(text), expected)
+        self.assertCountEqual(parseText.convert_prerequisites(text), expected)
 
     def test_middle(self):
         """
@@ -82,7 +82,7 @@ class TestParsePrerequisites(unittest.TestCase):
         text = ("MATH 1110-MATH 1120 with high performance, equivalent AP "
         "credit, or permission of department.")
         expected = [['MATH1120'],True]
-        self.assertCountEqual(get.parse_prerequisites(text), expected)
+        self.assertCountEqual(parseText.convert_prerequisites(text), expected)
 
     def test_instructor(self):
         """
@@ -93,7 +93,7 @@ class TestParsePrerequisites(unittest.TestCase):
         "the instructor. ")
         expected = [['CS1110', 'CS1112', 'CS1132', 'CS1133'],
         ['MATH2210', 'MATH2940'], ['CS3220', 'CS4210', 'MATH4250'],True]
-        self.assertCountEqual(get.parse_prerequisites(text), expected)
+        self.assertCountEqual(parseText.convert_prerequisites(text), expected)
 
     def test_dash(self):
         """
@@ -104,7 +104,7 @@ class TestParsePrerequisites(unittest.TestCase):
         "common algorithms and data structures, and an understanding of basic "
         "concepts in discrete mathematics.")
         expected = [['CS2110','CS2112'],['CS2800'],True]
-        self.assertCountEqual(get.parse_prerequisites(text), expected)
+        self.assertCountEqual(parseText.convert_prerequisites(text), expected)
 
     def test_repeat(self):
         """
@@ -115,10 +115,10 @@ class TestParsePrerequisites(unittest.TestCase):
         "(e.g. MATH 1920), programming proficiency (e.g. CS 2110), and CS 3780 "
         "or equivalent or permission of instructor.")
         expected = [['CS2800'], ['CS3780'], ['MATH2210', 'MATH2230', 'MATH2310',
-         'MATH2940'], ['MATH1920', 'MATH2220', 'MATH2240'],
+         'MATH2940'], ['MATH1120', 'MATH1910', 'MATH1920', 'MATH2220', 'MATH2240'],
          ['CS2110', 'CS2112'], ['BTRY3080', 'ECON3130',
          'ENGRD2700', 'MATH4710'],True]
-        self.assertCountEqual(get.parse_prerequisites(text), expected)
+        self.assertCountEqual(parseText.convert_prerequisites(text), expected)
 
     def test_replace_programming(self):
         """
@@ -126,7 +126,7 @@ class TestParsePrerequisites(unittest.TestCase):
         """
         text = "one programming course or equivalent programming experience."
         expected = [['CS1110', 'CS1112', 'CS1132', 'CS1133'],True]
-        self.assertCountEqual(get.parse_prerequisites(text), expected)
+        self.assertCountEqual(parseText.convert_prerequisites(text), expected)
 
 
 if __name__ == "__main__":

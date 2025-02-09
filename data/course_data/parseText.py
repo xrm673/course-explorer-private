@@ -8,7 +8,7 @@ import re
 def clean(text):
     if not text or text == "":
         return None 
-    text.replace('\xa0', ' ').replace("—","--").strip()
+    text = text.replace('\xa0', ' ').replace("—","--").strip()
     return text 
 
 def parse_distr(text):
@@ -29,18 +29,21 @@ def parse_distr(text):
 def clean_list(list):
     if not list or list==[]:
         return None
+    result = []
     for line in list:
-        line.replace('\xa0', ' ').replace("—","--").strip()
-    return list
+        line = line.replace('\xa0', ' ').replace("—","--").strip()
+        result.append(line)
+    return result
 
 def parse_preco(text):
+    details = {"Prerequisites":None,"Corequisites":None,
+               "Prerequisites or Corequisites":None,"Need Note":False}
     text = clean(text)
     if not text:
-        return None 
+        return details 
     
     preco_list = separate_prereq(text)
 
-    details = {}
     prerequisite = convert_prerequisites(preco_list[0])
     details["Prerequisites"] = prerequisite[:-1]
 

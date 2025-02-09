@@ -11,8 +11,10 @@ def api_get_subjects(semester):
     if response.status_code == 200:
         data = response.json()
         return data
+    elif response.status_code == 404:
+        print(f"{semester} page not found")
     else:
-        raise Exception("Error: {response.status_code}")
+        raise Exception(f"Error: {response.status_code}")
 
 
 def get(semester,subject,career=None,level=None):
@@ -32,5 +34,7 @@ def get(semester,subject,career=None,level=None):
     if response.status_code == 200:
         data = response.json()
         return data
+    elif response.status_code == 404:
+        print(f"{semester}-{subject} page not found!")
     else:
-        raise Exception("Error: {response.status_code}")
+        raise Exception(f"Error: {response.status_code}")
