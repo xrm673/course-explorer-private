@@ -98,7 +98,7 @@ def get_session_details(semester,subject,max_level=5):
                     note_text = note["descrlong"]
                     section_notes.append(note_text)
                     if has_preco(note_text):
-                        preco_dict = parse_preco(course["catalogPrereqCoreq"])
+                        preco_dict = parse_preco(note_text)
                         if preco_dict["Prerequisites"]:
                             section_dict["prereq"] = preco_dict["Prerequisites"]
                         if preco_dict["Corequisites"]:
