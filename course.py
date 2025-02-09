@@ -8,6 +8,50 @@ import special
 
 NEXT_SEMESTER = "SP25"
 
+class Course(object):
+    # getters
+    def get_subject(self):
+        return self._subject
+    
+    def get_number(self):
+        return re.search(r'\d+', self._code).group(0)
+
+    # helper for match_level
+    def get_level(self):
+        """
+        return an int that indicates the level of the course
+        """
+        return int(self.get_number()[0])
+    
+    def get_semester_offered(self):
+        return self._data["Semester Offered"]
+    
+    def available(self,semester):
+        if semester in self._data["Semester Offered"]:
+            return True 
+
+    def __init__(self,course_code,course_data):
+        assert re.fullmatch(r"[A-Z]+[0-9]{4}", course_code)
+        subject = re.match(r"[A-Z]+", course_code).group(0)
+        assert subject in course_data
+
+        if [self._code] in course_data[self._subject]:
+            self._data = course_data[self._subject][self._code]
+        else:
+            return UnknownCourse(course_code)
+
+        self._code = course_code 
+        self._subject = subject
+
+class UnknownCourse(Course):
+    def get_semester_offered(self):
+        return None
+    
+    def __init__(self,course_code):
+        self._code = course_code 
+        self._subject = re.match(r"[A-Z]+", course_code).group(0)
+        self._data = None
+
 def contain_course(course_data,course_code):
     subject = get_subject(course_code)
     if subject in course_data and course_code in course_data[subject]:
