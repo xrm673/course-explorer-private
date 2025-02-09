@@ -35,6 +35,14 @@ def clean_list(list):
         result.append(line)
     return result
 
+def has_preco(text):
+    if ("Prerequisite:" in text or "prerequisite:" in text or 
+        "Corequisite:" in text or "corequisite:" in text or
+        "Prerequisite or corequisite:" in text or 
+        "prerequisite or corequisite:" in text):
+        return True
+    return False
+
 def parse_preco(text):
     details = {"Prerequisites":None,"Corequisites":None,
                "Prerequisites or Corequisites":None,"Need Note":False}
@@ -271,4 +279,23 @@ def parse_overlap(text):
         for match in re.finditer(course_code_pattern, text)
     ]
     return course_list
-    
+
+def parse_instructor(l):
+    result = []
+    for instructor in l:
+        if instructor["middleName"] != "":
+            name = f"{instructor["firstName"]} {instructor["middleName"]} {instructor["lastName"]}"
+        else:
+            name = f"{instructor["firstName"]} {instructor["lastName"]}"
+        result.append(name)
+    return result
+
+def parse_credit(crdmax,crdmin):
+    """
+    crdmax and crdmin are int
+    """
+    result = [crdmax]
+    while crdmax > crdmin:
+        crdmax -= 1
+        result.append(crdmax)
+    return result

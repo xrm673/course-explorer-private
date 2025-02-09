@@ -45,31 +45,31 @@ def get_course_details(semester,subject,max_level=5):
         code = course["subject"] + course["catalogNbr"]
         details = {}
 
-        details["Title (long)"] = course["titleLong"]
-        details["Title (short)"] = course["titleShort"]
-        details["Semester Offered"] = [semester]
-        details["Description"] = clean(course["description"])
-        details["Specific Requirements"] = clean(course["catalogPrereqCoreq"])
+        details["ttl"] = course["titleLong"]
+        details["tts"] = course["titleShort"]
+        details["smst"] = [semester]
+        details["dsrpn"] = clean(course["description"])
+        details["req"] = clean(course["catalogPrereqCoreq"])
         if parse_distr(course["catalogDistr"]):
-            details["Distributions"] = parse_distr(course["catalogDistr"])
+            details["distr"] = parse_distr(course["catalogDistr"])
         if parse_overlap(course["catalogForbiddenOverlaps"]):
-            details["Forbidden Overlaps"] = parse_overlap(
+            details["ovlp"] = parse_overlap(
                 course["catalogForbiddenOverlaps"])
         if clean(course["catalogPermission"]):
-            details["Enrollment Permission"] = clean(course["catalogPermission"])
+            details["pmsn"] = clean(course["catalogPermission"])
         if clean(course["catalogComments"]):
-            details["Comments"] = clean(course["catalogComments"])
+            details["cmts"] = clean(course["catalogComments"])
         if clean_list(course["catalogOutcomes"]):
-            details["Outcomes"] = clean_list(course["catalogOutcomes"])
+            details["otcm"] = clean_list(course["catalogOutcomes"])
         
         preco_dict = parse_preco(course["catalogPrereqCoreq"])
         if preco_dict["Prerequisites"]:
-            details["Prerequisites"] = preco_dict["Prerequisites"]
+            details["prereq"] = preco_dict["Prerequisites"]
         if preco_dict["Corequisites"]:
-            details["Corequisites"] = preco_dict["Corequisites"]
+            details["coreq"] = preco_dict["Corequisites"]
         if preco_dict["Prerequisites or Corequisites"]:
-            details["Prerequisites or Corequisites"] = preco_dict["Prerequisites or Corequisites"]
-        details["Need_note"] = preco_dict["Need Note"]
+            details["preco"] = preco_dict["Prerequisites or Corequisites"]
+        details["note"] = preco_dict["Need Note"]
  
         result[code] = details
     print(f"finished {subject}-{semester}")
@@ -122,36 +122,36 @@ def prev_semester(semester):
 #         data = get_all_courses(semester,max_level)
 #         to_json(semester,data)
 
-def combine_all():
-    current_directory = os.getcwd()
+# def combine_all():
+#     current_directory = os.getcwd()
 
-    for filename in os.listdir(current_directory):
-        if filename.endswith(".json") and "LAST" in filename:
-            with open(filename, "r", encoding="utf-8") as f:
-                current_data = json.load(f)
-            break
+#     for filename in os.listdir(current_directory):
+#         if filename.endswith(".json") and "LAST" in filename:
+#             with open(filename, "r", encoding="utf-8") as f:
+#                 current_data = json.load(f)
+#             break
 
-    if current_data is None:
-        raise FileNotFoundError(f"{LAST_SEMESTER} file not found in the directory!")
+#     if current_data is None:
+#         raise FileNotFoundError(f"{LAST_SEMESTER} file not found in the directory!")
 
-    for filename in os.listdir(current_directory):
-        if filename.endswith(".json") and not "LAST" in filename:
-            semester = filename[:4]
-            with open(filename, "r", encoding="utf-8") as f:
-                data = json.load(f)
-            for subject in data:
-                if not subject in current_data:
-                    current_data[subject] = data[subject]
-                else:
-                    for course_code in data[subject]:
-                        if course_code in current_data[subject]:
-                            current_data[subject][course_code]["Semester Offered"].append(semester)
-                        else:
-                            current_data[subject][course_code] = data[subject][course_code]
+#     for filename in os.listdir(current_directory):
+#         if filename.endswith(".json") and not "LAST" in filename:
+#             semester = filename[:4]
+#             with open(filename, "r", encoding="utf-8") as f:
+#                 data = json.load(f)
+#             for subject in data:
+#                 if not subject in current_data:
+#                     current_data[subject] = data[subject]
+#                 else:
+#                     for course_code in data[subject]:
+#                         if course_code in current_data[subject]:
+#                             current_data[subject][course_code]["Semester Offered"].append(semester)
+#                         else:
+#                             current_data[subject][course_code] = data[subject][course_code]
     
-    file_path = os.path.join("new_combined", 'combined.json')
-    with open(file_path, "w", encoding="utf-8") as f:
-        json.dump(current_data, f, indent=4)
+#     file_path = os.path.join("new_combined", 'combined.json')
+#     with open(file_path, "w", encoding="utf-8") as f:
+#         json.dump(current_data, f, indent=4)
 
             
 
@@ -167,11 +167,11 @@ def get_three_years(semester,max_level=5):
             if value == {}:
                 continue
             if not subject in course_data:
-                course_data["subject"] = value
+                course_data[subject] = value
             else:
                 for course_code in value:
                     if course_code in course_data[subject]:
-                        course_data[subject][course_code]["Semester Offered"].append(semester)
+                        course_data[subject][course_code]["smst"].append(semester)
                     else:
                         course_data[subject][course_code] = value[course_code]
         
