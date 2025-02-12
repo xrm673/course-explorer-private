@@ -52,7 +52,7 @@ def get_session_details(semester,subject,max_level=5):
             group_dict["req"] = group["componentsRequired"]
             if group["componentsOptional"] != []:
                 group_dict["opt"] = group["componentsOptional"]
-            group_dict["grading"] = group["gradingBasis"]
+            group_dict["gradingb"] = group["gradingBasis"]
             group_dict["session_code"] = group["sessionCode"]
             if group["simpleCombinations"] != []:
                 group_dict["cmb"] = group["simpleCombinations"]
@@ -87,7 +87,7 @@ def get_session_details(semester,subject,max_level=5):
                         meeting_dict["end_dt"] = meeting["endDt"]
                     if (meeting["instructors"] and 
                         meeting["instructors"] != [] and type != "DIS"):
-                        meeting_dict["instr"] = parse_instructor(meeting["instructors"])
+                        meeting_dict["instr"] = {semester:parse_instructor(meeting["instructors"])}
                     if (meeting["meetingTopicDescription"] and 
                         meeting["meetingTopicDescription"] != ""):
                         meeting_dict["mt_tpc"] = meeting["meetingTopicDescription"]
@@ -128,7 +128,137 @@ def get_all_sessions(semester,max_level=5):
         result[subject] = value
     return result
 
-data = get_all_sessions(LAST_SEMESTER)
-with open("sessions", "w", encoding="utf-8") as f:
-    json.dump(data, f, indent=4)
+def prev_semester(semester):
+    """
+    return the previous semester
+    """
+    season = semester[:2]
+    year = int(semester[2:])
+    if season == "SP":
+        season = "WI"
+    elif season == "WI":
+        season = "FA"
+        year -= 1
+    elif season == "FA":
+        season = "SU"
+    elif season == "SU":
+        season = "SP"
+    semester = season + str(year)
+    return semester
+
+def get_one_year(semester,max_level=5):
+    session_data = get_all_sessions(semester,max_level)
+    count = 0
+    while count < 3:
+        count += 1
+        semester = prev_semester(semester)
+        subjects = get_subjects(semester)
+        for subject in subjects:
+            value = get_session_details(semester,subject,max_level)
+            if not value:
+                continue 
+            if not subject in session_data:
+                session_data[subject] = value 
+            else:
+                for course_code in value:
+                    if course_code in session_data[subject]:
+                        course_session_data = session_data[subject][course_code]
+                        course_value_data = value[course_code]
+                        instr_added = find_instructors(course_value_data,semester)
+                        session_data[subject][course_code] = add_instructors(course_session_data,instr_added,semester)
+                    else:
+                        session_data[subject][course_code] = value[course_code]
+    return session_data
+
+def find_instructors(course_value_data,semester):
+    """
+    Extracts instructor information from previous semester's course data.
+    Returns a nested dictionary structured as:
+    {group: {session: {meeting: instructors}}}
+    """
+    instructor_data = {}
+    has_ins = False
+    
+    for group in course_value_data:
+        if group not in instructor_data:
+            instructor_data[group] = {}
+
+        for session in course_value_data[group]:
+            if len(session) == 7:  # Session ID check
+                if session not in instructor_data[group]:
+                    instructor_data[group][session] = {}
+
+                for meeting in course_value_data[group][session]:
+                    if len(meeting) == 8:  # Meeting ID check
+                        if "instr" in course_value_data[group][session][meeting]:
+                            instructors = course_value_data[group][session][meeting]["instr"]
+                            instructor_data[group][session][meeting] = instructors
+                            has_ins = True
+    if has_ins:
+        return instructor_data
+    else:
+        return {} 
+
+def add_instructors(course_session_data,instructor_data,semester):
+    """
+    Transfers instructors from previous semester to current semester
+    by matching group, session, and meeting structure.
+    """
+    if instructor_data == {}:
+        return course_session_data
+    for group in course_session_data:
+        if group not in instructor_data:
+            continue  # No previous data for this group, skip
+
+        for session in course_session_data[group]:
+            if session not in instructor_data[group]:
+                continue  # No matching session in previous semester
+
+            for meeting in course_session_data[group][session]:
+                if meeting not in instructor_data[group][session]:
+                    continue  # No matching meeting, skip
+
+                # Get the previous instructor list
+                prev_instr = instructor_data[group][session][meeting]
+
+                # Ensure "instr" exists in current data
+                if "instr" not in course_session_data[group][session][meeting]:
+                    course_session_data[group][session][meeting]["instr"] = {}
+
+                # Merge the instructor dictionaries, keeping unique instructor IDs
+                course_session_data[group][session][meeting]["instr"][semester] = prev_instr[semester]
+
+    return course_session_data
+
+def break_data(data):
+    session_am = {}
+    session_nz = {}
+    for subject in data:
+        if subject[0] in A_TO_M:
+            session_am[subject] = data[subject]
+        else:
+            session_nz[subject] = data[subject]
+    file_path = os.path.join("session", 'session_am.json')
+    with open(file_path, "w", encoding="utf-8") as f:
+        json.dump(session_am, f, indent=4)
+    file_path = os.path.join("session", 'session_nz.json')
+    with open(file_path, "w", encoding="utf-8") as f:
+        json.dump(session_nz, f, indent=4)
+
+def get_all_types(data):
+    result = []
+    for subject in data:
+        for course_code in data[subject]:
+            for group in data[subject][course_code]:
+                req = data[subject][course_code][group]["req"]
+                if isinstance(req,list):
+                    result.append(tuple(req))
+                result.append(req)
+    return list(set(result))
+
+data = get_one_year(LAST_SEMESTER)
+print(get_all_types(data))
+break_data(data)
+# with open("sessions_combined.json", "w", encoding="utf-8") as f:
+#     json.dump(data, f, indent=4)
             

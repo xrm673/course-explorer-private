@@ -283,11 +283,13 @@ def parse_overlap(text):
 def parse_instructor(l):
     result = []
     for instructor in l:
+        sub_result = {}
         if instructor["middleName"] != "":
             name = f"{instructor["firstName"]} {instructor["middleName"]} {instructor["lastName"]}"
         else:
             name = f"{instructor["firstName"]} {instructor["lastName"]}"
-        result.append(name)
+        sub_result[instructor["netid"]] = name
+        result.append(sub_result)
     return result
 
 def parse_credit(crdmax,crdmin):

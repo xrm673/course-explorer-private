@@ -13,6 +13,9 @@ class Course(object):
     def get_subject(self):
         return self._subject
     
+    def get_title(self):
+        return self._coursedata["ttl"]
+    
     def get_number(self):
         return re.search(r'\d+', self._code).group(0)
 
@@ -24,33 +27,64 @@ class Course(object):
         return int(self.get_number()[0])
     
     def get_semester_offered(self):
-        return self._data["Semester Offered"]
+        return self._coursedata["Semester Offered"]
     
     def available(self,semester):
         if semester in self._data["Semester Offered"]:
             return True 
 
-    def __init__(self,course_code,course_data):
+    def __init__(self,course_code,course_data,session_data):
         assert re.fullmatch(r"[A-Z]+[0-9]{4}", course_code)
         subject = re.match(r"[A-Z]+", course_code).group(0)
         assert subject in course_data
 
-        if [self._code] in course_data[self._subject]:
-            self._data = course_data[self._subject][self._code]
-        else:
-            return UnknownCourse(course_code)
-
         self._code = course_code 
         self._subject = subject
+        if self._code in course_data[subject]:
+            self._coursedata = course_data[subject]
+        else:
+            self._coursedata = None
+
+        if not self._coursedata:
+            return UnknownCourse(course_code,course_data,session_data)
+        if not self._code in session_data[subject]:
+            return OldCourse(course_code,course_data,session_data)
+        if len(session_data[subject][course_code])==1:
+            return OneGroupCourse(course_code,course_data,session_data)
+        else: 
+            return MultiGroupCourse(course_code,course_data,session_data)
+
+class OneGroupCourse(Course):
+    def __init__(self,course_code,course_data,session_data):
+        super().__init__(course_code,course_data,session_data)
+        self._coursedata = course_data[self._subject][self._code]
+        self._sessiondata = session_data[self._subject][self._code]
+
+class MultiGroupCourse(Course):
+    def __init__(self,course_code,course_data,session_data):
+        super().__init__(course_code,course_data,session_data)
+        self._coursedata = course_data[self._subject][self._code]
+        self._sessiondata = session_data[self._subject][self._code]
+
+class OldCourse(Course):
+    def available(self):
+        return False
+
+    def __init__(self,course_code,course_data,session_data):
+        super().__init__(course_code,course_data,session_data)
 
 class UnknownCourse(Course):
+    def get_title(self):
+        return None
+    
     def get_semester_offered(self):
         return None
     
-    def __init__(self,course_code):
-        self._code = course_code 
-        self._subject = re.match(r"[A-Z]+", course_code).group(0)
-        self._data = None
+    def get_description(self):
+        return "This course has not been offered by Cornell for more than three years!"
+    
+    def __init__(self,course_code,course_data,session_data):
+        super().__init__(course_code,course_data,session_data)
 
 def contain_course(course_data,course_code):
     subject = get_subject(course_code)

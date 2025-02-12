@@ -177,6 +177,22 @@ def get_three_years(semester,max_level=5):
         
     return course_data
 
+def break_data(data):
+    combined_am = {}
+    combined_nz = {}
+    for subject in data:
+        if subject[0] in A_TO_M:
+            combined_am[subject] = data[subject]
+        else:
+            combined_nz[subject] = data[subject]
+    file_path = os.path.join("new_combined", 'combined_am.json')
+    with open(file_path, "w", encoding="utf-8") as f:
+        json.dump(combined_am, f, indent=4)
+    file_path = os.path.join("new_combined", 'combined_nz.json')
+    with open(file_path, "w", encoding="utf-8") as f:
+        json.dump(combined_nz, f, indent=4)
+
+
 
 def to_json(data):
     file_path = os.path.join("new_combined", 'new_combined.json')
@@ -184,5 +200,5 @@ def to_json(data):
         json.dump(data, f, indent=4)
 
 data = get_three_years(LAST_SEMESTER)
-to_json(data)
+break_data(data)
 # combine_all()
