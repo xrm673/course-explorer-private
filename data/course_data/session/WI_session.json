@@ -1,0 +1,4574 @@
+{
+    "AEM": {
+        "AEM1200": {
+            "Grp1": {
+                "crd": [
+                    3
+                ],
+                "req": [
+                    "LEC"
+                ],
+                "gradingb": "OPT",
+                "session_code": "WS",
+                "LEC-001": {
+                    "id": 1090,
+                    "mode": "AD",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "dwt5": "David W. Taylor"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                }
+            }
+        },
+        "AEM2011": {
+            "Grp1": {
+                "crd": [
+                    3
+                ],
+                "req": [
+                    "LEC"
+                ],
+                "gradingb": "GRI",
+                "session_code": "WS",
+                "LEC-001": {
+                    "id": 1091,
+                    "consent": "D",
+                    "mode": "AD",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "dlh266": "Donna Lynn Haeger"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                }
+            }
+        },
+        "AEM2210": {
+            "Grp1": {
+                "crd": [
+                    3
+                ],
+                "req": [
+                    "LEC"
+                ],
+                "gradingb": "GRI",
+                "session_code": "WS",
+                "LEC-001": {
+                    "id": 1092,
+                    "open": "C",
+                    "mode": "AD",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "rtg77": "R Thomas Godwin"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                }
+            }
+        },
+        "AEM2400": {
+            "Grp1": {
+                "crd": [
+                    3
+                ],
+                "req": [
+                    "LEC"
+                ],
+                "gradingb": "GRI",
+                "session_code": "WS",
+                "LEC-001": {
+                    "id": 1093,
+                    "mode": "AD",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "gse23": "Scott Erickson"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                }
+            }
+        },
+        "AEM2841": {
+            "Grp1": {
+                "crd": [
+                    3
+                ],
+                "req": [
+                    "LEC"
+                ],
+                "gradingb": "OPI",
+                "session_code": "WS",
+                "LEC-001": {
+                    "id": 1094,
+                    "mode": "AD",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "am2393": "Reza Moghimi"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                }
+            }
+        },
+        "AEM3230": {
+            "Grp1": {
+                "crd": [
+                    3
+                ],
+                "req": [
+                    "LEC"
+                ],
+                "gradingb": "GRD",
+                "session_code": "WS",
+                "LEC-001": {
+                    "id": 1096,
+                    "mode": "AD",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "eel33": "Eric E Lewis"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                }
+            }
+        },
+        "AEM3991": {
+            "Grp1": {
+                "crd": [
+                    3
+                ],
+                "req": [
+                    "LEC"
+                ],
+                "gradingb": "OPT",
+                "session_code": "WS",
+                "cmb": [
+                    {
+                        "subject": "NBA",
+                        "catalogNbr": "5991",
+                        "type": "W"
+                    }
+                ],
+                "LEC-001": {
+                    "id": 1097,
+                    "open": "C",
+                    "mode": "AD",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "eai1": "Elena A. Iankova"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                }
+            }
+        },
+        "AEM4002": {
+            "Grp1": {
+                "crd": [
+                    2
+                ],
+                "req": [
+                    "FLD"
+                ],
+                "gradingb": "BMT",
+                "session_code": "1",
+                "FLD-801": {
+                    "id": 1193,
+                    "open": "C",
+                    "tpc": "London Crossroads: Social Impact Projects",
+                    "loctn": "OTHINTL",
+                    "consent": "D",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "01/05/2025",
+                        "end_dt": "01/12/2025",
+                        "instr": [
+                            {
+                                "jmm528": "Jennifer Majka"
+                            },
+                            {
+                                "jas926": "James Alexander Stapp"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "Taught in London, England. Travel dates to London are leaving January 5, 2025 and returning January 12, 2025."
+                    ]
+                }
+            },
+            "Grp2": {
+                "crd": [
+                    2
+                ],
+                "req": [
+                    "FLD"
+                ],
+                "gradingb": "BMT",
+                "session_code": "1",
+                "FLD-802": {
+                    "id": 1194,
+                    "open": "C",
+                    "tpc": "Social Impact Consulting in South Africa",
+                    "loctn": "OTHINTL",
+                    "consent": "D",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "01/04/2025",
+                        "end_dt": "01/16/2025",
+                        "instr": [
+                            {
+                                "tlp24": "Trent Preszler"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "Taught in South Africa. Travel dates to South Africa are leaving January 3, 2025 and returning January 17, 2025."
+                    ]
+                }
+            }
+        },
+        "AEM4460": {
+            "Grp1": {
+                "crd": [
+                    0.5
+                ],
+                "req": [
+                    "FLD"
+                ],
+                "gradingb": "BMT",
+                "session_code": "1",
+                "FLD-801": {
+                    "id": 1196,
+                    "loctn": "OTHINTL",
+                    "consent": "D",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "01/05/2025",
+                        "end_dt": "01/12/2025",
+                        "instr": [
+                            {
+                                "dwh22": "Daniel Williams Hooker"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "Taught in Greece. Travel dates to Greece are leaving January 5, 2025 and returning January 12, 2025."
+                    ]
+                }
+            }
+        }
+    },
+    "AMST": {
+        "AMST2371": {
+            "Grp1": {
+                "crd": [
+                    3
+                ],
+                "req": [
+                    "LEC"
+                ],
+                "gradingb": "OPT",
+                "session_code": "WS",
+                "cmb": [
+                    {
+                        "subject": "ASRC",
+                        "catalogNbr": "2370",
+                        "type": "C"
+                    },
+                    {
+                        "subject": "MUSIC",
+                        "catalogNbr": "2370",
+                        "type": "C"
+                    }
+                ],
+                "LEC-001": {
+                    "id": 1108,
+                    "open": "C",
+                    "mode": "AD",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "cma249": "Catherine M. Appert"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                }
+            }
+        },
+        "AMST2505": {
+            "Grp1": {
+                "crd": [
+                    4
+                ],
+                "req": [
+                    "LEC"
+                ],
+                "gradingb": "GRD",
+                "session_code": "WS",
+                "cmb": [
+                    {
+                        "subject": "FGSS",
+                        "catalogNbr": "2501",
+                        "type": "C"
+                    },
+                    {
+                        "subject": "PMA",
+                        "catalogNbr": "2501",
+                        "type": "C"
+                    },
+                    {
+                        "subject": "VISST",
+                        "catalogNbr": "2502",
+                        "type": "C"
+                    }
+                ],
+                "LEC-001": {
+                    "id": 1087,
+                    "open": "C",
+                    "mode": "SD",
+                    "meeting1": {
+                        "tmstart": "10:00AM",
+                        "tmend": "02:05PM",
+                        "ptn": "MTWRF",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "sns87": "Samantha Noelle Sheppard"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                }
+            }
+        },
+        "AMST3141": {
+            "Grp1": {
+                "crd": [
+                    4
+                ],
+                "req": [
+                    "LEC"
+                ],
+                "gradingb": "OPT",
+                "session_code": "WS",
+                "cmb": [
+                    {
+                        "subject": "GOVT",
+                        "catalogNbr": "3141",
+                        "type": "C"
+                    }
+                ],
+                "LEC-001": {
+                    "id": 1114,
+                    "open": "C",
+                    "mode": "AD",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "mcs378": "Matthew C Saleh"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                }
+            }
+        }
+    },
+    "ANSC": {
+        "ANSC1120": {
+            "Grp1": {
+                "crd": [
+                    3
+                ],
+                "req": [
+                    "LEC",
+                    "LAB"
+                ],
+                "gradingb": "OPT",
+                "session_code": "WS",
+                "LEC-001": {
+                    "id": 1101,
+                    "mode": "AD",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "mas329": "Melanie Amanda Soberon"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                },
+                "LAB-401": {
+                    "id": 1102,
+                    "mode": "AD",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "mas329": "Melanie Amanda Soberon"
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "ANSC2551": {
+            "Grp1": {
+                "crd": [
+                    0.5
+                ],
+                "req": [
+                    "FLD"
+                ],
+                "gradingb": "BMT",
+                "session_code": "1",
+                "FLD-801": {
+                    "id": 1174,
+                    "loctn": "OTHINTL",
+                    "consent": "I",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "01/07/2025",
+                        "end_dt": "01/18/2025",
+                        "instr": [
+                            {
+                                "mev1": "Mike Van Amburgh"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "Taught in Italy. This is part of a multi-term course sequence with ANSC 2550 and ANSC 2552."
+                    ]
+                }
+            }
+        },
+        "ANSC3561": {
+            "Grp1": {
+                "crd": [
+                    0.5
+                ],
+                "req": [
+                    "FLD"
+                ],
+                "gradingb": "BMT",
+                "session_code": "1",
+                "FLD-801": {
+                    "id": 1175,
+                    "loctn": "OTHINTL",
+                    "consent": "I",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "01/06/2025",
+                        "end_dt": "01/16/2025",
+                        "instr": [
+                            {
+                                "mev1": "Mike Van Amburgh"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "Taught in Germany. This is part of a multi-term course sequence with ANSC 3560 and ANSC 3562."
+                    ]
+                }
+            }
+        }
+    },
+    "ANTHR": {
+        "ANTHR3590": {
+            "Grp1": {
+                "crd": [
+                    3
+                ],
+                "req": [
+                    "SEM"
+                ],
+                "gradingb": "GRI",
+                "session_code": "DYN",
+                "cmb": [
+                    {
+                        "subject": "ANTHR",
+                        "catalogNbr": "6590",
+                        "type": "B"
+                    },
+                    {
+                        "subject": "ARKEO",
+                        "catalogNbr": "3590",
+                        "type": "B"
+                    },
+                    {
+                        "subject": "ARKEO",
+                        "catalogNbr": "6590",
+                        "type": "B"
+                    },
+                    {
+                        "subject": "ARTH",
+                        "catalogNbr": "3590",
+                        "type": "B"
+                    },
+                    {
+                        "subject": "ARTH",
+                        "catalogNbr": "6595",
+                        "type": "B"
+                    },
+                    {
+                        "subject": "ASIAN",
+                        "catalogNbr": "3351",
+                        "type": "B"
+                    },
+                    {
+                        "subject": "ASIAN",
+                        "catalogNbr": "6651",
+                        "type": "B"
+                    },
+                    {
+                        "subject": "VISST",
+                        "catalogNbr": "3590",
+                        "type": "B"
+                    },
+                    {
+                        "subject": "VISST",
+                        "catalogNbr": "6590",
+                        "type": "B"
+                    }
+                ],
+                "SEM-101": {
+                    "id": 1116,
+                    "loctn": "OTHINTL",
+                    "consent": "D",
+                    "meeting1": {
+                        "tmstart": "09:00AM",
+                        "tmend": "12:00PM",
+                        "ptn": "MTWRF",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "nf42": "Magnus Fiskesjo"
+                            }
+                        ]
+                    },
+                    "meeting2": {
+                        "tmstart": "01:00PM",
+                        "tmend": "04:00PM",
+                        "ptn": "MTWRF",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025"
+                    },
+                    "meeting3": {
+                        "tmstart": "09:00AM",
+                        "tmend": "12:00PM",
+                        "ptn": "S",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025"
+                    },
+                    "notes": [
+                        "Taught in Krong Siem Reap and Phnom Penh, Cambodia.",
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                }
+            }
+        }
+    },
+    "ARKEO": {
+        "ARKEO2700": {
+            "Grp1": {
+                "crd": [
+                    3
+                ],
+                "req": [
+                    "LEC"
+                ],
+                "gradingb": "GRI",
+                "session_code": "WS",
+                "cmb": [
+                    {
+                        "subject": "ARTH",
+                        "catalogNbr": "2200",
+                        "type": "C"
+                    },
+                    {
+                        "subject": "CLASS",
+                        "catalogNbr": "2700",
+                        "type": "C"
+                    }
+                ],
+                "LEC-001": {
+                    "id": 1150,
+                    "mode": "AD",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "vjp33": "Verity Jane Platt"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                }
+            }
+        },
+        "ARKEO3590": {
+            "Grp1": {
+                "crd": [
+                    3
+                ],
+                "req": [
+                    "SEM"
+                ],
+                "gradingb": "GRI",
+                "session_code": "DYN",
+                "cmb": [
+                    {
+                        "subject": "ANTHR",
+                        "catalogNbr": "3590",
+                        "type": "B"
+                    },
+                    {
+                        "subject": "ANTHR",
+                        "catalogNbr": "6590",
+                        "type": "B"
+                    },
+                    {
+                        "subject": "ARKEO",
+                        "catalogNbr": "6590",
+                        "type": "B"
+                    },
+                    {
+                        "subject": "ARTH",
+                        "catalogNbr": "3590",
+                        "type": "B"
+                    },
+                    {
+                        "subject": "ARTH",
+                        "catalogNbr": "6595",
+                        "type": "B"
+                    },
+                    {
+                        "subject": "ASIAN",
+                        "catalogNbr": "3351",
+                        "type": "B"
+                    },
+                    {
+                        "subject": "ASIAN",
+                        "catalogNbr": "6651",
+                        "type": "B"
+                    },
+                    {
+                        "subject": "VISST",
+                        "catalogNbr": "3590",
+                        "type": "B"
+                    },
+                    {
+                        "subject": "VISST",
+                        "catalogNbr": "6590",
+                        "type": "B"
+                    }
+                ],
+                "SEM-101": {
+                    "id": 1161,
+                    "consent": "D",
+                    "meeting1": {
+                        "tmstart": "09:00AM",
+                        "tmend": "12:00PM",
+                        "ptn": "MTWRF",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "nf42": "Magnus Fiskesjo"
+                            }
+                        ]
+                    },
+                    "meeting2": {
+                        "tmstart": "01:00PM",
+                        "tmend": "04:00PM",
+                        "ptn": "MTWRF",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025"
+                    },
+                    "meeting3": {
+                        "tmstart": "09:00AM",
+                        "tmend": "12:00PM",
+                        "ptn": "S",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025"
+                    }
+                }
+            }
+        }
+    },
+    "ARTH": {
+        "ARTH2200": {
+            "Grp1": {
+                "crd": [
+                    3
+                ],
+                "req": [
+                    "LEC"
+                ],
+                "gradingb": "GRI",
+                "session_code": "WS",
+                "cmb": [
+                    {
+                        "subject": "ARKEO",
+                        "catalogNbr": "2700",
+                        "type": "C"
+                    },
+                    {
+                        "subject": "CLASS",
+                        "catalogNbr": "2700",
+                        "type": "C"
+                    }
+                ],
+                "LEC-001": {
+                    "id": 1148,
+                    "mode": "AD",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "vjp33": "Verity Jane Platt"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                }
+            }
+        },
+        "ARTH3590": {
+            "Grp1": {
+                "crd": [
+                    3
+                ],
+                "req": [
+                    "SEM"
+                ],
+                "gradingb": "GRI",
+                "session_code": "DYN",
+                "cmb": [
+                    {
+                        "subject": "ANTHR",
+                        "catalogNbr": "3590",
+                        "type": "B"
+                    },
+                    {
+                        "subject": "ANTHR",
+                        "catalogNbr": "6590",
+                        "type": "B"
+                    },
+                    {
+                        "subject": "ARKEO",
+                        "catalogNbr": "3590",
+                        "type": "B"
+                    },
+                    {
+                        "subject": "ARKEO",
+                        "catalogNbr": "6590",
+                        "type": "B"
+                    },
+                    {
+                        "subject": "ARTH",
+                        "catalogNbr": "6595",
+                        "type": "B"
+                    },
+                    {
+                        "subject": "ASIAN",
+                        "catalogNbr": "3351",
+                        "type": "B"
+                    },
+                    {
+                        "subject": "ASIAN",
+                        "catalogNbr": "6651",
+                        "type": "B"
+                    },
+                    {
+                        "subject": "VISST",
+                        "catalogNbr": "3590",
+                        "type": "B"
+                    },
+                    {
+                        "subject": "VISST",
+                        "catalogNbr": "6590",
+                        "type": "B"
+                    }
+                ],
+                "SEM-101": {
+                    "id": 1162,
+                    "consent": "D",
+                    "meeting1": {
+                        "tmstart": "09:00AM",
+                        "tmend": "12:00PM",
+                        "ptn": "MTWRF",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "nf42": "Magnus Fiskesjo"
+                            }
+                        ]
+                    },
+                    "meeting2": {
+                        "tmstart": "01:00PM",
+                        "tmend": "04:00PM",
+                        "ptn": "MTWRF",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025"
+                    },
+                    "meeting3": {
+                        "tmstart": "09:00AM",
+                        "tmend": "12:00PM",
+                        "ptn": "S",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025"
+                    }
+                }
+            }
+        }
+    },
+    "ASIAN": {
+        "ASIAN3351": {
+            "Grp1": {
+                "crd": [
+                    3
+                ],
+                "req": [
+                    "SEM"
+                ],
+                "gradingb": "GRI",
+                "session_code": "DYN",
+                "cmb": [
+                    {
+                        "subject": "ANTHR",
+                        "catalogNbr": "3590",
+                        "type": "B"
+                    },
+                    {
+                        "subject": "ANTHR",
+                        "catalogNbr": "6590",
+                        "type": "B"
+                    },
+                    {
+                        "subject": "ARKEO",
+                        "catalogNbr": "3590",
+                        "type": "B"
+                    },
+                    {
+                        "subject": "ARKEO",
+                        "catalogNbr": "6590",
+                        "type": "B"
+                    },
+                    {
+                        "subject": "ARTH",
+                        "catalogNbr": "3590",
+                        "type": "B"
+                    },
+                    {
+                        "subject": "ARTH",
+                        "catalogNbr": "6595",
+                        "type": "B"
+                    },
+                    {
+                        "subject": "ASIAN",
+                        "catalogNbr": "6651",
+                        "type": "B"
+                    },
+                    {
+                        "subject": "VISST",
+                        "catalogNbr": "3590",
+                        "type": "B"
+                    },
+                    {
+                        "subject": "VISST",
+                        "catalogNbr": "6590",
+                        "type": "B"
+                    }
+                ],
+                "SEM-101": {
+                    "id": 1163,
+                    "consent": "D",
+                    "meeting1": {
+                        "tmstart": "09:00AM",
+                        "tmend": "12:00PM",
+                        "ptn": "MTWRF",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "nf42": "Magnus Fiskesjo"
+                            }
+                        ]
+                    },
+                    "meeting2": {
+                        "tmstart": "01:00PM",
+                        "tmend": "04:00PM",
+                        "ptn": "MTWRF",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025"
+                    },
+                    "meeting3": {
+                        "tmstart": "09:00AM",
+                        "tmend": "12:00PM",
+                        "ptn": "S",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025"
+                    }
+                }
+            }
+        }
+    },
+    "ASL": {
+        "ASL1101": {
+            "Grp1": {
+                "crd": [
+                    4
+                ],
+                "req": [
+                    "SEM"
+                ],
+                "gradingb": "GRI",
+                "session_code": "WS",
+                "SEM-101": {
+                    "id": 1122,
+                    "mode": "SD",
+                    "meeting1": {
+                        "tmstart": "11:00AM",
+                        "tmend": "01:15PM",
+                        "ptn": "MTWRF",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "mp842": "Matilda Prestano"
+                            }
+                        ]
+                    },
+                    "meeting2": {
+                        "tmstart": "01:45PM",
+                        "tmend": "03:40PM",
+                        "ptn": "MTWRF",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "mp842": "Matilda Prestano"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                }
+            }
+        }
+    },
+    "ASRC": {
+        "ASRC2370": {
+            "Grp1": {
+                "crd": [
+                    3
+                ],
+                "req": [
+                    "LEC"
+                ],
+                "gradingb": "OPT",
+                "session_code": "WS",
+                "cmb": [
+                    {
+                        "subject": "AMST",
+                        "catalogNbr": "2371",
+                        "type": "C"
+                    },
+                    {
+                        "subject": "MUSIC",
+                        "catalogNbr": "2370",
+                        "type": "C"
+                    }
+                ],
+                "LEC-001": {
+                    "id": 1109,
+                    "open": "C",
+                    "mode": "AD",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "cma249": "Catherine M. Appert"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                }
+            }
+        }
+    },
+    "BIOEE": {
+        "BIOEE1610": {
+            "Grp1": {
+                "crd": [
+                    3
+                ],
+                "req": [
+                    "LEC"
+                ],
+                "gradingb": "OPT",
+                "session_code": "WS",
+                "LEC-001": {
+                    "id": 1124,
+                    "mode": "AD",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "jrs626": "Justin R. St. Juliana"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                }
+            }
+        }
+    },
+    "BIOG": {
+        "BIOG3500": {
+            "Grp1": {
+                "crd": [
+                    3
+                ],
+                "req": [
+                    "LEC"
+                ],
+                "gradingb": "GRD",
+                "session_code": "WS",
+                "LEC-001": {
+                    "id": 1127,
+                    "open": "C",
+                    "mode": "AD",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "mas245": "Mark Akos Sarvary"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                }
+            }
+        }
+    },
+    "BIOMI": {
+        "BIOMI1720": {
+            "Grp1": {
+                "crd": [
+                    3
+                ],
+                "req": [
+                    "LEC"
+                ],
+                "gradingb": "GRD",
+                "session_code": "WS",
+                "cmb": [
+                    {
+                        "subject": "CLASS",
+                        "catalogNbr": "1692",
+                        "type": "C"
+                    }
+                ],
+                "LEC-001": {
+                    "id": 1129,
+                    "consent": "I",
+                    "mode": "SD",
+                    "meeting1": {
+                        "tmstart": "08:30AM",
+                        "tmend": "11:40AM",
+                        "ptn": "MTWRF",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "hr12": "Hanna M. Roisman"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                }
+            }
+        }
+    },
+    "CLASS": {
+        "CLASS1692": {
+            "Grp1": {
+                "crd": [
+                    3
+                ],
+                "req": [
+                    "LEC"
+                ],
+                "gradingb": "GRD",
+                "session_code": "WS",
+                "cmb": [
+                    {
+                        "subject": "BIOMI",
+                        "catalogNbr": "1720",
+                        "type": "C"
+                    }
+                ],
+                "LEC-001": {
+                    "id": 1128,
+                    "consent": "I",
+                    "mode": "SD",
+                    "meeting1": {
+                        "tmstart": "08:30AM",
+                        "tmend": "11:40AM",
+                        "ptn": "MTWRF",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "hr12": "Hanna M. Roisman"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                }
+            }
+        },
+        "CLASS2604": {
+            "Grp1": {
+                "crd": [
+                    3
+                ],
+                "req": [
+                    "LEC"
+                ],
+                "gradingb": "OPT",
+                "session_code": "WS",
+                "LEC-001": {
+                    "id": 1130,
+                    "mode": "AD",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "mf268": "Michael Fontaine"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                }
+            }
+        },
+        "CLASS2700": {
+            "Grp1": {
+                "crd": [
+                    3
+                ],
+                "req": [
+                    "LEC"
+                ],
+                "gradingb": "GRI",
+                "session_code": "WS",
+                "cmb": [
+                    {
+                        "subject": "ARKEO",
+                        "catalogNbr": "2700",
+                        "type": "C"
+                    },
+                    {
+                        "subject": "ARTH",
+                        "catalogNbr": "2200",
+                        "type": "C"
+                    }
+                ],
+                "LEC-001": {
+                    "id": 1149,
+                    "mode": "AD",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "vjp33": "Verity Jane Platt"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                }
+            }
+        }
+    },
+    "COMM": {
+        "COMM3090": {
+            "Grp1": {
+                "crd": [
+                    3
+                ],
+                "req": [
+                    "LEC",
+                    "FLD"
+                ],
+                "gradingb": "GRD",
+                "session_code": "DYN",
+                "LEC-001": {
+                    "id": 1117,
+                    "loctn": "OTHINTL",
+                    "consent": "I",
+                    "meeting1": {
+                        "tmstart": "02:00PM",
+                        "tmend": "05:00PM",
+                        "ptn": "S",
+                        "start_dt": "01/04/2025",
+                        "end_dt": "01/04/2025",
+                        "instr": [
+                            {
+                                "ml2576": "Michelle LaVigne"
+                            }
+                        ]
+                    },
+                    "meeting2": {
+                        "tmstart": "10:00AM",
+                        "tmend": "05:00PM",
+                        "ptn": "M",
+                        "start_dt": "01/06/2025",
+                        "end_dt": "01/06/2025",
+                        "instr": [
+                            {
+                                "ml2576": "Michelle LaVigne"
+                            }
+                        ]
+                    },
+                    "meeting3": {
+                        "tmstart": "02:00PM",
+                        "tmend": "05:00PM",
+                        "ptn": "T",
+                        "start_dt": "01/07/2025",
+                        "end_dt": "01/07/2025",
+                        "instr": [
+                            {
+                                "ml2576": "Michelle LaVigne"
+                            }
+                        ]
+                    },
+                    "meeting4": {
+                        "tmstart": "10:00AM",
+                        "tmend": "05:00PM",
+                        "ptn": "W",
+                        "start_dt": "01/08/2025",
+                        "end_dt": "01/08/2025",
+                        "instr": [
+                            {
+                                "ml2576": "Michelle LaVigne"
+                            }
+                        ]
+                    },
+                    "meeting5": {
+                        "tmstart": "09:00AM",
+                        "tmend": "05:00PM",
+                        "ptn": "F",
+                        "start_dt": "01/10/2025",
+                        "end_dt": "01/10/2025",
+                        "instr": [
+                            {
+                                "ml2576": "Michelle LaVigne"
+                            }
+                        ]
+                    },
+                    "meeting6": {
+                        "tmstart": "09:00AM",
+                        "tmend": "05:00PM",
+                        "ptn": "Su",
+                        "start_dt": "01/12/2025",
+                        "end_dt": "01/12/2025",
+                        "instr": [
+                            {
+                                "ml2576": "Michelle LaVigne"
+                            }
+                        ]
+                    },
+                    "meeting7": {
+                        "tmstart": "09:00AM",
+                        "tmend": "05:00PM",
+                        "ptn": "M",
+                        "start_dt": "01/13/2025",
+                        "end_dt": "01/13/2025",
+                        "instr": [
+                            {
+                                "ml2576": "Michelle LaVigne"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "Taught in Oaxaca, Mexico.",
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                },
+                "FLD-801": {
+                    "id": 1118,
+                    "loctn": "OTHINTL",
+                    "consent": "I",
+                    "meeting1": {
+                        "tmstart": "09:00AM",
+                        "tmend": "12:00PM",
+                        "ptn": "S",
+                        "start_dt": "01/04/2025",
+                        "end_dt": "01/04/2025",
+                        "instr": [
+                            {
+                                "ml2576": "Michelle LaVigne"
+                            }
+                        ]
+                    },
+                    "meeting2": {
+                        "tmstart": "09:00AM",
+                        "tmend": "05:00PM",
+                        "ptn": "Su",
+                        "start_dt": "01/05/2025",
+                        "end_dt": "01/05/2025",
+                        "instr": [
+                            {
+                                "ml2576": "Michelle LaVigne"
+                            }
+                        ]
+                    },
+                    "meeting3": {
+                        "tmstart": "09:00AM",
+                        "tmend": "12:00PM",
+                        "ptn": "T",
+                        "start_dt": "01/07/2025",
+                        "end_dt": "01/07/2025",
+                        "instr": [
+                            {
+                                "ml2576": "Michelle LaVigne"
+                            }
+                        ]
+                    },
+                    "meeting4": {
+                        "tmstart": "09:00AM",
+                        "tmend": "05:00PM",
+                        "ptn": "R",
+                        "start_dt": "01/09/2025",
+                        "end_dt": "01/09/2025",
+                        "instr": [
+                            {
+                                "ml2576": "Michelle LaVigne"
+                            }
+                        ]
+                    },
+                    "meeting5": {
+                        "tmstart": "09:00AM",
+                        "tmend": "05:00PM",
+                        "ptn": "S",
+                        "start_dt": "01/11/2025",
+                        "end_dt": "01/11/2025",
+                        "instr": [
+                            {
+                                "ml2576": "Michelle LaVigne"
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "COMM4300": {
+            "Grp1": {
+                "crd": [
+                    3
+                ],
+                "req": [
+                    "SEM"
+                ],
+                "gradingb": "OPT",
+                "session_code": "WS",
+                "cmb": [
+                    {
+                        "subject": "COMM",
+                        "catalogNbr": "5300",
+                        "type": "B"
+                    },
+                    {
+                        "subject": "INFO",
+                        "catalogNbr": "4301",
+                        "type": "B"
+                    },
+                    {
+                        "subject": "INFO",
+                        "catalogNbr": "5301",
+                        "type": "B"
+                    }
+                ],
+                "SEM-101": {
+                    "id": 1151,
+                    "consent": "D",
+                    "mode": "SD",
+                    "meeting1": {
+                        "tmstart": "09:30AM",
+                        "tmend": "12:45PM",
+                        "ptn": "MTWRF",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "des14": "Dawn Schrader"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                }
+            }
+        },
+        "COMM4760": {
+            "Grp1": {
+                "crd": [
+                    3
+                ],
+                "req": [
+                    "LEC"
+                ],
+                "gradingb": "GRD",
+                "session_code": "WS",
+                "LEC-001": {
+                    "id": 1147,
+                    "mode": "AD",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "ju68": "Jamal Uddin"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                }
+            }
+        },
+        "COMM5300": {
+            "Grp1": {
+                "crd": [
+                    3
+                ],
+                "req": [
+                    "SEM"
+                ],
+                "gradingb": "OPT",
+                "session_code": "WS",
+                "cmb": [
+                    {
+                        "subject": "COMM",
+                        "catalogNbr": "4300",
+                        "type": "B"
+                    },
+                    {
+                        "subject": "INFO",
+                        "catalogNbr": "4301",
+                        "type": "B"
+                    },
+                    {
+                        "subject": "INFO",
+                        "catalogNbr": "5301",
+                        "type": "B"
+                    }
+                ],
+                "SEM-101": {
+                    "id": 1153,
+                    "consent": "D",
+                    "mode": "SD",
+                    "meeting1": {
+                        "tmstart": "09:30AM",
+                        "tmend": "12:45PM",
+                        "ptn": "MTWRF",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "des14": "Dawn Schrader"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                }
+            }
+        }
+    },
+    "CS": {
+        "CS2850": {
+            "Grp1": {
+                "crd": [
+                    3
+                ],
+                "req": [
+                    "LEC"
+                ],
+                "gradingb": "OPT",
+                "session_code": "WS",
+                "cmb": [
+                    {
+                        "subject": "ECON",
+                        "catalogNbr": "2040",
+                        "type": "C"
+                    },
+                    {
+                        "subject": "INFO",
+                        "catalogNbr": "2040",
+                        "type": "C"
+                    },
+                    {
+                        "subject": "SOC",
+                        "catalogNbr": "2090",
+                        "type": "C"
+                    }
+                ],
+                "LEC-001": {
+                    "id": 1137,
+                    "open": "C",
+                    "mode": "AD",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "ae392": "Anna Evtushenko"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                }
+            }
+        }
+    },
+    "ECON": {
+        "ECON1110": {
+            "Grp1": {
+                "crd": [
+                    3
+                ],
+                "req": [
+                    "LEC"
+                ],
+                "gradingb": "OPT",
+                "session_code": "WS",
+                "LEC-001": {
+                    "id": 1131,
+                    "mode": "AD",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "jpw6": "Jennifer Parker Wissink"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                }
+            }
+        },
+        "ECON1120": {
+            "Grp1": {
+                "crd": [
+                    3
+                ],
+                "req": [
+                    "LEC"
+                ],
+                "gradingb": "OPT",
+                "session_code": "WS",
+                "LEC-001": {
+                    "id": 1132,
+                    "mode": "AD",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "tae23": "Thomas Andrew Evans"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                }
+            }
+        },
+        "ECON2040": {
+            "Grp1": {
+                "crd": [
+                    3
+                ],
+                "req": [
+                    "LEC"
+                ],
+                "gradingb": "OPT",
+                "session_code": "WS",
+                "cmb": [
+                    {
+                        "subject": "CS",
+                        "catalogNbr": "2850",
+                        "type": "C"
+                    },
+                    {
+                        "subject": "INFO",
+                        "catalogNbr": "2040",
+                        "type": "C"
+                    },
+                    {
+                        "subject": "SOC",
+                        "catalogNbr": "2090",
+                        "type": "C"
+                    }
+                ],
+                "LEC-001": {
+                    "id": 1135,
+                    "open": "C",
+                    "mode": "AD",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "ae392": "Anna Evtushenko"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                }
+            }
+        }
+    },
+    "ENGL": {
+        "ENGL2795": {
+            "Grp1": {
+                "crd": [
+                    3
+                ],
+                "req": [
+                    "SEM"
+                ],
+                "gradingb": "OPT",
+                "session_code": "WS",
+                "SEM-101": {
+                    "id": 1133,
+                    "mode": "AD",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "kug1": "Krystyna Urbisz Golkowska"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                }
+            }
+        }
+    },
+    "ENTOM": {
+        "ENTOM2030": {
+            "Grp1": {
+                "crd": [
+                    3
+                ],
+                "req": [
+                    "LEC"
+                ],
+                "gradingb": "OPT",
+                "session_code": "WS",
+                "LEC-001": {
+                    "id": 1139,
+                    "mode": "AD",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "cmc27": "Marina Caillaud"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                }
+            }
+        }
+    },
+    "FGSS": {
+        "FGSS2501": {
+            "Grp1": {
+                "crd": [
+                    4
+                ],
+                "req": [
+                    "LEC"
+                ],
+                "gradingb": "GRD",
+                "session_code": "WS",
+                "cmb": [
+                    {
+                        "subject": "AMST",
+                        "catalogNbr": "2505",
+                        "type": "C"
+                    },
+                    {
+                        "subject": "PMA",
+                        "catalogNbr": "2501",
+                        "type": "C"
+                    },
+                    {
+                        "subject": "VISST",
+                        "catalogNbr": "2502",
+                        "type": "C"
+                    }
+                ],
+                "LEC-001": {
+                    "id": 1086,
+                    "open": "C",
+                    "mode": "SD",
+                    "meeting1": {
+                        "tmstart": "10:00AM",
+                        "tmend": "02:05PM",
+                        "ptn": "MTWRF",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "sns87": "Samantha Noelle Sheppard"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                }
+            }
+        }
+    },
+    "GDEV": {
+        "GDEV3501": {
+            "Grp1": {
+                "crd": [
+                    2.5
+                ],
+                "req": [
+                    "PRA"
+                ],
+                "gradingb": "SUI",
+                "session_code": "1",
+                "cmb": [
+                    {
+                        "subject": "GDEV",
+                        "catalogNbr": "5501",
+                        "type": "W"
+                    }
+                ],
+                "PRA-601": {
+                    "id": 1176,
+                    "tpc": "Agroecology: Theory and Practice",
+                    "loctn": "OTHINTL",
+                    "consent": "I",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "01/05/2025",
+                        "end_dt": "01/18/2025",
+                        "instr": [
+                            {
+                                "rnb5": "Rachel Bezner Kerr"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "Taught in Malawi. Multi-term course, completion of GDEV 3500/5500 and GDEV 3501/5501 required for final grade."
+                    ]
+                }
+            },
+            "Grp2": {
+                "crd": [
+                    2.5
+                ],
+                "req": [
+                    "PRA"
+                ],
+                "gradingb": "SUI",
+                "session_code": "1",
+                "cmb": [
+                    {
+                        "subject": "GDEV",
+                        "catalogNbr": "5501",
+                        "type": "W"
+                    }
+                ],
+                "PRA-602": {
+                    "id": 1177,
+                    "tpc": "Social Inequalities in Africa",
+                    "loctn": "OTHINTL",
+                    "consent": "I",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/13/2025",
+                        "instr": [
+                            {
+                                "pme7": "Parfait M. Eloundou-Enyegue"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "Taught in Cameroon. Multi-term course, completion of GDEV 3500/5500 and GDEV 3501/5501 required for final grade."
+                    ]
+                }
+            }
+        },
+        "GDEV5501": {
+            "Grp1": {
+                "crd": [
+                    2.5
+                ],
+                "req": [
+                    "PRA"
+                ],
+                "gradingb": "SUI",
+                "session_code": "1",
+                "cmb": [
+                    {
+                        "subject": "GDEV",
+                        "catalogNbr": "3501",
+                        "type": "W"
+                    }
+                ],
+                "PRA-601": {
+                    "id": 1178,
+                    "tpc": "Agroecology: Theory and Practice",
+                    "loctn": "OTHINTL",
+                    "consent": "I",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "01/05/2025",
+                        "end_dt": "01/18/2025",
+                        "instr": [
+                            {
+                                "rnb5": "Rachel Bezner Kerr"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "Taught in Malawi. Multi-term course, completion of GDEV 3500/5500 and GDEV 3105/5501 required for final grade."
+                    ]
+                }
+            },
+            "Grp2": {
+                "crd": [
+                    2.5
+                ],
+                "req": [
+                    "PRA"
+                ],
+                "gradingb": "SUI",
+                "session_code": "1",
+                "cmb": [
+                    {
+                        "subject": "GDEV",
+                        "catalogNbr": "3501",
+                        "type": "W"
+                    }
+                ],
+                "PRA-602": {
+                    "id": 1179,
+                    "tpc": "Social Inequalities in Africa",
+                    "loctn": "OTHINTL",
+                    "consent": "I",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/13/2025",
+                        "instr": [
+                            {
+                                "pme7": "Parfait M. Eloundou-Enyegue"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "Taught in Cameroon. Multi-term course, completion of GDEV 3500/5500 and GDEV 3105/5501 required for final grade."
+                    ]
+                }
+            }
+        }
+    },
+    "GOVT": {
+        "GOVT3141": {
+            "Grp1": {
+                "crd": [
+                    4
+                ],
+                "req": [
+                    "LEC"
+                ],
+                "gradingb": "OPT",
+                "session_code": "WS",
+                "cmb": [
+                    {
+                        "subject": "AMST",
+                        "catalogNbr": "3141",
+                        "type": "C"
+                    }
+                ],
+                "LEC-001": {
+                    "id": 1113,
+                    "open": "C",
+                    "mode": "AD",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "mcs378": "Matthew C Saleh"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                }
+            }
+        },
+        "GOVT3686": {
+            "Grp1": {
+                "crd": [
+                    3
+                ],
+                "req": [
+                    "LEC"
+                ],
+                "gradingb": "OPT",
+                "session_code": "WS",
+                "LEC-001": {
+                    "id": 1105,
+                    "open": "C",
+                    "mode": "AD",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "ua42": "Uriel Abulof"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                }
+            }
+        }
+    },
+    "HD": {
+        "HD2600": {
+            "Grp1": {
+                "crd": [
+                    3
+                ],
+                "req": [
+                    "LEC"
+                ],
+                "gradingb": "OPI",
+                "session_code": "WS",
+                "cmb": [
+                    {
+                        "subject": "PSYCH",
+                        "catalogNbr": "2750",
+                        "type": "C"
+                    }
+                ],
+                "LEC-001": {
+                    "id": 1111,
+                    "open": "C",
+                    "mode": "AD",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "vz29": "Vivian Zayas"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                }
+            }
+        }
+    },
+    "HIST": {
+        "HIST3410": {
+            "Grp1": {
+                "crd": [
+                    3
+                ],
+                "req": [
+                    "LEC"
+                ],
+                "gradingb": "OPT",
+                "session_code": "WS",
+                "LEC-001": {
+                    "id": 1155,
+                    "mode": "AD",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "jp61": "Joseph Palermo"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                }
+            }
+        },
+        "HIST3662": {
+            "Grp1": {
+                "crd": [
+                    4
+                ],
+                "req": [
+                    "SEM"
+                ],
+                "gradingb": "GRD",
+                "session_code": "WS",
+                "SEM-101": {
+                    "id": 1140,
+                    "consent": "D",
+                    "mode": "AD",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "jma49": "Jomarie Alano"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                }
+            }
+        }
+    },
+    "ILRGL": {
+        "ILRGL2200": {
+            "Grp1": {
+                "crd": [
+                    3
+                ],
+                "req": [
+                    "LEC"
+                ],
+                "gradingb": "GRI",
+                "session_code": "WS",
+                "LEC-001": {
+                    "id": 1141,
+                    "mode": "SD",
+                    "meeting1": {
+                        "tmstart": "09:30AM",
+                        "tmend": "12:25PM",
+                        "ptn": "MTWRF",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "aor4": "Armands Osvalds Revelins"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                }
+            }
+        }
+    },
+    "ILRST": {
+        "ILRST2100": {
+            "Grp1": {
+                "crd": [
+                    4
+                ],
+                "req": [
+                    "LEC",
+                    "DIS"
+                ],
+                "gradingb": "GRI",
+                "session_code": "WS",
+                "cmb": [
+                    {
+                        "subject": "ILRST",
+                        "catalogNbr": "5100",
+                        "type": "B"
+                    },
+                    {
+                        "subject": "STSCI",
+                        "catalogNbr": "2100",
+                        "type": "B"
+                    }
+                ],
+                "LEC-001": {
+                    "id": 1121,
+                    "mode": "SD",
+                    "meeting1": {
+                        "tmstart": "09:00AM",
+                        "tmend": "11:55AM",
+                        "ptn": "MTWRF",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "tjd9": "Thomas J. Diciccio"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                },
+                "DIS-201": {
+                    "id": 1123,
+                    "mode": "SD",
+                    "meeting1": {
+                        "tmstart": "12:00PM",
+                        "tmend": "01:00PM",
+                        "ptn": "MTWRF",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025"
+                    }
+                }
+            }
+        },
+        "ILRST5100": {
+            "Grp1": {
+                "crd": [
+                    4
+                ],
+                "req": [
+                    "LEC",
+                    "DIS"
+                ],
+                "gradingb": "GRI",
+                "session_code": "WS",
+                "cmb": [
+                    {
+                        "subject": "ILRST",
+                        "catalogNbr": "2100",
+                        "type": "B"
+                    },
+                    {
+                        "subject": "STSCI",
+                        "catalogNbr": "2100",
+                        "type": "B"
+                    }
+                ],
+                "LEC-001": {
+                    "id": 1119,
+                    "mode": "SD",
+                    "meeting1": {
+                        "tmstart": "09:00AM",
+                        "tmend": "11:55AM",
+                        "ptn": "MTWRF",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "tjd9": "Thomas J. Diciccio"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                },
+                "DIS-201": {
+                    "id": 1120,
+                    "mode": "SD",
+                    "meeting1": {
+                        "tmstart": "12:00PM",
+                        "tmend": "01:00PM",
+                        "ptn": "MTWRF",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025"
+                    },
+                    "notes": [
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                }
+            }
+        }
+    },
+    "INFO": {
+        "INFO2040": {
+            "Grp1": {
+                "crd": [
+                    3
+                ],
+                "req": [
+                    "LEC"
+                ],
+                "gradingb": "OPT",
+                "session_code": "WS",
+                "cmb": [
+                    {
+                        "subject": "CS",
+                        "catalogNbr": "2850",
+                        "type": "C"
+                    },
+                    {
+                        "subject": "ECON",
+                        "catalogNbr": "2040",
+                        "type": "C"
+                    },
+                    {
+                        "subject": "SOC",
+                        "catalogNbr": "2090",
+                        "type": "C"
+                    }
+                ],
+                "LEC-001": {
+                    "id": 1138,
+                    "mode": "AD",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "ae392": "Anna Evtushenko"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                }
+            }
+        },
+        "INFO4301": {
+            "Grp1": {
+                "crd": [
+                    3
+                ],
+                "req": [
+                    "SEM"
+                ],
+                "gradingb": "OPT",
+                "session_code": "WS",
+                "cmb": [
+                    {
+                        "subject": "COMM",
+                        "catalogNbr": "4300",
+                        "type": "B"
+                    },
+                    {
+                        "subject": "COMM",
+                        "catalogNbr": "5300",
+                        "type": "B"
+                    },
+                    {
+                        "subject": "INFO",
+                        "catalogNbr": "5301",
+                        "type": "B"
+                    }
+                ],
+                "SEM-101": {
+                    "id": 1152,
+                    "open": "C",
+                    "consent": "D",
+                    "mode": "SD",
+                    "meeting1": {
+                        "tmstart": "09:30AM",
+                        "tmend": "12:45PM",
+                        "ptn": "MTWRF",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "des14": "Dawn Schrader"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                }
+            }
+        },
+        "INFO4900": {
+            "Grp1": {
+                "crd": [
+                    4,
+                    3,
+                    2,
+                    1
+                ],
+                "req": [
+                    "IND"
+                ],
+                "gradingb": "OPT",
+                "session_code": "DYN",
+                "IND-601": {
+                    "id": 1195,
+                    "consent": "D",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/18/2025",
+                        "instr": [
+                            {
+                                "mw966": "Matthew Wilkens"
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "INFO5301": {
+            "Grp1": {
+                "crd": [
+                    3
+                ],
+                "req": [
+                    "SEM"
+                ],
+                "gradingb": "OPT",
+                "session_code": "WS",
+                "cmb": [
+                    {
+                        "subject": "COMM",
+                        "catalogNbr": "4300",
+                        "type": "B"
+                    },
+                    {
+                        "subject": "COMM",
+                        "catalogNbr": "5300",
+                        "type": "B"
+                    },
+                    {
+                        "subject": "INFO",
+                        "catalogNbr": "4301",
+                        "type": "B"
+                    }
+                ],
+                "SEM-101": {
+                    "id": 1154,
+                    "consent": "D",
+                    "mode": "SD",
+                    "meeting1": {
+                        "tmstart": "09:30AM",
+                        "tmend": "12:45PM",
+                        "ptn": "MTWRF",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "des14": "Dawn Schrader"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                }
+            }
+        }
+    },
+    "MUSIC": {
+        "MUSIC1106": {
+            "Grp1": {
+                "crd": [
+                    3
+                ],
+                "req": [
+                    "LEC"
+                ],
+                "gradingb": "OPT",
+                "session_code": "WS",
+                "LEC-001": {
+                    "id": 1142,
+                    "mode": "AD",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "jms862": "James M. Spinazzola"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                }
+            }
+        },
+        "MUSIC2370": {
+            "Grp1": {
+                "crd": [
+                    3
+                ],
+                "req": [
+                    "LEC"
+                ],
+                "gradingb": "OPT",
+                "session_code": "WS",
+                "cmb": [
+                    {
+                        "subject": "AMST",
+                        "catalogNbr": "2371",
+                        "type": "C"
+                    },
+                    {
+                        "subject": "ASRC",
+                        "catalogNbr": "2370",
+                        "type": "C"
+                    }
+                ],
+                "LEC-001": {
+                    "id": 1107,
+                    "mode": "AD",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "cma249": "Catherine M. Appert"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                }
+            }
+        },
+        "MUSIC2701": {
+            "Grp1": {
+                "crd": [
+                    3
+                ],
+                "req": [
+                    "LEC"
+                ],
+                "gradingb": "GRD",
+                "session_code": "WS",
+                "LEC-001": {
+                    "id": 1112,
+                    "mode": "AD",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "rsm253": "Roger Moseley"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                }
+            }
+        }
+    },
+    "NBA": {
+        "NBA5920": {
+            "Grp1": {
+                "crd": [
+                    1.5
+                ],
+                "req": [
+                    "FLD"
+                ],
+                "gradingb": "SUI",
+                "session_code": "1",
+                "FLD-801": {
+                    "id": 1159,
+                    "open": "C",
+                    "tpc": "Japan and Korea",
+                    "loctn": "OTHINTL",
+                    "consent": "I",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/18/2025"
+                    },
+                    "notes": [
+                        "Enrollment limited to Johnson MBA students class of 2025 Traveling to Japan & Korea for Trek."
+                    ]
+                }
+            }
+        },
+        "NBA5991": {
+            "Grp1": {
+                "crd": [
+                    3
+                ],
+                "req": [
+                    "LEC"
+                ],
+                "gradingb": "OPI",
+                "session_code": "WS",
+                "cmb": [
+                    {
+                        "subject": "AEM",
+                        "catalogNbr": "3991",
+                        "type": "W"
+                    }
+                ],
+                "LEC-001": {
+                    "id": 1098,
+                    "open": "C",
+                    "mode": "AD",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "eai1": "Elena A. Iankova"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                }
+            }
+        }
+    },
+    "NTRES": {
+        "NTRES3152": {
+            "Grp1": {
+                "crd": [
+                    2
+                ],
+                "req": [
+                    "FLD"
+                ],
+                "gradingb": "SUS",
+                "session_code": "1",
+                "cmb": [
+                    {
+                        "subject": "NTRES",
+                        "catalogNbr": "6152",
+                        "type": "W"
+                    }
+                ],
+                "FLD-801": {
+                    "id": 1171,
+                    "consent": "I",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "01/04/2025",
+                        "end_dt": "01/19/2025",
+                        "instr": [
+                            {
+                                "blg85": "Ben Gottesman"
+                            },
+                            {
+                                "anr37": "Aaron N. Rice"
+                            },
+                            {
+                                "lms433": "Larissa Sayuri Moreira Sugai"
+                            },
+                            {
+                                "lbs233": "Laurel Symes"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "Must enroll in NTRES 3151 and NTRES 3152 to receive a final grade. Permission of Instructor required. Students will travel independently and will be picked up on the Big Island."
+                    ]
+                }
+            }
+        },
+        "NTRES4301": {
+            "Grp1": {
+                "crd": [
+                    1.5
+                ],
+                "req": [
+                    "PRA"
+                ],
+                "gradingb": "BMT",
+                "session_code": "1",
+                "PRA-401": {
+                    "id": 1084,
+                    "open": "C",
+                    "loctn": "OTHDOM",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "MTWRFSSu",
+                        "start_dt": "01/06/2025",
+                        "end_dt": "01/12/2025",
+                        "instr": [
+                            {
+                                "cek7": "Cliff Kraft"
+                            },
+                            {
+                                "tbl3": "Bruce Lauber"
+                            }
+                        ]
+                    },
+                    "nd_note": false,
+                    "notes": [
+                        "Prerequisite: NTRES 4300. \nTaught in Washington, D.C.\nSee https://cals.cornell.edu/natural-resources-environment/degrees-programs/courses/environmental-policy-processes for more information."
+                    ]
+                }
+            }
+        }
+    },
+    "ORIE": {
+        "ORIE3150": {
+            "Grp1": {
+                "crd": [
+                    4
+                ],
+                "req": [
+                    "LEC"
+                ],
+                "gradingb": "GRI",
+                "session_code": "WS",
+                "LEC-001": {
+                    "id": 1104,
+                    "mode": "OL",
+                    "meeting1": {
+                        "tmstart": "09:00AM",
+                        "tmend": "12:15PM",
+                        "ptn": "MTWRF",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "jc62": "John Richard Callister"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                }
+            }
+        }
+    },
+    "PE": {
+        "PE1272": {
+            "Grp1": {
+                "crd": [
+                    1
+                ],
+                "req": [
+                    "LEC"
+                ],
+                "gradingb": "SUI",
+                "session_code": "WS",
+                "LEC-001": {
+                    "id": 1099,
+                    "mode": "AD",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025"
+                    },
+                    "notes": [
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                }
+            }
+        },
+        "PE1620": {
+            "Grp1": {
+                "crd": [
+                    1
+                ],
+                "req": [
+                    "LEC"
+                ],
+                "gradingb": "SUS",
+                "session_code": "1",
+                "LEC-001": {
+                    "id": 1079,
+                    "consent": "I",
+                    "meeting1": {
+                        "tmstart": "08:00AM",
+                        "tmend": "06:00PM",
+                        "ptn": "MTWR",
+                        "start_dt": "01/13/2025",
+                        "end_dt": "01/16/2025",
+                        "instr": [
+                            {
+                                "brb4": "Benjamin Ransom Blakeley"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This is part two of a multi-semester course. Part one (course fee: $450) is held in November 2024, part two (course fee: $0) runs from January 13-16, 2025 from 8:00am - 6:00pm. You must attend part one in November in order to take part two in January. Students enrolled in this course who are living on-campus will need to find off-campus accommodations until the residential halls open. Participation in all class sessions in the fall and winter semesters is required to receive the 1 PE credit."
+                    ]
+                }
+            }
+        },
+        "PE1621": {
+            "Grp1": {
+                "crd": [
+                    1
+                ],
+                "req": [
+                    "LEC"
+                ],
+                "gradingb": "SUS",
+                "session_code": "1",
+                "LEC-001": {
+                    "id": 1080,
+                    "consent": "I",
+                    "meeting1": {
+                        "tmstart": "08:00AM",
+                        "tmend": "06:00PM",
+                        "ptn": "MFSSu",
+                        "start_dt": "01/17/2025",
+                        "end_dt": "01/20/2025",
+                        "instr": [
+                            {
+                                "brb4": "Benjamin Ransom Blakeley"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This is part two of a multi-semester course. Part one (course fee: $450) is held in November 2024, part two (course fee: $0) runs from January 17-20, 2025 from 8:00am - 6:00pm. You must attend part one in November in order to take part two in January. Students are responsible for enrolling in the winter class (part 2). Students enrolled in this course who are living on-campus will need to find off-campus accommodations until the residential halls open. Participation in all class sessions in the fall and winter semesters is required to receive the 1 PE credit."
+                    ]
+                }
+            }
+        },
+        "PE1626": {
+            "Grp1": {
+                "crd": [
+                    1
+                ],
+                "req": [
+                    "LEC"
+                ],
+                "gradingb": "SUS",
+                "session_code": "1",
+                "LEC-001": {
+                    "id": 1081,
+                    "consent": "I",
+                    "meeting1": {
+                        "tmstart": "08:00AM",
+                        "tmend": "06:00PM",
+                        "ptn": "MTWRFSSu",
+                        "start_dt": "01/13/2025",
+                        "end_dt": "01/20/2025",
+                        "instr": [
+                            {
+                                "brb4": "Benjamin Ransom Blakeley"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This is part two of a multi-semester course. Part one (course fee: $855) is held in November 2024 -- part two (course fee: $0) runs from January 13-20, 2025 from 8:00am - 6:00pm. You must attend part one in November in order to take part two in January: students are responsible for enrolling in the winter class (part 2). Students enrolled in this course who are living on-campus will need to find off-campus accommodations until the residential halls open. Participation in all class sessions in the fall and winter semesters is required to receive the 1 PE credit."
+                    ]
+                }
+            }
+        },
+        "PE1627": {
+            "Grp1": {
+                "crd": [
+                    1
+                ],
+                "req": [
+                    "LEC"
+                ],
+                "gradingb": "SUS",
+                "session_code": "1",
+                "LEC-001": {
+                    "id": 1082,
+                    "consent": "I",
+                    "meeting1": {
+                        "tmstart": "08:00AM",
+                        "tmend": "06:00PM",
+                        "ptn": "MSSu",
+                        "start_dt": "01/17/2025",
+                        "end_dt": "01/19/2025",
+                        "instr": [
+                            {
+                                "brb4": "Benjamin Ransom Blakeley"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This is part two of a multi-semester course. Part one (course fee: $375) is held in November 2024, part two (course fee: $0) runs from January 17-19, 2025 from 8:00am - 6:00pm. You must attend part one in November in order to take part two in January: students are responsible for enrolling in the winter class (part 2). Students enrolled in this course who are living on-campus will need to find off-campus accommodations until the residential halls open. Participation in all class sessions in the fall and winter semesters is required to receive the 1 PE credit."
+                    ]
+                }
+            }
+        }
+    },
+    "PLSCI": {
+        "PLSCI2301": {
+            "Grp1": {
+                "crd": [
+                    2
+                ],
+                "req": [
+                    "FLD"
+                ],
+                "gradingb": "BMT",
+                "session_code": "1",
+                "FLD-801": {
+                    "id": 1160,
+                    "loctn": "OTHINTL",
+                    "consent": "I",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "01/03/2025",
+                        "end_dt": "01/18/2025",
+                        "instr": [
+                            {
+                                "mag4": "Maria Alejandra Gandolfo Nixon"
+                            },
+                            {
+                                "kcn2": "Kevin C. Nixon"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "Taught in Patagonia. Class travels to Patagonia (Chile) on January 2 and returns on January 19, 2025. Students must enroll in PLSCI 2302 during the spring semester to receive a final grade."
+                    ]
+                }
+            }
+        },
+        "PLSCI2400": {
+            "Grp1": {
+                "crd": [
+                    3
+                ],
+                "req": [
+                    "LEC"
+                ],
+                "gradingb": "OPT",
+                "session_code": "WS",
+                "LEC-001": {
+                    "id": 1106,
+                    "open": "C",
+                    "mode": "AD",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "ts21": "Tom Silva"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                }
+            }
+        },
+        "PLSCI3401": {
+            "Grp1": {
+                "crd": [
+                    1.5
+                ],
+                "req": [
+                    "FLD"
+                ],
+                "gradingb": "SUI",
+                "session_code": "1",
+                "FLD-801": {
+                    "id": 1078,
+                    "tpc": "Medicinal Plants in the Amazon",
+                    "loctn": "OTHINTL",
+                    "consent": "D",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "01/07/2025",
+                        "end_dt": "01/14/2025",
+                        "instr": [
+                            {
+                                "lcc2": "Leah Cynara Cook"
+                            },
+                            {
+                                "gf32": "Giulia Friso"
+                            },
+                            {
+                                "mpp3": "Marvin P. Pritts"
+                            },
+                            {
+                                "car295": "Courtney Ann Roby"
+                            }
+                        ]
+                    },
+                    "prereq": [
+                        [
+                            "CLASS2640",
+                            "PLSCI2100",
+                            "PLSCI3100"
+                        ],
+                        [
+                            "PLSCI3400"
+                        ]
+                    ],
+                    "nd_note": true,
+                    "notes": [
+                        "Prerequisite: PLSCI 3400, plus CLASS 2640 or PLSCI 2100 or PLSCI 3100. Enrollment preference given to: Classics, Agricultural Sciences, and Plant Sciences majors. This is part two of a multi-semester course, running January 6, 2025 - January 15, 2025 in the Peruvian Amazon. To apply, please contact Leah Cook (lcc2)."
+                    ]
+                }
+            }
+        }
+    },
+    "PMA": {
+        "PMA2501": {
+            "Grp1": {
+                "crd": [
+                    4
+                ],
+                "req": [
+                    "LEC"
+                ],
+                "gradingb": "GRD",
+                "session_code": "WS",
+                "cmb": [
+                    {
+                        "subject": "AMST",
+                        "catalogNbr": "2505",
+                        "type": "C"
+                    },
+                    {
+                        "subject": "FGSS",
+                        "catalogNbr": "2501",
+                        "type": "C"
+                    },
+                    {
+                        "subject": "VISST",
+                        "catalogNbr": "2502",
+                        "type": "C"
+                    }
+                ],
+                "LEC-001": {
+                    "id": 1085,
+                    "open": "C",
+                    "mode": "SD",
+                    "meeting1": {
+                        "tmstart": "10:00AM",
+                        "tmend": "02:05PM",
+                        "ptn": "MTWRF",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "sns87": "Samantha Noelle Sheppard"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                }
+            }
+        },
+        "PMA3467": {
+            "Grp1": {
+                "crd": [
+                    4
+                ],
+                "req": [
+                    "SEM"
+                ],
+                "gradingb": "GRD",
+                "session_code": "WS",
+                "SEM-101": {
+                    "id": 1103,
+                    "mode": "SD",
+                    "meeting1": {
+                        "tmstart": "12:00PM",
+                        "tmend": "04:10PM",
+                        "ptn": "MTWRF",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "kjw247": "Kristen J Warner"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                }
+            }
+        }
+    },
+    "PSYCH": {
+        "PSYCH2750": {
+            "Grp1": {
+                "crd": [
+                    3
+                ],
+                "req": [
+                    "LEC"
+                ],
+                "gradingb": "OPI",
+                "session_code": "WS",
+                "cmb": [
+                    {
+                        "subject": "HD",
+                        "catalogNbr": "2600",
+                        "type": "C"
+                    }
+                ],
+                "LEC-001": {
+                    "id": 1110,
+                    "mode": "AD",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "vz29": "Vivian Zayas"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                }
+            }
+        }
+    },
+    "SOC": {
+        "SOC2090": {
+            "Grp1": {
+                "crd": [
+                    3
+                ],
+                "req": [
+                    "LEC"
+                ],
+                "gradingb": "OPT",
+                "session_code": "WS",
+                "cmb": [
+                    {
+                        "subject": "CS",
+                        "catalogNbr": "2850",
+                        "type": "C"
+                    },
+                    {
+                        "subject": "ECON",
+                        "catalogNbr": "2040",
+                        "type": "C"
+                    },
+                    {
+                        "subject": "INFO",
+                        "catalogNbr": "2040",
+                        "type": "C"
+                    }
+                ],
+                "LEC-001": {
+                    "id": 1136,
+                    "open": "C",
+                    "mode": "AD",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "ae392": "Anna Evtushenko"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                }
+            }
+        }
+    },
+    "STSCI": {
+        "STSCI2100": {
+            "Grp1": {
+                "crd": [
+                    4
+                ],
+                "req": [
+                    "LEC",
+                    "DIS"
+                ],
+                "gradingb": "GRI",
+                "session_code": "WS",
+                "cmb": [
+                    {
+                        "subject": "ILRST",
+                        "catalogNbr": "2100",
+                        "type": "B"
+                    },
+                    {
+                        "subject": "ILRST",
+                        "catalogNbr": "5100",
+                        "type": "B"
+                    }
+                ],
+                "LEC-001": {
+                    "id": 1125,
+                    "mode": "SD",
+                    "meeting1": {
+                        "tmstart": "09:00AM",
+                        "tmend": "11:55AM",
+                        "ptn": "MTWRF",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "tjd9": "Thomas J. Diciccio"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                },
+                "DIS-201": {
+                    "id": 1126,
+                    "mode": "SD",
+                    "meeting1": {
+                        "tmstart": "12:00PM",
+                        "tmend": "01:00PM",
+                        "ptn": "MTWRF",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025"
+                    }
+                }
+            }
+        }
+    },
+    "TECHIE": {
+        "TECHIE5315": {
+            "Grp1": {
+                "crd": [
+                    1
+                ],
+                "req": [
+                    "LEC"
+                ],
+                "gradingb": "SUI",
+                "session_code": "1",
+                "LEC-030": {
+                    "id": 1075,
+                    "loctn": "NYCTECH",
+                    "consent": "D",
+                    "meeting1": {
+                        "tmstart": "01:30PM",
+                        "tmend": "05:00PM",
+                        "ptn": "TWRF",
+                        "start_dt": "01/14/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "jrb553": "John (J.B.) Blevins"
+                            },
+                            {
+                                "ltf24": "Lutz Thomas Finger"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "Application required. Enrollment limited to: Cornell Tech students."
+                    ]
+                }
+            }
+        }
+    },
+    "VISST": {
+        "VISST2502": {
+            "Grp1": {
+                "crd": [
+                    4
+                ],
+                "req": [
+                    "LEC"
+                ],
+                "gradingb": "GRD",
+                "session_code": "WS",
+                "cmb": [
+                    {
+                        "subject": "AMST",
+                        "catalogNbr": "2505",
+                        "type": "C"
+                    },
+                    {
+                        "subject": "FGSS",
+                        "catalogNbr": "2501",
+                        "type": "C"
+                    },
+                    {
+                        "subject": "PMA",
+                        "catalogNbr": "2501",
+                        "type": "C"
+                    }
+                ],
+                "LEC-001": {
+                    "id": 1088,
+                    "open": "C",
+                    "mode": "SD",
+                    "meeting1": {
+                        "tmstart": "10:00AM",
+                        "tmend": "02:05PM",
+                        "ptn": "MTWRF",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "sns87": "Samantha Noelle Sheppard"
+                            }
+                        ]
+                    },
+                    "notes": [
+                        "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
+                    ]
+                }
+            }
+        },
+        "VISST3590": {
+            "Grp1": {
+                "crd": [
+                    3
+                ],
+                "req": [
+                    "SEM"
+                ],
+                "gradingb": "GRI",
+                "session_code": "DYN",
+                "cmb": [
+                    {
+                        "subject": "ANTHR",
+                        "catalogNbr": "3590",
+                        "type": "B"
+                    },
+                    {
+                        "subject": "ANTHR",
+                        "catalogNbr": "6590",
+                        "type": "B"
+                    },
+                    {
+                        "subject": "ARKEO",
+                        "catalogNbr": "3590",
+                        "type": "B"
+                    },
+                    {
+                        "subject": "ARKEO",
+                        "catalogNbr": "6590",
+                        "type": "B"
+                    },
+                    {
+                        "subject": "ARTH",
+                        "catalogNbr": "3590",
+                        "type": "B"
+                    },
+                    {
+                        "subject": "ARTH",
+                        "catalogNbr": "6595",
+                        "type": "B"
+                    },
+                    {
+                        "subject": "ASIAN",
+                        "catalogNbr": "3351",
+                        "type": "B"
+                    },
+                    {
+                        "subject": "ASIAN",
+                        "catalogNbr": "6651",
+                        "type": "B"
+                    },
+                    {
+                        "subject": "VISST",
+                        "catalogNbr": "6590",
+                        "type": "B"
+                    }
+                ],
+                "SEM-101": {
+                    "id": 1164,
+                    "consent": "D",
+                    "meeting1": {
+                        "tmstart": "09:00AM",
+                        "tmend": "12:00PM",
+                        "ptn": "MTWRF",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025",
+                        "instr": [
+                            {
+                                "nf42": "Magnus Fiskesjo"
+                            }
+                        ]
+                    },
+                    "meeting2": {
+                        "tmstart": "01:00PM",
+                        "tmend": "04:00PM",
+                        "ptn": "MTWRF",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025"
+                    },
+                    "meeting3": {
+                        "tmstart": "09:00AM",
+                        "tmend": "12:00PM",
+                        "ptn": "S",
+                        "start_dt": "01/02/2025",
+                        "end_dt": "01/17/2025"
+                    }
+                }
+            }
+        }
+    },
+    "VTMED": {
+        "VTMED5600": {
+            "Grp1": {
+                "crd": [
+                    2
+                ],
+                "req": [
+                    "CLN"
+                ],
+                "gradingb": "SUI",
+                "session_code": "1",
+                "CLN-301": {
+                    "id": 1002,
+                    "consent": "D",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "12/16/2024",
+                        "end_dt": "01/19/2025",
+                        "instr": [
+                            {
+                                "fal43": "Francisco A. Leal-Yepes"
+                            },
+                            {
+                                "sm682": "Sabine Mann"
+                            },
+                            {
+                                "js448": "Jessica Anne Allerton McArt"
+                            },
+                            {
+                                "dvn2": "Daryl Van Nydam"
+                            },
+                            {
+                                "mcs8": "Mary Caroline Smith"
+                            },
+                            {
+                                "tv84": "Taika von Konigslow"
+                            }
+                        ]
+                    }
+                }
+            },
+            "Grp2": {
+                "crd": [
+                    2
+                ],
+                "req": [
+                    "CLN"
+                ],
+                "gradingb": "SUI",
+                "session_code": "1",
+                "CLN-302": {
+                    "id": 1003,
+                    "consent": "D",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "12/16/2024",
+                        "end_dt": "01/19/2025",
+                        "instr": [
+                            {
+                                "fal43": "Francisco A. Leal-Yepes"
+                            },
+                            {
+                                "sm682": "Sabine Mann"
+                            },
+                            {
+                                "js448": "Jessica Anne Allerton McArt"
+                            },
+                            {
+                                "dvn2": "Daryl Van Nydam"
+                            },
+                            {
+                                "mcs8": "Mary Caroline Smith"
+                            },
+                            {
+                                "tv84": "Taika von Konigslow"
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "VTMED5601": {
+            "Grp1": {
+                "crd": [
+                    2
+                ],
+                "req": [
+                    "CLN"
+                ],
+                "gradingb": "SUI",
+                "session_code": "1",
+                "CLN-301": {
+                    "id": 1004,
+                    "consent": "D",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "12/16/2024",
+                        "end_dt": "01/19/2025",
+                        "instr": [
+                            {
+                                "pcc25": "Patrick C. Carney"
+                            },
+                            {
+                                "clc248": "Casey Cazer"
+                            },
+                            {
+                                "bgc2": "Brian Glenn Collins"
+                            },
+                            {
+                                "dih26": "Isabel Hernandez"
+                            },
+                            {
+                                "lkm32": "Leni K. Kaplan"
+                            },
+                            {
+                                "mbp73": "Michelle B. Porter"
+                            }
+                        ]
+                    }
+                }
+            },
+            "Grp2": {
+                "crd": [
+                    2
+                ],
+                "req": [
+                    "CLN"
+                ],
+                "gradingb": "SUI",
+                "session_code": "1",
+                "CLN-302": {
+                    "id": 1005,
+                    "consent": "D",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "12/16/2024",
+                        "end_dt": "01/19/2025",
+                        "instr": [
+                            {
+                                "pcc25": "Patrick C. Carney"
+                            },
+                            {
+                                "clc248": "Casey Cazer"
+                            },
+                            {
+                                "bgc2": "Brian Glenn Collins"
+                            },
+                            {
+                                "dih26": "Isabel Hernandez"
+                            },
+                            {
+                                "lkm32": "Leni K. Kaplan"
+                            },
+                            {
+                                "mbp73": "Michelle B. Porter"
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "VTMED5602": {
+            "Grp1": {
+                "crd": [
+                    2
+                ],
+                "req": [
+                    "CLN"
+                ],
+                "gradingb": "SUI",
+                "session_code": "1",
+                "CLN-301": {
+                    "id": 1006,
+                    "consent": "D",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "12/16/2024",
+                        "end_dt": "01/19/2025",
+                        "instr": [
+                            {
+                                "amc344": "Alyssa Marie Chandler"
+                            },
+                            {
+                                "mlm64": "Meredith L. Miller"
+                            },
+                            {
+                                "jmb279": "Jennifer Prieto"
+                            },
+                            {
+                                "kws5": "Kenneth William Simpson"
+                            }
+                        ]
+                    }
+                }
+            },
+            "Grp2": {
+                "crd": [
+                    2
+                ],
+                "req": [
+                    "CLN"
+                ],
+                "gradingb": "SUI",
+                "session_code": "1",
+                "CLN-302": {
+                    "id": 1007,
+                    "consent": "D",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "12/16/2024",
+                        "end_dt": "01/19/2025",
+                        "instr": [
+                            {
+                                "amc344": "Alyssa Marie Chandler"
+                            },
+                            {
+                                "mlm64": "Meredith L. Miller"
+                            },
+                            {
+                                "jmb279": "Jennifer Prieto"
+                            },
+                            {
+                                "kws5": "Kenneth William Simpson"
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "VTMED5603": {
+            "Grp1": {
+                "crd": [
+                    2
+                ],
+                "req": [
+                    "CLN"
+                ],
+                "gradingb": "SUI",
+                "session_code": "1",
+                "CLN-301": {
+                    "id": 1008,
+                    "consent": "D",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "12/16/2024",
+                        "end_dt": "01/19/2025",
+                        "instr": [
+                            {
+                                "njb235": "Nicole J. Buote"
+                            },
+                            {
+                                "caf242": "Christian A Folk"
+                            },
+                            {
+                                "gmh59": "Galina M. Hayes"
+                            },
+                            {
+                                "djl242": "Daniel J Lopez"
+                            },
+                            {
+                                "jbm338": "Jourdan B. McPhetridge"
+                            }
+                        ]
+                    }
+                }
+            },
+            "Grp2": {
+                "crd": [
+                    2
+                ],
+                "req": [
+                    "CLN"
+                ],
+                "gradingb": "SUI",
+                "session_code": "1",
+                "CLN-302": {
+                    "id": 1009,
+                    "consent": "D",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "12/16/2024",
+                        "end_dt": "01/19/2025",
+                        "instr": [
+                            {
+                                "njb235": "Nicole J. Buote"
+                            },
+                            {
+                                "caf242": "Christian A Folk"
+                            },
+                            {
+                                "gmh59": "Galina M. Hayes"
+                            },
+                            {
+                                "djl242": "Daniel J Lopez"
+                            },
+                            {
+                                "jbm338": "Jourdan B. McPhetridge"
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "VTMED5604": {
+            "Grp1": {
+                "crd": [
+                    2
+                ],
+                "req": [
+                    "CLN"
+                ],
+                "gradingb": "SUI",
+                "session_code": "1",
+                "CLN-301": {
+                    "id": 1010,
+                    "consent": "D",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "12/16/2024",
+                        "end_dt": "01/19/2025",
+                        "instr": [
+                            {
+                                "mc957": "Marta Cercone"
+                            },
+                            {
+                                "bd382": "Barbara Delvescovo"
+                            },
+                            {
+                                "mbf6": "Julia Felippe"
+                            },
+                            {
+                                "km424": "Katharyn Jean Mitchell"
+                            },
+                            {
+                                "gap7": "Gillian A. Perkins"
+                            },
+                            {
+                                "tlp52": "Toby L Pinn-Woodcock"
+                            },
+                            {
+                                "jet37": "Joy Ellen Tomlinson"
+                            }
+                        ]
+                    }
+                }
+            },
+            "Grp2": {
+                "crd": [
+                    2
+                ],
+                "req": [
+                    "CLN"
+                ],
+                "gradingb": "SUI",
+                "session_code": "1",
+                "CLN-302": {
+                    "id": 1011,
+                    "consent": "D",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "12/16/2024",
+                        "end_dt": "01/19/2025",
+                        "instr": [
+                            {
+                                "mc957": "Marta Cercone"
+                            },
+                            {
+                                "bd382": "Barbara Delvescovo"
+                            },
+                            {
+                                "mbf6": "Julia Felippe"
+                            },
+                            {
+                                "gap7": "Gillian A. Perkins"
+                            },
+                            {
+                                "tlp52": "Toby L Pinn-Woodcock"
+                            },
+                            {
+                                "jet37": "Joy Ellen Tomlinson"
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "VTMED5605": {
+            "Grp1": {
+                "crd": [
+                    2
+                ],
+                "req": [
+                    "CLN"
+                ],
+                "gradingb": "SUI",
+                "session_code": "1",
+                "CLN-301": {
+                    "id": 1012,
+                    "consent": "D",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "12/16/2024",
+                        "end_dt": "01/19/2025",
+                        "instr": [
+                            {
+                                "ac2399": "Aimee Colbath"
+                            },
+                            {
+                                "mld12": "Michelle Lee Delco"
+                            },
+                            {
+                                "slf3": "Susan Lawson Fubini"
+                            },
+                            {
+                                "esh82": "Eileen S. Hackett"
+                            },
+                            {
+                                "rcm335": "Rebecca C McOnie"
+                            },
+                            {
+                                "rmr45": "Rolfe M. Radcliffe"
+                            },
+                            {
+                                "hlr42": "Heidi L. Reesink"
+                            }
+                        ]
+                    }
+                }
+            },
+            "Grp2": {
+                "crd": [
+                    2
+                ],
+                "req": [
+                    "CLN"
+                ],
+                "gradingb": "SUI",
+                "session_code": "1",
+                "CLN-302": {
+                    "id": 1013,
+                    "consent": "D",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "12/16/2024",
+                        "end_dt": "01/19/2025",
+                        "instr": [
+                            {
+                                "ac2399": "Aimee Colbath"
+                            },
+                            {
+                                "mld12": "Michelle Lee Delco"
+                            },
+                            {
+                                "slf3": "Susan Lawson Fubini"
+                            },
+                            {
+                                "rcm335": "Rebecca C McOnie"
+                            },
+                            {
+                                "rmr45": "Rolfe M. Radcliffe"
+                            },
+                            {
+                                "hlr42": "Heidi L. Reesink"
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "VTMED5606": {
+            "Grp1": {
+                "crd": [
+                    2
+                ],
+                "req": [
+                    "CLN"
+                ],
+                "gradingb": "SUI",
+                "session_code": "1",
+                "CLN-301": {
+                    "id": 1014,
+                    "consent": "D",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "12/16/2024",
+                        "end_dt": "01/19/2025",
+                        "instr": [
+                            {
+                                "jda246": "Joaquin B. Araos"
+                            },
+                            {
+                                "jmb264": "Jordyn Marie Boesch"
+                            },
+                            {
+                                "lc268": "Luis Campoy"
+                            },
+                            {
+                                "mm459": "Manuel Martin Flores"
+                            },
+                            {
+                                "ctt8": "Joy Te Tseng"
+                            }
+                        ]
+                    }
+                }
+            },
+            "Grp2": {
+                "crd": [
+                    2
+                ],
+                "req": [
+                    "CLN"
+                ],
+                "gradingb": "SUI",
+                "session_code": "1",
+                "CLN-302": {
+                    "id": 1015,
+                    "consent": "D",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "12/16/2024",
+                        "end_dt": "01/19/2025",
+                        "instr": [
+                            {
+                                "jda246": "Joaquin B. Araos"
+                            },
+                            {
+                                "jmb264": "Jordyn Marie Boesch"
+                            },
+                            {
+                                "lc268": "Luis Campoy"
+                            },
+                            {
+                                "mm459": "Manuel Martin Flores"
+                            },
+                            {
+                                "ctt8": "Joy Te Tseng"
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "VTMED5607": {
+            "Grp1": {
+                "crd": [
+                    2
+                ],
+                "req": [
+                    "CLN"
+                ],
+                "gradingb": "SUI",
+                "session_code": "1",
+                "CLN-301": {
+                    "id": 1016,
+                    "consent": "D",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "12/16/2024",
+                        "end_dt": "01/19/2025",
+                        "instr": [
+                            {
+                                "mdc252": "Mitzi D. Clark"
+                            },
+                            {
+                                "hde2": "Heather Dawn Edginton"
+                            },
+                            {
+                                "jp256": "Jeanine Peters-Kennedy"
+                            }
+                        ]
+                    }
+                }
+            },
+            "Grp2": {
+                "crd": [
+                    2
+                ],
+                "req": [
+                    "CLN"
+                ],
+                "gradingb": "SUI",
+                "session_code": "1",
+                "CLN-302": {
+                    "id": 1017,
+                    "consent": "D",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "12/16/2024",
+                        "end_dt": "01/19/2025",
+                        "instr": [
+                            {
+                                "mdc252": "Mitzi D. Clark"
+                            },
+                            {
+                                "hde2": "Heather Dawn Edginton"
+                            },
+                            {
+                                "jp256": "Jeanine Peters-Kennedy"
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "VTMED5608": {
+            "Grp1": {
+                "crd": [
+                    2
+                ],
+                "req": [
+                    "CLN"
+                ],
+                "gradingb": "SUI",
+                "session_code": "1",
+                "CLN-301": {
+                    "id": 1018,
+                    "consent": "D",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "12/16/2024",
+                        "end_dt": "01/19/2025",
+                        "instr": [
+                            {
+                                "kek248": "Kelly E. Knickelbein"
+                            },
+                            {
+                                "ecl32": "Eric C. Ledbetter"
+                            },
+                            {
+                                "ems462": "Erin McGovern Scott"
+                            }
+                        ]
+                    }
+                }
+            },
+            "Grp2": {
+                "crd": [
+                    2
+                ],
+                "req": [
+                    "CLN"
+                ],
+                "gradingb": "SUI",
+                "session_code": "1",
+                "CLN-302": {
+                    "id": 1019,
+                    "consent": "D",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "12/16/2024",
+                        "end_dt": "01/19/2025",
+                        "instr": [
+                            {
+                                "kek248": "Kelly E. Knickelbein"
+                            },
+                            {
+                                "ecl32": "Eric C. Ledbetter"
+                            },
+                            {
+                                "ems462": "Erin McGovern Scott"
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "VTMED5609": {
+            "Grp1": {
+                "crd": [
+                    2
+                ],
+                "req": [
+                    "CLN"
+                ],
+                "gradingb": "SUI",
+                "session_code": "1",
+                "CLN-301": {
+                    "id": 1020,
+                    "consent": "D",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "12/16/2024",
+                        "end_dt": "01/19/2025",
+                        "instr": [
+                            {
+                                "adm10": "Andrew David Miller"
+                            }
+                        ]
+                    }
+                }
+            },
+            "Grp2": {
+                "crd": [
+                    2
+                ],
+                "req": [
+                    "CLN"
+                ],
+                "gradingb": "SUI",
+                "session_code": "1",
+                "CLN-302": {
+                    "id": 1021,
+                    "consent": "D",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "12/16/2024",
+                        "end_dt": "01/19/2025",
+                        "instr": [
+                            {
+                                "adm10": "Andrew David Miller"
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "VTMED5610": {
+            "Grp1": {
+                "crd": [
+                    2
+                ],
+                "req": [
+                    "CLN"
+                ],
+                "gradingb": "SUI",
+                "session_code": "1",
+                "CLN-301": {
+                    "id": 1022,
+                    "consent": "D",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "12/16/2024",
+                        "end_dt": "01/19/2025",
+                        "instr": [
+                            {
+                                "al736": "Assaf Lerer"
+                            },
+                            {
+                                "ajp377": "Aaron J Percival"
+                            },
+                            {
+                                "irp5": "Ian R Porter"
+                            },
+                            {
+                                "pvs2": "Peter V. Scrivani"
+                            },
+                            {
+                                "mst42": "Meg Thompson"
+                            },
+                            {
+                                "abt25": "Amy B. Todd-Donato"
+                            },
+                            {
+                                "crt76": "Christopher R. Tollefson"
+                            }
+                        ]
+                    }
+                }
+            },
+            "Grp2": {
+                "crd": [
+                    2
+                ],
+                "req": [
+                    "CLN"
+                ],
+                "gradingb": "SUI",
+                "session_code": "1",
+                "CLN-302": {
+                    "id": 1023,
+                    "consent": "D",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "12/16/2024",
+                        "end_dt": "01/19/2025",
+                        "instr": [
+                            {
+                                "al736": "Assaf Lerer"
+                            },
+                            {
+                                "ajp377": "Aaron J Percival"
+                            },
+                            {
+                                "irp5": "Ian R Porter"
+                            },
+                            {
+                                "pvs2": "Peter V. Scrivani"
+                            },
+                            {
+                                "abt25": "Amy B. Todd-Donato"
+                            },
+                            {
+                                "crt76": "Christopher R. Tollefson"
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "VTMED5611": {
+            "Grp1": {
+                "crd": [
+                    2
+                ],
+                "req": [
+                    "CLN"
+                ],
+                "gradingb": "SUI",
+                "session_code": "1",
+                "CLN-301": {
+                    "id": 1024,
+                    "consent": "D",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "12/16/2024",
+                        "end_dt": "01/19/2025",
+                        "instr": [
+                            {
+                                "djf42": "Daniel J. Fletcher"
+                            },
+                            {
+                                "jmf439": "Jethro M. Forbes"
+                            },
+                            {
+                                "jmm539": "Julie M. Menard"
+                            },
+                            {
+                                "nwp26": "Nathan W. Peterson"
+                            },
+                            {
+                                "amp385": "Armi M. Pigott"
+                            },
+                            {
+                                "gls37": "Gretchen L. Schoeffler"
+                            }
+                        ]
+                    }
+                }
+            },
+            "Grp2": {
+                "crd": [
+                    2
+                ],
+                "req": [
+                    "CLN"
+                ],
+                "gradingb": "SUI",
+                "session_code": "1",
+                "CLN-302": {
+                    "id": 1025,
+                    "consent": "D",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "12/16/2024",
+                        "end_dt": "01/19/2025",
+                        "instr": [
+                            {
+                                "djf42": "Daniel J. Fletcher"
+                            },
+                            {
+                                "jmf439": "Jethro M. Forbes"
+                            },
+                            {
+                                "jmm539": "Julie M. Menard"
+                            },
+                            {
+                                "nwp26": "Nathan W. Peterson"
+                            },
+                            {
+                                "amp385": "Armi M. Pigott"
+                            },
+                            {
+                                "gls37": "Gretchen L. Schoeffler"
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "VTMED5613": {
+            "Grp1": {
+                "crd": [
+                    2
+                ],
+                "req": [
+                    "CLN"
+                ],
+                "gradingb": "SUI",
+                "session_code": "1",
+                "CLN-301": {
+                    "id": 1026,
+                    "consent": "D",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "12/16/2024",
+                        "end_dt": "01/19/2025",
+                        "instr": [
+                            {
+                                "caf242": "Christian A Folk"
+                            },
+                            {
+                                "uk28": "Ursula Krotscheck"
+                            },
+                            {
+                                "djl242": "Daniel J Lopez"
+                            },
+                            {
+                                "st284": "Selena Tinga"
+                            }
+                        ]
+                    }
+                }
+            },
+            "Grp2": {
+                "crd": [
+                    2
+                ],
+                "req": [
+                    "CLN"
+                ],
+                "gradingb": "SUI",
+                "session_code": "1",
+                "CLN-302": {
+                    "id": 1027,
+                    "consent": "D",
+                    "meeting1": {
+                        "tmstart": "",
+                        "tmend": "",
+                        "ptn": "",
+                        "start_dt": "12/16/2024",
+                        "end_dt": "01/19/2025",
+                        "instr": [
+                            {
+                                "caf242": "Christian A Folk"
+                            },
+                            {
+                                "uk28": "Ursula Krotscheck"
+                            },
+                            {
+                                "djl242": "Daniel J Lopez"
+                            },
+                            {
+                                "st284": "Selena Tinga"
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    }
+}

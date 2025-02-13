@@ -185,17 +185,17 @@ def break_data(data):
             combined_am[subject] = data[subject]
         else:
             combined_nz[subject] = data[subject]
-    file_path = os.path.join("new_combined", 'combined_am.json')
+    file_path = os.path.join("combined", 'combined_am.json')
     with open(file_path, "w", encoding="utf-8") as f:
         json.dump(combined_am, f, indent=4)
-    file_path = os.path.join("new_combined", 'combined_nz.json')
+    file_path = os.path.join("combined", 'combined_nz.json')
     with open(file_path, "w", encoding="utf-8") as f:
         json.dump(combined_nz, f, indent=4)
 
 
 
 def to_json(data):
-    file_path = os.path.join("new_combined", 'new_combined.json')
+    file_path = os.path.join("combined", 'new_combined.json')
     with open(file_path, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=4)
 

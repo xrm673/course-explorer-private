@@ -30,7 +30,7 @@
         </p>
     {% endif %}
 
-    {% if prereq != [] %}
+    {% if prereq %}
         <p>Prerequisites:</p>
         {% for group in prereq %}
         <div class="group-container">
@@ -58,8 +58,5 @@
         <p>Permission Requirement: {{permission}} </p>
     {% endif %}    
     
-    {% set subject = course_code | extract_subject %}
-    {% set number = course_code | extract_number %}
-    {% set semester = course_code | get_recent_semester %}
-    <p><a href="https://classes.cornell.edu/browse/roster/{{semester}}/class/{{subject}}/{{number}}">See on Class Roster</a></p>
+    <p><a href="https://classes.cornell.edu/browse/roster/{{recent_semester}}/class/{{subject}}/{{number}}">See on Class Roster</a></p>
 </body>

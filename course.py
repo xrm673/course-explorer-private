@@ -5,21 +5,62 @@ Start Date: December 20, 2024
 
 import re
 import special
+from constants import *
 
 NEXT_SEMESTER = "SP25"
 
 class Course(object):
+    @classmethod
+    def create(cls,course_code,course_data,SP_session,
+               FA_session,SU_session,WI_session):
+        if not re.fullmatch(r"[A-Z]+[0-9]{4}", course_code):
+            raise ValueError()
+        
+        subject = re.match(r"[A-Z]+", course_code).group(0)
+        if subject not in course_data:
+            return UnknownCourse(course_code, course_data, SP_session,
+               FA_session,SU_session,WI_session)
+
+        coursemap = course_data[subject]
+        if course_code not in coursemap:
+            return UnknownCourse(course_code, course_data, SP_session,
+               FA_session,SU_session,WI_session)
+        
+        this_year = False
+        for sm in coursemap[course_code]["smst"]:
+            if sm in CURRENT_YEAR:
+                provided_season = sm[:2]
+                this_year = True
+                break
+        if not this_year:
+            return OldCourse(course_code, course_data, SP_session,
+               FA_session,SU_session,WI_session)
+
+        if provided_season == "SP":
+            session_info = SP_session[subject][course_code]
+        elif provided_season == "FA":
+            session_info = FA_session[subject][course_code]
+        elif provided_season == "SU":
+            session_info = SU_session[subject][course_code]
+        elif provided_season == "WI":
+            session_info = WI_session[subject][course_code]
+        if len(session_info) == 1:
+            return OneGroupCourse(course_code, course_data, SP_session,
+               FA_session,SU_session,WI_session)
+        else:
+            return MultiGroupCourse(course_code, course_data, SP_session,
+               FA_session,SU_session,WI_session)
+        
     # getters
     def get_subject(self):
         return self._subject
     
     def get_title(self):
         return self._coursedata["ttl"]
-    
-    def get_number(self):
-        return re.search(r'\d+', self._code).group(0)
 
-    # helper for match_level
+    def get_number(self):
+        return re.search(r'\d+', self._code).group(0)    
+    
     def get_level(self):
         """
         return an int that indicates the level of the course
@@ -27,64 +68,173 @@ class Course(object):
         return int(self.get_number()[0])
     
     def get_semester_offered(self):
-        return self._coursedata["Semester Offered"]
+        return self._coursedata["smst"]
     
+    def get_description(self):
+        return self._coursedata["dsrpn"]
+    
+    def get_distribution(self):
+        return self._coursedata.get("distr")
+    
+    def get_requirement(self):
+        return self._coursedata.get("req")
+    
+    def get_outcomes(self):
+        return self._coursedata.get("otcm")
+    
+    def get_comments(self):
+        return self._coursedata.get("cmts")
+    
+    def get_permission(self):
+        return self._coursedata.get("pmsn")
+    
+    def get_prereq(self):
+        return self._coursedata.get("prereq")
+    
+    def offered_season(self):
+        semester_offered = self.get_semester_offered()
+        for semester in semester_offered:
+            if semester in CURRENT_YEAR:
+                return semester[:2]
+
     def available(self,semester):
-        if semester in self._data["Semester Offered"]:
+        spring_and_fall = only_fall = only_spring = summer = winter = False
+        plan_season = semester[:2]
+        last_season = LAST_SEMESTER[:2]
+        semesters_offered = self.get_semester_offered()
+        if (LAST_SEMESTER in semesters_offered and 
+            PREV_SEMESTER in semesters_offered):
+            spring_and_fall = True 
+        elif (LAST_SEMESTER in semesters_offered and 
+              not PREV_SEMESTER in semesters_offered):
+            if last_season == "FA":
+                only_fall = True 
+            else:
+                only_spring = True 
+        if (LATEST_SUMMER in semesters_offered):
+            summer = True 
+        if (LATEST_WINTER in semesters_offered):
+            winter = True 
+
+        if plan_season == "FA":
+            if spring_and_fall or only_fall:
+                return True 
+        if plan_season == "SP":
+            if spring_and_fall or only_spring:
+                return True 
+        if plan_season == "SU" and summer:
+           return True 
+        if plan_season == "WI" and winter:
             return True 
+        return False  
 
-    def __init__(self,course_code,course_data,session_data):
-        assert re.fullmatch(r"[A-Z]+[0-9]{4}", course_code)
-        subject = re.match(r"[A-Z]+", course_code).group(0)
-        assert subject in course_data
+    def __init__(self,course_code,course_data,SP_session,
+               FA_session,SU_session,WI_session):
+        self._code = course_code
+        self._subject = re.match(r"[A-Z]+", course_code).group(0)
+        self._coursedata = course_data[self._subject][course_code]
+        self._spsession = SP_session 
+        self._fasession = FA_session
+        self._susession = SU_session
+        self._wisession = WI_session
+        
+        # if course_code in SP_session[self._subject]:
+        #     self._spsession = SP_session[self._subject][course_code]
+        # else:
+        #     self._spsession = None 
+        
+        # if course_code in FA_session[self._subject]:
+        #     self._fasession = FA_session[self._subject][course_code]
+        # else:
+        #     self._fasession = None 
 
-        self._code = course_code 
-        self._subject = subject
-        if self._code in course_data[subject]:
-            self._coursedata = course_data[subject]
-        else:
-            self._coursedata = None
+        # if course_code in WI_session[self._subject]:
+        #     self._wisession = WI_session[self._subject][course_code]
+        # else:
+        #     self._wisession = None 
 
-        if not self._coursedata:
-            return UnknownCourse(course_code,course_data,session_data)
-        if not self._code in session_data[subject]:
-            return OldCourse(course_code,course_data,session_data)
-        if len(session_data[subject][course_code])==1:
-            return OneGroupCourse(course_code,course_data,session_data)
-        else: 
-            return MultiGroupCourse(course_code,course_data,session_data)
+        # if course_code in SU_session[self._subject]:
+        #     self._susession = SU_session[self._subject][course_code]
+        # else:
+        #     self._susession = None 
 
 class OneGroupCourse(Course):
-    def __init__(self,course_code,course_data,session_data):
-        super().__init__(course_code,course_data,session_data)
-        self._coursedata = course_data[self._subject][self._code]
-        self._sessiondata = session_data[self._subject][self._code]
+    def get_credits(self):
+        season = self.offered_season()
+        if season == "SP":
+            return self._spsession[self._subject][self._code]["Grp1"]["crd"]
+        if season == "FA":
+            return self._fasession[self._subject][self._code]["Grp1"]["crd"]
+        if season == "SU":
+            return self._susession[self._subject][self._code]["Grp1"]["crd"]
+        if season == "WI":
+            return self._wisession[self._subject][self._code]["Grp1"]["crd"]  
+        else:
+            return []
+              
+        # if self._spsession and self._spsession["Grp1"]["crd"]:
+        #     return self._spsession["Grp1"]["crd"]
+        # elif self._fasession and self._fasession["Grp1"]["crd"]:
+        #     return self._fasession["Grp1"]["crd"]
+        # elif self._susession and self._susession["Grp1"]["crd"]:
+        #     return self._susession["Grp1"]["crd"]
+        # elif self._wisession and self._wisession["Grp1"]["crd"]:
+        #     return self._wisession["Grp1"]["crd"]
+        # else:
+        #     return None 
+
+    def get_instructors(self):
+        pass 
+
+    def __init__(self,course_code,course_data,SP_session,
+               FA_session,SU_session,WI_session):
+        super().__init__(course_code,course_data,SP_session,
+               FA_session,SU_session,WI_session)
 
 class MultiGroupCourse(Course):
-    def __init__(self,course_code,course_data,session_data):
-        super().__init__(course_code,course_data,session_data)
-        self._coursedata = course_data[self._subject][self._code]
-        self._sessiondata = session_data[self._subject][self._code]
+    def __init__(self,course_code,course_data,SP_session,
+               FA_session,SU_session,WI_session):
+        super().__init__(course_code,course_data,SP_session,
+               FA_session,SU_session,WI_session)
 
 class OldCourse(Course):
-    def available(self):
+    def available(self,semester=None):
         return False
 
-    def __init__(self,course_code,course_data,session_data):
-        super().__init__(course_code,course_data,session_data)
+    def __init__(self,course_code,course_data,SP_session,
+               FA_session,SU_session,WI_session):
+        super().__init__(course_code,course_data,SP_session,
+               FA_session,SU_session,WI_session)
 
 class UnknownCourse(Course):
     def get_title(self):
-        return None
+        return "Unknown Course"
     
     def get_semester_offered(self):
         return None
     
+    def get_distribution(self):
+        return None
+    
+    def get_requirement(self):
+        return None
+    
+    def get_outcomes(self):
+        return None
+    
+    def get_comments(self):
+        return None
+    
+    def available(self,semester=None):
+        return False
+    
     def get_description(self):
         return "This course has not been offered by Cornell for more than three years!"
     
-    def __init__(self,course_code,course_data,session_data):
-        super().__init__(course_code,course_data,session_data)
+    def __init__(self,course_code,course_data,SP_session,
+               FA_session,SU_session,WI_session):
+        super().__init__(course_code,course_data,SP_session,
+               FA_session,SU_session,WI_session)
 
 def contain_course(course_data,course_code):
     subject = get_subject(course_code)

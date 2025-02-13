@@ -8,12 +8,19 @@ import json
 import re
 import special
 import parseMajor
-import course
+from course import *
+from constants import *
+import os
 
 app = Flask(__name__)
 app.secret_key = 'some_random_secret_key'
 
-course_data = {}
+course_data_am = {}
+course_data_nz = {}
+SP_session = {}
+FA_session = {}
+SU_session = {}
+WI_session = {}
 college_data = {}
 major1_data = {}
 major2_data = {}
@@ -28,9 +35,36 @@ def load_data():
 
 # helper for load data
 def load_course_data():
-    global course_data
-    with open('data/course_data/combined/corrected.json', 'r') as file:
-        course_data = json.load(file)
+    global course_data_am
+    global course_data_nz
+    global SP_session
+    global FA_session
+    global WI_session
+    global SU_session
+    
+    filepath = os.path.join(COURSE_DATA_ROUTE,"combined_am.json")
+    with open(filepath, 'r') as file:
+        course_data_am = json.load(file)
+    
+    filepath = os.path.join(COURSE_DATA_ROUTE,"combined_nz.json")
+    with open(filepath,'r') as file:
+        course_data_nz = json.load(file)
+    
+    filepath = os.path.join(SESSION_DATA_ROUTE,"SP_session.json")
+    with open(filepath,'r') as file:
+        SP_session = json.load(file)
+    
+    filepath = os.path.join(SESSION_DATA_ROUTE,"FA_session.json")
+    with open(filepath,'r') as file:
+        FA_session = json.load(file)
+    
+    filepath = os.path.join(SESSION_DATA_ROUTE,"SU_session.json")
+    with open(filepath,'r') as file:
+        SU_session = json.load(file)
+    
+    filepath = os.path.join(SESSION_DATA_ROUTE,"WI_session.json")
+    with open(filepath,'r') as file:
+        WI_session = json.load(file)
 
 # helper for load data
 def load_college_data():
@@ -151,33 +185,43 @@ def search_courses():
 
 @app.route('/<course_code>',methods = ['GET'])
 def display_course(course_code):
-    subject = course.get_subject(course_code)
-    if course.contain_course(course_data,course_code):
-        data = course_data[subject][course_code]
+    if course_code[0] in A_TO_M:
+        course_created = Course.create(course_code,course_data_am,
+                                       SP_session,FA_session,
+                                       SU_session,WI_session)
     else:
-        raise Exception()
-    title = data["Title"]
-    description = data["Description"]
-    credits = data['Credits']
-    semesters = data['Semester Offered']
-    distributions = data["Distribution"]
-    prereq = data["Prerequisites"]
-    requirement = data["Specific Requirements"]
-    comments = data["Comments"]
-    recommend = data["Recommended Prerequisite"]
-    permission = data["Permission"]
+        course_created = Course.create(course_code,course_data_nz,
+                                       SP_session,FA_session,
+                                       SU_session,WI_session)
+    title = course_created.get_title()
+    subject = course_created.get_subject()
+    number = course_created.get_number()
+    description = course_created.get_description()
+    credits = course_created.get_credits()
+    semesters = course_created.get_semester_offered()
+    recent_semester = semesters[0]
+    distributions = course_created.get_distribution()
+    prereq = course_created.get_prereq()
+    requirement = course_created.get_requirement()
+    outcomes = course_created.get_outcomes()
+    comments = course_created.get_comments()
+    # recommend = data["Recommended Prerequisite"]
+    permission = course_created.get_permission()
     return render_template(
         'course.html',
         course_code = course_code,
         title = title,
+        subject = subject,
+        number = number,
+        recent_semester = recent_semester,
         description = description,
         credits = credits,
         semesters = semesters,
         distributions = distributions,
         prereq = prereq,
         requirement = requirement,
+        outcomes = outcomes,
         comments = comments,
-        recommend = recommend,
         permission = permission
         )
 
