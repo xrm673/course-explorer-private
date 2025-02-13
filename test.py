@@ -55,18 +55,17 @@ def test_get_credits(course_data_am,course_data_nz,
                      FA_session,SP_session,SU_session,WI_session):
     
     cs1110 = course.Course.create("CS1110",course_data_am,
-                                  FA_session,SP_session,SU_session,WI_session)
-    return cs1110.get_credits()
+                                  SP_session,FA_session,SU_session,WI_session)
+    return cs1110.get_instructors()
 
 if __name__ == "__main__":
     start_time = time.time()
     load_data()
     load_time = time.time()
     count = 0
-    while count < 10000:
-        test_get_credits(course_data_am,course_data_nz,
-                        FA_session,SP_session,SU_session,WI_session)
-        count += 1
+    print(test_get_credits(course_data_am,course_data_nz,
+                    FA_session,SP_session,SU_session,WI_session))
+    count += 1
     end_time = time.time() 
     print(load_time - start_time)
     print(end_time - load_time)

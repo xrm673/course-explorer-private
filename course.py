@@ -93,9 +93,9 @@ class Course(object):
     
     def offered_season(self):
         semester_offered = self.get_semester_offered()
-        for semester in semester_offered:
-            if semester in CURRENT_YEAR:
-                return semester[:2]
+        semester = semester_offered[0]
+        if semester in CURRENT_YEAR:
+            return semester[:2]
 
     def available(self,semester):
         spring_and_fall = only_fall = only_spring = summer = winter = False
@@ -171,20 +171,32 @@ class OneGroupCourse(Course):
             return self._wisession[self._subject][self._code]["Grp1"]["crd"]  
         else:
             return []
-              
-        # if self._spsession and self._spsession["Grp1"]["crd"]:
-        #     return self._spsession["Grp1"]["crd"]
-        # elif self._fasession and self._fasession["Grp1"]["crd"]:
-        #     return self._fasession["Grp1"]["crd"]
-        # elif self._susession and self._susession["Grp1"]["crd"]:
-        #     return self._susession["Grp1"]["crd"]
-        # elif self._wisession and self._wisession["Grp1"]["crd"]:
-        #     return self._wisession["Grp1"]["crd"]
-        # else:
-        #     return None 
 
-    def get_instructors(self):
-        pass 
+    def get_instructors(self,semester=LAST_SEMESTER):
+        assert semester in self.get_semester_offered()
+        season = semester[:2]
+        if season == "SP":
+            session_data = self._spsession[self._subject][self._code]["Grp1"]
+        elif season == "FA":
+            session_data = self._fasession[self._subject][self._code]["Grp1"]
+        elif season == "SU":
+            session_data = self._susession[self._subject][self._code]["Grp1"]
+        elif season == "WI":
+            session_data = self._wisession[self._subject][self._code]["Grp1"]
+        
+        result = {}
+        for attribute in session_data:
+            if len(attribute) == 7:
+                for sub_attribute in session_data[attribute]:
+                    if len(sub_attribute) == 8:
+                        if not "instr" in session_data[attribute][sub_attribute]:
+                            continue
+                        instr_dict = session_data[attribute][sub_attribute].get("instr")
+                        for instr in instr_dict:
+                            result[instr] = instr_dict[instr]
+        return result
+
+
 
     def __init__(self,course_code,course_data,SP_session,
                FA_session,SU_session,WI_session):

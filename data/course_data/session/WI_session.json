@@ -19,11 +19,9 @@
                         "ptn": "",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "dwt5": "David W. Taylor"
-                            }
-                        ]
+                        "instr": {
+                            "dwt5": "David W. Taylor"
+                        }
                     },
                     "notes": [
                         "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
@@ -51,11 +49,9 @@
                         "ptn": "",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "dlh266": "Donna Lynn Haeger"
-                            }
-                        ]
+                        "instr": {
+                            "dlh266": "Donna Lynn Haeger"
+                        }
                     },
                     "notes": [
                         "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
@@ -83,11 +79,9 @@
                         "ptn": "",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "rtg77": "R Thomas Godwin"
-                            }
-                        ]
+                        "instr": {
+                            "rtg77": "R Thomas Godwin"
+                        }
                     },
                     "notes": [
                         "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
@@ -114,11 +108,9 @@
                         "ptn": "",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "gse23": "Scott Erickson"
-                            }
-                        ]
+                        "instr": {
+                            "gse23": "Scott Erickson"
+                        }
                     },
                     "notes": [
                         "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
@@ -145,11 +137,9 @@
                         "ptn": "",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "am2393": "Reza Moghimi"
-                            }
-                        ]
+                        "instr": {
+                            "am2393": "Reza Moghimi"
+                        }
                     },
                     "notes": [
                         "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
@@ -176,11 +166,9 @@
                         "ptn": "",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "eel33": "Eric E Lewis"
-                            }
-                        ]
+                        "instr": {
+                            "eel33": "Eric E Lewis"
+                        }
                     },
                     "notes": [
                         "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
@@ -215,11 +203,9 @@
                         "ptn": "",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "eai1": "Elena A. Iankova"
-                            }
-                        ]
+                        "instr": {
+                            "eai1": "Elena A. Iankova"
+                        }
                     },
                     "notes": [
                         "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
@@ -249,14 +235,10 @@
                         "ptn": "",
                         "start_dt": "01/05/2025",
                         "end_dt": "01/12/2025",
-                        "instr": [
-                            {
-                                "jmm528": "Jennifer Majka"
-                            },
-                            {
-                                "jas926": "James Alexander Stapp"
-                            }
-                        ]
+                        "instr": {
+                            "jmm528": "Jennifer Majka",
+                            "jas926": "James Alexander Stapp"
+                        }
                     },
                     "notes": [
                         "Taught in London, England. Travel dates to London are leaving January 5, 2025 and returning January 12, 2025."
@@ -284,11 +266,9 @@
                         "ptn": "",
                         "start_dt": "01/04/2025",
                         "end_dt": "01/16/2025",
-                        "instr": [
-                            {
-                                "tlp24": "Trent Preszler"
-                            }
-                        ]
+                        "instr": {
+                            "tlp24": "Trent Preszler"
+                        }
                     },
                     "notes": [
                         "Taught in South Africa. Travel dates to South Africa are leaving January 3, 2025 and returning January 17, 2025."
@@ -316,11 +296,9 @@
                         "ptn": "",
                         "start_dt": "01/05/2025",
                         "end_dt": "01/12/2025",
-                        "instr": [
-                            {
-                                "dwh22": "Daniel Williams Hooker"
-                            }
-                        ]
+                        "instr": {
+                            "dwh22": "Daniel Williams Hooker"
+                        }
                     },
                     "notes": [
                         "Taught in Greece. Travel dates to Greece are leaving January 5, 2025 and returning January 12, 2025."
@@ -362,11 +340,9 @@
                         "ptn": "",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "cma249": "Catherine M. Appert"
-                            }
-                        ]
+                        "instr": {
+                            "cma249": "Catherine M. Appert"
+                        }
                     },
                     "notes": [
                         "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
@@ -411,11 +387,9 @@
                         "ptn": "MTWRF",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "sns87": "Samantha Noelle Sheppard"
-                            }
-                        ]
+                        "instr": {
+                            "sns87": "Samantha Noelle Sheppard"
+                        }
                     },
                     "notes": [
                         "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
@@ -450,11 +424,9 @@
                         "ptn": "",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "mcs378": "Matthew C Saleh"
-                            }
-                        ]
+                        "instr": {
+                            "mcs378": "Matthew C Saleh"
+                        }
                     },
                     "notes": [
                         "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
@@ -484,11 +456,9 @@
                         "ptn": "",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "mas329": "Melanie Amanda Soberon"
-                            }
-                        ]
+                        "instr": {
+                            "mas329": "Melanie Amanda Soberon"
+                        }
                     },
                     "notes": [
                         "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
@@ -503,11 +473,9 @@
                         "ptn": "",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "mas329": "Melanie Amanda Soberon"
-                            }
-                        ]
+                        "instr": {
+                            "mas329": "Melanie Amanda Soberon"
+                        }
                     }
                 }
             }
@@ -532,11 +500,9 @@
                         "ptn": "",
                         "start_dt": "01/07/2025",
                         "end_dt": "01/18/2025",
-                        "instr": [
-                            {
-                                "mev1": "Mike Van Amburgh"
-                            }
-                        ]
+                        "instr": {
+                            "mev1": "Mike Van Amburgh"
+                        }
                     },
                     "notes": [
                         "Taught in Italy. This is part of a multi-term course sequence with ANSC 2550 and ANSC 2552."
@@ -564,11 +530,9 @@
                         "ptn": "",
                         "start_dt": "01/06/2025",
                         "end_dt": "01/16/2025",
-                        "instr": [
-                            {
-                                "mev1": "Mike Van Amburgh"
-                            }
-                        ]
+                        "instr": {
+                            "mev1": "Mike Van Amburgh"
+                        }
                     },
                     "notes": [
                         "Taught in Germany. This is part of a multi-term course sequence with ANSC 3560 and ANSC 3562."
@@ -645,11 +609,9 @@
                         "ptn": "MTWRF",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "nf42": "Magnus Fiskesjo"
-                            }
-                        ]
+                        "instr": {
+                            "nf42": "Magnus Fiskesjo"
+                        }
                     },
                     "meeting2": {
                         "tmstart": "01:00PM",
@@ -705,11 +667,9 @@
                         "ptn": "",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "vjp33": "Verity Jane Platt"
-                            }
-                        ]
+                        "instr": {
+                            "vjp33": "Verity Jane Platt"
+                        }
                     },
                     "notes": [
                         "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
@@ -783,11 +743,9 @@
                         "ptn": "MTWRF",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "nf42": "Magnus Fiskesjo"
-                            }
-                        ]
+                        "instr": {
+                            "nf42": "Magnus Fiskesjo"
+                        }
                     },
                     "meeting2": {
                         "tmstart": "01:00PM",
@@ -839,11 +797,9 @@
                         "ptn": "",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "vjp33": "Verity Jane Platt"
-                            }
-                        ]
+                        "instr": {
+                            "vjp33": "Verity Jane Platt"
+                        }
                     },
                     "notes": [
                         "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
@@ -917,11 +873,9 @@
                         "ptn": "MTWRF",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "nf42": "Magnus Fiskesjo"
-                            }
-                        ]
+                        "instr": {
+                            "nf42": "Magnus Fiskesjo"
+                        }
                     },
                     "meeting2": {
                         "tmstart": "01:00PM",
@@ -1008,11 +962,9 @@
                         "ptn": "MTWRF",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "nf42": "Magnus Fiskesjo"
-                            }
-                        ]
+                        "instr": {
+                            "nf42": "Magnus Fiskesjo"
+                        }
                     },
                     "meeting2": {
                         "tmstart": "01:00PM",
@@ -1052,11 +1004,9 @@
                         "ptn": "MTWRF",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "mp842": "Matilda Prestano"
-                            }
-                        ]
+                        "instr": {
+                            "mp842": "Matilda Prestano"
+                        }
                     },
                     "meeting2": {
                         "tmstart": "01:45PM",
@@ -1064,11 +1014,9 @@
                         "ptn": "MTWRF",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "mp842": "Matilda Prestano"
-                            }
-                        ]
+                        "instr": {
+                            "mp842": "Matilda Prestano"
+                        }
                     },
                     "notes": [
                         "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
@@ -1110,11 +1058,9 @@
                         "ptn": "",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "cma249": "Catherine M. Appert"
-                            }
-                        ]
+                        "instr": {
+                            "cma249": "Catherine M. Appert"
+                        }
                     },
                     "notes": [
                         "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
@@ -1143,11 +1089,9 @@
                         "ptn": "",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "jrs626": "Justin R. St. Juliana"
-                            }
-                        ]
+                        "instr": {
+                            "jrs626": "Justin R. St. Juliana"
+                        }
                     },
                     "notes": [
                         "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
@@ -1177,11 +1121,9 @@
                         "ptn": "",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "mas245": "Mark Akos Sarvary"
-                            }
-                        ]
+                        "instr": {
+                            "mas245": "Mark Akos Sarvary"
+                        }
                     },
                     "notes": [
                         "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
@@ -1218,11 +1160,9 @@
                         "ptn": "MTWRF",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "hr12": "Hanna M. Roisman"
-                            }
-                        ]
+                        "instr": {
+                            "hr12": "Hanna M. Roisman"
+                        }
                     },
                     "notes": [
                         "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
@@ -1259,11 +1199,9 @@
                         "ptn": "MTWRF",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "hr12": "Hanna M. Roisman"
-                            }
-                        ]
+                        "instr": {
+                            "hr12": "Hanna M. Roisman"
+                        }
                     },
                     "notes": [
                         "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
@@ -1290,11 +1228,9 @@
                         "ptn": "",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "mf268": "Michael Fontaine"
-                            }
-                        ]
+                        "instr": {
+                            "mf268": "Michael Fontaine"
+                        }
                     },
                     "notes": [
                         "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
@@ -1333,11 +1269,9 @@
                         "ptn": "",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "vjp33": "Verity Jane Platt"
-                            }
-                        ]
+                        "instr": {
+                            "vjp33": "Verity Jane Platt"
+                        }
                     },
                     "notes": [
                         "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
@@ -1368,11 +1302,9 @@
                         "ptn": "S",
                         "start_dt": "01/04/2025",
                         "end_dt": "01/04/2025",
-                        "instr": [
-                            {
-                                "ml2576": "Michelle LaVigne"
-                            }
-                        ]
+                        "instr": {
+                            "ml2576": "Michelle LaVigne"
+                        }
                     },
                     "meeting2": {
                         "tmstart": "10:00AM",
@@ -1380,11 +1312,9 @@
                         "ptn": "M",
                         "start_dt": "01/06/2025",
                         "end_dt": "01/06/2025",
-                        "instr": [
-                            {
-                                "ml2576": "Michelle LaVigne"
-                            }
-                        ]
+                        "instr": {
+                            "ml2576": "Michelle LaVigne"
+                        }
                     },
                     "meeting3": {
                         "tmstart": "02:00PM",
@@ -1392,11 +1322,9 @@
                         "ptn": "T",
                         "start_dt": "01/07/2025",
                         "end_dt": "01/07/2025",
-                        "instr": [
-                            {
-                                "ml2576": "Michelle LaVigne"
-                            }
-                        ]
+                        "instr": {
+                            "ml2576": "Michelle LaVigne"
+                        }
                     },
                     "meeting4": {
                         "tmstart": "10:00AM",
@@ -1404,11 +1332,9 @@
                         "ptn": "W",
                         "start_dt": "01/08/2025",
                         "end_dt": "01/08/2025",
-                        "instr": [
-                            {
-                                "ml2576": "Michelle LaVigne"
-                            }
-                        ]
+                        "instr": {
+                            "ml2576": "Michelle LaVigne"
+                        }
                     },
                     "meeting5": {
                         "tmstart": "09:00AM",
@@ -1416,11 +1342,9 @@
                         "ptn": "F",
                         "start_dt": "01/10/2025",
                         "end_dt": "01/10/2025",
-                        "instr": [
-                            {
-                                "ml2576": "Michelle LaVigne"
-                            }
-                        ]
+                        "instr": {
+                            "ml2576": "Michelle LaVigne"
+                        }
                     },
                     "meeting6": {
                         "tmstart": "09:00AM",
@@ -1428,11 +1352,9 @@
                         "ptn": "Su",
                         "start_dt": "01/12/2025",
                         "end_dt": "01/12/2025",
-                        "instr": [
-                            {
-                                "ml2576": "Michelle LaVigne"
-                            }
-                        ]
+                        "instr": {
+                            "ml2576": "Michelle LaVigne"
+                        }
                     },
                     "meeting7": {
                         "tmstart": "09:00AM",
@@ -1440,11 +1362,9 @@
                         "ptn": "M",
                         "start_dt": "01/13/2025",
                         "end_dt": "01/13/2025",
-                        "instr": [
-                            {
-                                "ml2576": "Michelle LaVigne"
-                            }
-                        ]
+                        "instr": {
+                            "ml2576": "Michelle LaVigne"
+                        }
                     },
                     "notes": [
                         "Taught in Oaxaca, Mexico.",
@@ -1461,11 +1381,9 @@
                         "ptn": "S",
                         "start_dt": "01/04/2025",
                         "end_dt": "01/04/2025",
-                        "instr": [
-                            {
-                                "ml2576": "Michelle LaVigne"
-                            }
-                        ]
+                        "instr": {
+                            "ml2576": "Michelle LaVigne"
+                        }
                     },
                     "meeting2": {
                         "tmstart": "09:00AM",
@@ -1473,11 +1391,9 @@
                         "ptn": "Su",
                         "start_dt": "01/05/2025",
                         "end_dt": "01/05/2025",
-                        "instr": [
-                            {
-                                "ml2576": "Michelle LaVigne"
-                            }
-                        ]
+                        "instr": {
+                            "ml2576": "Michelle LaVigne"
+                        }
                     },
                     "meeting3": {
                         "tmstart": "09:00AM",
@@ -1485,11 +1401,9 @@
                         "ptn": "T",
                         "start_dt": "01/07/2025",
                         "end_dt": "01/07/2025",
-                        "instr": [
-                            {
-                                "ml2576": "Michelle LaVigne"
-                            }
-                        ]
+                        "instr": {
+                            "ml2576": "Michelle LaVigne"
+                        }
                     },
                     "meeting4": {
                         "tmstart": "09:00AM",
@@ -1497,11 +1411,9 @@
                         "ptn": "R",
                         "start_dt": "01/09/2025",
                         "end_dt": "01/09/2025",
-                        "instr": [
-                            {
-                                "ml2576": "Michelle LaVigne"
-                            }
-                        ]
+                        "instr": {
+                            "ml2576": "Michelle LaVigne"
+                        }
                     },
                     "meeting5": {
                         "tmstart": "09:00AM",
@@ -1509,11 +1421,9 @@
                         "ptn": "S",
                         "start_dt": "01/11/2025",
                         "end_dt": "01/11/2025",
-                        "instr": [
-                            {
-                                "ml2576": "Michelle LaVigne"
-                            }
-                        ]
+                        "instr": {
+                            "ml2576": "Michelle LaVigne"
+                        }
                     }
                 }
             }
@@ -1555,11 +1465,9 @@
                         "ptn": "MTWRF",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "des14": "Dawn Schrader"
-                            }
-                        ]
+                        "instr": {
+                            "des14": "Dawn Schrader"
+                        }
                     },
                     "notes": [
                         "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
@@ -1586,11 +1494,9 @@
                         "ptn": "",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "ju68": "Jamal Uddin"
-                            }
-                        ]
+                        "instr": {
+                            "ju68": "Jamal Uddin"
+                        }
                     },
                     "notes": [
                         "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
@@ -1635,11 +1541,9 @@
                         "ptn": "MTWRF",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "des14": "Dawn Schrader"
-                            }
-                        ]
+                        "instr": {
+                            "des14": "Dawn Schrader"
+                        }
                     },
                     "notes": [
                         "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
@@ -1686,11 +1590,9 @@
                         "ptn": "",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "ae392": "Anna Evtushenko"
-                            }
-                        ]
+                        "instr": {
+                            "ae392": "Anna Evtushenko"
+                        }
                     },
                     "notes": [
                         "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
@@ -1719,11 +1621,9 @@
                         "ptn": "",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "jpw6": "Jennifer Parker Wissink"
-                            }
-                        ]
+                        "instr": {
+                            "jpw6": "Jennifer Parker Wissink"
+                        }
                     },
                     "notes": [
                         "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
@@ -1750,11 +1650,9 @@
                         "ptn": "",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "tae23": "Thomas Andrew Evans"
-                            }
-                        ]
+                        "instr": {
+                            "tae23": "Thomas Andrew Evans"
+                        }
                     },
                     "notes": [
                         "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
@@ -1799,11 +1697,9 @@
                         "ptn": "",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "ae392": "Anna Evtushenko"
-                            }
-                        ]
+                        "instr": {
+                            "ae392": "Anna Evtushenko"
+                        }
                     },
                     "notes": [
                         "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
@@ -1832,11 +1728,9 @@
                         "ptn": "",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "kug1": "Krystyna Urbisz Golkowska"
-                            }
-                        ]
+                        "instr": {
+                            "kug1": "Krystyna Urbisz Golkowska"
+                        }
                     },
                     "notes": [
                         "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
@@ -1865,11 +1759,9 @@
                         "ptn": "",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "cmc27": "Marina Caillaud"
-                            }
-                        ]
+                        "instr": {
+                            "cmc27": "Marina Caillaud"
+                        }
                     },
                     "notes": [
                         "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
@@ -1916,11 +1808,9 @@
                         "ptn": "MTWRF",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "sns87": "Samantha Noelle Sheppard"
-                            }
-                        ]
+                        "instr": {
+                            "sns87": "Samantha Noelle Sheppard"
+                        }
                     },
                     "notes": [
                         "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
@@ -1958,11 +1848,9 @@
                         "ptn": "",
                         "start_dt": "01/05/2025",
                         "end_dt": "01/18/2025",
-                        "instr": [
-                            {
-                                "rnb5": "Rachel Bezner Kerr"
-                            }
-                        ]
+                        "instr": {
+                            "rnb5": "Rachel Bezner Kerr"
+                        }
                     },
                     "notes": [
                         "Taught in Malawi. Multi-term course, completion of GDEV 3500/5500 and GDEV 3501/5501 required for final grade."
@@ -1996,11 +1884,9 @@
                         "ptn": "",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/13/2025",
-                        "instr": [
-                            {
-                                "pme7": "Parfait M. Eloundou-Enyegue"
-                            }
-                        ]
+                        "instr": {
+                            "pme7": "Parfait M. Eloundou-Enyegue"
+                        }
                     },
                     "notes": [
                         "Taught in Cameroon. Multi-term course, completion of GDEV 3500/5500 and GDEV 3501/5501 required for final grade."
@@ -2036,11 +1922,9 @@
                         "ptn": "",
                         "start_dt": "01/05/2025",
                         "end_dt": "01/18/2025",
-                        "instr": [
-                            {
-                                "rnb5": "Rachel Bezner Kerr"
-                            }
-                        ]
+                        "instr": {
+                            "rnb5": "Rachel Bezner Kerr"
+                        }
                     },
                     "notes": [
                         "Taught in Malawi. Multi-term course, completion of GDEV 3500/5500 and GDEV 3105/5501 required for final grade."
@@ -2074,11 +1958,9 @@
                         "ptn": "",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/13/2025",
-                        "instr": [
-                            {
-                                "pme7": "Parfait M. Eloundou-Enyegue"
-                            }
-                        ]
+                        "instr": {
+                            "pme7": "Parfait M. Eloundou-Enyegue"
+                        }
                     },
                     "notes": [
                         "Taught in Cameroon. Multi-term course, completion of GDEV 3500/5500 and GDEV 3105/5501 required for final grade."
@@ -2115,11 +1997,9 @@
                         "ptn": "",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "mcs378": "Matthew C Saleh"
-                            }
-                        ]
+                        "instr": {
+                            "mcs378": "Matthew C Saleh"
+                        }
                     },
                     "notes": [
                         "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
@@ -2147,11 +2027,9 @@
                         "ptn": "",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "ua42": "Uriel Abulof"
-                            }
-                        ]
+                        "instr": {
+                            "ua42": "Uriel Abulof"
+                        }
                     },
                     "notes": [
                         "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
@@ -2188,11 +2066,9 @@
                         "ptn": "",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "vz29": "Vivian Zayas"
-                            }
-                        ]
+                        "instr": {
+                            "vz29": "Vivian Zayas"
+                        }
                     },
                     "notes": [
                         "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
@@ -2221,11 +2097,9 @@
                         "ptn": "",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "jp61": "Joseph Palermo"
-                            }
-                        ]
+                        "instr": {
+                            "jp61": "Joseph Palermo"
+                        }
                     },
                     "notes": [
                         "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
@@ -2253,11 +2127,9 @@
                         "ptn": "",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "jma49": "Jomarie Alano"
-                            }
-                        ]
+                        "instr": {
+                            "jma49": "Jomarie Alano"
+                        }
                     },
                     "notes": [
                         "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
@@ -2286,11 +2158,9 @@
                         "ptn": "MTWRF",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "aor4": "Armands Osvalds Revelins"
-                            }
-                        ]
+                        "instr": {
+                            "aor4": "Armands Osvalds Revelins"
+                        }
                     },
                     "notes": [
                         "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
@@ -2332,11 +2202,9 @@
                         "ptn": "MTWRF",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "tjd9": "Thomas J. Diciccio"
-                            }
-                        ]
+                        "instr": {
+                            "tjd9": "Thomas J. Diciccio"
+                        }
                     },
                     "notes": [
                         "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
@@ -2387,11 +2255,9 @@
                         "ptn": "MTWRF",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "tjd9": "Thomas J. Diciccio"
-                            }
-                        ]
+                        "instr": {
+                            "tjd9": "Thomas J. Diciccio"
+                        }
                     },
                     "notes": [
                         "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
@@ -2451,11 +2317,9 @@
                         "ptn": "",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "ae392": "Anna Evtushenko"
-                            }
-                        ]
+                        "instr": {
+                            "ae392": "Anna Evtushenko"
+                        }
                     },
                     "notes": [
                         "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
@@ -2501,11 +2365,9 @@
                         "ptn": "MTWRF",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "des14": "Dawn Schrader"
-                            }
-                        ]
+                        "instr": {
+                            "des14": "Dawn Schrader"
+                        }
                     },
                     "notes": [
                         "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
@@ -2535,11 +2397,9 @@
                         "ptn": "",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/18/2025",
-                        "instr": [
-                            {
-                                "mw966": "Matthew Wilkens"
-                            }
-                        ]
+                        "instr": {
+                            "mw966": "Matthew Wilkens"
+                        }
                     }
                 }
             }
@@ -2581,11 +2441,9 @@
                         "ptn": "MTWRF",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "des14": "Dawn Schrader"
-                            }
-                        ]
+                        "instr": {
+                            "des14": "Dawn Schrader"
+                        }
                     },
                     "notes": [
                         "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
@@ -2614,11 +2472,9 @@
                         "ptn": "",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "jms862": "James M. Spinazzola"
-                            }
-                        ]
+                        "instr": {
+                            "jms862": "James M. Spinazzola"
+                        }
                     },
                     "notes": [
                         "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
@@ -2657,11 +2513,9 @@
                         "ptn": "",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "cma249": "Catherine M. Appert"
-                            }
-                        ]
+                        "instr": {
+                            "cma249": "Catherine M. Appert"
+                        }
                     },
                     "notes": [
                         "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
@@ -2688,11 +2542,9 @@
                         "ptn": "",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "rsm253": "Roger Moseley"
-                            }
-                        ]
+                        "instr": {
+                            "rsm253": "Roger Moseley"
+                        }
                     },
                     "notes": [
                         "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
@@ -2758,11 +2610,9 @@
                         "ptn": "",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "eai1": "Elena A. Iankova"
-                            }
-                        ]
+                        "instr": {
+                            "eai1": "Elena A. Iankova"
+                        }
                     },
                     "notes": [
                         "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
@@ -2798,20 +2648,12 @@
                         "ptn": "",
                         "start_dt": "01/04/2025",
                         "end_dt": "01/19/2025",
-                        "instr": [
-                            {
-                                "blg85": "Ben Gottesman"
-                            },
-                            {
-                                "anr37": "Aaron N. Rice"
-                            },
-                            {
-                                "lms433": "Larissa Sayuri Moreira Sugai"
-                            },
-                            {
-                                "lbs233": "Laurel Symes"
-                            }
-                        ]
+                        "instr": {
+                            "blg85": "Ben Gottesman",
+                            "anr37": "Aaron N. Rice",
+                            "lms433": "Larissa Sayuri Moreira Sugai",
+                            "lbs233": "Laurel Symes"
+                        }
                     },
                     "notes": [
                         "Must enroll in NTRES 3151 and NTRES 3152 to receive a final grade. Permission of Instructor required. Students will travel independently and will be picked up on the Big Island."
@@ -2839,14 +2681,10 @@
                         "ptn": "MTWRFSSu",
                         "start_dt": "01/06/2025",
                         "end_dt": "01/12/2025",
-                        "instr": [
-                            {
-                                "cek7": "Cliff Kraft"
-                            },
-                            {
-                                "tbl3": "Bruce Lauber"
-                            }
-                        ]
+                        "instr": {
+                            "cek7": "Cliff Kraft",
+                            "tbl3": "Bruce Lauber"
+                        }
                     },
                     "nd_note": false,
                     "notes": [
@@ -2876,11 +2714,9 @@
                         "ptn": "MTWRF",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "jc62": "John Richard Callister"
-                            }
-                        ]
+                        "instr": {
+                            "jc62": "John Richard Callister"
+                        }
                     },
                     "notes": [
                         "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
@@ -2935,11 +2771,9 @@
                         "ptn": "MTWR",
                         "start_dt": "01/13/2025",
                         "end_dt": "01/16/2025",
-                        "instr": [
-                            {
-                                "brb4": "Benjamin Ransom Blakeley"
-                            }
-                        ]
+                        "instr": {
+                            "brb4": "Benjamin Ransom Blakeley"
+                        }
                     },
                     "notes": [
                         "This is part two of a multi-semester course. Part one (course fee: $450) is held in November 2024, part two (course fee: $0) runs from January 13-16, 2025 from 8:00am - 6:00pm. You must attend part one in November in order to take part two in January. Students enrolled in this course who are living on-campus will need to find off-campus accommodations until the residential halls open. Participation in all class sessions in the fall and winter semesters is required to receive the 1 PE credit."
@@ -2966,11 +2800,9 @@
                         "ptn": "MFSSu",
                         "start_dt": "01/17/2025",
                         "end_dt": "01/20/2025",
-                        "instr": [
-                            {
-                                "brb4": "Benjamin Ransom Blakeley"
-                            }
-                        ]
+                        "instr": {
+                            "brb4": "Benjamin Ransom Blakeley"
+                        }
                     },
                     "notes": [
                         "This is part two of a multi-semester course. Part one (course fee: $450) is held in November 2024, part two (course fee: $0) runs from January 17-20, 2025 from 8:00am - 6:00pm. You must attend part one in November in order to take part two in January. Students are responsible for enrolling in the winter class (part 2). Students enrolled in this course who are living on-campus will need to find off-campus accommodations until the residential halls open. Participation in all class sessions in the fall and winter semesters is required to receive the 1 PE credit."
@@ -2997,11 +2829,9 @@
                         "ptn": "MTWRFSSu",
                         "start_dt": "01/13/2025",
                         "end_dt": "01/20/2025",
-                        "instr": [
-                            {
-                                "brb4": "Benjamin Ransom Blakeley"
-                            }
-                        ]
+                        "instr": {
+                            "brb4": "Benjamin Ransom Blakeley"
+                        }
                     },
                     "notes": [
                         "This is part two of a multi-semester course. Part one (course fee: $855) is held in November 2024 -- part two (course fee: $0) runs from January 13-20, 2025 from 8:00am - 6:00pm. You must attend part one in November in order to take part two in January: students are responsible for enrolling in the winter class (part 2). Students enrolled in this course who are living on-campus will need to find off-campus accommodations until the residential halls open. Participation in all class sessions in the fall and winter semesters is required to receive the 1 PE credit."
@@ -3028,11 +2858,9 @@
                         "ptn": "MSSu",
                         "start_dt": "01/17/2025",
                         "end_dt": "01/19/2025",
-                        "instr": [
-                            {
-                                "brb4": "Benjamin Ransom Blakeley"
-                            }
-                        ]
+                        "instr": {
+                            "brb4": "Benjamin Ransom Blakeley"
+                        }
                     },
                     "notes": [
                         "This is part two of a multi-semester course. Part one (course fee: $375) is held in November 2024, part two (course fee: $0) runs from January 17-19, 2025 from 8:00am - 6:00pm. You must attend part one in November in order to take part two in January: students are responsible for enrolling in the winter class (part 2). Students enrolled in this course who are living on-campus will need to find off-campus accommodations until the residential halls open. Participation in all class sessions in the fall and winter semesters is required to receive the 1 PE credit."
@@ -3062,14 +2890,10 @@
                         "ptn": "",
                         "start_dt": "01/03/2025",
                         "end_dt": "01/18/2025",
-                        "instr": [
-                            {
-                                "mag4": "Maria Alejandra Gandolfo Nixon"
-                            },
-                            {
-                                "kcn2": "Kevin C. Nixon"
-                            }
-                        ]
+                        "instr": {
+                            "mag4": "Maria Alejandra Gandolfo Nixon",
+                            "kcn2": "Kevin C. Nixon"
+                        }
                     },
                     "notes": [
                         "Taught in Patagonia. Class travels to Patagonia (Chile) on January 2 and returns on January 19, 2025. Students must enroll in PLSCI 2302 during the spring semester to receive a final grade."
@@ -3097,11 +2921,9 @@
                         "ptn": "",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "ts21": "Tom Silva"
-                            }
-                        ]
+                        "instr": {
+                            "ts21": "Tom Silva"
+                        }
                     },
                     "notes": [
                         "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
@@ -3130,29 +2952,21 @@
                         "ptn": "",
                         "start_dt": "01/07/2025",
                         "end_dt": "01/14/2025",
-                        "instr": [
-                            {
-                                "lcc2": "Leah Cynara Cook"
-                            },
-                            {
-                                "gf32": "Giulia Friso"
-                            },
-                            {
-                                "mpp3": "Marvin P. Pritts"
-                            },
-                            {
-                                "car295": "Courtney Ann Roby"
-                            }
-                        ]
+                        "instr": {
+                            "lcc2": "Leah Cynara Cook",
+                            "gf32": "Giulia Friso",
+                            "mpp3": "Marvin P. Pritts",
+                            "car295": "Courtney Ann Roby"
+                        }
                     },
                     "prereq": [
+                        [
+                            "PLSCI3400"
+                        ],
                         [
                             "CLASS2640",
                             "PLSCI2100",
                             "PLSCI3100"
-                        ],
-                        [
-                            "PLSCI3400"
                         ]
                     ],
                     "nd_note": true,
@@ -3201,11 +3015,9 @@
                         "ptn": "MTWRF",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "sns87": "Samantha Noelle Sheppard"
-                            }
-                        ]
+                        "instr": {
+                            "sns87": "Samantha Noelle Sheppard"
+                        }
                     },
                     "notes": [
                         "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
@@ -3232,11 +3044,9 @@
                         "ptn": "MTWRF",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "kjw247": "Kristen J Warner"
-                            }
-                        ]
+                        "instr": {
+                            "kjw247": "Kristen J Warner"
+                        }
                     },
                     "notes": [
                         "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
@@ -3272,11 +3082,9 @@
                         "ptn": "",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "vz29": "Vivian Zayas"
-                            }
-                        ]
+                        "instr": {
+                            "vz29": "Vivian Zayas"
+                        }
                     },
                     "notes": [
                         "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
@@ -3323,11 +3131,9 @@
                         "ptn": "",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "ae392": "Anna Evtushenko"
-                            }
-                        ]
+                        "instr": {
+                            "ae392": "Anna Evtushenko"
+                        }
                     },
                     "notes": [
                         "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
@@ -3369,11 +3175,9 @@
                         "ptn": "MTWRF",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "tjd9": "Thomas J. Diciccio"
-                            }
-                        ]
+                        "instr": {
+                            "tjd9": "Thomas J. Diciccio"
+                        }
                     },
                     "notes": [
                         "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
@@ -3414,14 +3218,10 @@
                         "ptn": "TWRF",
                         "start_dt": "01/14/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "jrb553": "John (J.B.) Blevins"
-                            },
-                            {
-                                "ltf24": "Lutz Thomas Finger"
-                            }
-                        ]
+                        "instr": {
+                            "jrb553": "John (J.B.) Blevins",
+                            "ltf24": "Lutz Thomas Finger"
+                        }
                     },
                     "notes": [
                         "Application required. Enrollment limited to: Cornell Tech students."
@@ -3468,11 +3268,9 @@
                         "ptn": "MTWRF",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "sns87": "Samantha Noelle Sheppard"
-                            }
-                        ]
+                        "instr": {
+                            "sns87": "Samantha Noelle Sheppard"
+                        }
                     },
                     "notes": [
                         "This Winter Session class is offered by the School of Continuing Education and Summer Sessions. For details visit: https://sce.cornell.edu/courses/roster."
@@ -3546,11 +3344,9 @@
                         "ptn": "MTWRF",
                         "start_dt": "01/02/2025",
                         "end_dt": "01/17/2025",
-                        "instr": [
-                            {
-                                "nf42": "Magnus Fiskesjo"
-                            }
-                        ]
+                        "instr": {
+                            "nf42": "Magnus Fiskesjo"
+                        }
                     },
                     "meeting2": {
                         "tmstart": "01:00PM",
@@ -3590,26 +3386,14 @@
                         "ptn": "",
                         "start_dt": "12/16/2024",
                         "end_dt": "01/19/2025",
-                        "instr": [
-                            {
-                                "fal43": "Francisco A. Leal-Yepes"
-                            },
-                            {
-                                "sm682": "Sabine Mann"
-                            },
-                            {
-                                "js448": "Jessica Anne Allerton McArt"
-                            },
-                            {
-                                "dvn2": "Daryl Van Nydam"
-                            },
-                            {
-                                "mcs8": "Mary Caroline Smith"
-                            },
-                            {
-                                "tv84": "Taika von Konigslow"
-                            }
-                        ]
+                        "instr": {
+                            "fal43": "Francisco A. Leal-Yepes",
+                            "sm682": "Sabine Mann",
+                            "js448": "Jessica Anne Allerton McArt",
+                            "dvn2": "Daryl Van Nydam",
+                            "mcs8": "Mary Caroline Smith",
+                            "tv84": "Taika von Konigslow"
+                        }
                     }
                 }
             },
@@ -3631,26 +3415,14 @@
                         "ptn": "",
                         "start_dt": "12/16/2024",
                         "end_dt": "01/19/2025",
-                        "instr": [
-                            {
-                                "fal43": "Francisco A. Leal-Yepes"
-                            },
-                            {
-                                "sm682": "Sabine Mann"
-                            },
-                            {
-                                "js448": "Jessica Anne Allerton McArt"
-                            },
-                            {
-                                "dvn2": "Daryl Van Nydam"
-                            },
-                            {
-                                "mcs8": "Mary Caroline Smith"
-                            },
-                            {
-                                "tv84": "Taika von Konigslow"
-                            }
-                        ]
+                        "instr": {
+                            "fal43": "Francisco A. Leal-Yepes",
+                            "sm682": "Sabine Mann",
+                            "js448": "Jessica Anne Allerton McArt",
+                            "dvn2": "Daryl Van Nydam",
+                            "mcs8": "Mary Caroline Smith",
+                            "tv84": "Taika von Konigslow"
+                        }
                     }
                 }
             }
@@ -3674,26 +3446,14 @@
                         "ptn": "",
                         "start_dt": "12/16/2024",
                         "end_dt": "01/19/2025",
-                        "instr": [
-                            {
-                                "pcc25": "Patrick C. Carney"
-                            },
-                            {
-                                "clc248": "Casey Cazer"
-                            },
-                            {
-                                "bgc2": "Brian Glenn Collins"
-                            },
-                            {
-                                "dih26": "Isabel Hernandez"
-                            },
-                            {
-                                "lkm32": "Leni K. Kaplan"
-                            },
-                            {
-                                "mbp73": "Michelle B. Porter"
-                            }
-                        ]
+                        "instr": {
+                            "pcc25": "Patrick C. Carney",
+                            "clc248": "Casey Cazer",
+                            "bgc2": "Brian Glenn Collins",
+                            "dih26": "Isabel Hernandez",
+                            "lkm32": "Leni K. Kaplan",
+                            "mbp73": "Michelle B. Porter"
+                        }
                     }
                 }
             },
@@ -3715,26 +3475,14 @@
                         "ptn": "",
                         "start_dt": "12/16/2024",
                         "end_dt": "01/19/2025",
-                        "instr": [
-                            {
-                                "pcc25": "Patrick C. Carney"
-                            },
-                            {
-                                "clc248": "Casey Cazer"
-                            },
-                            {
-                                "bgc2": "Brian Glenn Collins"
-                            },
-                            {
-                                "dih26": "Isabel Hernandez"
-                            },
-                            {
-                                "lkm32": "Leni K. Kaplan"
-                            },
-                            {
-                                "mbp73": "Michelle B. Porter"
-                            }
-                        ]
+                        "instr": {
+                            "pcc25": "Patrick C. Carney",
+                            "clc248": "Casey Cazer",
+                            "bgc2": "Brian Glenn Collins",
+                            "dih26": "Isabel Hernandez",
+                            "lkm32": "Leni K. Kaplan",
+                            "mbp73": "Michelle B. Porter"
+                        }
                     }
                 }
             }
@@ -3758,20 +3506,12 @@
                         "ptn": "",
                         "start_dt": "12/16/2024",
                         "end_dt": "01/19/2025",
-                        "instr": [
-                            {
-                                "amc344": "Alyssa Marie Chandler"
-                            },
-                            {
-                                "mlm64": "Meredith L. Miller"
-                            },
-                            {
-                                "jmb279": "Jennifer Prieto"
-                            },
-                            {
-                                "kws5": "Kenneth William Simpson"
-                            }
-                        ]
+                        "instr": {
+                            "amc344": "Alyssa Marie Chandler",
+                            "mlm64": "Meredith L. Miller",
+                            "jmb279": "Jennifer Prieto",
+                            "kws5": "Kenneth William Simpson"
+                        }
                     }
                 }
             },
@@ -3793,20 +3533,12 @@
                         "ptn": "",
                         "start_dt": "12/16/2024",
                         "end_dt": "01/19/2025",
-                        "instr": [
-                            {
-                                "amc344": "Alyssa Marie Chandler"
-                            },
-                            {
-                                "mlm64": "Meredith L. Miller"
-                            },
-                            {
-                                "jmb279": "Jennifer Prieto"
-                            },
-                            {
-                                "kws5": "Kenneth William Simpson"
-                            }
-                        ]
+                        "instr": {
+                            "amc344": "Alyssa Marie Chandler",
+                            "mlm64": "Meredith L. Miller",
+                            "jmb279": "Jennifer Prieto",
+                            "kws5": "Kenneth William Simpson"
+                        }
                     }
                 }
             }
@@ -3830,23 +3562,13 @@
                         "ptn": "",
                         "start_dt": "12/16/2024",
                         "end_dt": "01/19/2025",
-                        "instr": [
-                            {
-                                "njb235": "Nicole J. Buote"
-                            },
-                            {
-                                "caf242": "Christian A Folk"
-                            },
-                            {
-                                "gmh59": "Galina M. Hayes"
-                            },
-                            {
-                                "djl242": "Daniel J Lopez"
-                            },
-                            {
-                                "jbm338": "Jourdan B. McPhetridge"
-                            }
-                        ]
+                        "instr": {
+                            "njb235": "Nicole J. Buote",
+                            "caf242": "Christian A Folk",
+                            "gmh59": "Galina M. Hayes",
+                            "djl242": "Daniel J Lopez",
+                            "jbm338": "Jourdan B. McPhetridge"
+                        }
                     }
                 }
             },
@@ -3868,23 +3590,13 @@
                         "ptn": "",
                         "start_dt": "12/16/2024",
                         "end_dt": "01/19/2025",
-                        "instr": [
-                            {
-                                "njb235": "Nicole J. Buote"
-                            },
-                            {
-                                "caf242": "Christian A Folk"
-                            },
-                            {
-                                "gmh59": "Galina M. Hayes"
-                            },
-                            {
-                                "djl242": "Daniel J Lopez"
-                            },
-                            {
-                                "jbm338": "Jourdan B. McPhetridge"
-                            }
-                        ]
+                        "instr": {
+                            "njb235": "Nicole J. Buote",
+                            "caf242": "Christian A Folk",
+                            "gmh59": "Galina M. Hayes",
+                            "djl242": "Daniel J Lopez",
+                            "jbm338": "Jourdan B. McPhetridge"
+                        }
                     }
                 }
             }
@@ -3908,29 +3620,15 @@
                         "ptn": "",
                         "start_dt": "12/16/2024",
                         "end_dt": "01/19/2025",
-                        "instr": [
-                            {
-                                "mc957": "Marta Cercone"
-                            },
-                            {
-                                "bd382": "Barbara Delvescovo"
-                            },
-                            {
-                                "mbf6": "Julia Felippe"
-                            },
-                            {
-                                "km424": "Katharyn Jean Mitchell"
-                            },
-                            {
-                                "gap7": "Gillian A. Perkins"
-                            },
-                            {
-                                "tlp52": "Toby L Pinn-Woodcock"
-                            },
-                            {
-                                "jet37": "Joy Ellen Tomlinson"
-                            }
-                        ]
+                        "instr": {
+                            "mc957": "Marta Cercone",
+                            "bd382": "Barbara Delvescovo",
+                            "mbf6": "Julia Felippe",
+                            "km424": "Katharyn Jean Mitchell",
+                            "gap7": "Gillian A. Perkins",
+                            "tlp52": "Toby L Pinn-Woodcock",
+                            "jet37": "Joy Ellen Tomlinson"
+                        }
                     }
                 }
             },
@@ -3952,26 +3650,14 @@
                         "ptn": "",
                         "start_dt": "12/16/2024",
                         "end_dt": "01/19/2025",
-                        "instr": [
-                            {
-                                "mc957": "Marta Cercone"
-                            },
-                            {
-                                "bd382": "Barbara Delvescovo"
-                            },
-                            {
-                                "mbf6": "Julia Felippe"
-                            },
-                            {
-                                "gap7": "Gillian A. Perkins"
-                            },
-                            {
-                                "tlp52": "Toby L Pinn-Woodcock"
-                            },
-                            {
-                                "jet37": "Joy Ellen Tomlinson"
-                            }
-                        ]
+                        "instr": {
+                            "mc957": "Marta Cercone",
+                            "bd382": "Barbara Delvescovo",
+                            "mbf6": "Julia Felippe",
+                            "gap7": "Gillian A. Perkins",
+                            "tlp52": "Toby L Pinn-Woodcock",
+                            "jet37": "Joy Ellen Tomlinson"
+                        }
                     }
                 }
             }
@@ -3995,29 +3681,15 @@
                         "ptn": "",
                         "start_dt": "12/16/2024",
                         "end_dt": "01/19/2025",
-                        "instr": [
-                            {
-                                "ac2399": "Aimee Colbath"
-                            },
-                            {
-                                "mld12": "Michelle Lee Delco"
-                            },
-                            {
-                                "slf3": "Susan Lawson Fubini"
-                            },
-                            {
-                                "esh82": "Eileen S. Hackett"
-                            },
-                            {
-                                "rcm335": "Rebecca C McOnie"
-                            },
-                            {
-                                "rmr45": "Rolfe M. Radcliffe"
-                            },
-                            {
-                                "hlr42": "Heidi L. Reesink"
-                            }
-                        ]
+                        "instr": {
+                            "ac2399": "Aimee Colbath",
+                            "mld12": "Michelle Lee Delco",
+                            "slf3": "Susan Lawson Fubini",
+                            "esh82": "Eileen S. Hackett",
+                            "rcm335": "Rebecca C McOnie",
+                            "rmr45": "Rolfe M. Radcliffe",
+                            "hlr42": "Heidi L. Reesink"
+                        }
                     }
                 }
             },
@@ -4039,26 +3711,14 @@
                         "ptn": "",
                         "start_dt": "12/16/2024",
                         "end_dt": "01/19/2025",
-                        "instr": [
-                            {
-                                "ac2399": "Aimee Colbath"
-                            },
-                            {
-                                "mld12": "Michelle Lee Delco"
-                            },
-                            {
-                                "slf3": "Susan Lawson Fubini"
-                            },
-                            {
-                                "rcm335": "Rebecca C McOnie"
-                            },
-                            {
-                                "rmr45": "Rolfe M. Radcliffe"
-                            },
-                            {
-                                "hlr42": "Heidi L. Reesink"
-                            }
-                        ]
+                        "instr": {
+                            "ac2399": "Aimee Colbath",
+                            "mld12": "Michelle Lee Delco",
+                            "slf3": "Susan Lawson Fubini",
+                            "rcm335": "Rebecca C McOnie",
+                            "rmr45": "Rolfe M. Radcliffe",
+                            "hlr42": "Heidi L. Reesink"
+                        }
                     }
                 }
             }
@@ -4082,23 +3742,13 @@
                         "ptn": "",
                         "start_dt": "12/16/2024",
                         "end_dt": "01/19/2025",
-                        "instr": [
-                            {
-                                "jda246": "Joaquin B. Araos"
-                            },
-                            {
-                                "jmb264": "Jordyn Marie Boesch"
-                            },
-                            {
-                                "lc268": "Luis Campoy"
-                            },
-                            {
-                                "mm459": "Manuel Martin Flores"
-                            },
-                            {
-                                "ctt8": "Joy Te Tseng"
-                            }
-                        ]
+                        "instr": {
+                            "jda246": "Joaquin B. Araos",
+                            "jmb264": "Jordyn Marie Boesch",
+                            "lc268": "Luis Campoy",
+                            "mm459": "Manuel Martin Flores",
+                            "ctt8": "Joy Te Tseng"
+                        }
                     }
                 }
             },
@@ -4120,23 +3770,13 @@
                         "ptn": "",
                         "start_dt": "12/16/2024",
                         "end_dt": "01/19/2025",
-                        "instr": [
-                            {
-                                "jda246": "Joaquin B. Araos"
-                            },
-                            {
-                                "jmb264": "Jordyn Marie Boesch"
-                            },
-                            {
-                                "lc268": "Luis Campoy"
-                            },
-                            {
-                                "mm459": "Manuel Martin Flores"
-                            },
-                            {
-                                "ctt8": "Joy Te Tseng"
-                            }
-                        ]
+                        "instr": {
+                            "jda246": "Joaquin B. Araos",
+                            "jmb264": "Jordyn Marie Boesch",
+                            "lc268": "Luis Campoy",
+                            "mm459": "Manuel Martin Flores",
+                            "ctt8": "Joy Te Tseng"
+                        }
                     }
                 }
             }
@@ -4160,17 +3800,11 @@
                         "ptn": "",
                         "start_dt": "12/16/2024",
                         "end_dt": "01/19/2025",
-                        "instr": [
-                            {
-                                "mdc252": "Mitzi D. Clark"
-                            },
-                            {
-                                "hde2": "Heather Dawn Edginton"
-                            },
-                            {
-                                "jp256": "Jeanine Peters-Kennedy"
-                            }
-                        ]
+                        "instr": {
+                            "mdc252": "Mitzi D. Clark",
+                            "hde2": "Heather Dawn Edginton",
+                            "jp256": "Jeanine Peters-Kennedy"
+                        }
                     }
                 }
             },
@@ -4192,17 +3826,11 @@
                         "ptn": "",
                         "start_dt": "12/16/2024",
                         "end_dt": "01/19/2025",
-                        "instr": [
-                            {
-                                "mdc252": "Mitzi D. Clark"
-                            },
-                            {
-                                "hde2": "Heather Dawn Edginton"
-                            },
-                            {
-                                "jp256": "Jeanine Peters-Kennedy"
-                            }
-                        ]
+                        "instr": {
+                            "mdc252": "Mitzi D. Clark",
+                            "hde2": "Heather Dawn Edginton",
+                            "jp256": "Jeanine Peters-Kennedy"
+                        }
                     }
                 }
             }
@@ -4226,17 +3854,11 @@
                         "ptn": "",
                         "start_dt": "12/16/2024",
                         "end_dt": "01/19/2025",
-                        "instr": [
-                            {
-                                "kek248": "Kelly E. Knickelbein"
-                            },
-                            {
-                                "ecl32": "Eric C. Ledbetter"
-                            },
-                            {
-                                "ems462": "Erin McGovern Scott"
-                            }
-                        ]
+                        "instr": {
+                            "kek248": "Kelly E. Knickelbein",
+                            "ecl32": "Eric C. Ledbetter",
+                            "ems462": "Erin McGovern Scott"
+                        }
                     }
                 }
             },
@@ -4258,17 +3880,11 @@
                         "ptn": "",
                         "start_dt": "12/16/2024",
                         "end_dt": "01/19/2025",
-                        "instr": [
-                            {
-                                "kek248": "Kelly E. Knickelbein"
-                            },
-                            {
-                                "ecl32": "Eric C. Ledbetter"
-                            },
-                            {
-                                "ems462": "Erin McGovern Scott"
-                            }
-                        ]
+                        "instr": {
+                            "kek248": "Kelly E. Knickelbein",
+                            "ecl32": "Eric C. Ledbetter",
+                            "ems462": "Erin McGovern Scott"
+                        }
                     }
                 }
             }
@@ -4292,11 +3908,9 @@
                         "ptn": "",
                         "start_dt": "12/16/2024",
                         "end_dt": "01/19/2025",
-                        "instr": [
-                            {
-                                "adm10": "Andrew David Miller"
-                            }
-                        ]
+                        "instr": {
+                            "adm10": "Andrew David Miller"
+                        }
                     }
                 }
             },
@@ -4318,11 +3932,9 @@
                         "ptn": "",
                         "start_dt": "12/16/2024",
                         "end_dt": "01/19/2025",
-                        "instr": [
-                            {
-                                "adm10": "Andrew David Miller"
-                            }
-                        ]
+                        "instr": {
+                            "adm10": "Andrew David Miller"
+                        }
                     }
                 }
             }
@@ -4346,29 +3958,15 @@
                         "ptn": "",
                         "start_dt": "12/16/2024",
                         "end_dt": "01/19/2025",
-                        "instr": [
-                            {
-                                "al736": "Assaf Lerer"
-                            },
-                            {
-                                "ajp377": "Aaron J Percival"
-                            },
-                            {
-                                "irp5": "Ian R Porter"
-                            },
-                            {
-                                "pvs2": "Peter V. Scrivani"
-                            },
-                            {
-                                "mst42": "Meg Thompson"
-                            },
-                            {
-                                "abt25": "Amy B. Todd-Donato"
-                            },
-                            {
-                                "crt76": "Christopher R. Tollefson"
-                            }
-                        ]
+                        "instr": {
+                            "al736": "Assaf Lerer",
+                            "ajp377": "Aaron J Percival",
+                            "irp5": "Ian R Porter",
+                            "pvs2": "Peter V. Scrivani",
+                            "mst42": "Meg Thompson",
+                            "abt25": "Amy B. Todd-Donato",
+                            "crt76": "Christopher R. Tollefson"
+                        }
                     }
                 }
             },
@@ -4390,26 +3988,14 @@
                         "ptn": "",
                         "start_dt": "12/16/2024",
                         "end_dt": "01/19/2025",
-                        "instr": [
-                            {
-                                "al736": "Assaf Lerer"
-                            },
-                            {
-                                "ajp377": "Aaron J Percival"
-                            },
-                            {
-                                "irp5": "Ian R Porter"
-                            },
-                            {
-                                "pvs2": "Peter V. Scrivani"
-                            },
-                            {
-                                "abt25": "Amy B. Todd-Donato"
-                            },
-                            {
-                                "crt76": "Christopher R. Tollefson"
-                            }
-                        ]
+                        "instr": {
+                            "al736": "Assaf Lerer",
+                            "ajp377": "Aaron J Percival",
+                            "irp5": "Ian R Porter",
+                            "pvs2": "Peter V. Scrivani",
+                            "abt25": "Amy B. Todd-Donato",
+                            "crt76": "Christopher R. Tollefson"
+                        }
                     }
                 }
             }
@@ -4433,26 +4019,14 @@
                         "ptn": "",
                         "start_dt": "12/16/2024",
                         "end_dt": "01/19/2025",
-                        "instr": [
-                            {
-                                "djf42": "Daniel J. Fletcher"
-                            },
-                            {
-                                "jmf439": "Jethro M. Forbes"
-                            },
-                            {
-                                "jmm539": "Julie M. Menard"
-                            },
-                            {
-                                "nwp26": "Nathan W. Peterson"
-                            },
-                            {
-                                "amp385": "Armi M. Pigott"
-                            },
-                            {
-                                "gls37": "Gretchen L. Schoeffler"
-                            }
-                        ]
+                        "instr": {
+                            "djf42": "Daniel J. Fletcher",
+                            "jmf439": "Jethro M. Forbes",
+                            "jmm539": "Julie M. Menard",
+                            "nwp26": "Nathan W. Peterson",
+                            "amp385": "Armi M. Pigott",
+                            "gls37": "Gretchen L. Schoeffler"
+                        }
                     }
                 }
             },
@@ -4474,26 +4048,14 @@
                         "ptn": "",
                         "start_dt": "12/16/2024",
                         "end_dt": "01/19/2025",
-                        "instr": [
-                            {
-                                "djf42": "Daniel J. Fletcher"
-                            },
-                            {
-                                "jmf439": "Jethro M. Forbes"
-                            },
-                            {
-                                "jmm539": "Julie M. Menard"
-                            },
-                            {
-                                "nwp26": "Nathan W. Peterson"
-                            },
-                            {
-                                "amp385": "Armi M. Pigott"
-                            },
-                            {
-                                "gls37": "Gretchen L. Schoeffler"
-                            }
-                        ]
+                        "instr": {
+                            "djf42": "Daniel J. Fletcher",
+                            "jmf439": "Jethro M. Forbes",
+                            "jmm539": "Julie M. Menard",
+                            "nwp26": "Nathan W. Peterson",
+                            "amp385": "Armi M. Pigott",
+                            "gls37": "Gretchen L. Schoeffler"
+                        }
                     }
                 }
             }
@@ -4517,20 +4079,12 @@
                         "ptn": "",
                         "start_dt": "12/16/2024",
                         "end_dt": "01/19/2025",
-                        "instr": [
-                            {
-                                "caf242": "Christian A Folk"
-                            },
-                            {
-                                "uk28": "Ursula Krotscheck"
-                            },
-                            {
-                                "djl242": "Daniel J Lopez"
-                            },
-                            {
-                                "st284": "Selena Tinga"
-                            }
-                        ]
+                        "instr": {
+                            "caf242": "Christian A Folk",
+                            "uk28": "Ursula Krotscheck",
+                            "djl242": "Daniel J Lopez",
+                            "st284": "Selena Tinga"
+                        }
                     }
                 }
             },
@@ -4552,20 +4106,12 @@
                         "ptn": "",
                         "start_dt": "12/16/2024",
                         "end_dt": "01/19/2025",
-                        "instr": [
-                            {
-                                "caf242": "Christian A Folk"
-                            },
-                            {
-                                "uk28": "Ursula Krotscheck"
-                            },
-                            {
-                                "djl242": "Daniel J Lopez"
-                            },
-                            {
-                                "st284": "Selena Tinga"
-                            }
-                        ]
+                        "instr": {
+                            "caf242": "Christian A Folk",
+                            "uk28": "Ursula Krotscheck",
+                            "djl242": "Daniel J Lopez",
+                            "st284": "Selena Tinga"
+                        }
                     }
                 }
             }
