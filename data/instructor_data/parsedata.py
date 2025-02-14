@@ -6,6 +6,7 @@ Start Date: February 13, 2025
 import pandas as pd
 import json
 from nameparser import HumanName
+import duckdb
 
 df = pd.read_csv('rmp_data.csv')
 with open("instructor_name_data.json", 'r') as file:
@@ -23,11 +24,18 @@ def create_columns(df):
 def generate_namedf(data):
     result = []
     for subject in data:
-        semester = subject[-4:]
         for course in data[subject]:
             for group in data[subject][course]:
                 for section in data[subject][course][group]:
                     for instr_dict in data[subject][course][group][section]:
+                        # make_correction(instr_dict)
+                        if instr_dict["middleName"]:
+                            instr_dict["Professor_Name"] = (f"{instr_dict['firstName']} "
+                                                    f"{instr_dict['middleName']} "
+                                                    f"{instr_dict['lastName']}")
+                        else:
+                            instr_dict["Professor_Name"] = (f"{instr_dict['firstName']} "
+                                                    f"{instr_dict['lastName']}")
                         result.append(instr_dict)
     name_df = pd.DataFrame(result)
     name_df = name_df.rename(columns={"firstName": "firstname", "lastName": "lastname","middleName":"middlename"})
@@ -35,16 +43,34 @@ def generate_namedf(data):
     return name_df
 
 def generate(name_df,df):
-    df = df.merge(name_df, on=["firstname", "middlename", "lastname"], how="left")
-    temp_name_df = name_df.drop(columns=["middlename"]).rename(columns={"firstname": "fname", "lastname": "lname", "netid": "netid_temp"})
-    df = df.merge(temp_name_df, left_on=["firstname", "lastname"], right_on=["fname", "lname"], how="left")
-    df["netid"] = df["netid"].fillna(df["netid_temp"])
-    df = df.drop(columns=["netid_temp", "fname", "lname","firstname","lastname","middlename"])
-    df = df.drop_duplicates(subset=['netid'], keep='first')
-    df = df.where(pd.notna(df), None)
+
+    # Step 1️⃣: Merge on Full Professor Name (Most Precise Match)
+    df1 = df.merge(name_df, on="Professor_Name", how="left")
+    df1 = df1[df1["netid"].notna()]  # Keep only rows with netid
+
+    # Step 2️⃣: Merge on Firstname + Middlename + Lastname
+    df2 = df.merge(name_df, on=["firstname", "middlename", "lastname"], how="left")
+    df2 = df2[df2["netid"].notna()]  # Keep only rows with netid
+
+    # Step 3️⃣: Merge on Firstname + Lastname (Ignoring Middlename)
+    temp_name_df = name_df.drop(columns=["middlename"])
+    df3 = df.merge(temp_name_df, left_on=["firstname", "lastname"], right_on=["firstname", "lastname"], how="left")
+    df3 = df3[df3["netid"].notna()]  # Keep only rows with netid
+
+    # Step 4️⃣: Concatenate All DataFrames Together
+    df_final = pd.concat([df1, df2, df3])
+
+    # Step 5️⃣: Drop Duplicate `netid` Entries (Keeping First Valid Match)
+    df_final = df_final.drop_duplicates(subset=["netid"], keep="first")
+
+    # Step 6️⃣: Drop Unnecessary Columns
+    df_final = df_final.drop(columns=["firstname", "lastname", "middlename"], errors="ignore")
+
+    df = df_final.where(pd.notna(df_final), None)
     data_dict = df.set_index("netid").to_dict(orient="index")
+    print(data_dict["dxw2"])
     with open("instructor_rate.json", "w") as f:
-        json.dump(data_dict, f, indent=4)
+        json.dump(data_dict, f, indent=4)  
 
 df = create_columns(df)
 name_df = generate_namedf(data)

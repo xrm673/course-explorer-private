@@ -10,11 +10,12 @@
 
     <p>Description: {{ description }}</p>
 
-    <p>Credits:
-    {% for credit in credits %}
-        <button>{{ credit }}</button>
-    {% endfor %}
-    </p>
+    <p>Credits: </p>
+        <ul>
+            {% for credit in credits %}
+            <li>{{ credit }}</li>
+            {% endfor %}
+        </ul>
 
     <p>Semesters offered:
     {% for semester in semesters %}
@@ -25,7 +26,7 @@
     {% if quality is not none %}
         <p>Quality: {{ quality }}</p>
     {% endif %}
-    
+
     <p>Instructor(s):</p>
     <ul>
         {% for netid, details in instructors.items() %}
@@ -59,10 +60,6 @@
 
     {% if comments is not none %}
         <p>Comments: {{comments}} </p>
-    {% endif %}
-
-    {% if recommend is not none %}
-        <p>Recommend Prerequisites: {{recommend}} </p>
     {% endif %}
     
     {% if permission is not none %}

@@ -197,6 +197,7 @@ class OneGroupCourse(Course):
 
     def get_instructors(self,semester=LAST_SEMESTER):
         assert semester in self.get_semester_offered()
+        assert semester in CURRENT_YEAR
         season = semester[:2]
         if season == "SP":
             session_data = self._spsession["Grp1"]
