@@ -64,11 +64,19 @@ def generate(name_df,df):
     df_final = df_final.drop_duplicates(subset=["netid"], keep="first")
 
     # Step 6️⃣: Drop Unnecessary Columns
-    df_final = df_final.drop(columns=["firstname", "lastname", "middlename"], errors="ignore")
+    df_final = df_final.drop(columns=["firstname", "lastname", "middlename",
+                                      "firstname_x","middlename_x","lastname_x",
+                                      "firstname_y","middlename_y","lastname_y"], errors="ignore")
 
     df = df_final.where(pd.notna(df_final), None)
     data_dict = df.set_index("netid").to_dict(orient="index")
-    print(data_dict["dxw2"])
+    for netid in data_dict:
+        if not data_dict[netid]["Professor_Name"]:
+            if data_dict[netid]["Professor_Name_x"]:
+                data_dict[netid]["Professor_Name"] = data_dict[netid]["Professor_Name_x"]
+            elif data_dict[netid]["Professor_Name_y"]: 
+                data_dict[netid]["Professor_Name"] = data_dict[netid]["Professor_Name_y"]
+
     with open("instructor_rate.json", "w") as f:
         json.dump(data_dict, f, indent=4)  
 
