@@ -22,6 +22,17 @@
     {% endfor %}
     </p>
 
+    {% if quality is not none %}
+        <p>Quality: {{ quality }}</p>
+    {% endif %}
+    
+    <p>Instructor(s):</p>
+    <ul>
+        {% for netid, details in instructors.items() %}
+            <li>{{ details }} ({{ netid }})</li>
+        {% endfor %}
+    </ul>
+
     {% if distributions is not none %}
         <p>Distributions:
         {% for distribution in distributions %}

@@ -6,6 +6,8 @@ Start Date: December 20, 2024
 import re
 import special
 from constants import *
+from group import *
+from instructor import *
 
 NEXT_SEMESTER = "SP25"
 
@@ -68,7 +70,7 @@ class Course(object):
         return int(self.get_number()[0])
     
     def get_semester_offered(self):
-        return self._coursedata["smst"]
+        return self._semester
     
     def get_description(self):
         return self._coursedata["dsrpn"]
@@ -91,98 +93,119 @@ class Course(object):
     def get_prereq(self):
         return self._coursedata.get("prereq")
     
-    def offered_season(self):
-        semester_offered = self.get_semester_offered()
-        semester = semester_offered[0]
+    def first_season(self):
+        semester = self._semester[0]
         if semester in CURRENT_YEAR:
             return semester[:2]
 
     def available(self,semester):
-        spring_and_fall = only_fall = only_spring = summer = winter = False
         plan_season = semester[:2]
-        last_season = LAST_SEMESTER[:2]
-        semesters_offered = self.get_semester_offered()
-        if (LAST_SEMESTER in semesters_offered and 
-            PREV_SEMESTER in semesters_offered):
-            spring_and_fall = True 
-        elif (LAST_SEMESTER in semesters_offered and 
-              not PREV_SEMESTER in semesters_offered):
-            if last_season == "FA":
-                only_fall = True 
-            else:
-                only_spring = True 
-        if (LATEST_SUMMER in semesters_offered):
-            summer = True 
-        if (LATEST_WINTER in semesters_offered):
-            winter = True 
-
-        if plan_season == "FA":
-            if spring_and_fall or only_fall:
-                return True 
-        if plan_season == "SP":
-            if spring_and_fall or only_spring:
-                return True 
-        if plan_season == "SU" and summer:
-           return True 
-        if plan_season == "WI" and winter:
+        if plan_season == "SP" and self._spsession:
             return True 
-        return False  
+        if plan_season == "FA" and self._fasession:
+            return True
+        if plan_season == "SU" and self._susession:
+            return True
+        if plan_season == "WI" and self._wisession:
+            return True
+        return False 
 
     def __init__(self,course_code,course_data,SP_session,
                FA_session,SU_session,WI_session):
         self._code = course_code
         self._subject = re.match(r"[A-Z]+", course_code).group(0)
         self._coursedata = course_data[self._subject][course_code]
-        self._spsession = SP_session 
-        self._fasession = FA_session
-        self._susession = SU_session
-        self._wisession = WI_session
+        self._semester = self._coursedata["smst"]
         
-        # if course_code in SP_session[self._subject]:
-        #     self._spsession = SP_session[self._subject][course_code]
-        # else:
-        #     self._spsession = None 
+        if LATEST_SPRING in self._semester:
+            self._spsession = SP_session[self._subject][course_code]
+            # self._spgroups = self.initiate_group(self._spsession)
+        else:
+            self._spsession = None
+            # self._spgroups = None 
         
-        # if course_code in FA_session[self._subject]:
-        #     self._fasession = FA_session[self._subject][course_code]
-        # else:
-        #     self._fasession = None 
+        if LATEST_FALL in self._semester:
+            self._fasession = FA_session[self._subject][course_code]
+            # self._fagroups = self.initiate_group(self._fasession)
+        else:
+            self._fasession = None
+            # self._fagroups = None 
 
-        # if course_code in WI_session[self._subject]:
-        #     self._wisession = WI_session[self._subject][course_code]
-        # else:
-        #     self._wisession = None 
+        if LATEST_SUMMER in self._semester:
+            self._susession = SU_session[self._subject][course_code]
+            # self._sugroups = self.initiate_group(self._susession)
+        else:
+            self._susession = None
+            # self._sugroups = None 
 
-        # if course_code in SU_session[self._subject]:
-        #     self._susession = SU_session[self._subject][course_code]
-        # else:
-        #     self._susession = None 
+        if LATEST_WINTER in self._semester:
+            self._wisession = WI_session[self._subject][course_code]
+            # self._wigroups = self.initiate_group(self._wisession)
+        else:
+            self._wisession = None
+            # self._wigroups = None 
+
+    def initiate_group(self,session_data):
+        groups = []
+        for group in session_data:
+            group_data = session_data[group]
+            group = Group(self._code,group,group_data)
+            groups.append(group)
+        return groups         
 
 class OneGroupCourse(Course):
     def get_credits(self):
-        season = self.offered_season()
-        if season == "SP":
-            return self._spsession[self._subject][self._code]["Grp1"]["crd"]
-        if season == "FA":
-            return self._fasession[self._subject][self._code]["Grp1"]["crd"]
-        if season == "SU":
-            return self._susession[self._subject][self._code]["Grp1"]["crd"]
-        if season == "WI":
-            return self._wisession[self._subject][self._code]["Grp1"]["crd"]  
-        else:
-            return []
+        if LAST_SEASON == "SP":
+            if self._spsession:
+                # return self._spgroups[0].get_credits()
+                return self._spsession["Grp1"]["crd"]
+            if self._fasession:
+                # return self._fagroups[0].get_credits()
+                return self._fasession["Grp1"]["crd"]
+        elif LAST_SEASON == "FA":
+            if self._fasession:
+                # return self._spgroups[0].get_credits()
+                return self._fasession["Grp1"]["crd"]
+            if self._spsession:
+                # return self._spgroups[0].get_credits()
+                return self._spsession["Grp1"]["crd"]
+        if self._susession:
+            # return self._sugroups[0].get_credits()
+            return self._susession["Grp1"]["crd"]
+        if self._wisession:
+            # return self._wigroups[0].get_credits()
+            return self._wisession["Grp1"]["crd"]
+        return []
+
+    def get_section_requirement(self):
+        if LAST_SEASON == "SP":
+            if self._spsession:
+                return self._spsession["Grp1"]["req"]
+                # return self._spgroups[0].get_section_requirement()
+            if self._fasession:
+                return self._fasession["Grp1"]["req"]
+        elif LAST_SEASON == "FA":
+            if self._fasession:
+                return self._fasession["Grp1"]["req"]
+            if self._spsession:
+                return self._spsession["Grp1"]["req"]
+        if self._susession:
+            return self._susession["Grp1"]["req"] 
+        if self._wisession:
+            return self._wisession["Grp1"]["req"]  
+        return []             
 
     def get_instructors(self,semester=LAST_SEMESTER):
         assert semester in self.get_semester_offered()
         season = semester[:2]
         if season == "SP":
-            session_data = self._spsession[self._subject][self._code]["Grp1"]
+            session_data = self._spsession["Grp1"]
         elif season == "FA":
-            session_data = self._fasession[self._subject][self._code]["Grp1"]
+            session_data = self._fasession["Grp1"]
         elif season == "SU":
-            session_data = self._susession[self._subject][self._code]["Grp1"]
+            session_data = self._susession["Grp1"]
         elif season == "WI":
-            session_data = self._wisession[self._subject][self._code]["Grp1"]
+            session_data = self._wisession["Grp1"]
         
         result = {}
         for attribute in session_data:
@@ -192,11 +215,23 @@ class OneGroupCourse(Course):
                         if not "instr" in session_data[attribute][sub_attribute]:
                             continue
                         instr_dict = session_data[attribute][sub_attribute].get("instr")
-                        for instr in instr_dict:
-                            result[instr] = instr_dict[instr]
+                        for netid in instr_dict:
+                            result[netid] = instr_dict[netid]
         return result
-
-
+    
+    def get_quality(self,instr_dict,instructor_data):
+        sum = 0
+        count = 0
+        for netid in instr_dict:
+            instructor = Instructor(netid,instr_dict[netid],instructor_data)
+            quality = instructor.get_quality()
+            if quality is not None:
+                sum += quality
+                count += 1
+        if count != 0:
+            return round((sum / count),2)
+        else: 
+            return None
 
     def __init__(self,course_code,course_data,SP_session,
                FA_session,SU_session,WI_session):

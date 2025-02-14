@@ -32,6 +32,7 @@ LATEST = 2030
 def load_data():
     load_course_data()
     load_college_data()
+    load_instructor_data()
 
 # helper for load data
 def load_course_data():
@@ -71,6 +72,11 @@ def load_college_data():
     global college_data
     with open('data/college_data/college.json', 'r') as file:
         college_data = json.load(file)
+
+def load_instructor_data():
+    global instructor_data
+    with open('data/instructor_data/instructor_rate.json', 'r') as file:
+        instructor_data = json.load(file)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -199,6 +205,8 @@ def display_course(course_code):
     description = course_created.get_description()
     credits = course_created.get_credits()
     semesters = course_created.get_semester_offered()
+    crt_instr_dict = course_created.get_instructors(semesters[0])
+    crt_quality = course_created.get_quality(crt_instr_dict,instructor_data)
     recent_semester = semesters[0]
     distributions = course_created.get_distribution()
     prereq = course_created.get_prereq()
@@ -213,10 +221,12 @@ def display_course(course_code):
         title = title,
         subject = subject,
         number = number,
+        quality = crt_quality,
         recent_semester = recent_semester,
         description = description,
         credits = credits,
         semesters = semesters,
+        instructors = crt_instr_dict,
         distributions = distributions,
         prereq = prereq,
         requirement = requirement,

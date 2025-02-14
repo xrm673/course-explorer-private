@@ -9,10 +9,12 @@ import os
 import json
 import course 
 import time 
+import pandas as pd
 
 def load_data():
     load_course_data()
     load_college_data()
+    load_instructor_data()
 
 def load_course_data():
     global course_data_am
@@ -51,12 +53,19 @@ def load_college_data():
     with open('data/college_data/college.json', 'r') as file:
         college_data = json.load(file)
 
+def load_instructor_data():
+    global instructor_data
+    with open('data/instructor_data/instructor_rate.json', 'r') as file:
+        instructor_data = json.load(file)
+
 def test_get_credits(course_data_am,course_data_nz,
-                     FA_session,SP_session,SU_session,WI_session):
+                     FA_session,SP_session,SU_session,WI_session,instructor_data):
     
     cs1110 = course.Course.create("CS1110",course_data_am,
                                   SP_session,FA_session,SU_session,WI_session)
-    return cs1110.get_instructors()
+    instr = cs1110.get_instructors()
+    quality = cs1110.get_quality(instr,instructor_data)
+    return quality
 
 if __name__ == "__main__":
     start_time = time.time()
@@ -64,9 +73,14 @@ if __name__ == "__main__":
     load_time = time.time()
     count = 0
     print(test_get_credits(course_data_am,course_data_nz,
-                    FA_session,SP_session,SU_session,WI_session))
-    count += 1
+                        FA_session,SP_session,SU_session,WI_session,instructor_data))
+    while count < 10000:
+        test_get_credits(course_data_am,course_data_nz,
+                        FA_session,SP_session,SU_session,WI_session,instructor_data)
+        count += 1
     end_time = time.time() 
-    print(load_time - start_time)
-    print(end_time - load_time)
-    # 0.1551236
+    print(f"load time: {load_time - start_time}")
+    print(f"run time: {end_time - load_time}")
+    # 0.3364 s
+    # 0.0344 s
+    # 0.0644 s
