@@ -80,73 +80,71 @@ def load_instructor_data():
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    if 'college' not in session:
-        return redirect(url_for('select_college'))
-    college = session['college']
-    major1_code = session['major1']
-    major1 = college_data[college]['Majors'][major1_code]
-    major2_code = session['major2']
-    if not major2_code == None:
-        major2 = college_data[college]['Majors'][major2_code]
-    else:
-        major2 = None
     return render_template(
         'index.html',
-        college_data = college_data,
-        college = college,
-        major1 = major1,
-        major2 = major2,
-        major1_code = major1_code,
-        major2_code = major2_code,
-        year = session['year'])
+        college = session['college'] if 'college' in session else None,
+        major_codes = session['majors'] if 'majors' in session else None,
+        minor_codes = session['minors'] if 'minors' in session else None,
+        subjects = session['subjects'] if 'subjects' in session else None,
+        year = session['year'] if 'year' in session else None,
+        majors = MAJORS,
+        minors = MINORS,
+        colleges = COLLEGES,
+        graduations = GRADUATION_YEARS)
 
-# @app.route('/get-started', methods=['GET', 'POST'])
-# def get_started():
+@app.route('/save-information', methods=['POST'])
+def save_data():
+    data = request.get_json()
+    
+    session['college'] = data['college']
+    session['majors'] = data['majors']
+    session['minors'] = data['minors']
+    session['subjects'] = data['subjects']
+    session['graduationYear'] = data['graduationYear']
+
+    return jsonify({"message": "Data saved successfully!"})
+
+# @app.route('/select-college', methods=['GET', 'POST'])
+# def select_college():
 #     if request.method == 'POST':
-#         return redirect(url_for('select_college'))
-#     return render_template('get-started.html')
+#         college = request.form.get("college")
+#         if not college or college not in college_data:
+#             return "You must select a college.", 400
+#         session['college'] = college
+#         return redirect(url_for('select_major'))
+#     return render_template('select-college.html',colleges=college_data)
 
-@app.route('/select-college', methods=['GET', 'POST'])
-def select_college():
-    if request.method == 'POST':
-        college = request.form.get("college")
-        if not college or college not in college_data:
-            return "You must select a college.", 400
-        session['college'] = college
-        return redirect(url_for('select_major'))
-    return render_template('select-college.html',colleges=college_data)
+# @app.route('/select-major', methods=['GET', 'POST'])
+# def select_major():
+#     if 'college' not in session:
+#         return redirect(url_for('select-college'))
+#     college = session['college']
+#     majors = college_data[college]['Majors']
+#     minors = college_data["Minors"]
+#     if request.method == 'POST':
+#         major1 = request.form.get("major1")
+#         major2 = request.form.get("major2")
+#         minor1 = request.form.get("minor1")
+#         if not major1 or major1 not in majors:
+#             return "You must select at least one major.", 400
+#         if major2 and (major2 not in majors or major1 == major2):
+#             return "Your second major must be different and valid.", 400
+#         session['major1'] = major1
+#         session['major2'] = major2 if major2 else None
+#         session['minor1'] = minor1 if minor1 else None
+#         return redirect(url_for('select_year'))
+#     return render_template('select-major.html',majors=majors,minors=minors)
 
-@app.route('/select-major', methods=['GET', 'POST'])
-def select_major():
-    if 'college' not in session:
-        return redirect(url_for('select-college'))
-    college = session['college']
-    majors = college_data[college]['Majors']
-    minors = college_data["Minors"]
-    if request.method == 'POST':
-        major1 = request.form.get("major1")
-        major2 = request.form.get("major2")
-        minor1 = request.form.get("minor1")
-        if not major1 or major1 not in majors:
-            return "You must select at least one major.", 400
-        if major2 and (major2 not in majors or major1 == major2):
-            return "Your second major must be different and valid.", 400
-        session['major1'] = major1
-        session['major2'] = major2 if major2 else None
-        session['minor1'] = minor1 if minor1 else None
-        return redirect(url_for('select_year'))
-    return render_template('select-major.html',majors=majors,minors=minors)
-
-@app.route('/select-year',methods=['GET', 'POST'])
-def select_year():
-    options = list(range(LATEST, CURRENT-1, -1))
-    if request.method == 'POST':
-        year = request.form.get("year")
-        if not year or int(year) not in options:
-            return "You must select a valid year.", 400
-        session['year'] = year
-        return redirect(url_for('select_courses'))
-    return render_template('select-year.html',year_options = options)
+# @app.route('/select-year',methods=['GET', 'POST'])
+# def select_year():
+#     options = list(range(LATEST, CURRENT-1, -1))
+#     if request.method == 'POST':
+#         year = request.form.get("year")
+#         if not year or int(year) not in options:
+#             return "You must select a valid year.", 400
+#         session['year'] = year
+#         return redirect(url_for('select_courses'))
+#     return render_template('select-year.html',year_options = options)
 
 @app.route('/select-courses', methods=['GET', 'POST'])
 def select_courses():
