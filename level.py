@@ -54,7 +54,8 @@ def only_level(course_data, subject, level, min_credit=3, excluded=[], included=
                 WI_session,
             )
         if (not course_code in excluded) and (course_created.get_level() == level):
-            max_crd = course_created.get_max_credit()
+            session = course_created.get_session()
+            max_crd = course_created.get_max_credit(session)
             if max_crd and max_crd >= min_credit:
                 result.append(course_code)
     result = result + included
@@ -94,7 +95,8 @@ def match_level(course_code, subject, min_level, min_credit=3, excluded=[]):
         course_created.get_subject() == subject
         and course_created.get_level() >= min_level
     ):
-        max_crd = course_created.get_max_credit()
+        session = course_created.get_session()
+        max_crd = course_created.get_max_credit(session)
         if max_crd and (max_crd >= min_credit):
             return True
     return False

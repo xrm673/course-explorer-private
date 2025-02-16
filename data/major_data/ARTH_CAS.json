@@ -65,7 +65,7 @@
         },
         "type": "B",
         "description": null,
-        "number": 1,
+        "number": 2,
         "courses": [
             "ARTH4155",
             "ARTH4354",
@@ -96,7 +96,7 @@
         },
         "type": "B",
         "description": null,
-        "number": 1,
+        "number": 3,
         "courses": [
             "ARTH2355",
             "ARTH2750",

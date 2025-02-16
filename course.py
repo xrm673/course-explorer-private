@@ -100,33 +100,33 @@ class Course(object):
     def get_prereq(self):
         return self._coursedata.get("prereq")
 
-    def get_credits(self):
+    def get_session(self):
         if LAST_SEASON == "SP":
             if self._spsession:
-                return self.parse_credit(self._spsession)
+                return self._spsession
             if self._fasession:
-                return self.parse_credit(self._fasession)
+                return self._fasession
         elif LAST_SEASON == "FA":
             if self._fasession:
-                return self.parse_credit(self._fasession)
+                return self._fasession
             if self._spsession:
-                return self.parse_credit(self._spsession)
+                return self._spsession
         if self._susession:
-            return self.parse_credit(self._susession)
+            return self._susession
         if self._wisession:
-            return self.parse_credit(self._wisession)
+            return self._wisession
         return []
 
-    def parse_credit(self, session_data):
+    def get_credits(self, session):
         result = []
-        for group in session_data:
-            for credit in session_data[group]["crd"]:
+        for group in session:
+            for credit in session[group]["crd"]:
                 if not credit in result:
                     result.append(credit)
         return result
 
-    def get_max_credit(self):
-        credits = self.get_credits()
+    def get_max_credit(self, session):
+        credits = self.get_credits(session)
         if credits:
             max_credit = 0
             for credit in credits:
@@ -188,56 +188,41 @@ class Course(object):
             self._wisession = None
             # self._wigroups = None
 
-    def initiate_group(self, session_data):
-        groups = []
-        for group in session_data:
-            group_data = session_data[group]
-            group = Group(self._code, group, group_data)
-            groups.append(group)
-        return groups
+    # def initiate_group(self, session_data):
+    #     groups = []
+    #     for group in session_data:
+    #         group_data = session_data[group]
+    #         group = Group(self._code, group, group_data)
+    #         groups.append(group)
+    #     return groups
 
 
 class OneGroupCourse(Course):
-    def get_credits(self):
-        if LAST_SEASON == "SP":
-            if self._spsession:
-                # return self._spgroups[0].get_credits()
-                return self._spsession["Grp1"]["crd"]
-            if self._fasession:
-                # return self._fagroups[0].get_credits()
-                return self._fasession["Grp1"]["crd"]
-        elif LAST_SEASON == "FA":
-            if self._fasession:
-                # return self._spgroups[0].get_credits()
-                return self._fasession["Grp1"]["crd"]
-            if self._spsession:
-                # return self._spgroups[0].get_credits()
-                return self._spsession["Grp1"]["crd"]
-        if self._susession:
-            # return self._sugroups[0].get_credits()
-            return self._susession["Grp1"]["crd"]
-        if self._wisession:
-            # return self._wigroups[0].get_credits()
-            return self._wisession["Grp1"]["crd"]
-        return []
+    # def get_credits(self):
+    #     if LAST_SEASON == "SP":
+    #         if self._spsession:
+    #             # return self._spgroups[0].get_credits()
+    #             return self._spsession["Grp1"]["crd"]
+    #         if self._fasession:
+    #             # return self._fagroups[0].get_credits()
+    #             return self._fasession["Grp1"]["crd"]
+    #     elif LAST_SEASON == "FA":
+    #         if self._fasession:
+    #             # return self._spgroups[0].get_credits()
+    #             return self._fasession["Grp1"]["crd"]
+    #         if self._spsession:
+    #             # return self._spgroups[0].get_credits()
+    #             return self._spsession["Grp1"]["crd"]
+    #     if self._susession:
+    #         # return self._sugroups[0].get_credits()
+    #         return self._susession["Grp1"]["crd"]
+    #     if self._wisession:
+    #         # return self._wigroups[0].get_credits()
+    #         return self._wisession["Grp1"]["crd"]
+    #     return []
 
-    def get_section_requirement(self):
-        if LAST_SEASON == "SP":
-            if self._spsession:
-                return self._spsession["Grp1"]["req"]
-                # return self._spgroups[0].get_section_requirement()
-            if self._fasession:
-                return self._fasession["Grp1"]["req"]
-        elif LAST_SEASON == "FA":
-            if self._fasession:
-                return self._fasession["Grp1"]["req"]
-            if self._spsession:
-                return self._spsession["Grp1"]["req"]
-        if self._susession:
-            return self._susession["Grp1"]["req"]
-        if self._wisession:
-            return self._wisession["Grp1"]["req"]
-        return []
+    def get_section_requirement(self, session):
+        return session["Grp1"]["req"]
 
     def get_instructors(self, semester=LAST_SEMESTER):
         assert semester in self.get_semester_offered()
@@ -299,10 +284,10 @@ class OldCourse(Course):
     def available(self, semester=None):
         return False
 
-    def get_credits(self):
+    def get_credits(self, session):
         return None
 
-    def get_max_credit(self):
+    def get_max_credit(self, session):
         return None
 
     def __init__(
@@ -332,10 +317,10 @@ class UnknownCourse(Course):
     def get_comments(self):
         return None
 
-    def get_credits(self):
+    def get_credits(self, session):
         return None
 
-    def get_max_credit(self):
+    def get_max_credit(self, session):
         return None
 
     def available(self, semester=None):
