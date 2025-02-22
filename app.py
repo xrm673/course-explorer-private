@@ -15,7 +15,7 @@ import os
 
 app = Flask(__name__)
 app.secret_key = "some_random_secret_key"
-CORS(app)
+CORS(app, origins=["http://localhost:5173"])
 
 course_data_am = {}
 course_data_nz = {}
@@ -200,6 +200,7 @@ def search_courses():
 
 @app.route("/api/course/<course_code>", methods=["GET"])
 def display_course(course_code):
+
     if course_code[0] in A_TO_M:
         course_created = Course.create(
             course_code, course_data_am, SP_session, FA_session, SU_session, WI_session
@@ -208,11 +209,21 @@ def display_course(course_code):
         course_created = Course.create(
             course_code, course_data_nz, SP_session, FA_session, SU_session, WI_session
         )
-    title = course_created.get_title()
-    subject = course_created.get_subject()
-    number = course_created.get_number()
-    description = course_created.get_description()
-    credits = course_created.get_credits()
+
+    session = course_created.get_session()
+    credits = course_created.get_credits(session)
+
+    course_data = {
+        "course_code": course_code,
+        "title": course_created.get_title(),
+        "subject": course_created.get_subject(),
+        "number": course_created.get_number(),
+        "description": course_created.get_description(),
+        "comments": course_created.get_comments(),
+        "outcomes": course_created.get_outcomes(),
+        "permission": course_created.get_permission(),
+        "credits": credits,
+    }
     semesters = course_created.get_semester_offered()
     crt_instr_dict = course_created.get_instructors(semesters[0])
     crt_quality = course_created.get_quality(crt_instr_dict, instructor_data)
@@ -220,33 +231,28 @@ def display_course(course_code):
     distributions = course_created.get_distribution()
     prereq = course_created.get_prereq()
     requirement = course_created.get_requirement()
-    outcomes = course_created.get_outcomes()
-    comments = course_created.get_comments()
     # recommend = data["Recommended Prerequisite"]
-    permission = course_created.get_permission()
-
-    course_data = {"course_code": course_code}
 
     return jsonify(course_data)
-    return render_template(
-        "course.html",
-        course_code=course_code,
-        title=title,
-        subject=subject,
-        number=number,
-        quality=crt_quality,
-        recent_semester=recent_semester,
-        description=description,
-        credits=credits,
-        semesters=semesters,
-        instructors=crt_instr_dict,
-        distributions=distributions,
-        prereq=prereq,
-        requirement=requirement,
-        outcomes=outcomes,
-        comments=comments,
-        permission=permission,
-    )
+    # return render_template(
+    #     "course.html",
+    #     course_code=course_code,
+    #     title=title,
+    #     subject=subject,
+    #     number=number,
+    #     quality=crt_quality,
+    #     recent_semester=recent_semester,
+    #     description=description,
+    #     credits=credits,
+    #     semesters=semesters,
+    #     instructors=crt_instr_dict,
+    #     distributions=distributions,
+    #     prereq=prereq,
+    #     requirement=requirement,
+    #     outcomes=outcomes,
+    #     comments=comments,
+    #     permission=permission,
+    # )
 
 
 @app.route("/<major_displayed>-<college>", methods=["GET"])
