@@ -135,10 +135,10 @@ class Course(object):
             return max_credit
         return None
 
-    def first_season(self):
-        semester = self._semester[0]
-        if semester in CURRENT_YEAR:
-            return semester[:2]
+    # def first_season(self):
+    #     semester = self._semester[0]
+    #     if semester in CURRENT_YEAR:
+    #         return semester[:2]
 
     def available(self, semester):
         plan_season = semester[:2]
@@ -152,6 +152,12 @@ class Course(object):
             return True
         return False
 
+    def add_score(self, score):
+        self._score += score
+
+    def add_tag(self, tag, description):
+        self._tags[tag] = description
+
     def __init__(
         self, course_code, course_data, SP_session, FA_session, SU_session, WI_session
     ):
@@ -159,6 +165,8 @@ class Course(object):
         self._subject = re.match(r"[A-Z]+", course_code).group(0)
         self._coursedata = course_data[self._subject][course_code]
         self._semester = self._coursedata["smst"]
+        self._score = 0
+        self._tags = {}
 
         if LATEST_SPRING in self._semester:
             self._spsession = SP_session[self._subject][course_code]
