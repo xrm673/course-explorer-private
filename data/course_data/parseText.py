@@ -308,6 +308,17 @@ def parse_overlap(text):
     return course_list
 
 
+def parse_combinations(combination_list):
+    if combination_list == []:
+        return []
+    result = []
+    for course_dict in combination_list:
+        course_id = course_dict["subject"] + course_dict["catalogNbr"]
+        new_dict = {"course_id": course_id, "type": course_dict["type"]}
+        result.append(new_dict)
+    return result
+
+
 def parse_instructor(l):
     result = {}
     for instructor in l:

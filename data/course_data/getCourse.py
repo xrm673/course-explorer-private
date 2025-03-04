@@ -131,7 +131,7 @@ def upload_subjects(subjects: List[Dict[str, Any]], semester: str) -> None:
     print(f"Added {subjects_added} new subjects for {semester}")
 
 
-def upload_courses(courses: List[Dict[str, Any]], semester: str) -> None:
+def upload_courses(courses: List[Dict[str, Any]], semester: str, max_level=5) -> None:
     """
     Process course data and upload to Firestore with semester tracking.
     Includes enrollment groups, sections, meetings, and instructors.
@@ -147,7 +147,10 @@ def upload_courses(courses: List[Dict[str, Any]], semester: str) -> None:
 
     # Process and upload courses with semester tracking
     for course in courses:
+        if int(course["catalogNbr"][0]) > max_level:
+            continue
         course_id = f"{course['subject']}{course['catalogNbr']}"
+        subject = course["subject"]
 
         # Check if the course already exists
         course_ref = db.collection("courses").document(course_id)
@@ -163,14 +166,14 @@ def upload_courses(courses: List[Dict[str, Any]], semester: str) -> None:
                 batch_count += 1
         else:
             # New course, create full document
-            course_data = get_single_course(course)
+            course_data = get_single_course(course, semester)
             batch.set(course_ref, course_data)
             batch_count += 1
 
         # Process groups
         for group_index, enroll_group in enumerate(course.get("enrollGroups", []), 1):
             group_id = f"{semester}_{course_id}_Grp{group_index}"
-            group_data = get_group(enroll_group, group_id, course_id, semester)
+            group_data = get_group(enroll_group, group_id, course_id, semester, subject)
             group_ref = db.collection("enrollGroups").document(group_id)
             batch.set(group_ref, group_data)
             batch_count += 1
@@ -178,10 +181,10 @@ def upload_courses(courses: List[Dict[str, Any]], semester: str) -> None:
             # Process sections
             for section in enroll_group.get("classSections", []):
                 section_id = (
-                    f"{group_id}_{section['ssrComponent']}-{section['section']}"
+                    f"{group_id}_{section['ssrComponent']}_{section['section']}"
                 )
                 section_data = get_section(
-                    section, section_id, course_id, group_id, semester
+                    section, section_id, course_id, group_id, semester, subject
                 )
                 section_ref = db.collection("sections").document(section_id)
                 batch.set(section_ref, section_data)
@@ -191,22 +194,29 @@ def upload_courses(courses: List[Dict[str, Any]], semester: str) -> None:
                 for i, meeting in enumerate(section.get("meetings", [])):
                     meeting_id = f"{section_id}_meeting{i+1}"
                     meeting_data = get_meeting(
-                        meeting, meeting_id, course_id, group_id, section_id, semester
+                        meeting,
+                        meeting_id,
+                        course_id,
+                        group_id,
+                        section_id,
+                        semester,
+                        subject,
                     )
 
                     # Process instructors - only store netIDs in meeting
                     instructors = []
-                    for instructor in meeting.get("instructors", []):
-                        netid = instructor.get("netid", "")
-                        if netid:
-                            instructors.append(netid)
-                            # Store instructor data in separate collection
-                            instructor_data = get_instructor(instructor)
-                            instructor_ref = db.collection("instructors").document(
-                                netid
-                            )
-                            batch.set(instructor_ref, instructor_data, merge=True)
-                            batch_count += 1
+                    if meeting["instructors"]:
+                        for instructor in meeting["instructors"]:
+                            netid = instructor.get("netid", "")
+                            if netid:
+                                instructors.append(netid)
+                                # Store instructor data in separate collection
+                                instructor_data = get_instructor(instructor)
+                                instructor_ref = db.collection("instructors").document(
+                                    netid
+                                )
+                                batch.set(instructor_ref, instructor_data, merge=True)
+                                batch_count += 1
 
                     # Only store the instructor IDs in the meeting
                     meeting_data["instructors"] = instructors
@@ -222,19 +232,23 @@ def upload_courses(courses: List[Dict[str, Any]], semester: str) -> None:
                     batch = db.batch()
                     batch_count = 0
 
+        print(f"finished {course_id}")
+
     # Commit any remaining documents
     if batch_count > 0:
         batch.commit()
         print(f"Committed remaining {batch_count} documents")
 
 
-def get_single_course(course: Dict[str, Any]):
+def get_single_course(course: Dict[str, Any], semester):
     single_course = {}
     course_id = course["subject"] + course["catalogNbr"]
 
     single_course["id"] = course_id
     single_course["sbj"] = course["subject"]
     single_course["nbr"] = course["catalogNbr"]
+    single_course["lvl"] = int(course["catalogNbr"][0])
+    single_course["smst"] = [semester]
     single_course["ttl"] = course["titleLong"]
     single_course["tts"] = course["titleShort"]
     single_course["dsrpn"] = clean(course["description"])
@@ -244,7 +258,7 @@ def get_single_course(course: Dict[str, Any]):
     if cmts:
         if has_recommend_preco(cmts):
             # comment that has recommended prerequisite info
-            single_course["rcmd_preco"] = cmts
+            single_course["rcmdPreco"] = cmts
         elif has_preco(cmts) and not req:
             # comment that has prerequisite info
             req = cmts
@@ -261,63 +275,70 @@ def get_single_course(course: Dict[str, Any]):
             single_course["coreq"] = json.dumps(preco_dict["coreq"])
         if preco_dict["preco"]:
             single_course["preco"] = json.dumps(preco_dict["preco"])
-        single_course["note"] = preco_dict["note"]
+        single_course["needNote"] = preco_dict["note"]
 
-    when = parse_when_offered(course["catalogWhenOffered"])
-    if when:
-        single_course["when"] = when
+    if course["catalogWhenOffered"]:
+        single_course["when"] = parse_when_offered(course["catalogWhenOffered"])
     if course["catalogBreadth"]:
         single_course["breadth"] = course["catalogBreadth"]
-    if parse_distr(course["catalogDistr"]):
+    if course["catalogDistr"]:
         single_course["distr"] = parse_distr(course["catalogDistr"])
-    if parse_distr(course["catalogAttribute"]):
+    if course["catalogAttribute"]:
         single_course["attr"] = parse_distr(course["catalogAttribute"])
-    if clean(course["catalogLang"]):
-        single_course["lanreq"] = course["catalogLang"]
-    if parse_overlap(course["catalogForbiddenOverlaps"]):
+    if course["catalogLang"]:
+        single_course["lanreq"] = clean(course["catalogLang"])
+    if course["catalogForbiddenOverlaps"]:
+        single_course["ovlpText"] = clean(course["catalogForbiddenOverlaps"])
         single_course["ovlp"] = parse_overlap(course["catalogForbiddenOverlaps"])
-    if clean(course["catalogFee"]):
-        single_course["fee"] = course["catalogFee"]
-    if clean(course["catalogSatisfiesReq"]):
-        single_course["satisfies"] = course["catalogSatisfiesReq"]
-    if clean(course["catalogPermission"]):
-        single_course["pmsn"] = clean(course["catalogPermission"])
-    if clean_list(course["catalogOutcomes"]):
+    if course["catalogFee"]:
+        single_course["fee"] = clean(course["catalogFee"])
+    if course["catalogSatisfiesReq"]:
+        single_course["satisfies"] = clean(course["catalogSatisfiesReq"])
+    if course["catalogPermission"]:
+        single_course["pmsn"] = course["catalogPermission"]
+    if course["catalogOutcomes"]:
         single_course["otcm"] = clean_list(course["catalogOutcomes"])
-    if clean(course["catalogCourseSubfield"]):
-        single_course["subfield"] = course["catalogCourseSubfield"]
+    if course["catalogCourseSubfield"]:
+        single_course["subfield"] = clean(course["catalogCourseSubfield"])
     single_course["career"] = course["acadCareer"]
     single_course["acadgrp"] = course["acadGroup"]
     return single_course
 
 
-def get_group(group, group_id, course_id, semester):
+def get_group(group, group_id, course_id, semester, subject):
     group_dict = {}
     group_dict["id"] = group_id
-    group_dict["course_id"] = course_id
+    group_dict["courseId"] = course_id
     group_dict["semester"] = semester
+    group_dict["sbj"] = subject
     group_dict["credits"] = parse_credit(group["unitsMaximum"], group["unitsMinimum"])
     group_dict["components"] = group["componentsRequired"]
-    if group["componentsOptional"] != []:
+    if group["componentsOptional"]:
         group_dict["componentsOptional"] = group["componentsOptional"]
-    group_dict["gradingBasis"] = group["gradingBasis"]
-    group_dict["session_code"] = group["sessionCode"]
-    if group["simpleCombinations"] != []:
-        group_dict["combinations"] = group["simpleCombinations"]
+    group_dict["grading"] = group["gradingBasis"]
+    group_dict["sessionCode"] = group["sessionCode"]
+    if group["simpleCombinations"]:
+        group_dict["comb"] = parse_combinations(group["simpleCombinations"])
+    if group["exploreCriteriaIds"]:
+        group_dict["criteriaId"] = group["exploreCriteriaIds"]
     return group_dict
 
 
-def get_section(section, section_id, course_id, group_id, semester):
+def get_section(section, section_id, course_id, group_id, semester, subject):
     section_dict = {}
     section_dict["id"] = section_id
-    section_dict["course_id"] = course_id
-    section_dict["group_id"] = group_id
+    section_dict["courseId"] = course_id
+    section_dict["groupId"] = group_id
     section_dict["semester"] = semester
+    section_dict["sbj"] = subject
     section_dict["key"] = f"{section['ssrComponent']}-{section['section']}"
     section_dict["type"] = section["ssrComponent"]
+    section_dict["classNbr"] = section["classNbr"]
+    if not section["isComponentGraded"]:
+        section_dict["graded"] = section["isComponentGraded"]
     if section["openStatus"] != "O":
         section_dict["open"] = section["openStatus"]
-    if section["topicDescription"] != "":
+    if section["topicDescription"]:
         section_dict["topic"] = section["topicDescription"]
     if section["location"] != "ITH":
         section_dict["location"] = section["location"]
@@ -325,6 +346,10 @@ def get_section(section, section_id, course_id, group_id, semester):
         section_dict["consent"] = section["addConsent"]
     if section["instructionMode"] != "P":
         section_dict["mode"] = section["instructionMode"]
+    if section["exploreCriteriaIds"]:
+        section_dict["criteriaId"] = section["exploreCriteriaIds"]
+    if section["materials"]:
+        section_dict["materials"] = section["materials"]
 
     section_notes = []
     for note in section["notes"]:
@@ -338,26 +363,29 @@ def get_section(section, section_id, course_id, group_id, semester):
                 section_dict["coreq"] = json.dumps(preco_dict["coreq"])
             if preco_dict["preco"]:
                 section_dict["preco"] = json.dumps(preco_dict["preco"])
-            section_dict["need_note"] = json.dumps(preco_dict["note"])
+            section_dict["needNote"] = json.dumps(preco_dict["note"])
     if section_notes != []:
         section_dict["notes"] = section_notes
     return section_dict
 
 
-def get_meeting(meeting, meeting_id, course_id, group_id, section_id, semester):
+def get_meeting(
+    meeting, meeting_id, course_id, group_id, section_id, semester, subject
+):
     meeting_dict = {}
     meeting_dict["id"] = meeting_id
-    meeting_dict["course_id"] = course_id
-    meeting_dict["group_id"] = group_id
-    meeting_dict["section_id"] = section_id
+    meeting_dict["courseId"] = course_id
+    meeting_dict["groupId"] = group_id
+    meeting_dict["sectionId"] = section_id
     meeting_dict["semester"] = semester
+    meeting_dict["sbj"] = subject
     meeting_dict["tmstart"] = meeting["timeStart"]
     meeting_dict["tmend"] = meeting["timeEnd"]
     meeting_dict["pattern"] = meeting["pattern"]
-    meeting_dict["start_dt"] = meeting["startDt"]
-    meeting_dict["end_dt"] = meeting["endDt"]
+    meeting_dict["startDt"] = meeting["startDt"]
+    meeting_dict["endDt"] = meeting["endDt"]
     if meeting["meetingTopicDescription"]:
-        meeting_dict["mt_tpc"] = meeting["meetingTopicDescription"]
+        meeting_dict["mtTopic"] = meeting["meetingTopicDescription"]
     return meeting_dict
 
 
@@ -388,14 +416,20 @@ def get_instructor(instructor):
 
 def main():
     """Process and upload course data for all semesters."""
-    for semester in CURRENT_YEAR:
-        subjects, courses = fetch_subjects_courses(semester)
-        print(
-            f"Processing {len(subjects)} subjects and {len(courses)} courses for {semester}"
-        )
-        upload_subjects(subjects, semester)
-        upload_courses(courses, semester)
-        print(f"Completed processing for {semester}\n")
+    subjects, courses = fetch_subjects_courses("SU24")
+    print(f"Processing {len(subjects)} subjects and {len(courses)} courses for SU24")
+    upload_subjects(subjects, "SU24")
+    upload_courses(courses, "SU24")
+    print(f"Completed processing for SU24\n")
+
+    # for semester in CURRENT_YEAR:
+    #     subjects, courses = fetch_subjects_courses(semester)
+    #     print(
+    #         f"Processing {len(subjects)} subjects and {len(courses)} courses for {semester}"
+    #     )
+    #     upload_subjects(subjects, semester)
+    #     upload_courses(courses, semester)
+    #     print(f"Completed processing for {semester}\n")
 
 
 if __name__ == "__main__":
