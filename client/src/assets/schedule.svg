@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Document outline -->
+  <rect x="3" y="2" width="18" height="20" rx="2" />
+  
+  <!-- Header line -->
+  <line x1="3" y1="6" x2="21" y2="6" />
+  
+  <!-- Course time slots with boxes -->
+  <rect x="5" y="8" width="5" height="3" rx="1" />
+  <rect x="5" y="13" width="8" height="3" rx="1" />
+  <rect x="5" y="18" width="6" height="3" rx="1" />
+  
+  <!-- Right side time indicators -->
+  <line x1="14" y1="9.5" x2="19" y2="9.5" />
+  <line x1="16" y1="14.5" x2="19" y2="14.5" />
+  <line x1="15" y1="19.5" x2="19" y2="19.5" />
+</svg>
