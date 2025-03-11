@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react' 
-import { getDisplayCourse } from '../services/api'
+import { getDisplayCourse } from '../../services/api'
 import { useParams } from 'react-router';
 
-export default function DisplayCourse() {
+export default function SingleCoursePage() {
    const [course, setCourse] = useState(null);
    const { courseCode } = useParams();
    const [loading, setLoading] = useState(true);
