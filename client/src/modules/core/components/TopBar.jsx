@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import styles from './TopBar.module.css'
 
 import logo from '../../../assets/logo.svg'
 import SearchBar from '../../searchBar/components/SearchBar'
@@ -23,31 +24,22 @@ export default function TopBar() {
             setOpenModal(modalName);
         }
     };
+
+    // Helper function to determine button class based on active state
+    const getButtonClass = (modalName, baseClass) => {
+        return openModal === modalName ? 
+            `${styles[baseClass]} ${styles.activeButton}` : 
+            `${styles[baseClass]} ${styles.inactiveButton}`;
+    };
     
     return (
         <>
-            <div style={{
-                "display": "flex",
-                "flexDirection": "row",
-                "alignItems": "center",
-                "justifyContent": "center",
-                "width": "100%",
-                "height": "100px",
-                "boxShadow": "0 2px 4px rgba(0,0,0,0.1)",
-                "position": "sticky",
-                "top": 0,
-                "zIndex": 100,
-                "backgroundColor": "white"
-            }}>
+            <div className={styles.topbar}>
                 <a href="/">
                     <img 
                         src={logo} 
                         alt="CU Explore"
-                        style={{
-                            "width": "150px",
-                            "margin": "0 100px 0 10px",
-                            "cursor": "pointer"
-                        }}
+                        className={styles.logo}
                     />
                 </a>
 
@@ -55,67 +47,34 @@ export default function TopBar() {
 
                 <button 
                     onClick={() => toggleModal('schedule')}
-                    style={{
-                        "background": "none",
-                        "border": "none",
-                        "cursor": "pointer",
-                        "margin": "0 25px 0 150px",
-                        "padding": 0,
-                        "opacity": openModal === 'schedule' ? 0.7 : 1,
-                        "transform": openModal === 'schedule' ? 'scale(1.1)' : 'scale(1)',
-                        "transition": "all 0.2s ease-in-out"
-                    }}
+                    className={getButtonClass('schedule', 'scheduleButton')}
                 >
                     <img 
                         src={scheduleIcon} 
                         alt="Schedule Icon"
-                        style={{
-                            "width": "40px"
-                        }} 
+                        className={styles.icon} 
                     />
                 </button>
 
                 <button 
                     onClick={() => toggleModal('profile')}
-                    style={{
-                        "background": "none",
-                        "border": "none",
-                        "cursor": "pointer",
-                        "margin": "0 25px 0 25px",
-                        "padding": 0,
-                        "opacity": openModal === 'profile' ? 0.7 : 1,
-                        "transform": openModal === 'profile' ? 'scale(1.1)' : 'scale(1)',
-                        "transition": "all 0.2s ease-in-out"
-                    }}
+                    className={getButtonClass('profile', 'profileButton')}
                 >
                     <img 
                         src={defaultAvator} 
                         alt="Avatar"
-                        style={{
-                            "width": "40px"
-                        }} 
+                        className={styles.icon} 
                     />
                 </button>
                 
                 <button 
                     onClick={() => toggleModal('navigation')}
-                    style={{
-                        "background": "none",
-                        "border": "none",
-                        "cursor": "pointer",
-                        "margin": "0 0 0 25px",
-                        "padding": 0,
-                        "opacity": openModal === 'navigation' ? 0.7 : 1,
-                        "transform": openModal === 'navigation' ? 'scale(1.1)' : 'scale(1)',
-                        "transition": "all 0.2s ease-in-out"
-                    }}
+                    className={getButtonClass('navigation', 'navigationButton')}
                 >
                     <img 
                         src={hamburgerIcon} 
                         alt="Hamburger"
-                        style={{
-                            "width": "40px"
-                        }} 
+                        className={styles.icon} 
                     />
                 </button>
             </div>

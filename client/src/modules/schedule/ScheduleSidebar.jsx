@@ -1,27 +1,25 @@
-export default function ScheduleSidebar({ onClose }) {
-    // Sample schedule data - in a real app, this would come from props or context
-    const scheduleData = {
-        planned: {
-            "Fall 2025": [
-                { code: "CS 4700", title: "Artificial Intelligence" },
-                { code: "CS 4780", title: "Machine Learning" }
-            ],
-            "Spring 2026": [
-                { code: "CS 4820", title: "Introduction to Analysis of Algorithms" }
-            ]
-        },
-        taken: {
-            "Fall 2024": [
-                { code: "CS 3110", title: "Data Structures and Functional Programming" },
-                { code: "CS 2800", title: "Discrete Structures" }
-            ],
-            "Spring 2024": [
-                { code: "CS 2110", title: "Object-Oriented Programming and Data Structures" }
-            ],
-            "Ungrouped Courses": [
-                { code: "CS 1110", title: "Introduction to Computing Using Python" }
-            ]
+import { useState, useEffect } from 'react';
+
+export default function ScheduleSidebar({ onClose, activeSemester, scheduleData, onRemoveCourse }) {
+    // Track which semesters are expanded
+    const [expandedSemesters, setExpandedSemesters] = useState({});
+    
+    // When activeSemester changes, expand that semester
+    useEffect(() => {
+        if (activeSemester) {
+            setExpandedSemesters(prev => ({
+                ...prev,
+                [activeSemester]: true
+            }));
         }
+    }, [activeSemester]);
+    
+    // Toggle semester expansion
+    const toggleSemester = (semester) => {
+        setExpandedSemesters(prev => ({
+            ...prev,
+            [semester]: !prev[semester]
+        }));
     };
 
     return (
@@ -67,45 +65,56 @@ export default function ScheduleSidebar({ onClose }) {
                 
                 {Object.entries(scheduleData.planned).map(([semester, courses]) => (
                     <div key={semester} style={{ "marginBottom": "15px" }}>
-                        <div style={{ 
-                            "fontWeight": "bold", 
-                            "marginBottom": "8px", 
-                            "display": "flex",
-                            "justifyContent": "space-between",
-                            "alignItems": "center",
-                            "cursor": "pointer"
-                        }}>
+                        <div 
+                            onClick={() => toggleSemester(semester)}
+                            style={{ 
+                                "fontWeight": "bold", 
+                                "marginBottom": "8px", 
+                                "display": "flex",
+                                "justifyContent": "space-between",
+                                "alignItems": "center",
+                                "cursor": "pointer",
+                                "padding": "5px",
+                                "backgroundColor": activeSemester === semester ? "#f0f7ff" : "transparent",
+                                "borderRadius": "4px"
+                            }}
+                        >
                             <span>{semester}</span>
-                            <span>▼</span>
+                            <span>{expandedSemesters[semester] ? "▲" : "▼"}</span>
                         </div>
-                        <div>
-                            {courses.map((course, index) => (
-                                <div key={index} style={{ 
-                                    "display": "flex", 
-                                    "justifyContent": "space-between", 
-                                    "alignItems": "center",
-                                    "padding": "8px",
-                                    "backgroundColor": "#f8f9fa",
-                                    "borderRadius": "4px",
-                                    "marginBottom": "5px"
-                                }}>
-                                    <a href={`/course/${course.code.replace(/\s+/g, '')}`} style={{ 
-                                        "textDecoration": "none", 
-                                        "color": "#333",
-                                        "fontWeight": "500"
+                        {expandedSemesters[semester] && (
+                            <div>
+                                {courses.map((course, index) => (
+                                    <div key={index} style={{ 
+                                        "display": "flex", 
+                                        "justifyContent": "space-between", 
+                                        "alignItems": "center",
+                                        "padding": "8px",
+                                        "backgroundColor": "#f8f9fa",
+                                        "borderRadius": "4px",
+                                        "marginBottom": "5px"
                                     }}>
-                                        {course.code}: {course.title}
-                                    </a>
-                                    <button style={{
-                                        "background": "none",
-                                        "border": "none",
-                                        "cursor": "pointer",
-                                        "color": "#dc3545",
-                                        "fontWeight": "bold"
-                                    }}>×</button>
-                                </div>
-                            ))}
-                        </div>
+                                        <a href={`/course/${course.code.replace(/\s+/g, '')}`} style={{ 
+                                            "textDecoration": "none", 
+                                            "color": "#333",
+                                            "fontWeight": "500"
+                                        }}>
+                                            {course.code}: {course.title}
+                                        </a>
+                                        <button 
+                                            onClick={() => onRemoveCourse(course.code)}
+                                            style={{
+                                                "background": "none",
+                                                "border": "none",
+                                                "cursor": "pointer",
+                                                "color": "#dc3545",
+                                                "fontWeight": "bold"
+                                            }}
+                                        >×</button>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
                     </div>
                 ))}
             </div>
@@ -120,45 +129,50 @@ export default function ScheduleSidebar({ onClose }) {
                 
                 {Object.entries(scheduleData.taken).map(([semester, courses]) => (
                     <div key={semester} style={{ "marginBottom": "15px" }}>
-                        <div style={{ 
-                            "fontWeight": "bold", 
-                            "marginBottom": "8px", 
-                            "display": "flex",
-                            "justifyContent": "space-between",
-                            "alignItems": "center",
-                            "cursor": "pointer"
-                        }}>
+                        <div 
+                            onClick={() => toggleSemester(semester)}
+                            style={{ 
+                                "fontWeight": "bold", 
+                                "marginBottom": "8px", 
+                                "display": "flex",
+                                "justifyContent": "space-between",
+                                "alignItems": "center",
+                                "cursor": "pointer"
+                            }}
+                        >
                             <span>{semester}</span>
-                            <span>▼</span>
+                            <span>{expandedSemesters[semester] ? "▲" : "▼"}</span>
                         </div>
-                        <div>
-                            {courses.map((course, index) => (
-                                <div key={index} style={{ 
-                                    "display": "flex", 
-                                    "justifyContent": "space-between", 
-                                    "alignItems": "center",
-                                    "padding": "8px",
-                                    "backgroundColor": "#f8f9fa",
-                                    "borderRadius": "4px",
-                                    "marginBottom": "5px"
-                                }}>
-                                    <a href={`/course/${course.code.replace(/\s+/g, '')}`} style={{ 
-                                        "textDecoration": "none", 
-                                        "color": "#333",
-                                        "fontWeight": "500"
+                        {expandedSemesters[semester] && (
+                            <div>
+                                {courses.map((course, index) => (
+                                    <div key={index} style={{ 
+                                        "display": "flex", 
+                                        "justifyContent": "space-between", 
+                                        "alignItems": "center",
+                                        "padding": "8px",
+                                        "backgroundColor": "#f8f9fa",
+                                        "borderRadius": "4px",
+                                        "marginBottom": "5px"
                                     }}>
-                                        {course.code}: {course.title}
-                                    </a>
-                                    <button style={{
-                                        "background": "none",
-                                        "border": "none",
-                                        "cursor": "pointer",
-                                        "color": "#dc3545",
-                                        "fontWeight": "bold"
-                                    }}>×</button>
-                                </div>
-                            ))}
-                        </div>
+                                        <a href={`/course/${course.code.replace(/\s+/g, '')}`} style={{ 
+                                            "textDecoration": "none", 
+                                            "color": "#333",
+                                            "fontWeight": "500"
+                                        }}>
+                                            {course.code}: {course.title}
+                                        </a>
+                                        <button style={{
+                                            "background": "none",
+                                            "border": "none",
+                                            "cursor": "pointer",
+                                            "color": "#dc3545",
+                                            "fontWeight": "bold"
+                                        }}>×</button>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
                     </div>
                 ))}
             </div>
