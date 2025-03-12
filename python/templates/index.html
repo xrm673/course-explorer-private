@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+
+    <!-- jQuery & Select2 JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/site.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+</head>
+
+<body>
+    {% if college is not none %}
+        <div class="info-box">
+            <h2>Profile:</h2>
+            <p>Graduation Year: {{ year }}</p>
+            <p>College: {{ colleges[college] }}</p>
+            {% for major_code in major_codes %}
+                <p>Major {{loop.index}}: {{ majors[major_code] }}</p>
+                <p><a href="{{ major_code }}">View Requirements>>></a></p>
+            {% endfor %}
+            <button id="reselect-button">Reselect</button>
+        </div>
+    {% else %}
+        <button id="start-button">Get Started</button>
+    {% endif %}
+
+    <div id="information-modal" class="modal hidden">
+        <div class="modal-content">
+        <h2>College</h2>
+        <p>Select your college</p>
+        <select id="collegeSearch" style="width: 350px;" required>
+            {% for key, value in colleges.items() %}
+                <option value="{{ key }}">{{ value }}</option>
+            {% endfor %}
+        </select>
+
+        <h2>Major(s)</h2>
+        <p>Select your major(s)</p>
+        <select id="majorSearch" multiple style="width: 350px;" required>
+            {% for key, value in majors.items() %}
+                <option value="{{ key }}">{{ value }}</option>
+            {% endfor %}
+        </select>
+
+        <h2>Minor(s)</h2>
+        <p>Select your minor(s)</p>
+        <select id="minorSearch" multiple style="width: 350px;">
+            {% for key, value in minors.items() %}
+                <option value="{{ key }}">{{ value }}</option>
+            {% endfor %}
+        </select>
+
+        <h2>Subject(s)</h2>
+        <p>Select any other subject that interests you beside your majors and minors</p>
+        <select id="subjectSearch" multiple style="width: 350px;">
+            {% for subject in subjects %}
+                <option value="{{ subject }}">{{ subject }}</option>
+            {% endfor %}
+        </select>
+
+        <h2>Graduation Year</h2>
+        <select id="graduationYears" style="width: 350px;">
+            {% for year in graduations %}
+                <option value="{{ year }}">{{ year }}</option>
+            {% endfor %}
+        </select>
+
+        <br><br>
+        <button id="saveInfoButton">Continue</button>
+        </div>
+    </div>
+
+    <div id="recommendation-modal" class="modal hidden">
+        <div class="modal-content">
+            <h2>Select courses you have taken</h2>
+            <button id="saveCoursesButton">Save</button>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            // Function to toggle modals
+            function toggleModal(hideModal, showModal) {
+                $(hideModal).addClass("hidden");
+                $(showModal).removeClass("hidden");
+            }
+
+            // Open the information modal
+            $(document).on("click", "#start-button, #reselect-button", function () {
+                $("#information-modal").removeClass("hidden");
+            });
+
+            // Close recommendation modal when "Save Courses" button is clicked
+            $(document).on("click", "#saveCoursesButton", function () {
+                $("#recommendation-modal").addClass("hidden");
+            });
+
+            // Initialize Select2 dropdowns
+            $("#collegeSearch").select2({
+                placeholder: "Search and select your college",
+                allowClear: true,
+            });
+
+            $("#majorSearch").select2({
+                placeholder: "Search and select up to 3 majors",
+                allowClear: true,
+                maximumSelectionLength: 3,
+            });
+
+            $("#minorSearch").select2({
+                placeholder: "Search and select up to 5 minors",
+                allowClear: true,
+                maximumSelectionLength: 5,
+            });
+
+            $("#subjectSearch").select2({
+                placeholder: "Search and select up to 5 subjects",
+                allowClear: true,
+                maximumSelectionLength: 5,
+            });
+
+            $("#graduationYears").select2({
+                placeholder: "Enter your graduation year",
+                allowClear: true,
+            });
+
+            // Handle form submission and data saving
+            $("#saveInfoButton").click(function () {
+                let college = $("#collegeSearch").val();
+                let majors = $("#majorSearch").val() || [];
+                let minors = $("#minorSearch").val() || [];
+                let subjects = $("#subjectSearch").val() || [];
+                let graduationYear = $("#graduationYears").val();
+
+                // Ensure required fields are selected
+                if (!college || majors.length === 0 || !graduationYear) {
+                    alert("Please select a College, at least one Major, and Graduation Year.");
+                    return;
+                }
+
+                // Disable button to prevent multiple submissions
+                let $saveButton = $("#saveInfoButton");
+                $saveButton.prop("disabled", true).text("Saving...");
+
+                // Send data to Flask via AJAX
+                $.ajax({
+                    url: "/save-information",
+                    type: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify({
+                        college: college,
+                        majors: majors,
+                        minors: minors,
+                        subjects: subjects,
+                        graduationYear: graduationYear,
+                    }),
+                    success: function (response) {
+                        toggleModal("#information-modal", "#recommendation-modal");
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("AJAX Error:", status, error);
+                        alert("Error saving data. Please try again.");
+                    },
+                    complete: function () {
+                        $saveButton.prop("disabled", false).text("Continue");
+                    },
+                });
+            });
+        });
+    </script>
+</body>

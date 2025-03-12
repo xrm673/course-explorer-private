@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ course_code }}</title>
+</head>
+<body>
+    <h1>{{ course_code }}</h1>
+    <h2>{{ title }}</h2>
+
+    <p>Description: {{ description }}</p>
+
+    <p>Credits: </p>
+        <ul>
+            {% for credit in credits %}
+            <li>{{ credit }}</li>
+            {% endfor %}
+        </ul>
+
+    <p>Semesters offered:
+    {% for semester in semesters %}
+        <button>{{ semester }}</button>
+    {% endfor %}
+    </p>
+
+    {% if quality is not none %}
+        <p>Quality: {{ quality }}</p>
+    {% endif %}
+
+    <p>Instructor(s):</p>
+    <ul>
+        {% for netid, details in instructors.items() %}
+            <li>{{ details }} ({{ netid }})</li>
+        {% endfor %}
+    </ul>
+
+    {% if distributions is not none %}
+        <p>Distributions:
+        {% for distribution in distributions %}
+            <button>{{ distribution }}</button>
+        {% endfor %}
+        </p>
+    {% endif %}
+
+    {% if prereq %}
+        <p>Prerequisites:</p>
+        {% for group in prereq %}
+        <div class="group-container">
+            {% for course in group %}
+            <button>{{ course }}</button>
+            {% endfor %}
+        </div>
+        {% endfor %}
+    {% endif %} 
+
+
+    {% if requirement is not none %}
+        <p><strong>Specific Requirements</strong></p>
+        <p>{{requirement}} </p>
+    {% endif %}
+
+    {% if comments is not none %}
+        <p>Comments: {{comments}} </p>
+    {% endif %}
+    
+    {% if permission is not none %}
+        <p>Permission Requirement: {{permission}} </p>
+    {% endif %}    
+    
+    <p><a href="https://classes.cornell.edu/browse/roster/{{recent_semester}}/class/{{subject}}/{{number}}">See on Class Roster</a></p>
+</body>
