@@ -8,6 +8,7 @@ import SingleMajorPage from './modules/singleMajor/SingleMajorPage'
 import MinorListPage from './modules/minorList/MinorListPage'
 import SingleMinorPage from './modules/singleMinor/SingleMinorPage'
 import SubjectListPage from './modules/subjectList/SubjectListPage'
+import SingleSubjectPage from './modules/singleSubject/singleSubjectPage'
 import SingleCoursePage from './modules/singleCourse/SingleCoursePage'
 import CollegePage from './modules/college/CollegePage'
 import MyDashboardPage from './modules/myDashboard/MyDashboardPage'
@@ -22,6 +23,7 @@ function App() {
         <Route path="minors" element={<MinorListPage />} />
         <Route path="minors/:minorId" element={<SingleMinorPage />} />
         <Route path="subjects" element={<SubjectListPage />} />
+        <Route path="subjects/:subjectId" element={<SingleSubjectPage />} />
         <Route path="courses/:courseId" element={<SingleCoursePage />} />
         <Route path="colleges/:collegeId" element={<CollegePage />} />
         <Route path="dashboard" element={<MyDashboardPage />} />

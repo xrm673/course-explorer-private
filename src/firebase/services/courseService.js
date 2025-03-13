@@ -12,15 +12,6 @@ import {
 // Collection reference
 const coursesRef = collection(db, "courses");
 
-// Get all courses
-export const getAllCourses = async () => {
-  const snapshot = await getDocs(coursesRef);
-  return snapshot.docs.map(doc => ({
-    id: doc.id,
-    ...doc.data()
-  }));
-};
-
 // Get course by ID
 export const getCourseById = async (id) => {
   const docRef = doc(db, "courses", id);
@@ -37,7 +28,7 @@ export const getCourseById = async (id) => {
 
 // Get courses by subject code
 export const getCoursesBySubject = async (subjectCode) => {
-  const q = query(coursesRef, where("subject", "==", subjectCode));
+  const q = query(coursesRef, where("sbj", "==", subjectCode));
   const snapshot = await getDocs(q);
   
   return snapshot.docs.map(doc => ({
