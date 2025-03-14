@@ -1,33 +1,39 @@
 import { useEffect, useState } from 'react' 
-import { getDisplayCourse } from '../../services/api'
-import { useParams } from 'react-router';
+import { useParams } from 'react-router-dom';
+
+import { getCourseById } from '../../firebase/services/courseService';
 
 export default function SingleCoursePage() {
-   const [course, setCourse] = useState(null);
-   const { courseCode } = useParams();
-   const [loading, setLoading] = useState(true);
+    const [course, setCourse] = useState(null);
+    const { courseId } = useParams();
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-   useEffect (() => {
-    async function fetchDisplayCourse() {
-        try {
-            const data = await getDisplayCourse(courseCode);
-            setCourse(data);
-        } catch (error) {
-            console.error("Failed to fetch course data", error);
-        } finally {
-            setLoading(false);
-        }
-    }
-    fetchDisplayCourse();
-   }, [courseCode]);
+    useEffect(() => {
+        const fetchCourse = async () => {
+            try {
+                const courseData = await getCourseById(courseId);
+                setCourse(courseData);
+                setLoading(false);
+            } catch (err) {
+                console.error(`Error fetching course ${courseId}:`, err);
+                setError("Failed to load course data");
+                setLoading(false);
+            }
+        };
+        
+        fetchCourse();
+    }, [courseId]); // Add courseId to dependency array
 
-   if (loading) return <h1>Loading...</h1>;
-   if (!course) return <h1>Course not found</h1>;
+    if (loading) return <h1>Loading...</h1>;
+    if (error) return <h1>{error}</h1>;
+    if (!course) return <h1>Course not found</h1>;
 
-   return (
-    <>
-      <h1>{ course.course_code }</h1>
-    </>
-   )
-
+    return (
+        <>
+            <h1>{ course.ttl }</h1>
+            <h2>{ course.id }</h2>
+            {/* Add more course details as needed */}
+        </>
+    );
 }
