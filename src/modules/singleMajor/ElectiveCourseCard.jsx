@@ -16,49 +16,75 @@ export default function ElectiveCourseCard({ courseId }) {
                 setCourse(courseData)
                 setLoading(false)
             } catch (err) {
-                setError("Faled to load")
+                setError("Failed to load")
                 setLoading(false)
             }
         } 
         fetchCourse()
-    }, [])
+    }, [courseId]) // Added courseId as dependency
 
-    if (loading) return <h1>Loading...</h1>;
-    if (error) return <h1>{error}</h1>;
+    if (loading) return <div style={{"width": "100%", "padding": "12px", "textAlign": "center", "backgroundColor": "white"}}>Loading...</div>;
+    if (error) return <div style={{"width": "100%", "padding": "12px", "textAlign": "center", "color": "#e53935", "backgroundColor": "white"}}>{error}</div>;
+
+    const tags = ["Tag 1", "Tag 2", "Tag 3"]
 
     return(
       <div style={{
         "border": "1px solid #ddd",
         "borderRadius": "8px",
-        "width": "400px",
-        "padding": "16px",
+        "width": "100%", // Changed from fixed 400px to 100%
+        "maxWidth": "100%", // Ensure it doesn't exceed its container
+        "padding": "12px", // Reduced padding from 16px
+        "boxSizing": "border-box", // Includes padding in width calculation
         "boxShadow": "0 2px 4px rgba(0,0,0,0.05)",
         "display": "flex",
         "flexDirection": "column",
-        "position": "relative"
+        "position": "relative",
+        "backgroundColor": "white"
       }}>
         {/* Header Section */}
         <div style={{
           "display": "flex",
           "justifyContent": "space-between",
           "alignItems": "flex-start",
-          "marginBottom": "8px"
+          "marginBottom": "6px" // Reduced from 8px
         }}>
           {/* Course Info */}
-          <div>
+          <div style={{
+            "flex": "1",
+            "minWidth": "0", // Important for text overflow handling
+            "maxWidth": "calc(100% - 50px)" // Leave space for buttons
+          }}>
             <p style={{
               "fontWeight": "bold",
-              "fontSize": "16px",
-              "margin": "0 0 4px 0"
+              "fontSize": "15px", // Reduced from 16px
+              "margin": "0 0 3px 0" // Reduced from 4px
             }}>
               {course.id}
             </p>
             <h3 style={{
-              "fontSize": "20px",
-              "margin": "0 0 8px 0",
-              "lineHeight": "1.3"
+              "fontSize": "18px", // Reduced from 20px
+              "margin": "0 0 6px 0", // Reduced from 8px
+              "lineHeight": "1.3",
+              "display": "-webkit-box",
+              "WebkitLineClamp": "2", // Show max 2 lines
+              "WebkitBoxOrient": "vertical",
+              "overflow": "hidden"
             }}>
-                <Link to={`/courses/${course.id}`}>
+                <Link 
+                  to={`/courses/${course.id}`}
+                  style={{
+                    "color": "#333", // Darker text color instead of default blue
+                    "textDecoration": "none", // Remove underline
+                    "fontWeight": "500", // Slightly bolder than normal
+                    "transition": "color 0.2s ease",
+                    ":hover": { // This won't work directly in inline styles, but showing intent
+                      "color": "#4a82e3", // Light blue on hover
+                      "textDecoration": "underline" // Add underline on hover
+                    }
+                  }}
+                  className="course-title-link" // Add class for potential CSS styling in stylesheet
+                >
                   {course.ttl}
                 </Link>
             </h3>
@@ -67,13 +93,14 @@ export default function ElectiveCourseCard({ courseId }) {
           {/* Action Buttons */}
           <div style={{
             "display": "flex",
-            "gap": "8px"
+            "gap": "5px", // Reduced from 8px
+            "flexShrink": "0" // Prevent buttons from shrinking
           }}>
             <img 
               src={add} 
               alt="Add the course to my schedule" 
               style={{
-                "width": "40px",
+                "width": "32px", // Reduced from 40px
                 "cursor": "pointer"
               }}
             />
@@ -81,9 +108,9 @@ export default function ElectiveCourseCard({ courseId }) {
               src={checkMark} 
               alt="Have taken this course" 
               style={{
-                "width": "30px",
+                "width": "24px", // Reduced from 30px
                 "cursor": "pointer",
-                "marginTop": "5px" // Align with the larger plus button
+                "marginTop": "4px" // Reduced from 5px
               }}
             />
           </div>
@@ -92,41 +119,31 @@ export default function ElectiveCourseCard({ courseId }) {
         {/* Tags Section */}
         <div style={{
           "display": "flex",
-          "gap": "8px",
-          "marginBottom": "12px",
+          "gap": "6px", // Reduced from 8px
+          "marginBottom": "8px", // Reduced from 12px
           "flexWrap": "wrap"
-        }}>
-          <span style={{
-            "padding": "4px 8px",
-            "border": "1px solid #ddd",
-            "borderRadius": "16px",
-            "fontSize": "18px"
-          }}>
-            Tag 1
-          </span>
-          <span style={{
-            "padding": "4px 8px",
-            "border": "1px solid #ddd",
-            "borderRadius": "16px",
-            "fontSize": "18px"
-          }}>
-            Tag 2
-          </span>
-          <span style={{
-            "padding": "4px 8px",
-            "border": "1px solid #ddd",
-            "borderRadius": "16px",
-            "fontSize": "18px"
-          }}>
-            Tag 3
-          </span>
+        }}> 
+          {tags.map((tag, i) => (
+            <span 
+              key={i}
+              style={{
+                "padding": "3px 6px", // Reduced from 4px 8px
+                "border": "1px solid #ddd",
+                "borderRadius": "14px", // Reduced from 16px
+                "fontSize": "16px", // Reduced from 16px
+                "backgroundColor": "#f8f8f8" // Light background for better visibility
+              }}
+            >
+              {tag}
+            </span>
+          ))}
         </div>
   
         {/* Review Score */}
         <div style={{
           "display": "flex",
           "alignItems": "center",
-          "fontSize": "14px"
+          "fontSize": "14px" // Consistent size
         }}>
           <span style={{
             "fontWeight": "bold",

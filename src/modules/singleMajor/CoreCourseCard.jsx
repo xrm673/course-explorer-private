@@ -23,8 +23,8 @@ export default function CoreCourseCard({ courseId }) {
         fetchCourse()
     }, [courseId])
 
-    if (loading) return <div style={{"width": "100%", "padding": "20px", "textAlign": "center"}}>Loading...</div>;
-    if (error) return <div style={{"width": "100%", "padding": "20px", "textAlign": "center", "color": "#e53935"}}>{error}</div>;
+    if (loading) return <div style={{"width": "100%", "padding": "20px", "textAlign": "center", "backgroundColor": "white"}}>Loading...</div>;
+    if (error) return <div style={{"width": "100%", "padding": "20px", "textAlign": "center", "color": "#e53935", "backgroundColor": "white"}}>{error}</div>;
 
     const tags = ["Tag 1", "Tag 2", "Tag 3", "Tag 4", "Tag 5"]
 
@@ -32,35 +32,41 @@ export default function CoreCourseCard({ courseId }) {
         <div style={{
             "border": "1px solid #ddd",
             "borderRadius": "8px",
-            "width": "70%",
-            "marginBottom": "16px",
-            "padding": "16px",
+            "width": "calc(100% - 2px)", // Accounting for border
+            "boxSizing": "border-box", // This is crucial - includes padding in width calculation
+            "marginBottom": "12px",
+            "padding": "12px", // Further reduced padding
             "boxShadow": "0 2px 4px rgba(0,0,0,0.05)",
             "display": "flex",
-            "flexDirection": "column"
+            "flexDirection": "column",
+            "backgroundColor": "white",
+            "maxWidth": "100%", // Ensures the card doesn't exceed parent width
+            "minHeight": "115px" // Add minimum height to accommodate two lines of title
         }}>
             {/* Header Section */}
             <div style={{
                 "display": "flex",
                 "justifyContent": "space-between",
                 "alignItems": "flex-start",
-                "marginBottom": "12px",
+                "marginBottom": "10px",
                 "width": "100%"
             }}>
                 {/* Course Info */}
                 <div style={{
-                    "flex": "1"
+                    "flex": "1",
+                    "minWidth": "0", // Important for text overflow handling
+                    "maxWidth": "calc(100% - 50px)" // Leave space for buttons
                 }}>
                     <div style={{
                         "display": "flex",
                         "alignItems": "center",
-                        "marginBottom": "8px"
+                        "marginBottom": "6px"
                     }}>
                         <p style={{
                             "fontWeight": "bold",
-                            "fontSize": "16px",
+                            "fontSize": "15px",
                             "margin": "0",
-                            "marginRight": "16px"
+                            "marginRight": "12px"
                         }}>
                             {course.id}
                         </p>
@@ -68,48 +74,55 @@ export default function CoreCourseCard({ courseId }) {
                         <div style={{
                             "display": "flex",
                             "alignItems": "center",
-                            "fontSize": "14px",
+                            "fontSize": "13px",
                             "backgroundColor": "#f5f5f5",
-                            "padding": "2px 8px",
+                            "padding": "2px 6px",
                             "borderRadius": "12px"
                         }}>
                             <span style={{
                                 "fontWeight": "bold",
-                                "marginRight": "4px"
+                                "marginRight": "3px"
                             }}>
                                 4.2
                             </span>
                             <span style={{
                                 "color": "#666",
-                                "fontSize": "12px"
+                                "fontSize": "11px"
                             }}>
                                 Rating
                             </span>
                         </div>
                     </div>
-                    <h3 style={{
-                        "fontSize": "20px",
-                        "margin": "0",
-                        "lineHeight": "1.3",
-                        "fontWeight": "500"
+                    <Link to={`/courses/${course.id}`} 
+                          style={{
+                            "fontSize": "20px", // Reduced font size
+                            "color": "#333",
+                            "textDecoration": "none",
+                            "margin": "0",
+                            "lineHeight": "1.3",
+                            "fontWeight": "500",
+                            "display": "-webkit-box",
+                            "WebkitLineClamp": "2", // Show max 2 lines
+                            "WebkitBoxOrient": "vertical",
+                            "overflow": "hidden",
+                            "maxWidth": "100%" // Ensure text doesn't overflow
                     }}>
-                        <Link to={`/courses/${course.id}`}>
                             {course.ttl}
-                        </Link>
-                    </h3>
+                    </Link>
                 </div>
 
                 {/* Action Buttons */}
                 <div style={{
                     "display": "flex",
-                    "gap": "8px",
-                    "marginLeft": "16px"
+                    "gap": "5px",
+                    "marginLeft": "10px",
+                    "flexShrink": "0"
                 }}>
                     <img 
                         src={add} 
                         alt="Add the course to my schedule" 
                         style={{
-                            "width": "40px",
+                            "width": "36px",
                             "cursor": "pointer"
                         }}
                     />
@@ -117,9 +130,9 @@ export default function CoreCourseCard({ courseId }) {
                         src={checkMark} 
                         alt="Have taken this course" 
                         style={{
-                            "width": "30px",
+                            "width": "28px",
                             "cursor": "pointer",
-                            "marginTop": "5px" // Align with the larger plus button
+                            "marginTop": "4px"
                         }}
                     />
                 </div>
@@ -128,15 +141,15 @@ export default function CoreCourseCard({ courseId }) {
             {/* Tags Section */}
             <div style={{
                 "display": "flex",
-                "gap": "8px",
+                "gap": "6px",
                 "flexWrap": "wrap"
             }}>
                 {tags.map((tag, index) => (
                     <span key={index} style={{
-                        "padding": "4px 10px",
+                        "padding": "3px 8px",
                         "border": "1px solid #ddd",
                         "borderRadius": "16px",
-                        "fontSize": "18px",
+                        "fontSize": "17px",
                         "backgroundColor": "#f9f9f9"
                     }}>
                         {tag}

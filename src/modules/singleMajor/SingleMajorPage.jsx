@@ -64,20 +64,40 @@ export default function SingleMajorPage() {
     if (!major) return <h1>Major not found</h1>;
 
     return (
-        <>
-            <h1>{major.name}</h1>
-            <h2>Colleges</h2>
-            {
-                major.colleges.map((college, i) => (
-                    <p key={i}>{college.name}</p>
-                ))
-            }
-            <section>
-                <h2>Select Your College:</h2>
+        <div style={{
+            "maxWidth": "1200px",
+            "margin": "0 auto",
+            "padding": "20px"
+        }}>
+            <h1 style={{
+                "fontSize": "32px",
+                "marginBottom": "20px",
+                "fontWeight": "700",
+                "color": "#333"
+            }}>{major.name}</h1>
+            
+            <section style={{
+                "marginBottom": "30px",
+                "padding": "20px",
+                "backgroundColor": "#f8f9fa",
+                "borderRadius": "8px"
+            }}>
+                <h2 style={{
+                    "fontSize": "18px",
+                    "marginBottom": "15px",
+                    "fontWeight": "600"
+                }}>Select Your College:</h2>
                 <select 
                     value={selectedCollegeId} 
                     onChange={handleCollegeChange}
                     className="college-selector"
+                    style={{
+                        "padding": "8px 12px",
+                        "borderRadius": "4px",
+                        "border": "1px solid #ccc",
+                        "fontSize": "16px",
+                        "minWidth": "200px"
+                    }}
                 >
                     {major.colleges.map((college, i) => (
                         <option key={i} value={college.id}>
@@ -88,11 +108,24 @@ export default function SingleMajorPage() {
             </section>
 
             <section>
-                <h2>{getSelectedCollegeName()} Requirements:</h2>
-                {getSelectedCollegeRequirements().map((reqId, i) => (
-                    <MajorRequirement key={i} reqId={reqId} />
-                ))}
+                <h2 style={{
+                    "fontSize": "24px",
+                    "marginBottom": "20px",
+                    "fontWeight": "600",
+                    "borderBottom": "2px solid #4a82e3",
+                    "paddingBottom": "10px"
+                }}>{getSelectedCollegeName()} Requirements</h2>
+                
+                <div style={{
+                    "display": "flex",
+                    "flexDirection": "column",
+                    "gap": "60px" // This adds significant space between each MajorRequirement
+                }}>
+                    {getSelectedCollegeRequirements().map((reqId, i) => (
+                        <MajorRequirement key={i} reqId={reqId} />
+                    ))}
+                </div>
             </section>
-        </>
+        </div>
     );
 }

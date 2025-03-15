@@ -1,0 +1,12 @@
+/* ElectiveCourseCard.module.css */
+.course-title-link {
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+  
+  .course-title-link:hover {
+    color: #4a82e3;
+    text-decoration: underline;
+  }
