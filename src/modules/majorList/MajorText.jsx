@@ -5,8 +5,8 @@ import { Link } from 'react-router';
 
 export default function MajorText({ majorCode }) {
   const [major, setMajor] = useState(null);
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true)
   
   useEffect(() => {
     const fetchMajor = async () => {

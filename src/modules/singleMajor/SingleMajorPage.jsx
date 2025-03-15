@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react' 
 import { useParams } from "react-router"
+import { useContext } from 'react';
+import { UserContext } from '../../context/UserContext';
 
 import { getMajorById } from '../../firebase/services/majorService'
 import MajorRequirement from './MajorRequirement';
 
 export default function SingleMajorPage() {
+    const { user, isLoggedIn } = useContext(UserContext);
     const [major, setMajor] = useState(null);
     const [selectedCollegeId, setSelectedCollegeId] = useState('');
     const { majorId } = useParams();

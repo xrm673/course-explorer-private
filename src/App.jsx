@@ -3,6 +3,8 @@ import { Routes, Route } from 'react-router-dom'
 // Import page components from modules
 import MainLayout from './modules/core/MainLayout'
 import HomePage from './modules/home/HomePage'
+import SignUp from './modules/userOnBoarding/SignUp'
+import LogIn from './modules/userOnBoarding/LogIn'
 import MajorListPage from './modules/majorList/MajorListPage'
 import SingleMajorPage from './modules/singleMajor/SingleMajorPage'
 import MinorListPage from './modules/minorList/MinorListPage'
@@ -18,6 +20,8 @@ function App() {
     <Routes>
       <Route path="/" element={<MainLayout />}>
         <Route index element={<HomePage />} />
+        <Route path="signup" element={<SignUp />} />
+        <Route path="login" element={<LogIn />} />
         <Route path="majors" element={<MajorListPage />} />
         <Route path="majors/:majorId" element={<SingleMajorPage />} />
         <Route path="minors" element={<MinorListPage />} />
