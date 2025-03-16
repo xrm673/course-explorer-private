@@ -1,5 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
 import { AcademicProvider } from './context/AcademicContext'
+// Import UserProvider (not just UserContext)
+import { UserProvider } from './context/UserContext'
 
 // Import page components from modules
 import MainLayout from './modules/core/MainLayout'
@@ -22,26 +24,28 @@ import MyDashboardPage from './modules/myDashboard/MyDashboardPage'
 
 function App() {
   return (
-    <AcademicProvider>
-      <Routes>
-        <Route path="/" element={<MainLayout />}>
-          <Route index element={<HomePage />} />
-          <Route path="signup" element={<SignUp />} />
-          <Route path="login" element={<LogIn />} />
-          <Route path="select-concentration" element={<SelectConcentration />} />
-          <Route path="select-courses" element={<SelectCourses />} />
-          <Route path="majors" element={<MajorListPage />} />
-          <Route path="majors/:majorId" element={<SingleMajorPage />} />
-          <Route path="minors" element={<MinorListPage />} />
-          <Route path="minors/:minorId" element={<SingleMinorPage />} />
-          <Route path="subjects" element={<SubjectListPage />} />
-          <Route path="subjects/:subjectId" element={<SingleSubjectPage />} />
-          <Route path="courses/:courseId" element={<SingleCoursePage />} />
-          <Route path="colleges/:collegeId" element={<CollegePage />} />
-          <Route path="dashboard" element={<MyDashboardPage />} />
-        </Route>
-      </Routes>
-    </AcademicProvider>
+    <UserProvider>
+      <AcademicProvider>
+        <Routes>
+          <Route path="/" element={<MainLayout />}>
+            <Route index element={<HomePage />} />
+            <Route path="signup" element={<SignUp />} />
+            <Route path="login" element={<LogIn />} />
+            <Route path="select-concentration" element={<SelectConcentration />} />
+            <Route path="select-courses" element={<SelectCourses />} />
+            <Route path="majors" element={<MajorListPage />} />
+            <Route path="majors/:majorId" element={<SingleMajorPage />} />
+            <Route path="minors" element={<MinorListPage />} />
+            <Route path="minors/:minorId" element={<SingleMinorPage />} />
+            <Route path="subjects" element={<SubjectListPage />} />
+            <Route path="subjects/:subjectId" element={<SingleSubjectPage />} />
+            <Route path="courses/:courseId" element={<SingleCoursePage />} />
+            <Route path="colleges/:collegeId" element={<CollegePage />} />
+            <Route path="dashboard" element={<MyDashboardPage />} />
+          </Route>
+        </Routes>
+      </AcademicProvider>
+    </UserProvider>
   )
 }
 

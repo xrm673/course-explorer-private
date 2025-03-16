@@ -61,7 +61,7 @@ export const getRequirementsByIds = async (requirementIds) => {
  */
 export const getRequirementsByMajor = async (majorId) => {
   try {
-    const q = query(collection(db, 'requirements'), where('majorId', '==', majorId));
+    const q = query(collection(db, 'requirements'), where('major', '==', majorId));
     const querySnapshot = await getDocs(q);
     
     const requirements = [];

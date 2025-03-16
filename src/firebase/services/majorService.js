@@ -168,7 +168,7 @@ export const fetchMajorWithRequirements = async (majorId) => {
   try {
     // Get the major data
     const major = await getMajorById(majorId);
-    
+
     // Create a structure to hold all requirements
     const requirementsData = {};
     
@@ -220,25 +220,38 @@ export const fetchMajorWithRequirements = async (majorId) => {
   }
 };
 
-// NEW FUNCTION: Fetch data for all user majors
 export const fetchUserMajorsData = async (userMajors) => {
   try {
     const majorsData = {};
-    const requirementsData = {};
+    const flattenedRequirements = {}; // The new flattened requirements map
     
     for (const major of userMajors) {
       const majorId = major.id;
-      const result = await fetchMajorWithRequirements(majorId);
       
-      if (result) {
-        majorsData[majorId] = result.major;
-        requirementsData[majorId] = result.requirements;
+      // 1. Get the major data
+      const majorData = await getMajorById(majorId);
+      if (majorData) {
+        majorsData[majorId] = majorData;
+        const majorName = majorData.name || majorId;
+        
+        // 2. Get ALL requirements for this major directly
+        const requirements = await getRequirementsByMajor(majorId);
+        // 3. Add each requirement to the flattened map with metadata
+        if (Array.isArray(requirements)) {
+          for (const req of requirements) {
+            if (req.id) {
+              // Add to flattened map with metadata
+              flattenedRequirements[req.id] = req;
+            }
+          }
+        }
       }
     }
     
+    // Return both the majors data and the flattened requirements
     return {
       majors: majorsData,
-      requirements: requirementsData
+      requirements: flattenedRequirements
     };
   } catch (error) {
     console.error("Error fetching user majors data:", error);

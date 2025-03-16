@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import HomeCourseCard from './HomeCourseCard';
-import FilterModal from '../../core/components/FilterModal';
-import { useSidebar } from '../../core/MainLayout'; // Correct import path
+import FilterModal from '../../filterModal/FilterModal';
+import { useSidebar } from '../../core/MainLayout';
 
 export default function CoursePicks() {
   // Get the sidebar context functions
@@ -81,44 +81,31 @@ export default function CoursePicks() {
     };
   }, []);
   
-  // Mock filter state
+  // Filter modal state
   const [showFilterModal, setShowFilterModal] = useState(false);
   
-  // Mock filter categories and options based on the design spec
-  const filterCategories = [
-    {
-      name: "Distribution Categories",
-      options: ["Distribution I", "Distribution II", "Distribution III"]
+  // Active filters state (using the enhanced structure)
+  const [activeFilters, setActiveFilters] = useState({
+    level: {
+      1000: { only: false, prefer: false },
+      2000: { only: false, prefer: false },
+      3000: { only: false, prefer: true }, // Example: Prefer 3000-level courses
+      4000: { only: false, prefer: false },
+      5000: { only: false, prefer: false }
     },
-    {
-      name: "Level",
-      options: ["1000", "2000", "3000", "4000", "5000"]
+    enrollment: {
+      eligible: { only: true, prefer: false }, // Example: Only show eligible courses
+      ineligible: { only: false, prefer: false }
     },
-    {
-      name: "Enrollment Requirements",
-      options: ["Eligible", "Ineligible"]
+    instructionMode: {
+      inPerson: { only: false, prefer: true }, // Example: Prefer in-person courses
+      onlineRecording: { only: false, prefer: false },
+      onlineLive: { only: false, prefer: false },
+      hybrid: { only: false, prefer: false },
+      others: { only: false, prefer: false }
     },
-    {
-      name: "Section Components",
-      options: ["LEC", "DIS", "SEM", "LAB", "Others"]
-    },
-    {
-      name: "Instruction Mode",
-      options: ["In-Person", "Online (Recording)", "Online (Live)", "Hybrid", "Others"]
-    },
-    {
-      name: "Difficulty",
-      options: ["Hard", "Moderate", "Easy"]
-    },
-    {
-      name: "Workload",
-      options: ["Heavy Workload", "Moderate Workload", "Light Workload"]
-    },
-    {
-      name: "Instructor Quality",
-      options: ["High-Rate Instructor"]
-    }
-  ];
+    majorRequirements: {} // Will be populated dynamically
+  });
   
   // Handle planning a course
   const handlePlanCourse = (course) => {
@@ -184,10 +171,73 @@ export default function CoursePicks() {
   };
   
   // Handler for applying filters
-  const handleApplyFilters = (filters) => {
-    console.log("Applied filters:", filters);
+  const handleApplyFilters = (newFilters) => {
+    console.log("Applied filters:", newFilters);
+    
+    // Save the filter state
+    setActiveFilters(newFilters);
+    
     // In a real implementation, this would filter the courses based on the selected filters
-    setShowFilterModal(false);
+    // This could involve:
+    // 1. Making an API call with the filter parameters
+    // 2. Client-side filtering of the course data
+    // 3. Updating the displayed courses
+    
+    // For now, we'll just log the filter state
+    applyMockFilters(newFilters);
+  };
+  
+  // Mock function to simulate filtering courses based on filter state
+  const applyMockFilters = (filters) => {
+    // This is just a simplified example of how you might filter courses
+    // In a real implementation, you would have more complex logic
+    
+    // Example: Filter by level and eligibility
+    const filteredCourses = courses.map(course => {
+      let isVisible = true;
+      let matchScore = 0;
+      
+      // Extract course level from code (e.g., 1110 -> 1000)
+      const courseCode = course.code.split(" ")[1];
+      const courseLevel = Math.floor(parseInt(courseCode) / 1000) * 1000;
+      
+      // Check for "only" filters which are exclusive
+      Object.keys(filters.level).forEach(level => {
+        if (filters.level[level].only && parseInt(level) !== courseLevel) {
+          isVisible = false;
+        }
+      });
+      
+      // Check eligibility
+      if (filters.enrollment.eligible.only && course.state === 'ineligible') {
+        isVisible = false;
+      }
+      
+      // Calculate preference match score for sorting
+      Object.keys(filters.level).forEach(level => {
+        if (filters.level[level].prefer && parseInt(level) === courseLevel) {
+          matchScore += 1;
+        }
+      });
+      
+      if (filters.instructionMode.inPerson.prefer && 
+          course.tags.includes('In-Person')) {
+        matchScore += 1;
+      }
+      
+      return {
+        ...course,
+        isVisible,
+        matchScore
+      };
+    });
+    
+    // Apply visibility and sort by match score
+    setCourses(
+      filteredCourses
+        .sort((a, b) => b.matchScore - a.matchScore)
+        .map(({isVisible, matchScore, ...rest}) => rest)
+    );
   };
   
   // Container styles
@@ -219,7 +269,7 @@ export default function CoursePicks() {
     display: 'flex',
     alignItems: 'center',
     padding: '10px 16px',
-    backgroundColor: '#3b82f6', // blue
+    backgroundColor: '#b31b1b', // Cornell red
     color: 'white',
     borderRadius: '8px',
     border: 'none',
@@ -268,15 +318,13 @@ export default function CoursePicks() {
         ))}
       </div>
       
-      {/* Filter modal */}
-      {showFilterModal && (
-        <FilterModal
-          show={showFilterModal}
-          onClose={() => setShowFilterModal(false)}
-          onApply={handleApplyFilters}
-          categories={filterCategories}
-        />
-      )}
+      {/* Enhanced Filter Modal */}
+      <FilterModal
+        isOpen={showFilterModal}
+        onClose={() => setShowFilterModal(false)}
+        activeFilters={activeFilters}
+        onApplyFilters={handleApplyFilters}
+      />
     </div>
   );
 }

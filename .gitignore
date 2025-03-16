@@ -99,3 +99,6 @@ var/
 
 # Development containers
 .devcontainer/
+
+# Build output
+dist/
