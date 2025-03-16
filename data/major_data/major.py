@@ -183,6 +183,7 @@ def commit_INFO():
             "INFO1200",
             "INFO1260",
             "INFO1300",
+            "INFO1998",
             "CS1110",
             "MATH1110",
             "INFO2040",

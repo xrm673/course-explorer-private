@@ -1,8 +1,35 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { UserContext } from '../../context/UserContext';
+import { doc, updateDoc } from 'firebase/firestore';
+import { db } from '../../firebase/config';
 
-export default function ScheduleSidebar({ onClose, activeSemester, scheduleData, onRemoveCourse }) {
+export default function ScheduleSidebar({ onClose, activeSemester }) {
+    const { user, setUser } = useContext(UserContext);
     // Track which semesters are expanded
     const [expandedSemesters, setExpandedSemesters] = useState({});
+    // Local state for scheduleData
+    const [scheduleData, setScheduleData] = useState({
+        planned: {
+            "Spring 2027": [],
+            "Fall 2026": [],
+            "Spring 2026": [],
+            "Fall 2025": [],
+        },
+        taken: {
+            "Spring 2025": [],
+            "Fall 2024": [],
+            "Spring 2024": [],
+            "Fall 2023": [],
+            "Ungrouped Courses": []
+        }
+    });
+    
+    // Load scheduleData from user context (localStorage)
+    useEffect(() => {
+        if (user && user.scheduleData) {
+            setScheduleData(user.scheduleData);
+        }
+    }, [user]);
     
     // When activeSemester changes, expand that semester
     useEffect(() => {
@@ -20,6 +47,43 @@ export default function ScheduleSidebar({ onClose, activeSemester, scheduleData,
             ...prev,
             [semester]: !prev[semester]
         }));
+    };
+
+    // Remove course from both localStorage and database
+    const removeCourse = async (courseCode, semester, type) => {
+        if (!user || !user.netId) {
+            console.error("User not logged in");
+            return;
+        }
+
+        try {
+            // Create a deep copy of the current scheduleData
+            const updatedScheduleData = JSON.parse(JSON.stringify(scheduleData));
+            
+            // Filter out the course to remove
+            updatedScheduleData[type][semester] = updatedScheduleData[type][semester]
+                .filter(course => course.code !== courseCode);
+            
+            // Update local state
+            setScheduleData(updatedScheduleData);
+            
+            // Update database
+            const userRef = doc(db, 'users', user.netId);
+            await updateDoc(userRef, {
+                scheduleData: updatedScheduleData,
+                lastUpdated: new Date()
+            });
+            
+            // Update user context (which updates localStorage)
+            setUser({
+                ...user,
+                scheduleData: updatedScheduleData
+            });
+            
+            console.log(`Removed ${courseCode} from ${semester}`);
+        } catch (error) {
+            console.error("Error removing course:", error);
+        }
     };
 
     return (
@@ -84,35 +148,41 @@ export default function ScheduleSidebar({ onClose, activeSemester, scheduleData,
                         </div>
                         {expandedSemesters[semester] && (
                             <div>
-                                {courses.map((course, index) => (
-                                    <div key={index} style={{ 
-                                        "display": "flex", 
-                                        "justifyContent": "space-between", 
-                                        "alignItems": "center",
-                                        "padding": "8px",
-                                        "backgroundColor": "#f8f9fa",
-                                        "borderRadius": "4px",
-                                        "marginBottom": "5px"
-                                    }}>
-                                        <a href={`/course/${course.code.replace(/\s+/g, '')}`} style={{ 
-                                            "textDecoration": "none", 
-                                            "color": "#333",
-                                            "fontWeight": "500"
-                                        }}>
-                                            {course.code}: {course.title}
-                                        </a>
-                                        <button 
-                                            onClick={() => onRemoveCourse(course.code)}
-                                            style={{
-                                                "background": "none",
-                                                "border": "none",
-                                                "cursor": "pointer",
-                                                "color": "#dc3545",
-                                                "fontWeight": "bold"
-                                            }}
-                                        >×</button>
+                                {courses.length === 0 ? (
+                                    <div style={{ padding: "8px", color: "#666", fontStyle: "italic" }}>
+                                        No courses planned for this semester
                                     </div>
-                                ))}
+                                ) : (
+                                    courses.map((course, index) => (
+                                        <div key={index} style={{ 
+                                            "display": "flex", 
+                                            "justifyContent": "space-between", 
+                                            "alignItems": "center",
+                                            "padding": "8px",
+                                            "backgroundColor": "#f8f9fa",
+                                            "borderRadius": "4px",
+                                            "marginBottom": "5px"
+                                        }}>
+                                            <a href={`/course/${course.code.replace(/\s+/g, '')}`} style={{ 
+                                                "textDecoration": "none", 
+                                                "color": "#333",
+                                                "fontWeight": "500"
+                                            }}>
+                                                {course.code}: {course.title}
+                                            </a>
+                                            <button 
+                                                onClick={() => removeCourse(course.code, semester, 'planned')}
+                                                style={{
+                                                    "background": "none",
+                                                    "border": "none",
+                                                    "cursor": "pointer",
+                                                    "color": "#dc3545",
+                                                    "fontWeight": "bold"
+                                                }}
+                                            >×</button>
+                                        </div>
+                                    ))
+                                )}
                             </div>
                         )}
                     </div>
@@ -145,32 +215,41 @@ export default function ScheduleSidebar({ onClose, activeSemester, scheduleData,
                         </div>
                         {expandedSemesters[semester] && (
                             <div>
-                                {courses.map((course, index) => (
-                                    <div key={index} style={{ 
-                                        "display": "flex", 
-                                        "justifyContent": "space-between", 
-                                        "alignItems": "center",
-                                        "padding": "8px",
-                                        "backgroundColor": "#f8f9fa",
-                                        "borderRadius": "4px",
-                                        "marginBottom": "5px"
-                                    }}>
-                                        <a href={`/course/${course.code.replace(/\s+/g, '')}`} style={{ 
-                                            "textDecoration": "none", 
-                                            "color": "#333",
-                                            "fontWeight": "500"
-                                        }}>
-                                            {course.code}: {course.title}
-                                        </a>
-                                        <button style={{
-                                            "background": "none",
-                                            "border": "none",
-                                            "cursor": "pointer",
-                                            "color": "#dc3545",
-                                            "fontWeight": "bold"
-                                        }}>×</button>
+                                {courses.length === 0 ? (
+                                    <div style={{ padding: "8px", color: "#666", fontStyle: "italic" }}>
+                                        No courses for this semester
                                     </div>
-                                ))}
+                                ) : (
+                                    courses.map((course, index) => (
+                                        <div key={index} style={{ 
+                                            "display": "flex", 
+                                            "justifyContent": "space-between", 
+                                            "alignItems": "center",
+                                            "padding": "8px",
+                                            "backgroundColor": "#f8f9fa",
+                                            "borderRadius": "4px",
+                                            "marginBottom": "5px"
+                                        }}>
+                                            <a href={`/course/${course.code.replace(/\s+/g, '')}`} style={{ 
+                                                "textDecoration": "none", 
+                                                "color": "#333",
+                                                "fontWeight": "500"
+                                            }}>
+                                                {course.code}: {course.tts}
+                                            </a>
+                                            <button 
+                                                onClick={() => removeCourse(course.code, semester, 'taken')}
+                                                style={{
+                                                    "background": "none",
+                                                    "border": "none",
+                                                    "cursor": "pointer",
+                                                    "color": "#dc3545",
+                                                    "fontWeight": "bold"
+                                                }}
+                                            >×</button>
+                                        </div>
+                                    ))
+                                )}
                             </div>
                         )}
                     </div>

@@ -12,9 +12,6 @@ export default function HomePage() {
     <>
         {isLoggedIn ? (
           <div>
-            Welcome, {user.netId}
-                {/* Display other user info like college, majors, etc. */}
-                {user.college && <span> | {user.college}</span>}
             <CoursePicks />
           </div>
           ) : (
