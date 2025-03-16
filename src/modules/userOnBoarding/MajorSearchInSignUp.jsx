@@ -72,8 +72,14 @@ export default function MajorSearchInSignUp({ onAddMajor }) {
     setSearchQuery(e.target.value);
   };
 
-  const handleSelectMajor = (major) => {
-    onAddMajor(major);
+  const handleSelectMajor = (major, collegeId) => {
+    // Only pass id and collegeId, no display properties
+    onAddMajor({
+      id: major.id,
+      collegeId: collegeId,
+      // We'll keep display names in component state for UI only, won't be stored
+      __displayName: major.name // Double underscore to indicate it's purely local
+    });
     setSearchQuery('');
     setShowDropdown(false);
   };
@@ -109,7 +115,7 @@ export default function MajorSearchInSignUp({ onAddMajor }) {
                 <div 
                   key={major.id} 
                   className="major-item"
-                  onClick={() => handleSelectMajor(major)}
+                  onClick={() => handleSelectMajor(major, college.id)}
                 >
                   {major.name}
                 </div>

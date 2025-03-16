@@ -46,13 +46,21 @@ def commit_ARTH():
                 ],
             }
         ],
-        "init": ["ARTH1100", "ARTH2000"],
+        "init": [
+            "ARTH1100",
+            "ARTH2000",
+            "ARTH1178",
+            "ARTH1154",
+            "ARTH2750",
+            "ARTH4101",
+        ],
     }
     add_major(major)
 
     req1 = {
         "id": "ARTH_req1",
         "type": "C",
+        "major": "ARTH",
         "name": "Core Courses",
         "tag": "ARTH Core",
         "tagDescr": "This is a core course of Art History major",
@@ -70,6 +78,7 @@ def commit_ARTH():
     req2 = {
         "id": "ARTH_req2",
         "type": "E",
+        "major": "ARTH",
         "name": "2000 Level",
         "tag": "2000 ARTH",
         "tagDescr": "This is a 2000 level Art History course.",
@@ -83,6 +92,7 @@ def commit_ARTH():
     req3 = {
         "id": "ARTH_req3",
         "type": "E",
+        "major": "ARTH",
         "name": "3000 Level",
         "tag": "3000 ARTH",
         "tagDescr": "This is a 3000 level Art History course.",
@@ -96,6 +106,7 @@ def commit_ARTH():
     req4 = {
         "id": "ARTH_req4",
         "type": "E",
+        "major": "ARTH",
         "name": "4000 Level",
         "tag": "4000 ARTH",
         "tagDescr": "This is a 4000 level Art History course.",
@@ -111,6 +122,7 @@ def commit_ARTH():
     req5 = {
         "id": "ARTH_req5",
         "type": "E",
+        "major": "ARTH",
         "name": "Electives",
         "tag": "ARTH Electives",
         "tagDescr": "This can be counted as an elective for Art History major.",
@@ -177,8 +189,6 @@ def commit_INFO():
             "INFO2450",
             "INFO2950",
             "INFO2951",
-            "INFO2300",
-            "INFO2310",
         ],
     }
     add_major(major)
@@ -186,6 +196,7 @@ def commit_INFO():
     req1 = {
         "id": "INFO_req1",
         "type": "C",
+        "major": "INFO",
         "name": "Core Courses",
         "tag": "INFO Core",
         "tagDescr": "This is a core course of Information Science major",
@@ -218,6 +229,7 @@ def commit_INFO():
     req2 = {
         "id": "INFO_req2",
         "type": "C",
+        "major": "INFO",
         "name": "Core Courses (Data Science)",
         "tag": "INFO Core",
         "tagDescr": "This is a core course of Information Science major",
@@ -248,6 +260,7 @@ def commit_INFO():
     req3 = {
         "id": "INFO_req3",
         "type": "C",
+        "major": "INFO",
         "name": "Programming Requirement",
         "tag": "INFO Programming",
         "tagDescr": "This can be counted as a programming course for Information Science major",
@@ -260,6 +273,7 @@ def commit_INFO():
     req4 = {
         "id": "INFO_req4",
         "type": "C",
+        "major": "INFO",
         "name": "Math Requirement",
         "tag": "INFO Math",
         "tagDescr": "This can be counted as a math course for Information Science major",
@@ -272,6 +286,7 @@ def commit_INFO():
     req5 = {
         "id": "INFO_req5",
         "type": "E",
+        "major": "INFO",
         "name": "Statistics Requirement",
         "tag": "INFO Stats",
         "tagDescr": "This can be counted as a statistic course for Information Science major",
@@ -305,6 +320,7 @@ def commit_INFO():
     req6 = {
         "id": "INFO_req6",
         "type": "E",
+        "major": "INFO",
         "name": "Electives",
         "tag": "INFO Electives",
         "tagDescr": "This can be counted as an elective for Information Science major",
@@ -317,6 +333,7 @@ def commit_INFO():
     req7 = {
         "id": "INFO_req7",
         "type": "E",
+        "major": "INFO",
         "name": "Understanding Social Behavior",
         "tag": "INFO Social Behavior",
         "tagDescr": "This can be counted as a Social Behavior course for the Behavioral Science concentration in Information Science major.",
@@ -340,6 +357,7 @@ def commit_INFO():
     req8 = {
         "id": "INFO_req8",
         "type": "E",
+        "major": "INFO",
         "name": "Social Data Analytics",
         "tag": "INFO Behavioral Data",
         "tagDescr": "This can be counted as a Social Data Analytics course for the Behavioral Science concentration in Information Science major.",
@@ -362,6 +380,7 @@ def commit_INFO():
     req9 = {
         "id": "INFO_req9",
         "type": "E",
+        "major": "INFO",
         "name": "Behavior in Sociological Context",
         "tag": "INFO Sociological Behavior",
         "tagDescr": "This can be counted as a Behavior in Sociological Context course for the Behavioral Science concentration in Information Science major.",
@@ -398,6 +417,7 @@ def commit_INFO():
     req10 = {
         "id": "INFO_req10",
         "type": "E",
+        "major": "INFO",
         "name": "Behavior in Network Context",
         "tag": "INFO Network Behavior",
         "tagDescr": "This can be counted as a Behavior in Network Context course for the Behavioral Science concentration in Information Science major.",
@@ -431,6 +451,7 @@ def commit_INFO():
     req11 = {
         "id": "INFO_req11",
         "type": "E",
+        "major": "INFO",
         "name": "Behavior in Design Context",
         "tag": "INFO Behavior Design",
         "tagDescr": "This can be counted as a Behavior in Design Context course for the Behavioral Science concentration in Information Science major.",
@@ -460,6 +481,7 @@ def commit_INFO():
     req12 = {
         "id": "INFO_req12",
         "type": "E",
+        "major": "INFO",
         "name": "Data Analysis",
         "tag": "INFO Data Analysis",
         "tagDescr": "This can be counted as a Data Analysis course for the Data Science concentration in Information Science major.",
@@ -483,6 +505,7 @@ def commit_INFO():
     req13 = {
         "id": "INFO_req13",
         "type": "E",
+        "major": "INFO",
         "name": "Domain Expertise",
         "tag": "INFO Data Domain",
         "tagDescr": "This can be counted as a Domain Expertise course for the Data Science concentration in Information Science major.",
@@ -506,6 +529,7 @@ def commit_INFO():
     req14 = {
         "id": "INFO_req14",
         "type": "E",
+        "major": "INFO",
         "name": "Big Data Ethics, Policy and Society",
         "tag": "INFO Data Ethics",
         "tagDescr": "This can be counted as a Big Data Ethics, Policy and Society course for the Data Science concentration in Information Science major.",
@@ -534,6 +558,7 @@ def commit_INFO():
     req15 = {
         "id": "INFO_req15",
         "type": "E",
+        "major": "INFO",
         "name": "Data Communication",
         "tag": "INFO Data Communication",
         "tagDescr": "This can be counted as a Data Communication course for the Data Science concentration in Information Science major.",

@@ -9,6 +9,13 @@ import {
   orderBy
 } from "firebase/firestore";
 
+// Import functions from requirementService
+import { 
+  getRequirementById, 
+  getRequirementsByIds,
+  getRequirementsByMajor
+} from "./requirementService";
+
 // Collection reference
 const majorsRef = collection(db, "majors");
 
@@ -152,6 +159,89 @@ export const getInitialCourses = async (majorId) => {
     }
   } catch (error) {
     console.error(`Error getting initial courses for major ${majorId}:`, error);
+    throw error;
+  }
+};
+
+// NEW FUNCTION: Comprehensive function to fetch a major with all its requirements
+export const fetchMajorWithRequirements = async (majorId) => {
+  try {
+    // Get the major data
+    const major = await getMajorById(majorId);
+    
+    // Create a structure to hold all requirements
+    const requirementsData = {};
+    
+    // 1. Get requirements from the major document (by college)
+    if (major.basicRequirements) {
+      for (const collegeReq of major.basicRequirements) {
+        const college = collegeReq.college;
+        requirementsData[college] = { basic: [] };
+        
+        if (collegeReq.requirements && collegeReq.requirements.length > 0) {
+          // Use the imported getRequirementsByIds function
+          const requirementDetails = await getRequirementsByIds(collegeReq.requirements);
+          requirementsData[college].basic = requirementDetails;
+        }
+      }
+    }
+    
+    // 2. Get concentration requirements if they exist
+    if (major.concentrations) {
+      requirementsData.concentrations = {};
+      
+      for (const concentration of major.concentrations) {
+        const concentrationName = concentration.concentration;
+        
+        if (concentration.requirements && concentration.requirements.length > 0) {
+          // Use the imported getRequirementsByIds function
+          const requirementDetails = await getRequirementsByIds(concentration.requirements);
+          requirementsData.concentrations[concentrationName] = requirementDetails;
+        } else {
+          requirementsData.concentrations[concentrationName] = [];
+        }
+      }
+    }
+    
+    // 3. Get requirements from the requirements collection with majorId
+    // Use the imported getRequirementsByMajor function
+    const collectionRequirements = await getRequirementsByMajor(majorId);
+    if (collectionRequirements.length > 0) {
+      requirementsData.linkedRequirements = collectionRequirements;
+    }
+    
+    return {
+      major,
+      requirements: requirementsData
+    };
+  } catch (error) {
+    console.error(`Error fetching major with requirements for ${majorId}:`, error);
+    throw error;
+  }
+};
+
+// NEW FUNCTION: Fetch data for all user majors
+export const fetchUserMajorsData = async (userMajors) => {
+  try {
+    const majorsData = {};
+    const requirementsData = {};
+    
+    for (const major of userMajors) {
+      const majorId = major.id;
+      const result = await fetchMajorWithRequirements(majorId);
+      
+      if (result) {
+        majorsData[majorId] = result.major;
+        requirementsData[majorId] = result.requirements;
+      }
+    }
+    
+    return {
+      majors: majorsData,
+      requirements: requirementsData
+    };
+  } catch (error) {
+    console.error("Error fetching user majors data:", error);
     throw error;
   }
 };

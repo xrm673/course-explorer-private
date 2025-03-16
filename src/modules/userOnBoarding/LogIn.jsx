@@ -1,15 +1,19 @@
 import { useState, useContext } from 'react';
 import { UserContext } from '../../context/UserContext';
+import { useAcademic } from '../../context/AcademicContext';
 import { loginWithNetID } from '../../firebase/services/authService';
+import { fetchUserMajorsData } from '../../firebase/services/majorService';
 
 const LogIn = () => {
   const [netId, setNetId] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
+  const [academicDataLoading, setAcademicDataLoading] = useState(false);
   
-  // Get the user context
+  // Get the user context and academic context
   const { user, setUser } = useContext(UserContext);
+  const { updateAcademicData, clearAcademicData } = useAcademic();
   
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,8 +28,32 @@ const LogIn = () => {
       // Update the user context with the fetched data
       setUser(userData);
       
-      // Show success message
+      // Show initial success message
       setSuccess(`Welcome back, ${userData.name || userData.netId}!`);
+      
+      // If user has majors, load academic data
+      if (userData.majors && userData.majors.length > 0) {
+        try {
+          setAcademicDataLoading(true);
+          setSuccess(`Welcome back, ${userData.name || userData.netId}! Loading your academic data...`);
+          
+          // Fetch academic data for the user's majors
+          const academicData = await fetchUserMajorsData(userData.majors);
+          
+          // Store the academic data in context (and localStorage)
+          updateAcademicData(academicData);
+          
+          // Update success message
+          setSuccess(`Welcome back, ${userData.name || userData.netId}! Your academic data has been loaded.`);
+          
+          console.log('Academic data loaded successfully:', academicData);
+        } catch (academicError) {
+          console.error('Failed to load academic data:', academicError);
+          setError(`Logged in successfully, but couldn't load academic data: ${academicError.message}`);
+        } finally {
+          setAcademicDataLoading(false);
+        }
+      }
       
       // Clear the input field
       setNetId('');
@@ -38,7 +66,7 @@ const LogIn = () => {
 
   const handleLogout = () => {
     setUser(null);
-    localStorage.removeItem('user');
+    clearAcademicData(); // Clear academic data when logging out
   };
   
   // If user is already logged in, show different content
@@ -71,17 +99,19 @@ const LogIn = () => {
           type="text"
           value={netId}
           onChange={(e) => setNetId(e.target.value)}
-          disabled={loading}
+          disabled={loading || academicDataLoading}
           required
         />
       </div>
       
       <button 
         type="submit" 
-        disabled={loading}
+        disabled={loading || academicDataLoading}
         className="login-button"
       >
-        {loading ? 'Logging in...' : 'Login'}
+        {loading ? 'Logging in...' : 
+         academicDataLoading ? 'Loading academic data...' : 
+         'Login'}
       </button>
     </form>
   );
