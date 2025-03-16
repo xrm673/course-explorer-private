@@ -4,6 +4,7 @@ import { UserContext } from '../../context/UserContext';
 import { useAcademic } from '../../context/AcademicContext';
 import { doc, updateDoc } from 'firebase/firestore';
 import { db } from '../../firebase/config';
+import './SelectConcentration.css';
 
 const SelectConcentration = () => {
   const { user, setUser } = useContext(UserContext);
@@ -34,15 +35,24 @@ const SelectConcentration = () => {
         if (majorData && majorData.concentrations && majorData.concentrations.length > 0) {
           majorsWithConcentrations.push({
             id: majorId,
-            name: majorObj.name || majorData.name,
+            collegeId: majorObj.collegeId,
+            name: majorData.name || majorId,
             concentrations: majorData.concentrations
           });
           
-          // Initialize selected concentration for this major (with the first concentration)
-          setSelectedConcentrations(prev => ({
-            ...prev, 
-            [majorId]: majorData.concentrations[0].concentration
-          }));
+          // Initialize selected concentrations for this major with an empty array
+          // Or use existing concentrations if the user already has them
+          if (majorObj.concentrations && Array.isArray(majorObj.concentrations)) {
+            setSelectedConcentrations(prev => ({
+              ...prev, 
+              [majorId]: majorObj.concentrations
+            }));
+          } else {
+            setSelectedConcentrations(prev => ({
+              ...prev, 
+              [majorId]: []
+            }));
+          }
         }
       }
     }
@@ -51,17 +61,40 @@ const SelectConcentration = () => {
     setLoading(false);
   }, [user, academicData, navigate]);
   
-  const handleConcentrationChange = (majorId, concentration) => {
-    setSelectedConcentrations(prev => ({
-      ...prev,
-      [majorId]: concentration
-    }));
+  const handleConcentrationToggle = (majorId, concentration) => {
+    setSelectedConcentrations(prev => {
+      const currentConcentrations = prev[majorId] || [];
+      
+      // Check if the concentration is already selected
+      if (currentConcentrations.includes(concentration)) {
+        // Remove it
+        return {
+          ...prev,
+          [majorId]: currentConcentrations.filter(c => c !== concentration)
+        };
+      } else {
+        // Add it
+        return {
+          ...prev,
+          [majorId]: [...currentConcentrations, concentration]
+        };
+      }
+    });
   };
   
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitting(true);
     setError('');
+    
+    // Validate that at least one concentration is selected for each major
+    for (const major of majorConcentrations) {
+      if (!selectedConcentrations[major.id] || selectedConcentrations[major.id].length === 0) {
+        setError(`Please select at least one concentration for ${major.name}`);
+        setSubmitting(false);
+        return;
+      }
+    }
     
     try {
       if (!user || !user.netId) {
@@ -75,8 +108,9 @@ const SelectConcentration = () => {
       const updatedMajors = user.majors.map(major => {
         if (selectedConcentrations[major.id]) {
           return {
-            ...major,
-            concentration: selectedConcentrations[major.id]
+            id: major.id,
+            collegeId: major.collegeId,
+            concentrations: selectedConcentrations[major.id]
           };
         }
         return major;
@@ -117,7 +151,7 @@ const SelectConcentration = () => {
   return (
     <div className="concentration-selection-container">
       <h2>Select Your Concentrations</h2>
-      <p>Please select a concentration for each of your majors:</p>
+      <p>Please select one or more concentrations for each of your majors:</p>
       
       {error && <div className="error-message">{error}</div>}
       
@@ -127,18 +161,25 @@ const SelectConcentration = () => {
             <h3>{major.name}</h3>
             
             <div className="concentration-options">
-              <label>Select concentration:</label>
-              <select 
-                value={selectedConcentrations[major.id] || ''}
-                onChange={(e) => handleConcentrationChange(major.id, e.target.value)}
-                required
-              >
+              <label className="options-label">Select all concentrations that you are interested in:</label>
+              <div className="checkbox-list">
                 {major.concentrations.map(conc => (
-                  <option key={conc.concentration} value={conc.concentration}>
-                    {conc.concentration}
-                  </option>
+                  <div key={conc.concentration} className="concentration-checkbox">
+                    <input 
+                      type="checkbox" 
+                      id={`${major.id}-${conc.concentration}`}
+                      checked={selectedConcentrations[major.id]?.includes(conc.concentration) || false}
+                      onChange={() => handleConcentrationToggle(major.id, conc.concentration)}
+                    />
+                    <label htmlFor={`${major.id}-${conc.concentration}`}>
+                      {conc.concentration}
+                    </label>
+                  </div>
                 ))}
-              </select>
+              </div>
+              {selectedConcentrations[major.id]?.length === 0 && (
+                <div className="validation-message">Please select at least one concentration</div>
+              )}
             </div>
           </div>
         ))}
