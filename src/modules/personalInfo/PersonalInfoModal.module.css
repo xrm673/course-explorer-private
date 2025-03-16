@@ -1,0 +1,145 @@
+.modalContainer {
+    position: fixed;
+    right: 0;
+    top: 100px;
+    height: calc(100vh - 100px);
+    width: 300px;
+    background-color: white;
+    box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+    z-index: 90;
+    padding: 20px;
+    overflow: auto;
+  }
+  
+  .modalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .modalTitle {
+    margin: 0;
+  }
+  
+  .closeButton {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  
+  .profileSection {
+    margin-bottom: 20px;
+  }
+  
+  .userInfoContainer {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    font-size: 20px;
+  }
+  
+  .userName {
+    font-weight: bold;
+  }
+  
+  .editProfileButton {
+    width: 100%;
+    padding: 8px;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .dashboardLink {
+    display: block;
+    width: 100%;
+    padding: 8px;
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+    border-radius: 4px;
+    text-decoration: none;
+    margin-top: 15px;
+  }
+  
+  .sectionContainer {
+    margin-bottom: 20px;
+  }
+  
+  .collegeLink {
+    text-decoration: none;
+    color: #007bff;
+  }
+  
+  .progressContainer {
+    margin-bottom: 10px;
+  }
+  
+  .progressHeader {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .progressLink {
+    text-decoration: none;
+    color: #007bff;
+  }
+  
+  .progressBar {
+    width: 100%;
+    background-color: #eee;
+    height: 8px;
+    border-radius: 4px;
+    margin-top: 5px;
+  }
+  
+  .progressFill {
+    background-color: #007bff;
+    height: 100%;
+    border-radius: 4px;
+  }
+  
+  .logoutButton {
+    width: 100%;
+    padding: 8px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+
+  .loginButton {
+    width: 100%;
+    padding: 8px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+
+  .signupButton {
+    width: 100%;
+    padding: 8px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+  }

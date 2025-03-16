@@ -1,39 +1,79 @@
-// src/components/UserOnBoarding.jsx
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { doc, setDoc } from 'firebase/firestore';
 import { db } from '../../firebase/config';
 import { UserContext } from '../../context/UserContext';
+import { getAllColleges } from '../../firebase/services/collegeService';
+import MajorSearchInSignUp from './MajorSearchInSignUp'
+import './SignUp.css';
 
 export default function SignUp() {
   const { setUser } = useContext(UserContext);
+  const [colleges, setColleges] = useState([]);
+  const [loading, setLoading] = useState(true);
   
   const [formData, setFormData] = useState({
     name: '',
     netId: '',
     college: 'CAS',
-    majors: [], // Changed to plural for clarity
+    majors: [],
     minors: []
   });
   
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState('');
 
+  useEffect(() => {
+    const fetchColleges = async () => {
+      try {
+        const collegeData = await getAllColleges();
+        setColleges(collegeData);
+        setLoading(false);
+      } catch (err) {
+        console.error("Failed to load colleges:", err);
+        setLoading(false);
+      }
+    };
+    
+    fetchColleges();
+  }, []);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
-  
-  // Handle major input (comma-separated list)
-  const handleMajorChange = (e) => {
-    // Split by comma and trim whitespace
-    const majorsArray = e.target.value.split(',').map(item => item.trim()).filter(item => item);
-    setFormData(prev => ({ ...prev, majors: majorsArray }));
+
+  const handleAddMajor = (major) => {
+    // Check if major is already added
+    if (!formData.majors.some(m => m.id === major.id)) {
+      setFormData(prev => ({
+        ...prev,
+        majors: [...prev.majors, major]
+      }));
+    }
   };
-  
-  // Handle minor input (comma-separated list)
-  const handleMinorChange = (e) => {
-    const minorsArray = e.target.value.split(',').map(item => item.trim()).filter(item => item);
-    setFormData(prev => ({ ...prev, minors: minorsArray }));
+
+  const handleRemoveMajor = (majorId) => {
+    setFormData(prev => ({
+      ...prev,
+      majors: prev.majors.filter(major => major.id !== majorId)
+    }));
+  };
+
+  const handleAddMinor = (minor) => {
+    // Check if minor is already added
+    if (!formData.minors.some(m => m.id === minor.id)) {
+      setFormData(prev => ({
+        ...prev,
+        minors: [...prev.minors, minor]
+      }));
+    }
+  };
+
+  const handleRemoveMinor = (minorId) => {
+    setFormData(prev => ({
+      ...prev,
+      minors: prev.minors.filter(minor => minor.id !== minorId)
+    }));
   };
 
   const handleSubmit = async (e) => {
@@ -119,41 +159,56 @@ export default function SignUp() {
             onChange={handleChange}
             required
           >
-            <option value="CAS">College of Arts & Sciences</option>
-            <option value="CALS">College of Agriculture & Life Sciences</option>
-            <option value="COE">College of Engineering</option>
-            <option value="AAP">Architecture, Art & Planning</option>
-            <option value="ILR">School of Industrial & Labor Relations</option>
-            <option value="CHE">College of Human Ecology</option>
-            <option value="SHA">School of Hotel Administration</option>
-            <option value="Dyson">Dyson School of Applied Economics & Management</option>
+            {loading ? (
+              <option value="">Loading colleges...</option>
+            ) : (
+              colleges.map(college => (
+                <option key={college.id} value={college.id}>
+                  {college.name}
+                </option>
+              ))
+            )}
           </select>
         </div>
         
         <div className="form-group">
-          <label htmlFor="majors">Majors (comma-separated):</label>
-          <input
-            type="text"
-            id="majors"
-            name="majors"
-            value={formData.majors.join(', ')}
-            onChange={handleMajorChange}
-            placeholder="e.g. CS, INFO"
-          />
-          <small>Enter major codes separated by commas</small>
+          <label>Majors:</label>
+          <MajorSearchInSignUp onAddMajor={handleAddMajor} />
+          
+          <div className="selected-items">
+            {formData.majors.map(major => (
+              <div key={major.id} className="selected-item">
+                <span>{major.name}</span>
+                <button 
+                  type="button" 
+                  className="remove-button" 
+                  onClick={() => handleRemoveMajor(major.id)}
+                >
+                  ×
+                </button>
+              </div>
+            ))}
+          </div>
         </div>
         
         <div className="form-group">
-          <label htmlFor="minors">Minors (comma-separated):</label>
-          <input
-            type="text"
-            id="minors"
-            name="minors"
-            value={formData.minors.join(', ')}
-            onChange={handleMinorChange}
-            placeholder="e.g. MATH, ECON"
-          />
-          <small>Enter minor codes separated by commas</small>
+          <label>Minors:</label>
+          <MajorSearchInSignUp onAddMajor={handleAddMinor} />
+          
+          <div className="selected-items">
+            {formData.minors.map(minor => (
+              <div key={minor.id} className="selected-item">
+                <span>{minor.name}</span>
+                <button 
+                  type="button" 
+                  className="remove-button" 
+                  onClick={() => handleRemoveMinor(minor.id)}
+                >
+                  ×
+                </button>
+              </div>
+            ))}
+          </div>
         </div>
         
         <button 
@@ -171,4 +226,4 @@ export default function SignUp() {
       )}
     </div>
   );
-};
+}

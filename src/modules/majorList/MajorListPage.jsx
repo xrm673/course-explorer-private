@@ -11,7 +11,6 @@ export default function MajorListPage() {
         const fetchColleges = async () => {
             try {
                 const collegesData = await getAllColleges()
-                console.log("Fetched college data:", collegesData);
                 setColleges(collegesData)
                 setLoading(false);
             } catch (err) {
