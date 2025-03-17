@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import CoreCourseCard from "./CoreCourseCard";
 import { getCourseById } from "../../firebase/services/courseService";
-import { getCourseSeasonAvailability } from "../../utils/semesterUtils";
+import { getCourseStatus } from "../../utils/courseUtils";
+import { UserContext } from "../../context/UserContext";
 import styles from './CoreCourseGroup.module.css';
 
 export default function CoreCourseGroup({ courseGrp, selectedSemester }) {
@@ -9,15 +10,32 @@ export default function CoreCourseGroup({ courseGrp, selectedSemester }) {
   const [additionalCourses, setAdditionalCourses] = useState([]);
   const [loading, setLoading] = useState(false);
   const [courseAvailability, setCourseAvailability] = useState({});
+  const [hasTakenCourse, setHasTakenCourse] = useState(false);
+  
+  // Get user context
+  const { user } = useContext(UserContext);
 
   // Early return with error handling if courseGrp is undefined
   if (!courseGrp || !courseGrp.courses || courseGrp.courses.length === 0) {
     return <div>Missing course group data</div>;
   }
 
-  // Determine if the selected semester is a Fall or Spring semester
-  const isFallSemester = selectedSemester.startsWith('FA');
-  const isSpringBySemester = selectedSemester.startsWith('SP');
+  // Check if any course in the group is marked as taken
+  useEffect(() => {
+    if (user && courseGrp && courseGrp.courses) {
+      let taken = false;
+      
+      for (const courseId of courseGrp.courses) {
+        const status = getCourseStatus(courseId, user);
+        if (status.isTaken) {
+          taken = true;
+          break;
+        }
+      }
+      
+      setHasTakenCourse(taken);
+    }
+  }, [user, courseGrp]);
 
   // Get additional courses data if there are more than one course
   useEffect(() => {
@@ -51,8 +69,8 @@ export default function CoreCourseGroup({ courseGrp, selectedSemester }) {
         
         for (const courseId of courseGrp.courses) {
           const courseData = await getCourseById(courseId);
-          const availability = getCourseSeasonAvailability(courseData);
-          availabilityData[courseId] = availability;
+          const status = user ? getCourseStatus(courseId, user) : { isTaken: false, isPlanned: false };
+          availabilityData[courseId] = status;
         }
         
         setCourseAvailability(availabilityData);
@@ -62,20 +80,45 @@ export default function CoreCourseGroup({ courseGrp, selectedSemester }) {
     };
     
     fetchCourseAvailability();
-  }, [courseGrp.courses]);
+  }, [courseGrp.courses, user]);
 
   const toggleExpand = () => {
     setExpanded(!expanded);
   };
 
+  // Handle status changes of individual courses
+  const handleCourseStatusChange = ({ courseId, isTaken }) => {
+    if (isTaken) {
+      setHasTakenCourse(true);
+    } else {
+      // Re-check if any course is still taken
+      let stillHasTaken = false;
+      for (const id of courseGrp.courses) {
+        if (id !== courseId) {
+          const status = getCourseStatus(id, user);
+          if (status.isTaken) {
+            stillHasTaken = true;
+            break;
+          }
+        }
+      }
+      setHasTakenCourse(stillHasTaken);
+    }
+  };
+
+  // Apply different container style based on taken status
+  const containerClassName = hasTakenCourse 
+    ? `${styles.courseGroupContainer} ${styles.takenCourseGroup}` 
+    : styles.courseGroupContainer;
+
   return (
-    <div className={styles.courseGroupContainer}>
+    <div className={containerClassName}>
       <div className={styles.courseCardsContainer}>
         {/* First course always shown */}
         <CoreCourseCard 
           courseId={courseGrp.courses[0]} 
           selectedSemester={selectedSemester}
-          availability={courseAvailability[courseGrp.courses[0]]}
+          onStatusChange={handleCourseStatusChange}
         />
         
         {/* Additional courses section */}
@@ -110,7 +153,7 @@ export default function CoreCourseGroup({ courseGrp, selectedSemester }) {
             key={i} 
             courseId={courseId} 
             selectedSemester={selectedSemester}
-            availability={courseAvailability[courseId]}
+            onStatusChange={handleCourseStatusChange}
           />
         ))}
         

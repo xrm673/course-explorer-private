@@ -81,15 +81,33 @@
   flex-shrink: 0;
 }
 
+.addButton, .checkButton, .removeButton {
+  width: 28px;
+  cursor: pointer;
+}
+
 .addButton {
   width: 36px;
-  cursor: pointer;
 }
 
 .checkButton {
   width: 28px;
-  cursor: pointer;
   margin-top: 4px;
+}
+
+.removeButton {
+  color: #dc3545;
+  font-size: 24px;
+  font-weight: bold;
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  line-height: 1;
 }
 
 .tagsContainer {
@@ -117,7 +135,7 @@
   color: #e53935;
 }
 
-/* New styles for semester availability */
+/* Styles for semester availability */
 .unavailableCourse {
   background-color: #f9f9f9;
   border: 1px solid #e0e0e0;
@@ -134,4 +152,15 @@
   text-align: center;
   font-weight: 500;
   border: 1px solid #ffeeba;
+}
+
+/* Status-based styles */
+.takenCourse {
+  background-color: #e8f5e9; /* Light green background */
+  border: 1px solid #66bb6a;
+}
+
+.plannedCourse {
+  background-color: #e3f2fd; /* Light blue background */
+  border: 1px solid #64b5f6;
 }

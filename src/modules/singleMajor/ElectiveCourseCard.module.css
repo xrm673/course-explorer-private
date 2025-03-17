@@ -59,15 +59,33 @@
   flex-shrink: 0;
 }
 
+.addButton, .checkButton, .removeButton {
+  width: 28px;
+  cursor: pointer;
+}
+
 .addButton {
   width: 32px;
-  cursor: pointer;
 }
 
 .checkButton {
   width: 24px;
-  cursor: pointer;
   margin-top: 4px;
+}
+
+.removeButton {
+  color: #dc3545;
+  font-size: 24px;
+  font-weight: bold;
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  line-height: 1;
 }
 
 .tagsContainer {
@@ -110,4 +128,15 @@
 
 .error {
   color: #e53935;
+}
+
+/* Status-based styles */
+.takenCourse {
+  background-color: #e8f5e9; /* Light green background */
+  border: 1px solid #66bb6a;
+}
+
+.plannedCourse {
+  background-color: #e3f2fd; /* Light blue background */
+  border: 1px solid #64b5f6;
 }
