@@ -17,7 +17,6 @@ const FilterModal = ({
 }) => {
   const { user } = useContext(UserContext);
   const { academicData } = useAcademic();
-  // console.log(academicData)
   // Determine if modal should be open (support both APIs)
   const modalOpen = isOpen !== undefined ? isOpen : show;
   // Use the appropriate close handler
