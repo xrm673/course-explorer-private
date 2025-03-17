@@ -320,3 +320,97 @@ export const getCourseStatus = (courseCode, user) => {
   
   return status;
 };
+
+/**
+ * Checks if a user is eligible to take a course based on prerequisites
+ * 
+ * @param {Object} course - The course object with prereq field
+ * @param {Object} user - The user object from UserContext
+ * @returns {Object} - Eligibility object: { isEligible: boolean, missingPrereqs: Array }
+ */
+export const checkCourseEligibility = (course, user) => {
+  // Default response
+  const defaultResponse = { isEligible: true, missingPrereqs: [] };
+  
+  // If no user or course, return eligible (default)
+  if (!user || !course) {
+    return defaultResponse;
+  }
+
+  // If no prerequisites, user is eligible
+  if (!course.prereq) {
+    return defaultResponse;
+  }
+
+  // Parse the prereq string to get the nested list
+  let prerequisites;
+  try {
+    // If prereq is already an array, use it as is
+    if (Array.isArray(course.prereq)) {
+      prerequisites = course.prereq;
+    } else {
+      // Otherwise try to parse it as a JSON string
+      prerequisites = JSON.parse(course.prereq);
+    }
+  } catch (error) {
+    console.error("Error parsing prereq for course", course.id, error);
+    return defaultResponse; // If we can't parse, assume eligible
+  }
+
+  // If no valid prerequisites after parsing, user is eligible
+  if (!Array.isArray(prerequisites) || prerequisites.length === 0) {
+    return defaultResponse;
+  }
+
+  // Get all courses the user has taken
+  if (!user.scheduleData || !user.scheduleData.taken) {
+    // No taken courses at all, so not eligible if there are any prerequisites
+    return { 
+      isEligible: false, 
+      missingPrereqs: prerequisites.map(group => 
+        Array.isArray(group) ? group.join(' or ') : group
+      ) 
+    };
+  }
+
+  // Compile a list of all taken course codes
+  const takenCourses = new Set();
+  Object.values(user.scheduleData.taken).forEach(courses => {
+    courses.forEach(course => {
+      if (course && course.code) {
+        takenCourses.add(course.code);
+      }
+    });
+  });
+
+  // Check each prerequisite group
+  const missingPrereqs = [];
+  
+  for (const group of prerequisites) {
+    // Handle non-array case (single course requirement)
+    if (!Array.isArray(group)) {
+      if (!takenCourses.has(group)) {
+        missingPrereqs.push(group);
+      }
+      continue;
+    }
+    
+    // Skip empty groups
+    if (group.length === 0) {
+      continue;
+    }
+
+    // Check if user has taken at least one course from this group
+    const satisfiedCourses = group.filter(courseCode => takenCourses.has(courseCode));
+    
+    // If user hasn't taken any course from this group, add it to missing prereqs
+    if (satisfiedCourses.length === 0) {
+      missingPrereqs.push(group.join(' or '));
+    }
+  }
+
+  return {
+    isEligible: missingPrereqs.length === 0,
+    missingPrereqs: missingPrereqs
+  };
+};

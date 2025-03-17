@@ -2,7 +2,13 @@ import { useEffect, useState, useContext } from "react"
 import { Link } from "react-router"
 import { getCourseById } from "../../firebase/services/courseService"
 import { getCourseSeasonAvailability } from "../../utils/semesterUtils"
-import { addCourseToSchedule, markCourseAsTaken, removeCourseFromSchedule, getCourseStatus } from "../../utils/courseUtils" 
+import { 
+  addCourseToSchedule, 
+  markCourseAsTaken, 
+  removeCourseFromSchedule, 
+  getCourseStatus, 
+  checkCourseEligibility 
+} from "../../utils/courseUtils" 
 import { UserContext } from "../../context/UserContext"
 import { useSidebar } from "../../modules/core/MainLayout"
 import add from "../../assets/add.svg"
@@ -15,6 +21,7 @@ export default function CoreCourseCard({ courseId, selectedSemester, availabilit
     const [error, setError] = useState(null);
     const [courseAvailability, setCourseAvailability] = useState(null);
     const [courseStatus, setCourseStatus] = useState({ isPlanned: false, isTaken: false, semester: null });
+    const [eligibility, setEligibility] = useState({ isEligible: true, missingPrereqs: [] });
     
     // Get user context and sidebar context
     const { user, setUser } = useContext(UserContext);
@@ -43,6 +50,10 @@ export default function CoreCourseCard({ courseId, selectedSemester, availabilit
                 if (user) {
                     const status = getCourseStatus(courseId, user);
                     setCourseStatus(status);
+                    
+                    // Check course eligibility
+                    const eligibilityCheck = checkCourseEligibility(courseData, user);
+                    setEligibility(eligibilityCheck);
                 }
                 
                 setLoading(false)
@@ -128,25 +139,59 @@ export default function CoreCourseCard({ courseId, selectedSemester, availabilit
     // Determine if we need to show a warning for this course
     const showSeasonWarning = !isAvailableInSelectedSeason;
     
-    // Apply different card style based on availability and status
+    // Apply different card style based on availability, status, and eligibility
+    // Note the priority: taken > planned > ineligible > season warning
     let cardClassName = styles.cardContainer;
     
     if (courseStatus.isTaken) {
         cardClassName = `${cardClassName} ${styles.takenCourse}`;
     } else if (courseStatus.isPlanned) {
         cardClassName = `${cardClassName} ${styles.plannedCourse}`;
-    }
-    
-    if (showSeasonWarning) {
+    } else if (!eligibility.isEligible) {
+        cardClassName = `${cardClassName} ${styles.ineligibleCourse}`;
+    } else if (showSeasonWarning) {
         cardClassName = `${cardClassName} ${styles.unavailableCourse}`;
     }
+
+// Format missing prerequisites for display
+const formatMissingPrereqs = () => {
+    if (!eligibility.missingPrereqs || eligibility.missingPrereqs.length === 0) {
+        return '';
+    }
+    
+    // Process each prerequisite group
+    const formattedPrereqs = eligibility.missingPrereqs.map(prereq => {
+        // If the prereq contains " or " - it's a group of alternative courses
+        if (prereq.includes(' or ')) {
+            const courses = prereq.split(' or ');
+            // If there's more than one course in the group, show just the first one
+            // followed by "alternatives"
+            if (courses.length > 1) {
+                return `${courses[0]} or alternatives`;
+            }
+            return prereq;
+        }
+        // Otherwise return as is
+        return prereq;
+    });
+    
+    // Join the processed prereqs with ", "
+    return `Need: ${formattedPrereqs.join(', ')}`;
+};
 
     return (
         <div className={cardClassName}>
             {/* Season Availability Warning */}
-            {showSeasonWarning && (
+            {showSeasonWarning && !courseStatus.isTaken && !courseStatus.isPlanned && (
                 <div className={styles.seasonWarning}>
                     {availabilityMessage}
+                </div>
+            )}
+            
+            {/* Eligibility Warning */}
+            {!courseStatus.isTaken && !courseStatus.isPlanned && !eligibility.isEligible && (
+                <div className={styles.eligibilityWarning}>
+                    {formatMissingPrereqs()}
                 </div>
             )}
             

@@ -164,3 +164,26 @@
   background-color: #e3f2fd; /* Light blue background */
   border: 1px solid #64b5f6;
 }
+
+/* Eligibility styles */
+.ineligibleCourse {
+  background-color: #ffebee; /* Light red background */
+  border: 1px solid #ef5350;
+}
+
+/* Update this existing CSS section for eligibility warning */
+.eligibilityWarning {
+  background-color: #ffebee;
+  color: #c62828;
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  font-size: 12px;
+  text-align: center;
+  font-weight: 500;
+  border: 1px solid #ef9a9a;
+  word-wrap: break-word; /* Allow long text to wrap */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 40px; /* Limit height to prevent oversized warnings */
+}
