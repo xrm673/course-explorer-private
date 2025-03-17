@@ -61,14 +61,14 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
         fetchRequirement();
     }, [reqId]);
 
-    // Calculate completion status whenever user or requirement data changes
+    // Calculate completion status
     useEffect(() => {
         if (!req || !user || !user.scheduleData || !user.scheduleData.taken) {
             setCompletionStatus("");
             return;
         }
         
-        // Get the number of courses required (from the requirement data)
+        // Get the number of courses required
         const requiredCount = req.number || 0;
         
         if (requiredCount === 0) {
@@ -76,26 +76,25 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
             return;
         }
         
-        // Count how many courses in this requirement the user has taken
-        let completedCount = 0;
-        
-        // Get all courses the user has taken (from all semesters)
-        const takenCourses = [];
+        // Extract taken courses set for efficient lookups
+        const takenCoursesSet = new Set();
         Object.values(user.scheduleData.taken).forEach(semester => {
             semester.forEach(course => {
                 if (course && course.code) {
-                    takenCourses.push(course.code);
+                    takenCoursesSet.add(course.code);
                 }
             });
         });
+        
+        let completedCount = 0;
         
         // If this is a core requirement with course groups
         if (req.courseGrps) {
             // For core requirements, check if any course in each group has been taken
             req.courseGrps.forEach(group => {
-                // For each group, if any course in the group is taken, count the group as completed
+                // Check if any course in the group is taken
                 const hasCompletedInGroup = group.courses.some(courseId => 
-                    takenCourses.includes(courseId)
+                    takenCoursesSet.has(courseId)
                 );
                 
                 if (hasCompletedInGroup) {
@@ -107,7 +106,7 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
         else if (req.courses) {
             // Count individual completed courses
             req.courses.forEach(courseId => {
-                if (takenCourses.includes(courseId)) {
+                if (takenCoursesSet.has(courseId)) {
                     completedCount++;
                 }
             });
@@ -117,7 +116,19 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
         setCompletionStatus(`(${completedCount}/${requiredCount})`);
     }, [req, user]);
 
-    // Filter courses based on selected semester and filters
+    // Helper function to get mode key
+    const getModeKey = (mode) => {
+        if (!mode) return 'others';
+        
+        const modeStr = String(mode).toLowerCase();
+        if (modeStr.includes('in-person')) return 'inPerson';
+        if (modeStr.includes('online') && modeStr.includes('recording')) return 'onlineRecording';
+        if (modeStr.includes('online') && modeStr.includes('live')) return 'onlineLive';
+        if (modeStr.includes('hybrid')) return 'hybrid';
+        return 'others';
+    };
+
+    // Load and filter courses
     useEffect(() => {
         if (!req || !req.courses || !selectedSemester) return;
 
@@ -126,50 +137,115 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
 
         const filterCourses = async () => {
             try {
-                const availableCourses = [];
-                const courseDataList = [];
-                const completedCoursesList = [];
-                
-                // Get all courses the user has taken
-                const takenCourses = [];
+                // Create an efficient lookup for taken courses
+                const takenCoursesSet = new Set();
                 if (user && user.scheduleData && user.scheduleData.taken) {
                     Object.values(user.scheduleData.taken).forEach(semester => {
                         semester.forEach(course => {
                             if (course && course.code) {
-                                takenCourses.push(course.code);
+                                takenCoursesSet.add(course.code);
                             }
                         });
                     });
                 }
                 
-                // Step 1: Filter by semester availability and separate completed courses
-                for (const courseId of req.courses) {
-                    try {
-                        const courseData = await getCourseById(courseId);
+                // Load all courses at once for better performance
+                const coursePromises = req.courses.map(courseId => getCourseById(courseId));
+                const allCourseData = await Promise.all(coursePromises);
+                
+                // Filter out null results
+                const validCourseData = allCourseData.filter(course => course !== null);
+                
+                // Separate completed courses and filter/score available courses
+                const completedCoursesList = [];
+                const courseResults = [];
+                
+                for (const course of validCourseData) {
+                    // Check if already taken
+                    if (takenCoursesSet.has(course.id)) {
+                        completedCoursesList.push(course);
+                        continue;
+                    }
+                    
+                    let score = 0;
+                    let shouldKeep = true;
+                    
+                    // Check semester availability
+                    if (!isCourseAvailableInSemester(course, selectedSemester)) {
+                        shouldKeep = false;
+                        continue;
+                    }
+                    
+                    // Apply level filters
+                    if (course.lvl) {
+                        const levelKey = (course.lvl * 1000).toString();
                         
-                        // Check if the course has been completed
-                        if (takenCourses.includes(courseId)) {
-                            completedCoursesList.push(courseData);
+                        // Apply "only" filter
+                        const hasLevelOnlyFilter = Object.values(activeFilters.level).some(level => level.only);
+                        if (hasLevelOnlyFilter && !activeFilters.level[levelKey]?.only) {
+                            shouldKeep = false;
+                            continue;
                         }
-                        // Otherwise, check if it's available this semester
-                        else if (isCourseAvailableInSemester(courseData, selectedSemester)) {
-                            availableCourses.push(courseId);
-                            courseDataList.push(courseData);
+                        
+                        // Apply "prefer" filter
+                        if (activeFilters.level[levelKey]?.prefer) {
+                            score += 5;
                         }
-                    } catch (err) {
-                        console.error(`Error checking course ${courseId}:`, err);
+                    }
+                    
+                    // Check eligibility filters
+                    if (user) {
+                        const eligibility = checkCourseEligibility(course, user);
+                        
+                        // Apply "only" filter
+                        if (activeFilters.enrollment.eligible?.only && !eligibility.isEligible) {
+                            shouldKeep = false;
+                            continue;
+                        }
+                        
+                        // Apply "prefer" filter
+                        if (activeFilters.enrollment.eligible?.prefer && eligibility.isEligible) {
+                            score += 5;
+                        }
+                    }
+                    
+                    // Check instruction mode filters
+                    if (course.instructionMode) {
+                        const modeKey = getModeKey(course.instructionMode);
+                        
+                        // Apply "only" filter
+                        const hasModeOnlyFilter = Object.values(activeFilters.instructionMode).some(mode => mode.only);
+                        if (hasModeOnlyFilter && !activeFilters.instructionMode[modeKey]?.only) {
+                            shouldKeep = false;
+                            continue;
+                        }
+                        
+                        // Apply "prefer" filter
+                        if (activeFilters.instructionMode[modeKey]?.prefer) {
+                            score += 3;
+                        }
+                    }
+                    
+                    // If course passed all filters, add it to results
+                    if (shouldKeep) {
+                        courseResults.push({
+                            course: course,
+                            score: score
+                        });
                     }
                 }
                 
-                // Update state with completed courses
+                // Sort courses by score (highest first)
+                courseResults.sort((a, b) => b.score - a.score);
+                
+                // Store all course data for reference
+                setCoursesWithData(validCourseData);
+                
+                // Store completed courses
                 setCompletedCourses(completedCoursesList);
                 
-                // Update available courses
-                setCoursesWithData(courseDataList);
-                
-                // Step 2: Apply user preference filters to available courses
-                const filteredIds = processCourseFilters(courseDataList, activeFilters, user);
-                setFilteredCourses(filteredIds);
+                // Store filtered and sorted courses - now storing full course objects!
+                setFilteredCourses(courseResults.map(result => result.course));
                 
                 setIsFiltering(false);
             } catch (err) {
@@ -179,93 +255,7 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
         };
 
         filterCourses();
-    }, [req, selectedSemester, user]);
-    
-    // Reapply filters when activeFilters change
-    useEffect(() => {
-        if (coursesWithData.length === 0 || isFiltering) return;
-        
-        const filteredIds = processCourseFilters(coursesWithData, activeFilters, user);
-        setFilteredCourses(filteredIds);
-        setCurrentPage(1);
-    }, [activeFilters, coursesWithData, user, isFiltering]);
-
-    // Process filter preferences and score courses
-    const processCourseFilters = (courses, filters, user) => {
-        // Calculate score and filter courses based on filter preferences
-        const scoredCourses = courses.map(course => {
-            let score = 0;
-            let shouldKeep = true;
-            
-            // Check course level filters
-            if (course.lvl) {
-                const levelKey = (Math.floor(course.lvl / 1000) * 1000).toString();
-                
-                // Apply "only" filter
-                const hasLevelOnlyFilter = Object.values(filters.level).some(level => level.only);
-                if (hasLevelOnlyFilter && !filters.level[levelKey]?.only) {
-                    shouldKeep = false;
-                }
-                
-                // Apply "prefer" filter
-                if (filters.level[levelKey]?.prefer) {
-                    score += 5;
-                }
-            }
-            
-            // Check eligibility filters
-            if (user) {
-                const eligibility = checkCourseEligibility(course, user);
-                
-                // Apply "only" filter
-                if (filters.enrollment.eligible?.only && !eligibility.isEligible) {
-                    shouldKeep = false;
-                }
-                
-                // Apply "prefer" filter
-                if (filters.enrollment.eligible?.prefer && eligibility.isEligible) {
-                    score += 5;
-                }
-            }
-            
-            // Check instruction mode filters
-            if (course.instructionMode) {
-                const modeKey = getModeKey(course.instructionMode);
-                
-                // Apply "only" filter
-                const hasModeOnlyFilter = Object.values(filters.instructionMode).some(mode => mode.only);
-                if (hasModeOnlyFilter && !filters.instructionMode[modeKey]?.only) {
-                    shouldKeep = false;
-                }
-                
-                // Apply "prefer" filter
-                if (filters.instructionMode[modeKey]?.prefer) {
-                    score += 3;
-                }
-            }
-            
-            return { course, score, shouldKeep };
-        });
-        
-        // Filter out courses that should be excluded
-        const filteredAndScoredCourses = scoredCourses
-            .filter(item => item.shouldKeep)
-            .sort((a, b) => b.score - a.score); // Sort by score (highest first)
-            
-        return filteredAndScoredCourses.map(item => item.course.id);
-    };
-    
-    // Helper function to map instruction mode to filter key
-    const getModeKey = (mode) => {
-        if (!mode) return 'others';
-        
-        const modeStr = mode.toLowerCase();
-        if (modeStr.includes('in-person')) return 'inPerson';
-        if (modeStr.includes('online') && modeStr.includes('recording')) return 'onlineRecording';
-        if (modeStr.includes('online') && modeStr.includes('live')) return 'onlineLive';
-        if (modeStr.includes('hybrid')) return 'hybrid';
-        return 'others';
-    };
+    }, [req, selectedSemester, user, activeFilters]);
 
     // Handle filter icon click
     const handleFilterClick = () => {
@@ -278,9 +268,9 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
         setShowFilterModal(false);
     };
 
-    if (loading) return <h1>Loading...</h1>;
-    if (error) return <h1>{error}</h1>;
-    if (!req) return <h1>Not found</h1>;
+    if (loading) return <div className={styles.loading}>Loading...</div>;
+    if (error) return <div className={styles.error}>{error}</div>;
+    if (!req) return <div className={styles.error}>Not found</div>;
 
     const isCoreReq = !(req.courses && Array.isArray(req.courses) && req.courses.length > 0);
 
@@ -319,12 +309,15 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
                 </div>
                 
                 <div className={styles.headerControls}>
-                    <img 
-                        src={filterIcon} 
-                        alt="Filter courses"
-                        className={styles.filterIcon}
-                        onClick={handleFilterClick}
-                    />
+                    {!isCoreReq && (
+                        <img 
+                            src={filterIcon} 
+                            alt="Filter courses"
+                            className={styles.filterIcon}
+                            onClick={handleFilterClick}
+                        />
+                    )}
+                    
                     {!isCoreReq && totalPages > 1 && (
                         <div className={styles.paginationControls}>
                             <button 
@@ -357,7 +350,7 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
                     <h4 className={styles.completedCoursesTitle}>Completed Courses:</h4>
                     <div className={styles.completedCoursesList}>
                         {completedCourses.map((course, index) => (
-                            <span key={index} className={styles.completedCourseItem}>
+                            <span key={course.id || index} className={styles.completedCourseItem}>
                                 {course.id}: {course.tts || course.ttl || course.id}
                             </span>
                         ))}
@@ -383,10 +376,11 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
                 </div>
             ) : (
                 <div className={styles.electiveCoursesGrid}>
-                    {currentCourses.map((courseId, i) => (
+                    {/* Pass full course object instead of just ID */}
+                    {currentCourses.map((course) => (
                         <ElectiveCourseCard 
-                            key={i} 
-                            courseId={courseId} 
+                            key={course.id} 
+                            course={course}  
                             selectedSemester={selectedSemester}
                         />
                     ))}
@@ -400,6 +394,7 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
                             key={index}
                             onClick={() => paginate(index + 1)}
                             className={`${styles.paginationDot} ${currentPage === index + 1 ? styles.paginationDotActive : ''}`}
+                            aria-label={`Page ${index + 1}`}
                         >
                             {index + 1}
                         </button>

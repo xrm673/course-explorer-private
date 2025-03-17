@@ -1,7 +1,5 @@
 import { useEffect, useState, useContext } from "react"
 import { Link } from "react-router"
-import { getCourseById } from "../../firebase/services/courseService"
-import { isCourseAvailableInSemester } from "../../utils/semesterUtils"
 import { 
   addCourseToSchedule, 
   markCourseAsTaken, 
@@ -15,11 +13,10 @@ import add from "../../assets/add.svg"
 import checkMark from "../../assets/checkMark.svg"
 import styles from "./ElectiveCourseCard.module.css"
 
-export default function ElectiveCourseCard({ courseId, selectedSemester, onStatusChange }) {
-    const [course, setCourse] = useState(null)
-    const [loading, setLoading] = useState(true);
+// Updated to receive course object directly instead of courseId
+export default function ElectiveCourseCard({ course, selectedSemester, onStatusChange }) {
+    // No longer need to fetch or store course data
     const [error, setError] = useState(null);
-    const [isAvailable, setIsAvailable] = useState(true);
     const [courseStatus, setCourseStatus] = useState({ isPlanned: false, isTaken: false, semester: null });
     const [eligibility, setEligibility] = useState({ isEligible: true, missingPrereqs: [] });
     
@@ -27,36 +24,21 @@ export default function ElectiveCourseCard({ courseId, selectedSemester, onStatu
     const { user, setUser } = useContext(UserContext);
     const { openSidebar } = useSidebar();
 
-    useEffect (() => {
-        const fetchCourse = async () => {
-            try {
-                const courseData = await getCourseById(courseId)
-                setCourse(courseData)
+    useEffect(() => {
+        try {
+            // Check if the course is already in the schedule
+            if (user && course) {
+                const status = getCourseStatus(course.id, user);
+                setCourseStatus(status);
                 
-                // Check if the course is available in the selected semester
-                if (selectedSemester) {
-                    const available = isCourseAvailableInSemester(courseData, selectedSemester);
-                    setIsAvailable(available);
-                }
-                
-                // Check if the course is already in the schedule
-                if (user) {
-                    const status = getCourseStatus(courseId, user);
-                    setCourseStatus(status);
-                    
-                    // Check course eligibility
-                    const eligibilityCheck = checkCourseEligibility(courseData, user);
-                    setEligibility(eligibilityCheck);
-                }
-                
-                setLoading(false)
-            } catch (err) {
-                setError("Failed to load")
-                setLoading(false)
+                // Check course eligibility
+                const eligibilityCheck = checkCourseEligibility(course, user);
+                setEligibility(eligibilityCheck);
             }
-        } 
-        fetchCourse()
-    }, [courseId, selectedSemester, user])
+        } catch (err) {
+            setError("Failed to check course status");
+        }
+    }, [course, user]);
 
     // Handle adding course to schedule
     const handleAddCourse = (e) => {
@@ -73,7 +55,7 @@ export default function ElectiveCourseCard({ courseId, selectedSemester, onStatu
             
             // Notify parent if needed
             if (onStatusChange) {
-                onStatusChange({ courseId, isPlanned: true, isTaken: false });
+                onStatusChange({ courseId: course.id, isPlanned: true, isTaken: false });
             }
         }
     };
@@ -93,7 +75,7 @@ export default function ElectiveCourseCard({ courseId, selectedSemester, onStatu
             
             // Notify parent if needed
             if (onStatusChange) {
-                onStatusChange({ courseId, isPlanned: false, isTaken: true });
+                onStatusChange({ courseId: course.id, isPlanned: false, isTaken: true });
             }
         }
     };
@@ -105,7 +87,7 @@ export default function ElectiveCourseCard({ courseId, selectedSemester, onStatu
         if (!course || !user) return;
         
         // Remove the course from the schedule
-        const success = removeCourseFromSchedule(courseId, user, setUser);
+        const success = removeCourseFromSchedule(course.id, user, setUser);
         
         if (success) {
             // Update local status
@@ -113,13 +95,14 @@ export default function ElectiveCourseCard({ courseId, selectedSemester, onStatu
             
             // Notify parent if needed
             if (onStatusChange) {
-                onStatusChange({ courseId, isPlanned: false, isTaken: false });
+                onStatusChange({ courseId: course.id, isPlanned: false, isTaken: false });
             }
         }
     };
 
-    if (loading) return <div className={styles.loading}>Loading...</div>;
+    // Error handling - now there's no loading state
     if (error) return <div className={styles.error}>{error}</div>;
+    if (!course) return <div className={styles.error}>Course data missing</div>;
 
     const tags = ["Tag 1", "Tag 2", "Tag 3"]
     
@@ -135,31 +118,31 @@ export default function ElectiveCourseCard({ courseId, selectedSemester, onStatu
         cardClassName = `${cardClassName} ${styles.ineligibleCourse}`;
     }
     
-// Format missing prerequisites for display
-const formatMissingPrereqs = () => {
-  if (!eligibility.missingPrereqs || eligibility.missingPrereqs.length === 0) {
-      return '';
-  }
-  
-  // Process each prerequisite group
-  const formattedPrereqs = eligibility.missingPrereqs.map(prereq => {
-      // If the prereq contains " or " - it's a group of alternative courses
-      if (prereq.includes(' or ')) {
-          const courses = prereq.split(' or ');
-          // If there's more than one course in the group, show just the first one
-          // followed by "alternatives"
-          if (courses.length > 1) {
-              return `${courses[0]} or alternatives`;
-          }
-          return prereq;
+    // Format missing prerequisites for display
+    const formatMissingPrereqs = () => {
+      if (!eligibility.missingPrereqs || eligibility.missingPrereqs.length === 0) {
+          return '';
       }
-      // Otherwise return as is
-      return prereq;
-  });
-  
-  // Join the processed prereqs with ", "
-  return `Need: ${formattedPrereqs.join(', ')}`;
-};
+      
+      // Process each prerequisite group
+      const formattedPrereqs = eligibility.missingPrereqs.map(prereq => {
+          // If the prereq contains " or " - it's a group of alternative courses
+          if (prereq.includes(' or ')) {
+              const courses = prereq.split(' or ');
+              // If there's more than one course in the group, show just the first one
+              // followed by "alternatives"
+              if (courses.length > 1) {
+                  return `${courses[0]} or alternatives`;
+              }
+              return prereq;
+          }
+          // Otherwise return as is
+          return prereq;
+      });
+      
+      // Join the processed prereqs with ", "
+      return `Need: ${formattedPrereqs.join(', ')}`;
+    };
 
     return(
       <div className={cardClassName}>
