@@ -132,7 +132,7 @@ export default function ElectiveCourseCard({ course, selectedSemester, onStatusC
               // If there's more than one course in the group, show just the first one
               // followed by "alternatives"
               if (courses.length > 1) {
-                  return `${courses[0]} or alternatives`;
+                  return `${courses[0]} or equivalent`;
               }
               return prereq;
           }

@@ -20,16 +20,16 @@ const SelectCourses = () => {
   const [currentCourse, setCurrentCourse] = useState(null);
   const [scheduleData, setScheduleData] = useState({
     planned: {
-      "Spring 2027": [],
-      "Fall 2026": [],
-      "Spring 2026": [],
-      "Fall 2025": [],
+      "SP27": [],
+      "FA26": [],
+      "SP26": [],
+      "FA25": [],
     },
     taken: {
-      "Spring 2025": [],
-      "Fall 2024": [],
-      "Spring 2024": [],
-      "Fall 2023": [],
+      "SP25": [],
+      "FA24": [],
+      "SP24": [],
+      "FA23": [],
       "Ungrouped Courses": []
     }
   });

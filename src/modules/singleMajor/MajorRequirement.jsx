@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useRef } from "react";
 import { getRequirementById } from "../../firebase/services/requirementService";
 import { getCourseById } from "../../firebase/services/courseService";
 import { isCourseAvailableInSemester } from "../../utils/semesterUtils";
@@ -24,6 +24,12 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
     const [completionStatus, setCompletionStatus] = useState("");
     const coursesPerPage = 9;
 
+    // Track when filtering should occur
+    const filterTriggerRef = useRef({
+        shouldFilter: true,  // true initially to run on first load
+        initialLoadComplete: false
+    });
+
     const [showFilterModal, setShowFilterModal] = useState(false);
     const [activeFilters, setActiveFilters] = useState({
         level: {
@@ -45,6 +51,11 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
         },
         majorRequirements: {}
     });
+
+    // Function to explicitly trigger filtering
+    const triggerFiltering = () => {
+        filterTriggerRef.current.shouldFilter = true;
+    };
 
     // Fetch requirement data
     useEffect(() => {
@@ -128,143 +139,162 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
         return 'others';
     };
 
-    // Load and filter courses
+    // Load and filter courses - modified to only run when explicitly triggered
     useEffect(() => {
         if (!req || !req.courses || !selectedSemester) return;
 
-        setIsFiltering(true);
-        setCurrentPage(1);
+        // Only filter if explicitly triggered or on initial load
+        if (filterTriggerRef.current.shouldFilter) {
+            setIsFiltering(true);
+            setCurrentPage(1);
 
-        const filterCourses = async () => {
-            try {
-                // Create an efficient lookup for taken courses
-                const takenCoursesSet = new Set();
-                if (user && user.scheduleData && user.scheduleData.taken) {
-                    Object.values(user.scheduleData.taken).forEach(semester => {
-                        semester.forEach(course => {
-                            if (course && course.code) {
-                                takenCoursesSet.add(course.code);
+            const filterCourses = async () => {
+                try {
+                    // Create an efficient lookup for taken courses
+                    const takenCoursesSet = new Set();
+                    if (user && user.scheduleData && user.scheduleData.taken) {
+                        Object.values(user.scheduleData.taken).forEach(semester => {
+                            semester.forEach(course => {
+                                if (course && course.code) {
+                                    takenCoursesSet.add(course.code);
+                                }
+                            });
+                        });
+                    }
+                    
+                    // Load all courses at once for better performance
+                    const coursePromises = req.courses.map(courseId => getCourseById(courseId));
+                    const allCourseData = await Promise.all(coursePromises);
+                    
+                    // Filter out null results
+                    const validCourseData = allCourseData.filter(course => course !== null);
+                    
+                    // Separate completed courses and filter/score available courses
+                    const completedCoursesList = [];
+                    const courseResults = [];
+                    
+                    for (const course of validCourseData) {
+                        // Check if already taken
+                        if (takenCoursesSet.has(course.id)) {
+                            completedCoursesList.push(course);
+                            continue;
+                        }
+                        
+                        let score = 0;
+                        let shouldKeep = true;
+                        
+                        // Check semester availability
+                        if (!isCourseAvailableInSemester(course, selectedSemester)) {
+                            shouldKeep = false;
+                            continue;
+                        }
+                        
+                        // Apply level filters
+                        if (course.lvl) {
+                            const levelKey = (course.lvl * 1000).toString();
+                            
+                            // Apply "only" filter
+                            const hasLevelOnlyFilter = Object.values(activeFilters.level).some(level => level.only);
+                            if (hasLevelOnlyFilter && !activeFilters.level[levelKey]?.only) {
+                                shouldKeep = false;
+                                continue;
                             }
-                        });
-                    });
+                            
+                            // Apply "prefer" filter
+                            if (activeFilters.level[levelKey]?.prefer) {
+                                score += 5;
+                            }
+                        }
+                        
+                        // Check eligibility filters
+                        if (user) {
+                            const eligibility = checkCourseEligibility(course, user);
+                            
+                            // Apply "only" filter
+                            if (activeFilters.enrollment.eligible?.only && !eligibility.isEligible) {
+                                shouldKeep = false;
+                                continue;
+                            }
+                            
+                            // Apply "prefer" filter
+                            if (activeFilters.enrollment.eligible?.prefer && eligibility.isEligible) {
+                                score += 5;
+                            }
+                        }
+                        
+                        // Check instruction mode filters
+                        if (course.instructionMode) {
+                            const modeKey = getModeKey(course.instructionMode);
+                            
+                            // Apply "only" filter
+                            const hasModeOnlyFilter = Object.values(activeFilters.instructionMode).some(mode => mode.only);
+                            if (hasModeOnlyFilter && !activeFilters.instructionMode[modeKey]?.only) {
+                                shouldKeep = false;
+                                continue;
+                            }
+                            
+                            // Apply "prefer" filter
+                            if (activeFilters.instructionMode[modeKey]?.prefer) {
+                                score += 3;
+                            }
+                        }
+                        
+                        // If course passed all filters, add it to results
+                        if (shouldKeep) {
+                            courseResults.push({
+                                course: course,
+                                score: score
+                            });
+                        }
+                    }
+                    
+                    // Sort courses by score (highest first)
+                    courseResults.sort((a, b) => b.score - a.score);
+                    
+                    // Store all course data for reference
+                    setCoursesWithData(validCourseData);
+                    
+                    // Store completed courses
+                    setCompletedCourses(completedCoursesList);
+                    
+                    // Store the sorted array directly to ensure order is preserved
+                    // Store full course objects in sorted order
+                    const sortedCourses = courseResults.map(result => result.course);
+                    
+                    // Store the sorted courses in state
+                    setFilteredCourses(sortedCourses);
+                    
+                    // Reset trigger flag and set initial load as complete
+                    filterTriggerRef.current.shouldFilter = false;
+                    filterTriggerRef.current.initialLoadComplete = true;
+                    setIsFiltering(false);
+                } catch (err) {
+                    console.error("Error filtering courses:", err);
+                    filterTriggerRef.current.shouldFilter = false;
+                    setIsFiltering(false);
                 }
-                
-                // Load all courses at once for better performance
-                const coursePromises = req.courses.map(courseId => getCourseById(courseId));
-                const allCourseData = await Promise.all(coursePromises);
-                
-                // Filter out null results
-                const validCourseData = allCourseData.filter(course => course !== null);
-                
-                // Separate completed courses and filter/score available courses
-                const completedCoursesList = [];
-                const courseResults = [];
-                
-                for (const course of validCourseData) {
-                    // Check if already taken
-                    if (takenCoursesSet.has(course.id)) {
-                        completedCoursesList.push(course);
-                        continue;
-                    }
-                    
-                    let score = 0;
-                    let shouldKeep = true;
-                    
-                    // Check semester availability
-                    if (!isCourseAvailableInSemester(course, selectedSemester)) {
-                        shouldKeep = false;
-                        continue;
-                    }
-                    
-                    // Apply level filters
-                    if (course.lvl) {
-                        const levelKey = (course.lvl * 1000).toString();
-                        
-                        // Apply "only" filter
-                        const hasLevelOnlyFilter = Object.values(activeFilters.level).some(level => level.only);
-                        if (hasLevelOnlyFilter && !activeFilters.level[levelKey]?.only) {
-                            shouldKeep = false;
-                            continue;
-                        }
-                        
-                        // Apply "prefer" filter
-                        if (activeFilters.level[levelKey]?.prefer) {
-                            score += 5;
-                        }
-                    }
-                    
-                    // Check eligibility filters
-                    if (user) {
-                        const eligibility = checkCourseEligibility(course, user);
-                        
-                        // Apply "only" filter
-                        if (activeFilters.enrollment.eligible?.only && !eligibility.isEligible) {
-                            shouldKeep = false;
-                            continue;
-                        }
-                        
-                        // Apply "prefer" filter
-                        if (activeFilters.enrollment.eligible?.prefer && eligibility.isEligible) {
-                            score += 5;
-                        }
-                    }
-                    
-                    // Check instruction mode filters
-                    if (course.instructionMode) {
-                        const modeKey = getModeKey(course.instructionMode);
-                        
-                        // Apply "only" filter
-                        const hasModeOnlyFilter = Object.values(activeFilters.instructionMode).some(mode => mode.only);
-                        if (hasModeOnlyFilter && !activeFilters.instructionMode[modeKey]?.only) {
-                            shouldKeep = false;
-                            continue;
-                        }
-                        
-                        // Apply "prefer" filter
-                        if (activeFilters.instructionMode[modeKey]?.prefer) {
-                            score += 3;
-                        }
-                    }
-                    
-                    // If course passed all filters, add it to results
-                    if (shouldKeep) {
-                        courseResults.push({
-                            course: course,
-                            score: score
-                        });
-                    }
-                }
-                
-                // Sort courses by score (highest first)
-                courseResults.sort((a, b) => b.score - a.score);
-                
-                // Store all course data for reference
-                setCoursesWithData(validCourseData);
-                
-                // Store completed courses
-                setCompletedCourses(completedCoursesList);
-                
-                // Store filtered and sorted courses - now storing full course objects!
-                setFilteredCourses(courseResults.map(result => result.course));
-                
-                setIsFiltering(false);
-            } catch (err) {
-                console.error("Error filtering courses:", err);
-                setIsFiltering(false);
-            }
-        };
+            };
 
-        filterCourses();
-    }, [req, selectedSemester, user, activeFilters]);
+            filterCourses();
+        }
+    }, [req, selectedSemester, activeFilters, user]);
+
+    // Re-trigger filtering when semester changes
+    useEffect(() => {
+        if (filterTriggerRef.current.initialLoadComplete) {
+            triggerFiltering();
+        }
+    }, [selectedSemester]);
 
     // Handle filter icon click
     const handleFilterClick = () => {
         setShowFilterModal(true);
     };
 
-    // Handle applying filters
+    // Handle applying filters - updated to trigger filtering
     const handleApplyFilters = (filters) => {
         setActiveFilters(filters);
+        triggerFiltering(); // Set flag to trigger filtering
         setShowFilterModal(false);
     };
 
