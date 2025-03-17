@@ -1,0 +1,100 @@
+.requirementSection {
+  width: 94%;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.requirementTitle {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.paginationControls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.paginationButton {
+  padding: 5px 10px;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.paginationButtonDisabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.paginationText {
+  font-size: 14px;
+}
+
+.coreCoursesGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 40px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.electiveCoursesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  width: 100%;
+}
+
+.paginationDots {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 5px;
+}
+
+.paginationDot {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background: white;
+  color: black;
+}
+
+.paginationDotActive {
+  background: #4a82e3;
+  color: white;
+}
+
+/* New styles for semester filtering */
+.loadingFilter {
+  padding: 40px 0;
+  text-align: center;
+  color: #666;
+  font-size: 16px;
+  width: 100%;
+}
+
+.noCourses {
+  padding: 40px 0;
+  text-align: center;
+  color: #666;
+  font-size: 16px;
+  width: 100%;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  border: 1px dashed #ddd;
+}

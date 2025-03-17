@@ -1,19 +1,35 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router"
 import { getCourseById } from "../../firebase/services/courseService"
+import { getCourseSeasonAvailability } from "../../utils/semesterUtils"
 import add from "../../assets/add.svg"
 import checkMark from "../../assets/checkMark.svg"
+import styles from './CoreCourseCard.module.css'
 
-export default function CoreCourseCard({ courseId }) {
+export default function CoreCourseCard({ courseId, selectedSemester, availability }) {
     const [course, setCourse] = useState(null)
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [courseAvailability, setCourseAvailability] = useState(null);
+    
+    // Determine if the selected semester is a Fall or Spring semester
+    const isFallSemester = selectedSemester && selectedSemester.startsWith('FA');
+    const isSpringBySemester = selectedSemester && selectedSemester.startsWith('SP');
 
     useEffect(() => {
         const fetchCourse = async () => {
             try {
                 const courseData = await getCourseById(courseId)
                 setCourse(courseData)
+                
+                // If availability is not provided as prop, fetch it
+                if (!availability) {
+                    const availabilityInfo = getCourseSeasonAvailability(courseData);
+                    setCourseAvailability(availabilityInfo);
+                } else {
+                    setCourseAvailability(availability);
+                }
+                
                 setLoading(false)
             } catch (err) {
                 setError("Failed to load")
@@ -21,137 +37,76 @@ export default function CoreCourseCard({ courseId }) {
             }
         } 
         fetchCourse()
-    }, [courseId])
+    }, [courseId, availability])
 
-    if (loading) return <div style={{"width": "100%", "padding": "20px", "textAlign": "center", "backgroundColor": "white"}}>Loading...</div>;
-    if (error) return <div style={{"width": "100%", "padding": "20px", "textAlign": "center", "color": "#e53935", "backgroundColor": "white"}}>{error}</div>;
+    if (loading) return <div className={styles.loading}>Loading...</div>;
+    if (error) return <div className={styles.error}>{error}</div>;
 
-    const tags = ["Tag 1", "Tag 2", "Tag 3", "Tag 4", "Tag 5"]
+    const tags = ["Tag 1", "Tag 2", "Tag 3", "Tag 4", "Tag 5"];
+    
+    // Determine availability based on selected semester
+    const { availableInFall, availableInSpring } = courseAvailability || {};
+    const isAvailableInSelectedSeason = isFallSemester ? availableInFall : isSpringBySemester ? availableInSpring : true;
+    const availabilityMessage = !isAvailableInSelectedSeason ? 
+        `Only offered in ${availableInFall ? 'Fall' : 'Spring'} semester` : '';
+
+    // Determine if we need to show a warning for this course
+    const showSeasonWarning = !isAvailableInSelectedSeason;
+    
+    // Apply different card style based on availability
+    const cardClassName = `${styles.cardContainer} ${showSeasonWarning ? styles.unavailableCourse : ''}`;
 
     return (
-        <div style={{
-            "border": "1px solid #ddd",
-            "borderRadius": "8px",
-            "width": "calc(100% - 2px)", // Accounting for border
-            "boxSizing": "border-box", // This is crucial - includes padding in width calculation
-            "marginBottom": "12px",
-            "padding": "12px", // Further reduced padding
-            "boxShadow": "0 2px 4px rgba(0,0,0,0.05)",
-            "display": "flex",
-            "flexDirection": "column",
-            "backgroundColor": "white",
-            "maxWidth": "100%", // Ensures the card doesn't exceed parent width
-            "minHeight": "115px" // Add minimum height to accommodate two lines of title
-        }}>
+        <div className={cardClassName}>
+            {/* Season Availability Warning */}
+            {showSeasonWarning && (
+                <div className={styles.seasonWarning}>
+                    {availabilityMessage}
+                </div>
+            )}
+            
             {/* Header Section */}
-            <div style={{
-                "display": "flex",
-                "justifyContent": "space-between",
-                "alignItems": "flex-start",
-                "marginBottom": "10px",
-                "width": "100%"
-            }}>
+            <div className={styles.header}>
                 {/* Course Info */}
-                <div style={{
-                    "flex": "1",
-                    "minWidth": "0", // Important for text overflow handling
-                    "maxWidth": "calc(100% - 50px)" // Leave space for buttons
-                }}>
-                    <div style={{
-                        "display": "flex",
-                        "alignItems": "center",
-                        "marginBottom": "6px"
-                    }}>
-                        <p style={{
-                            "fontWeight": "bold",
-                            "fontSize": "15px",
-                            "margin": "0",
-                            "marginRight": "12px"
-                        }}>
+                <div className={styles.courseInfo}>
+                    <div className={styles.courseCodeContainer}>
+                        <p className={styles.courseCode}>
                             {course.id}
                         </p>
                         {/* Review Score */}
-                        <div style={{
-                            "display": "flex",
-                            "alignItems": "center",
-                            "fontSize": "13px",
-                            "backgroundColor": "#f5f5f5",
-                            "padding": "2px 6px",
-                            "borderRadius": "12px"
-                        }}>
-                            <span style={{
-                                "fontWeight": "bold",
-                                "marginRight": "3px"
-                            }}>
+                        <div className={styles.reviewScore}>
+                            <span className={styles.score}>
                                 4.2
                             </span>
-                            <span style={{
-                                "color": "#666",
-                                "fontSize": "11px"
-                            }}>
+                            <span className={styles.ratingLabel}>
                                 Rating
                             </span>
                         </div>
                     </div>
-                    <Link to={`/courses/${course.id}`} 
-                          style={{
-                            "fontSize": "20px", // Reduced font size
-                            "color": "#333",
-                            "textDecoration": "none",
-                            "margin": "0",
-                            "lineHeight": "1.3",
-                            "fontWeight": "500",
-                            "display": "-webkit-box",
-                            "WebkitLineClamp": "2", // Show max 2 lines
-                            "WebkitBoxOrient": "vertical",
-                            "overflow": "hidden",
-                            "maxWidth": "100%" // Ensure text doesn't overflow
-                    }}>
-                            {course.ttl}
+                    <Link to={`/courses/${course.id}`} className={styles.courseTitle}>
+                        {course.ttl}
                     </Link>
                 </div>
 
                 {/* Action Buttons */}
-                <div style={{
-                    "display": "flex",
-                    "gap": "5px",
-                    "marginLeft": "10px",
-                    "flexShrink": "0"
-                }}>
+                <div className={styles.actionButtons}>
                     <img 
                         src={add} 
                         alt="Add the course to my schedule" 
-                        style={{
-                            "width": "36px",
-                            "cursor": "pointer"
-                        }}
+                        className={styles.addButton}
                     />
                     <img 
                         src={checkMark} 
                         alt="Have taken this course" 
-                        style={{
-                            "width": "28px",
-                            "cursor": "pointer",
-                            "marginTop": "4px"
-                        }}
+                        className={styles.checkButton}
                     />
                 </div>
             </div>
 
             {/* Tags Section */}
-            <div style={{
-                "display": "flex",
-                "gap": "6px",
-                "flexWrap": "wrap"
-            }}>
+            <div className={styles.tagsContainer}>
                 {tags.map((tag, index) => (
-                    <span key={index} style={{
-                        "padding": "3px 8px",
-                        "border": "1px solid #ddd",
-                        "borderRadius": "16px",
-                        "fontSize": "17px",
-                        "backgroundColor": "#f9f9f9"
-                    }}>
+                    <span key={index} className={styles.tag}>
                         {tag}
                     </span>
                 ))}

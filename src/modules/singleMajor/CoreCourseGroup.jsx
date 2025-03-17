@@ -1,16 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import CoreCourseCard from "./CoreCourseCard";
 import { getCourseById } from "../../firebase/services/courseService";
+import { getCourseSeasonAvailability } from "../../utils/semesterUtils";
+import styles from './CoreCourseGroup.module.css';
 
-export default function CoreCourseGroup({ courseGrp }) {
+export default function CoreCourseGroup({ courseGrp, selectedSemester }) {
   const [expanded, setExpanded] = useState(false);
   const [additionalCourses, setAdditionalCourses] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [courseAvailability, setCourseAvailability] = useState({});
 
   // Early return with error handling if courseGrp is undefined
   if (!courseGrp || !courseGrp.courses || courseGrp.courses.length === 0) {
     return <div>Missing course group data</div>;
   }
+
+  // Determine if the selected semester is a Fall or Spring semester
+  const isFallSemester = selectedSemester.startsWith('FA');
+  const isSpringBySemester = selectedSemester.startsWith('SP');
 
   // Get additional courses data if there are more than one course
   useEffect(() => {
@@ -36,49 +43,51 @@ export default function CoreCourseGroup({ courseGrp }) {
     }
   }, [courseGrp.courses, expanded, additionalCourses]);
 
+  // Get course availability information
+  useEffect(() => {
+    const fetchCourseAvailability = async () => {
+      try {
+        const availabilityData = {};
+        
+        for (const courseId of courseGrp.courses) {
+          const courseData = await getCourseById(courseId);
+          const availability = getCourseSeasonAvailability(courseData);
+          availabilityData[courseId] = availability;
+        }
+        
+        setCourseAvailability(availabilityData);
+      } catch (err) {
+        console.error("Failed to check course availability", err);
+      }
+    };
+    
+    fetchCourseAvailability();
+  }, [courseGrp.courses]);
+
   const toggleExpand = () => {
     setExpanded(!expanded);
   };
 
   return (
-    <div className="course-group-container" style={{
-      backgroundColor: '#f5f5f5',
-      borderRadius: '8px',
-      padding: '12px',
-      boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
-      width: '100%',
-      height: '100%',
-      boxSizing: 'border-box',
-      overflow: 'hidden'
-    }}>
-      <div className="course-cards-container" style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '10px',
-        width: '100%',
-        maxWidth: '100%'
-      }}>
+    <div className={styles.courseGroupContainer}>
+      <div className={styles.courseCardsContainer}>
         {/* First course always shown */}
-        <CoreCourseCard courseId={courseGrp.courses[0]} />
+        <CoreCourseCard 
+          courseId={courseGrp.courses[0]} 
+          selectedSemester={selectedSemester}
+          availability={courseAvailability[courseGrp.courses[0]]}
+        />
         
         {/* Additional courses section */}
         {courseGrp.courses.length > 1 && !expanded && (
-          <div className="additional-courses" style={{
-            borderTop: '1px solid #ddd',
-            marginTop: '10px',
-            paddingTop: '10px'
-          }}>
-            <div style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center'
-            }}>
+          <div className={styles.additionalCourses}>
+            <div className={styles.additionalCoursesHeader}>
               <div>
                 <strong>Also: </strong> 
                 {loading ? "Loading..." : (
                   <span>
                     {additionalCourses.map((course, i) => (
-                      <span key={i} style={{ marginRight: '5px' }}>
+                      <span key={i} className={styles.courseIdSpan}>
                         {course.id}
                       </span>
                     ))}
@@ -87,14 +96,7 @@ export default function CoreCourseGroup({ courseGrp }) {
               </div>
               <button 
                 onClick={toggleExpand}
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  color: '#0066cc',
-                  cursor: 'pointer',
-                  fontSize: '14px',
-                  padding: '5px'
-                }}
+                className={styles.actionButton}
               >
                 Show All
               </button>
@@ -104,24 +106,19 @@ export default function CoreCourseGroup({ courseGrp }) {
         
         {/* Show all courses when expanded */}
         {expanded && courseGrp.courses.slice(1).map((courseId, i) => (
-          <CoreCourseCard key={i} courseId={courseId} />
+          <CoreCourseCard 
+            key={i} 
+            courseId={courseId} 
+            selectedSemester={selectedSemester}
+            availability={courseAvailability[courseId]}
+          />
         ))}
         
         {/* Show collapse button when expanded */}
         {expanded && courseGrp.courses.length > 1 && (
           <button 
             onClick={toggleExpand}
-            style={{
-              background: 'none',
-              border: 'none',
-              color: '#0066cc',
-              cursor: 'pointer',
-              fontSize: '14px',
-              textAlign: 'center',
-              padding: '5px',
-              borderTop: '1px solid #ddd',
-              marginTop: '5px'
-            }}
+            className={styles.collapseButton}
           >
             Collapse
           </button>

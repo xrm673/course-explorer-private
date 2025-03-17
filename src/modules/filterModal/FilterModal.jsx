@@ -36,7 +36,6 @@ const FilterModal = ({
     },
     enrollment: {
       eligible: { only: false, prefer: false },
-      ineligible: { only: false, prefer: false }
     },
     instructionMode: {
       inPerson: { only: false, prefer: false },
@@ -254,7 +253,6 @@ const FilterModal = ({
       'Hybrid': 'hybrid',
       'Others': 'others',
       'Eligible': 'eligible',
-      'Ineligible': 'ineligible'
     };
     return mapping[option] || option.toLowerCase().replace(/[()]/g, '').replace(/\s+/g, '');
   };
@@ -442,125 +440,3 @@ const FilterModal = ({
 };
 
 export default FilterModal;
-
-// Add these debug logs to your existing FilterModal component
-
-// In the useEffect that processes major requirements:
-// useEffect(() => {
-//     console.log("User data:", user);
-//     console.log("Academic data:", academicData);
-    
-//     if (!user?.majors || !academicData?.majors || !academicData?.requirements) {
-//       console.log("Missing required data to display major requirements:");
-//       console.log("- user.majors exists:", !!user?.majors);
-//       console.log("- academicData.majors exists:", !!academicData?.majors);
-//       console.log("- academicData.requirements exists:", !!academicData?.requirements);
-//       return;
-//     }
-  
-//     console.log("User majors:", user.majors);
-    
-//     const majorRequirements = {};
-  
-//     // Process each major the user has selected
-//     user.majors.forEach(userMajor => {
-//       const majorId = userMajor.id;
-//       const collegeId = userMajor.collegeId;
-//       console.log(`Processing major: ${majorId}, college: ${collegeId}`);
-      
-//       const majorData = academicData.majors[majorId];
-      
-//       if (!majorData) {
-//         console.log(`Major data not found for ${majorId}`);
-//         return;
-//       }
-      
-//       console.log(`Found major data:`, majorData);
-      
-//       // Get basic requirements for this major + college combination
-//       const basicReqsEntry = majorData.basicRequirements?.find(req => 
-//         req.college === collegeId
-//       );
-      
-//       console.log(`Basic requirements entry for college ${collegeId}:`, basicReqsEntry);
-      
-//       const basicReqs = basicReqsEntry?.requirements || [];
-//       console.log(`Requirement IDs:`, basicReqs);
-      
-//       // Process basic requirements
-//       basicReqs.forEach(reqId => {
-//         const requirement = academicData.requirements[reqId];
-//         console.log(`Requirement ${reqId}:`, requirement);
-        
-//         if (requirement) {
-//           // Use format: majorId_reqId as the key and store the human-readable name
-//           const key = `${majorId}_${reqId}`;
-//           majorRequirements[key] = { 
-//             only: false, 
-//             prefer: false,
-//             // Use the requirement's name instead of ID
-//             displayName: requirement.name || reqId,
-//             majorId, // Store majorId to group by major in UI
-//             majorName: majorData.name || majorId
-//           };
-//         }
-//       });
-      
-//       // Process concentration requirements (if any)
-//       const userConcentrations = userMajor.concentrations || [];
-//       console.log(`User concentrations:`, userConcentrations);
-      
-//       if (userConcentrations.length > 0 && majorData.concentrations) {
-//         console.log(`Major has concentrations:`, majorData.concentrations);
-        
-//         userConcentrations.forEach(concentrationName => {
-//           console.log(`Processing concentration: ${concentrationName}`);
-          
-//           const concentrationData = majorData.concentrations.find(
-//             c => c.concentration === concentrationName
-//           );
-          
-//           console.log(`Found concentration data:`, concentrationData);
-          
-//           if (concentrationData && concentrationData.requirements) {
-//             concentrationData.requirements.forEach(reqId => {
-//               const requirement = academicData.requirements[reqId];
-//               console.log(`Concentration requirement ${reqId}:`, requirement);
-              
-//               if (requirement) {
-//                 const key = `${majorId}_${reqId}`;
-//                 majorRequirements[key] = { 
-//                   only: false, 
-//                   prefer: false,
-//                   displayName: requirement.name || reqId,
-//                   majorId,
-//                   majorName: majorData.name || majorId,
-//                   concentrationName // Include concentration name for better organization
-//                 };
-//               }
-//             });
-//           }
-//         });
-//       }
-//     });
-    
-//     console.log("Processed major requirements:", majorRequirements);
-    
-//     // Update filter state with the processed requirements
-//     setFilters(prev => {
-//       const newState = {
-//         ...prev,
-//         majorRequirements: {
-//           ...majorRequirements,
-//           // Preserve any existing filter selections
-//           ...(activeFilters?.majorRequirements || {})
-//         }
-//       };
-//       console.log("Updated filter state:", newState);
-//       return newState;
-//     });
-//   }, [user, academicData, activeFilters]);
-  
-//   // Before rendering, log the grouped requirements
-//   // Add this just before the return statement
-//   console.log("Grouped requirements for rendering:", groupedRequirements);

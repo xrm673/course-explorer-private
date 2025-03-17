@@ -5,11 +5,14 @@ import { UserContext } from '../../context/UserContext';
 
 import { getMajorById } from '../../firebase/services/majorService'
 import MajorRequirement from './MajorRequirement';
+import SemesterSelector from './SemesterSelector';
+import styles from './SingleMajorPage.module.css';
 
 export default function SingleMajorPage() {
     const { user, isLoggedIn } = useContext(UserContext);
     const [major, setMajor] = useState(null);
     const [selectedCollegeId, setSelectedCollegeId] = useState('');
+    const [selectedSemester, setSelectedSemester] = useState('FA25'); // Default to Fall 2025
     const { majorId } = useParams();
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -40,6 +43,11 @@ export default function SingleMajorPage() {
         setSelectedCollegeId(e.target.value);
     };
 
+    // Handler for semester selection change
+    const handleSemesterChange = (semester) => {
+        setSelectedSemester(semester);
+    };
+
     // Find requirements for the selected college
     const getSelectedCollegeRequirements = () => {
         if (!major || !major.basicRequirements) return [];
@@ -64,40 +72,15 @@ export default function SingleMajorPage() {
     if (!major) return <h1>Major not found</h1>;
 
     return (
-        <div style={{
-            "maxWidth": "1200px",
-            "margin": "0 auto",
-            "padding": "20px"
-        }}>
-            <h1 style={{
-                "fontSize": "32px",
-                "marginBottom": "20px",
-                "fontWeight": "700",
-                "color": "#333"
-            }}>{major.name}</h1>
+        <div className={styles.container}>
+            <h1 className={styles.majorTitle}>{major.name}</h1>
             
-            <section style={{
-                "marginBottom": "30px",
-                "padding": "20px",
-                "backgroundColor": "#f8f9fa",
-                "borderRadius": "8px"
-            }}>
-                <h2 style={{
-                    "fontSize": "18px",
-                    "marginBottom": "15px",
-                    "fontWeight": "600"
-                }}>Select Your College:</h2>
+            <section className={styles.collegeSelectionSection}>
+                <h2 className={styles.collegeSelectionHeading}>Select Your College:</h2>
                 <select 
                     value={selectedCollegeId} 
                     onChange={handleCollegeChange}
-                    className="college-selector"
-                    style={{
-                        "padding": "8px 12px",
-                        "borderRadius": "4px",
-                        "border": "1px solid #ccc",
-                        "fontSize": "16px",
-                        "minWidth": "200px"
-                    }}
+                    className={styles.collegeSelector}
                 >
                     {major.colleges.map((college, i) => (
                         <option key={i} value={college.id}>
@@ -106,23 +89,25 @@ export default function SingleMajorPage() {
                     ))}
                 </select>
             </section>
+            
+            {/* Semester Selector component */}
+            <SemesterSelector 
+                selectedSemester={selectedSemester}
+                onSemesterChange={handleSemesterChange}
+            />
 
             <section>
-                <h2 style={{
-                    "fontSize": "24px",
-                    "marginBottom": "20px",
-                    "fontWeight": "600",
-                    "borderBottom": "2px solid #4a82e3",
-                    "paddingBottom": "10px"
-                }}>{getSelectedCollegeName()} Requirements</h2>
+                <h2 className={styles.requirementsHeading}>
+                    {getSelectedCollegeName()} Requirements
+                </h2>
                 
-                <div style={{
-                    "display": "flex",
-                    "flexDirection": "column",
-                    "gap": "60px" // This adds significant space between each MajorRequirement
-                }}>
+                <div className={styles.requirementsContainer}>
                     {getSelectedCollegeRequirements().map((reqId, i) => (
-                        <MajorRequirement key={i} reqId={reqId} />
+                        <MajorRequirement 
+                            key={i} 
+                            reqId={reqId} 
+                            selectedSemester={selectedSemester}
+                        />
                     ))}
                 </div>
             </section>

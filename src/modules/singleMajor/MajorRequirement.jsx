@@ -1,14 +1,19 @@
 import { useState, useEffect } from "react";
 import { getRequirementById } from "../../firebase/services/requirementService";
+import { getCourseById } from "../../firebase/services/courseService";
+import { isCourseAvailableInSemester } from "../../utils/semesterUtils";
+import styles from "./MajorRequirement.module.css";
 
 import ElectiveCourseCard from "./ElectiveCourseCard";
 import CoreCourseGroup from "./CoreCourseGroup";
 
-export default function MajorRequirement({ reqId }) {
+export default function MajorRequirement({ reqId, selectedSemester }) {
     const [req, setReq] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
+    const [filteredCourses, setFilteredCourses] = useState([]);
+    const [isFiltering, setIsFiltering] = useState(true);
     const coursesPerPage = 9;
 
     useEffect(() => {
@@ -25,6 +30,41 @@ export default function MajorRequirement({ reqId }) {
         fetchRequirement();
     }, [reqId]);
 
+    // Filter courses based on selected semester
+    useEffect(() => {
+        if (!req || !req.courses || !selectedSemester) return;
+
+        setIsFiltering(true);
+        // Reset to first page when changing semester
+        setCurrentPage(1);
+
+        const filterCourses = async () => {
+            try {
+                const availableCourses = [];
+                
+                // Check each course for availability in the selected semester
+                for (const courseId of req.courses) {
+                    try {
+                        const courseData = await getCourseById(courseId);
+                        if (isCourseAvailableInSemester(courseData, selectedSemester)) {
+                            availableCourses.push(courseId);
+                        }
+                    } catch (err) {
+                        console.error(`Error checking course ${courseId}:`, err);
+                    }
+                }
+                
+                setFilteredCourses(availableCourses);
+                setIsFiltering(false);
+            } catch (err) {
+                console.error("Error filtering courses:", err);
+                setIsFiltering(false);
+            }
+        };
+
+        filterCourses();
+    }, [req, selectedSemester]);
+
     if (loading) return <h1>Loading...</h1>;
     if (error) return <h1>{error}</h1>;
     if (!req) return <h1>Not found</h1>;
@@ -32,13 +72,13 @@ export default function MajorRequirement({ reqId }) {
     const isCoreReq = !(req.courses && Array.isArray(req.courses) && req.courses.length > 0);
 
     // Pagination logic for elective courses
-    const totalCourses = isCoreReq ? 0 : req.courses.length;
+    const totalCourses = isCoreReq ? 0 : filteredCourses.length;
     const totalPages = Math.ceil(totalCourses / coursesPerPage);
     
     // Get current courses for the page
     const indexOfLastCourse = currentPage * coursesPerPage;
     const indexOfFirstCourse = indexOfLastCourse - coursesPerPage;
-    const currentCourses = isCoreReq ? [] : req.courses.slice(indexOfFirstCourse, indexOfLastCourse);
+    const currentCourses = isCoreReq ? [] : filteredCourses.slice(indexOfFirstCourse, indexOfLastCourse);
 
     // Change page
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -58,58 +98,29 @@ export default function MajorRequirement({ reqId }) {
     };
 
     return (
-        <div className="requirement-section" style={{
-            "width": "94%", // Making the entire section a bit narrower
-            "margin": "0 auto",
-            "maxWidth": "1200px" // Setting a max width
-        }}>
-            <div style={{
-                "display": "flex",
-                "justifyContent": "space-between",
-                "alignItems": "center",
-                "marginBottom": "16px"
-            }}>
-                <h3 style={{
-                    "fontSize": "20px",
-                    "fontWeight": "600",
-                    "margin": "0"
-                }}>
+        <div className={styles.requirementSection}>
+            <div className={styles.header}>
+                <h3 className={styles.requirementTitle}>
                     {req.name}
                 </h3>
                 
                 {!isCoreReq && totalPages > 1 && (
-                    <div style={{
-                        "display": "flex",
-                        "alignItems": "center",
-                        "gap": "10px"
-                    }}>
+                    <div className={styles.paginationControls}>
                         <button 
                             onClick={prevPage} 
                             disabled={currentPage === 1}
-                            style={{
-                                "padding": "5px 10px",
-                                "border": "none",
-                                "background": "none",
-                                "cursor": currentPage === 1 ? "default" : "pointer",
-                                "opacity": currentPage === 1 ? "0.5" : "1"
-                            }}
+                            className={`${styles.paginationButton} ${currentPage === 1 ? styles.paginationButtonDisabled : ''}`}
                             aria-label="Previous page"
                         >
                             &lt;
                         </button>
-                        <span style={{ "fontSize": "14px" }}>
+                        <span className={styles.paginationText}>
                             Page {currentPage} of {totalPages}
                         </span>
                         <button 
                             onClick={nextPage} 
                             disabled={currentPage === totalPages}
-                            style={{
-                                "padding": "5px 10px",
-                                "border": "none",
-                                "background": "none",
-                                "cursor": currentPage === totalPages ? "default" : "pointer",
-                                "opacity": currentPage === totalPages ? "0.5" : "1"
-                            }}
+                            className={`${styles.paginationButton} ${currentPage === totalPages ? styles.paginationButtonDisabled : ''}`}
                             aria-label="Next page"
                         >
                             &gt;
@@ -119,53 +130,40 @@ export default function MajorRequirement({ reqId }) {
             </div>
             
             {isCoreReq ? (
-                <div style={{
-                    "display": "grid",
-                    "gridTemplateColumns": "minmax(0, 1fr) minmax(0, 1fr)", // This ensures columns can shrink
-                    "gap": "40px", // Gap between columns
-                    "width": "100%",
-                    "boxSizing": "border-box" // Important for accurate sizing
-                }}>
+                <div className={styles.coreCoursesGrid}>
                     {req.courseGrps.map((grp, i) => (
-                        <CoreCourseGroup key={i} courseGrp={grp} />
+                        <CoreCourseGroup 
+                            key={i} 
+                            courseGrp={grp} 
+                            selectedSemester={selectedSemester}
+                        />
                     ))}
                 </div>
+            ) : isFiltering ? (
+                <div className={styles.loadingFilter}>Filtering courses...</div>
+            ) : filteredCourses.length === 0 ? (
+                <div className={styles.noCourses}>
+                    No courses available for {selectedSemester}
+                </div>
             ) : (
-                <div style={{
-                    "display": "grid",
-                    "gridTemplateColumns": "repeat(3, 1fr)", // Fixed 3-column layout
-                    "gap": "30px", // Maintained gap
-                    "width": "100%"
-                }}>
+                <div className={styles.electiveCoursesGrid}>
                     {currentCourses.map((courseId, i) => (
-                        <ElectiveCourseCard key={i} courseId={courseId} />
+                        <ElectiveCourseCard 
+                            key={i} 
+                            courseId={courseId} 
+                            selectedSemester={selectedSemester}
+                        />
                     ))}
                 </div>
             )}
             
             {!isCoreReq && totalPages > 1 && (
-                <div style={{
-                    "display": "flex",
-                    "justifyContent": "center",
-                    "marginTop": "20px",
-                    "gap": "5px"
-                }}>
+                <div className={styles.paginationDots}>
                     {Array.from({ length: totalPages }).map((_, index) => (
                         <button
                             key={index}
                             onClick={() => paginate(index + 1)}
-                            style={{
-                                "width": "30px",
-                                "height": "30px",
-                                "border": "1px solid #ccc",
-                                "borderRadius": "50%",
-                                "display": "flex",
-                                "justifyContent": "center",
-                                "alignItems": "center",
-                                "cursor": "pointer",
-                                "background": currentPage === index + 1 ? "#4a82e3" : "white",
-                                "color": currentPage === index + 1 ? "white" : "black"
-                            }}
+                            className={`${styles.paginationDot} ${currentPage === index + 1 ? styles.paginationDotActive : ''}`}
                         >
                             {index + 1}
                         </button>
