@@ -10,6 +10,7 @@ import ElectiveCourseCard from "./ElectiveCourseCard";
 import CoreCourseGroup from "./CoreCourseGroup";
 import FilterModal from "../filterModal/FilterModal";
 import filterIcon from "../../assets/filterIcon.svg";
+import refreshIcon from "../../assets/refresh.svg"
 
 export default function MajorRequirement({ reqId, selectedSemester }) {
     const { user } = useContext(UserContext);
@@ -21,6 +22,8 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
     const [coursesWithData, setCoursesWithData] = useState([]);
     const [completedCourses, setCompletedCourses] = useState([]);
     const [isFiltering, setIsFiltering] = useState(true);
+    const [isRefreshing, setIsRefreshing] = useState(false); // State for refresh animation
+    const [refreshTrigger, setRefreshTrigger] = useState(0); // New state to force refresh
     const [completionStatus, setCompletionStatus] = useState("");
     const coursesPerPage = 9;
 
@@ -52,9 +55,13 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
         majorRequirements: {}
     });
 
-    // Function to explicitly trigger filtering
+    // Enhanced function to explicitly trigger filtering with visual feedback
     const triggerFiltering = () => {
+        setIsRefreshing(true); // Start refresh animation
         filterTriggerRef.current.shouldFilter = true;
+        
+        // Increment the refresh trigger to force the effect to run
+        setRefreshTrigger(prev => prev + 1);
     };
 
     // Fetch requirement data
@@ -268,16 +275,18 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
                     filterTriggerRef.current.shouldFilter = false;
                     filterTriggerRef.current.initialLoadComplete = true;
                     setIsFiltering(false);
+                    setIsRefreshing(false); // Stop refresh animation
                 } catch (err) {
                     console.error("Error filtering courses:", err);
                     filterTriggerRef.current.shouldFilter = false;
                     setIsFiltering(false);
+                    setIsRefreshing(false); // Stop refresh animation even on error
                 }
             };
 
             filterCourses();
         }
-    }, [req, selectedSemester, activeFilters, user]);
+    }, [req, selectedSemester, activeFilters, user, refreshTrigger]); // Added refreshTrigger here
 
     // Re-trigger filtering when semester changes
     useEffect(() => {
@@ -289,6 +298,13 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
     // Handle filter icon click
     const handleFilterClick = () => {
         setShowFilterModal(true);
+    };
+
+    // Handle refresh icon click
+    const handleRefreshClick = () => {
+        // If already refreshing, don't trigger again
+        if (isRefreshing) return;
+        triggerFiltering();
     };
 
     // Handle applying filters - updated to trigger filtering
@@ -340,12 +356,27 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
                 
                 <div className={styles.headerControls}>
                     {!isCoreReq && (
-                        <img 
-                            src={filterIcon} 
-                            alt="Filter courses"
-                            className={styles.filterIcon}
-                            onClick={handleFilterClick}
-                        />
+                        <>
+                            <img 
+                                src={refreshIcon} 
+                                alt="Refresh courses"
+                                className={`${styles.filterIcon} ${isRefreshing ? styles.spinning : ''}`}
+                                onClick={handleRefreshClick}
+                                style={{ cursor: isRefreshing ? 'wait' : 'pointer' }}
+                                title="Refresh course list"
+                            />
+                            <img 
+                                src={filterIcon} 
+                                alt="Filter courses"
+                                className={`${styles.filterIcon} ${Object.values(activeFilters).some(
+                                    category => Object.values(category).some(
+                                        option => option.only || option.prefer
+                                    )
+                                ) ? styles.filterActive : ''}`}
+                                onClick={handleFilterClick}
+                                title="Filter courses"
+                            />
+                        </>
                     )}
                     
                     {!isCoreReq && totalPages > 1 && (
