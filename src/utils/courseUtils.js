@@ -414,3 +414,26 @@ export const checkCourseEligibility = (course, user) => {
     missingPrereqs: missingPrereqs
   };
 };
+
+/**
+ * Checks if a course is part of a requirement
+ * 
+ * @param {string} courseId - The course ID to check
+ * @param {Object} requirement - The requirement object to check against
+ * @returns {boolean} - Whether the course is part of the requirement
+ */
+export const isCourseInRequirement = (courseId, requirement) => {
+  if (!courseId || !requirement) return false;
+  
+  if (requirement.courseGrps && Array.isArray(requirement.courseGrps)) {
+    // Core requirement with course groups
+    return requirement.courseGrps.some(group => 
+      group.courses && Array.isArray(group.courses) && group.courses.includes(courseId)
+    );
+  } else if (requirement.courses && Array.isArray(requirement.courses)) {
+    // Elective requirement with courses array
+    return requirement.courses.includes(courseId);
+  }
+  
+  return false;
+};

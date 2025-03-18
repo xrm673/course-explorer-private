@@ -2,8 +2,9 @@ import { useState, useEffect, useContext, useRef } from "react";
 import { getRequirementById } from "../../firebase/services/requirementService";
 import { getCourseById } from "../../firebase/services/courseService";
 import { isCourseAvailableInSemester } from "../../utils/semesterUtils";
-import { checkCourseEligibility } from "../../utils/courseUtils";
+import { checkCourseEligibility, isCourseInRequirement } from "../../utils/courseUtils";
 import { UserContext } from "../../context/UserContext";
+import { useAcademic } from "../../context/AcademicContext";
 import styles from "./MajorRequirement.module.css";
 
 import ElectiveCourseCard from "./ElectiveCourseCard";
@@ -14,6 +15,7 @@ import refreshIcon from "../../assets/refresh.svg"
 
 export default function MajorRequirement({ reqId, selectedSemester }) {
     const { user } = useContext(UserContext);
+    const { academicData } = useAcademic(); // Added academicData
     const [req, setReq] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -146,9 +148,49 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
         return 'others';
     };
 
+    // Apply requirement filters and update score
+    const applyRequirementFilters = (course, filters) => {
+        let score = 0;
+        let shouldKeep = true;
+        
+        // Get all requirement filters
+        const requirementFilters = Object.entries(filters.majorRequirements || {});
+        if (requirementFilters.length === 0) {
+            return { score, shouldKeep };
+        }
+        
+        // Check for any "only" filters
+        const onlyFilters = requirementFilters.filter(([_, filter]) => filter.only);
+        if (onlyFilters.length > 0) {
+            // Course must be in at least one of the "only" requirements
+            const matchesAnyOnly = onlyFilters.some(([reqId]) => {
+                const requirement = academicData?.requirements?.[reqId];
+                return requirement && isCourseInRequirement(course.id, requirement);
+            });
+            
+            // If course doesn't match any "only" requirement, exclude it
+            if (!matchesAnyOnly) {
+                shouldKeep = false;
+                return { score, shouldKeep };
+            }
+        }
+        
+        // Apply "prefer" filters - add points for each matching requirement
+        const preferFilters = requirementFilters.filter(([_, filter]) => filter.prefer);
+        preferFilters.forEach(([reqId]) => {
+            const requirement = academicData?.requirements?.[reqId];
+            if (requirement && isCourseInRequirement(course.id, requirement)) {
+                // Significant score boost (10 points) for matching a preferred requirement
+                score += 10;
+            }
+        });
+        
+        return { score, shouldKeep };
+    };
+
     // Load and filter courses - modified to only run when explicitly triggered
     useEffect(() => {
-        if (!req || !req.courses || !selectedSemester) return;
+        if (!req || !req.courses || !selectedSemester || !academicData) return;
 
         // Only filter if explicitly triggered or on initial load
         if (filterTriggerRef.current.shouldFilter) {
@@ -246,6 +288,14 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
                             }
                         }
                         
+                        // Apply requirement filters *** NEW CODE ***
+                        const { score: reqScore, shouldKeep: reqShouldKeep } = applyRequirementFilters(course, activeFilters);
+                        score += reqScore;
+                        if (!reqShouldKeep) {
+                            shouldKeep = false;
+                            continue;
+                        }
+                        
                         // If course passed all filters, add it to results
                         if (shouldKeep) {
                             courseResults.push({
@@ -286,7 +336,7 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
 
             filterCourses();
         }
-    }, [req, selectedSemester, activeFilters, user, refreshTrigger]); // Added refreshTrigger here
+    }, [req, selectedSemester, activeFilters, user, refreshTrigger, academicData]); // Added academicData to dependencies
 
     // Re-trigger filtering when semester changes
     useEffect(() => {

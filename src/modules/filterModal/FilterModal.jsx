@@ -47,9 +47,9 @@ const FilterModal = ({
     majorRequirements: {}
   });
 
-  // Process requirements for all user's majors
+  // Process requirements for all user's majors when modal opens
   useEffect(() => {
-    if (!user?.majors || !academicData?.majors || !academicData?.requirements) {
+    if (!isOpen || !user?.majors || !academicData?.majors || !academicData?.requirements) {
       return;
     }
 
@@ -72,10 +72,10 @@ const FilterModal = ({
       basicReqs.forEach(reqId => {
         const requirement = academicData.requirements[reqId];
         if (requirement) {
-          // Use format: majorId_reqId as the key and store the human-readable name
+          // Use reqId directly as the key since it already includes the major prefix
           majorRequirements[reqId] = { 
-            only: false, 
-            prefer: false,
+            only: activeFilters?.majorRequirements?.[reqId]?.only || false, 
+            prefer: activeFilters?.majorRequirements?.[reqId]?.prefer || false,
             // Use the requirement's name instead of ID
             displayName: requirement.name || reqId,
             majorId, // Store majorId to group by major in UI
@@ -98,8 +98,8 @@ const FilterModal = ({
               const requirement = academicData.requirements[reqId];
               if (requirement) {
                 majorRequirements[reqId] = { 
-                  only: false, 
-                  prefer: false,
+                  only: activeFilters?.majorRequirements?.[reqId]?.only || false, 
+                  prefer: activeFilters?.majorRequirements?.[reqId]?.prefer || false,
                   displayName: requirement.name || reqId,
                   majorId,
                   majorName: majorData.name || majorId,
@@ -115,13 +115,9 @@ const FilterModal = ({
     // Update filter state with the processed requirements
     setFilters(prev => ({
       ...prev,
-      majorRequirements: {
-        ...majorRequirements,
-        // Preserve any existing filter selections
-        ...(activeFilters?.majorRequirements || {})
-      }
+      majorRequirements: majorRequirements
     }));
-  }, [user, academicData, activeFilters]);
+  }, [user, academicData, activeFilters, isOpen]); // Added isOpen to dependencies
 
   // Merge any active filters when they change
   useEffect(() => {
@@ -131,16 +127,7 @@ const FilterModal = ({
         level: { ...prev.level, ...(activeFilters.level || {}) },
         enrollment: { ...prev.enrollment, ...(activeFilters.enrollment || {}) },
         instructionMode: { ...prev.instructionMode, ...(activeFilters.instructionMode || {}) },
-        // For major requirements, we keep our processed version with display names
-        // but update the checkbox states
-        majorRequirements: Object.keys(prev.majorRequirements).reduce((acc, key) => {
-          acc[key] = {
-            ...prev.majorRequirements[key],
-            only: activeFilters.majorRequirements?.[key]?.only || false,
-            prefer: activeFilters.majorRequirements?.[key]?.prefer || false,
-          };
-          return acc;
-        }, {})
+        // We'll preserve our requirement display metadata in the main effect above
       }));
     }
   }, [activeFilters]);
@@ -172,17 +159,9 @@ const FilterModal = ({
   };
 
   const handleApply = () => {
-    // Strip out display metadata before passing filter state back
-    const cleanedFilters = {
-      ...filters,
-      majorRequirements: Object.entries(filters.majorRequirements).reduce((acc, [key, value]) => {
-        acc[key] = { only: value.only, prefer: value.prefer };
-        return acc;
-      }, {})
-    };
-    
-    // Call the external handler
-    handleApplyExternal(cleanedFilters);
+    // Return the full filters including metadata
+    // The MajorRequirement component only cares about the checkbox states
+    handleApplyExternal(filters);
     handleClose();
   };
 
