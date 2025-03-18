@@ -1,70 +1,72 @@
-/* TopBar.module.css */
-
 .topbar {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background-color: white;
-  }
-  
-  .logo {
-    width: 150px;
-    margin: 0 100px 0 10px;
-    cursor: pointer;
-  }
-  
-  .icon {
-    width: 40px;
-  }
-  
-  .buttonBase {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    transition: all 0.2s ease-in-out;
-  }
-  
-  .scheduleButton {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    transition: all 0.2s ease-in-out;
-    margin: 0 25px 0 150px;
-  }
-  
-  .profileButton {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    transition: all 0.2s ease-in-out;
-    margin: 0 25px;
-  }
-  
-  .navigationButton {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    transition: all 0.2s ease-in-out;
-    margin: 0 0 0 25px;
-  }
-  
-  .activeButton {
-    opacity: 0.7;
-    transform: scale(1.1);
-  }
-  
-  .inactiveButton {
-    opacity: 1;
-    transform: scale(1);
-  }
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  height: 100px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: white;
+  padding: 0 20px;
+}
+
+.logoLink {
+  margin-right: 40px;
+}
+
+.logo {
+  width: 150px;
+  cursor: pointer;
+}
+
+.navLinks {
+  display: flex;
+  margin-right: 30px;
+}
+
+.navLink {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  text-decoration: none;
+  padding: 10px 16px;
+  margin: 0 5px;
+  border-radius: 4px;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.navLink:hover {
+  background-color: #f5f5f5;
+  color: #b31b1b; /* Cornell red */
+}
+
+.rightControls {
+  display: flex;
+  margin-left: auto;
+  align-items: center;
+}
+
+.icon {
+  width: 40px;
+}
+
+.scheduleButton, .profileButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.2s ease-in-out;
+  margin: 0 15px;
+}
+
+.activeButton {
+  opacity: 0.7;
+  transform: scale(1.1);
+}
+
+.inactiveButton {
+  opacity: 1;
+  transform: scale(1);
+}

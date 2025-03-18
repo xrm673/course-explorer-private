@@ -10,7 +10,7 @@
 
 /* When sidebar is open, adjust the content width */
 .content-container.sidebar-open {
-  max-width: 900px;
+  max-width: 1000px; /* Increased from 900px to 1000px */
   margin-right: 300px; /* Matches the sidebar width */
 }
 

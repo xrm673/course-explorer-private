@@ -6,7 +6,6 @@ import logo from '../../../assets/logo.svg'
 import SearchBar from '../../searchBar/components/SearchBar'
 import scheduleIcon from '../../../assets/schedule.svg'
 import defaultAvator from '../../../assets/defaultAvator.svg'
-import hamburgerIcon from '../../../assets/hamburgerIcon.svg'
 
 export default function TopBar() {
     // Use the shared context instead of local state
@@ -21,7 +20,7 @@ export default function TopBar() {
     
     return (
         <div className={styles.topbar}>
-            <a href="/">
+            <a href="/" className={styles.logoLink}>
                 <img 
                     src={logo} 
                     alt="CU Explore"
@@ -29,40 +28,37 @@ export default function TopBar() {
                 />
             </a>
 
+            <div className={styles.navLinks}>
+                <a href="/majors" className={styles.navLink}>Majors</a>
+                <a href="/minors" className={styles.navLink}>Minors</a>
+                <a href="/subjects" className={styles.navLink}>Subjects</a>
+            </div>
+
             <SearchBar />
 
-            <button 
-                onClick={() => toggleSidebar('schedule')}
-                className={getButtonClass('schedule', 'scheduleButton')}
-            >
-                <img 
-                    src={scheduleIcon} 
-                    alt="Schedule Icon"
-                    className={styles.icon} 
-                />
-            </button>
+            <div className={styles.rightControls}>
+                <button 
+                    onClick={() => toggleSidebar('schedule')}
+                    className={getButtonClass('schedule', 'scheduleButton')}
+                >
+                    <img 
+                        src={scheduleIcon} 
+                        alt="Schedule Icon"
+                        className={styles.icon} 
+                    />
+                </button>
 
-            <button 
-                onClick={() => toggleSidebar('profile')}
-                className={getButtonClass('profile', 'profileButton')}
-            >
-                <img 
-                    src={defaultAvator} 
-                    alt="Avatar"
-                    className={styles.icon} 
-                />
-            </button>
-            
-            <button 
-                onClick={() => toggleSidebar('navigation')}
-                className={getButtonClass('navigation', 'navigationButton')}
-            >
-                <img 
-                    src={hamburgerIcon} 
-                    alt="Hamburger"
-                    className={styles.icon} 
-                />
-            </button>
+                <button 
+                    onClick={() => toggleSidebar('profile')}
+                    className={getButtonClass('profile', 'profileButton')}
+                >
+                    <img 
+                        src={defaultAvator} 
+                        alt="Avatar"
+                        className={styles.icon} 
+                    />
+                </button>
+            </div>
         </div>
     );
 }

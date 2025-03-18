@@ -17,7 +17,7 @@
 
 /* The 'sidebar-open' class will be added via JavaScript in the component */
 .selectorContainer.sidebar-open {
-  max-width: 900px;
+  max-width: 1000px; /* Match the updated content width */
   margin-right: 300px;
 }
 
