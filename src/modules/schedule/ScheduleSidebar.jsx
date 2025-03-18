@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../../context/UserContext';
 import { doc, updateDoc } from 'firebase/firestore';
 import { db } from '../../firebase/config';
+import styles from './ScheduleSidebar.module.css';
 
 export default function ScheduleSidebar({ onClose, activeSemester }) {
     const { user, setUser } = useContext(UserContext);
@@ -87,33 +88,12 @@ export default function ScheduleSidebar({ onClose, activeSemester }) {
     };
 
     return (
-        <div style={{
-            "position": "fixed",
-            "right": 0,
-            "top": "100px",
-            "height": "calc(100vh - 100px)",
-            "width": "300px",
-            "backgroundColor": "white",
-            "boxShadow": "-2px 0 5px rgba(0,0,0,0.1)",
-            "zIndex": 90,
-            "padding": "20px",
-            "overflow": "auto"
-        }}>
-            <div style={{
-                "display": "flex",
-                "justifyContent": "space-between",
-                "alignItems": "center",
-                "marginBottom": "20px"
-            }}>
-                <h2 style={{ "margin": 0 }}>My Schedule</h2>
+        <div className={styles.sidebarContainer}>
+            <div className={styles.header}>
+                <h2 className={styles.title}>My Schedule</h2>
                 <button 
                     onClick={onClose}
-                    style={{
-                        "background": "none",
-                        "border": "none",
-                        "fontSize": "24px",
-                        "cursor": "pointer"
-                    }}
+                    className={styles.closeButton}
                 >
                     ×
                 </button>

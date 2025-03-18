@@ -1,0 +1,34 @@
+/* ScheduleSidebar.module.css */
+.sidebarContainer {
+    position: fixed;
+    right: 0;
+    top: 100px;
+    height: calc(100vh - 100px);
+    width: 300px;
+    background-color: white;
+    box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+    z-index: 90;
+    padding: 20px;
+    overflow-y: auto;
+    box-sizing: border-box;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .title {
+    margin: 0;
+  }
+  
+  .closeButton {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  
+  /* Other styles for planned/taken sections... */

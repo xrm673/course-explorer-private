@@ -1,0 +1,30 @@
+/* MainLayout.css */
+
+/* Content container - this will adjust its width */
+.content-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  transition: max-width 0.3s ease, margin-right 0.3s ease;
+}
+
+/* When sidebar is open, adjust the content width */
+.content-container.sidebar-open {
+  max-width: 900px;
+  margin-right: 300px; /* Matches the sidebar width */
+}
+
+/* For responsive adjustments */
+@media (max-width: 1200px) {
+  .content-container.sidebar-open {
+    max-width: calc(100% - 320px);
+  }
+}
+
+/* For smaller screens, overlay sidebar instead */
+@media (max-width: 768px) {
+  .content-container.sidebar-open {
+    margin-right: 0;
+    max-width: 100%;
+  }
+}

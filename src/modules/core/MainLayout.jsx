@@ -2,7 +2,9 @@ import { useState, createContext, useContext } from 'react'
 import { Outlet } from 'react-router-dom'
 import TopBar from './components/TopBar'
 import NavigationMenu from './components/NavigationMenu'
+import PersonalInfoModal from '../personalInfo/PersonalInfoModal'
 import ScheduleSidebar from '../schedule/ScheduleSidebar'
+import './MainLayout.css' // We'll create this CSS file
 
 // Create context for sidebar functionality
 export const SidebarContext = createContext();
@@ -12,55 +14,64 @@ export function useSidebar() {
 }
 
 export default function MainLayout() {
-  const [isNavOpen, setIsNavOpen] = useState(false)
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
-  const [activeSemester, setActiveSemester] = useState(null)
+  const [activeSidebar, setActiveSidebar] = useState(null);
+  const [activeSemester, setActiveSemester] = useState(null);
   
-  // Function to open sidebar with a specific semester
-  const openSidebar = (semester) => {
-    setActiveSemester(semester);
-    setIsSidebarOpen(true);
+  const toggleSidebar = (sidebarName) => {
+    setActiveSidebar(prev => prev === sidebarName ? null : sidebarName);
   };
   
-  // Listen for course update events (optional)
-  // This allows components to respond to course changes if needed
+  const openSidebar = (semester) => {
+    setActiveSemester(semester);
+    setActiveSidebar('schedule');
+  };
+  
+  const closeSidebar = () => {
+    setActiveSidebar(null);
+  };
+  
   const courseUpdated = () => {
-    // Dispatch an event that other components can listen for
     const event = new CustomEvent('courseUpdated');
     document.dispatchEvent(event);
   };
   
-  // Value to provide to the context
   const sidebarContextValue = {
+    activeSidebar,
+    toggleSidebar,
     openSidebar,
-    isSidebarOpen,
+    closeSidebar,
     activeSemester,
-    courseUpdated
+    courseUpdated,
+    isSidebarOpen: activeSidebar === 'schedule'
   };
 
   return (
     <SidebarContext.Provider value={sidebarContextValue}>
-      <div>
-        <TopBar
-          onMenuClick={() => setIsNavOpen(true)}
-          onScheduleClick={() => setIsSidebarOpen(true)}
-        />
-        
-        {isNavOpen && (
-          <NavigationMenu onClose={() => setIsNavOpen(false)} />
-        )}
-        
+      {/* TopBar remains full width */}
+      <TopBar />
+      
+      {/* Content container that adjusts width */}
+      <div className={`content-container ${activeSidebar ? 'sidebar-open' : ''}`}>
         <main>
           <Outlet />
         </main>
-        
-        {isSidebarOpen && (
-          <ScheduleSidebar 
-            onClose={() => setIsSidebarOpen(false)} 
-            activeSemester={activeSemester}
-          />
-        )}
       </div>
+      
+      {/* Sidebars remain fixed */}
+      {activeSidebar === 'navigation' && (
+        <NavigationMenu onClose={closeSidebar} />
+      )}
+      
+      {activeSidebar === 'profile' && (
+        <PersonalInfoModal onClose={closeSidebar} />
+      )}
+      
+      {activeSidebar === 'schedule' && (
+        <ScheduleSidebar 
+          onClose={closeSidebar} 
+          activeSemester={activeSemester}
+        />
+      )}
     </SidebarContext.Provider>
   )
 }

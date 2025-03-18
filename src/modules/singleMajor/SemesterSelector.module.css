@@ -1,16 +1,26 @@
+/* SemesterSelector.module.css */
 .selectorContainer {
   position: sticky;
-  top: 100px; /* Set this to match the height of the TopBar */
-  z-index: 90; /* Lower than TopBar's z-index (100) */
+  top: 100px;
+  z-index: 90;
   background-color: white;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   padding: 15px 20px;
   margin-bottom: 25px;
   border-radius: 8px;
-  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
   box-sizing: border-box;
+  transition: max-width 0.3s ease, margin-right 0.3s ease;
 }
-  
+
+/* The 'sidebar-open' class will be added via JavaScript in the component */
+.selectorContainer.sidebar-open {
+  max-width: 900px;
+  margin-right: 300px;
+}
+
 .selectorTitle {
   font-size: 16px;
   font-weight: 600;
@@ -50,4 +60,17 @@
   
 .activeButton:hover {
   background-color: #3a72d3;
+}
+
+@media (max-width: 1200px) {
+  .selectorContainer.sidebar-open {
+    max-width: calc(100% - 320px);
+  }
+}
+
+@media (max-width: 768px) {
+  .selectorContainer.sidebar-open {
+    margin-right: 0;
+    max-width: 100%;
+  }
 }
