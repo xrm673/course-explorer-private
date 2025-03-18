@@ -3,26 +3,26 @@ import { UserContext } from '../../context/UserContext';
 import { useAcademic } from '../../context/AcademicContext';
 import styles from './FilterModal.module.css';
 
-// This component supports both the original API and the new enhanced API
+/**
+ * FilterModal component for filtering courses
+ * 
+ * @param {boolean} isOpen - Whether the modal is visible
+ * @param {Object} activeFilters - The current active filters
+ * @param {Function} onClose - Function to call when closing the modal
+ * @param {Function} onApplyFilters - Function to call when applying filters
+ */
 const FilterModal = ({ 
-  // Original API props
-  show, 
-  onClose, 
-  onApply, 
-  categories,
-  // Enhanced API props
-  isOpen,
+  isOpen, 
   activeFilters,
+  onClose,
   onApplyFilters
 }) => {
   const { user } = useContext(UserContext);
   const { academicData } = useAcademic();
-  // Determine if modal should be open (support both APIs)
-  const modalOpen = isOpen !== undefined ? isOpen : show;
-  // Use the appropriate close handler
+  
+  // Safe handlers with fallbacks
   const handleClose = onClose || (() => {});
-  // Use the appropriate apply handler
-  const handleApplyExternal = onApplyFilters || onApply || (() => {});
+  const handleApplyExternal = onApplyFilters || (() => {});
   
   // Initialize filter state with default structure
   const [filters, setFilters] = useState({
@@ -46,30 +46,6 @@ const FilterModal = ({
     // Major requirements will be populated dynamically
     majorRequirements: {}
   });
-
-  // Process categories if they are provided in the older format
-  useEffect(() => {
-    if (categories && Array.isArray(categories)) {
-      const newFilters = { ...filters };
-      
-      categories.forEach(category => {
-        const categoryKey = getCategoryKey(category.name);
-        
-        if (categoryKey) {
-          // Reset the category
-          newFilters[categoryKey] = {};
-          
-          // Add each option
-          category.options.forEach(option => {
-            const optionKey = getOptionKey(option);
-            newFilters[categoryKey][optionKey] = { only: false, prefer: false };
-          });
-        }
-      });
-      
-      setFilters(newFilters);
-    }
-  }, [categories]);
 
   // Process requirements for all user's majors
   useEffect(() => {
@@ -97,8 +73,7 @@ const FilterModal = ({
         const requirement = academicData.requirements[reqId];
         if (requirement) {
           // Use format: majorId_reqId as the key and store the human-readable name
-          const key = `${majorId}_${reqId}`;
-          majorRequirements[key] = { 
+          majorRequirements[reqId] = { 
             only: false, 
             prefer: false,
             // Use the requirement's name instead of ID
@@ -122,8 +97,7 @@ const FilterModal = ({
             concentrationData.requirements.forEach(reqId => {
               const requirement = academicData.requirements[reqId];
               if (requirement) {
-                const key = `${majorId}_${reqId}`;
-                majorRequirements[key] = { 
+                majorRequirements[reqId] = { 
                   only: false, 
                   prefer: false,
                   displayName: requirement.name || reqId,
@@ -174,19 +148,26 @@ const FilterModal = ({
   // Handle checkbox changes
   const handleCheckboxChange = (category, option, checkboxType) => {
     setFilters(prevFilters => {
-      const updatedFilters = { ...prevFilters };
+      // Create a deep copy of the relevant category
+      const updatedCategory = JSON.parse(JSON.stringify(prevFilters[category]));
       
-      // For "only" checkboxes, uncheck all other "only" options in the same category
-      if (checkboxType === 'only' && updatedFilters[category][option][checkboxType] === false) {
-        Object.keys(updatedFilters[category]).forEach(opt => {
+      // For "only" checkboxes, uncheck all other "only" options
+      if (checkboxType === 'only' && !updatedCategory[option][checkboxType]) {
+        Object.keys(updatedCategory).forEach(opt => {
           if (opt !== option) {
-            updatedFilters[category][opt].only = false;
+            updatedCategory[opt].only = false;
           }
         });
       }
       
-      updatedFilters[category][option][checkboxType] = !updatedFilters[category][option][checkboxType];
-      return updatedFilters;
+      // Toggle the specific checkbox
+      updatedCategory[option][checkboxType] = !updatedCategory[option][checkboxType];
+      
+      // Return new state with updated category
+      return {
+        ...prevFilters,
+        [category]: updatedCategory
+      };
     });
   };
 
@@ -200,7 +181,7 @@ const FilterModal = ({
       }, {})
     };
     
-    // Call the appropriate external handler
+    // Call the external handler
     handleApplyExternal(cleanedFilters);
     handleClose();
   };
@@ -233,30 +214,8 @@ const FilterModal = ({
     setFilters(resetFilters);
   };
 
-  // Helper to convert category names to keys
-  const getCategoryKey = (name) => {
-    const mapping = {
-      'Level': 'level',
-      'Enrollment Requirements': 'enrollment',
-      'Instruction Mode': 'instructionMode'
-    };
-    return mapping[name] || name.toLowerCase().replace(/\s+/g, '');
-  };
-
-  // Helper to convert option names to keys
-  const getOptionKey = (option) => {
-    const mapping = {
-      'In-Person': 'inPerson',
-      'Online (Recording)': 'onlineRecording',
-      'Online (Live)': 'onlineLive',
-      'Hybrid': 'hybrid',
-      'Others': 'others',
-      'Eligible': 'eligible',
-    };
-    return mapping[option] || option.toLowerCase().replace(/[()]/g, '').replace(/\s+/g, '');
-  };
-
-  if (!modalOpen) return null;
+  // Early return if modal is not open
+  if (!isOpen) return null;
 
   // Group major requirements by major for better organization
   const groupedRequirements = Object.entries(filters.majorRequirements).reduce((acc, [key, req]) => {
