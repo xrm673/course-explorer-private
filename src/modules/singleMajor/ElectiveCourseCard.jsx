@@ -14,7 +14,7 @@ import checkMark from "../../assets/checkMark.svg"
 import styles from "./ElectiveCourseCard.module.css"
 
 // Updated to receive course object directly instead of courseId
-export default function ElectiveCourseCard({ course, selectedSemester, onStatusChange }) {
+export default function ElectiveCourseCard({ course, selectedSemester, onStatusChange, tags }) {
     // No longer need to fetch or store course data
     const [error, setError] = useState(null);
     const [courseStatus, setCourseStatus] = useState({ isPlanned: false, isTaken: false, semester: null });
@@ -103,8 +103,6 @@ export default function ElectiveCourseCard({ course, selectedSemester, onStatusC
     // Error handling - now there's no loading state
     if (error) return <div className={styles.error}>{error}</div>;
     if (!course) return <div className={styles.error}>Course data missing</div>;
-
-    const tags = ["Tag 1", "Tag 2", "Tag 3"]
     
     // Apply different card style based on status and eligibility
     // Note the priority: taken > planned > ineligible > default

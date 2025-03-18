@@ -21,7 +21,6 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
     const [error, setError] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
     const [filteredCourses, setFilteredCourses] = useState([]);
-    const [coursesWithData, setCoursesWithData] = useState([]);
     const [completedCourses, setCompletedCourses] = useState([]);
     const [isFiltering, setIsFiltering] = useState(true);
     const [isRefreshing, setIsRefreshing] = useState(false); // State for refresh animation
@@ -148,15 +147,16 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
         return 'others';
     };
 
-    // Apply requirement filters and update score
+    // Apply requirement filters and collect tags in one pass
     const applyRequirementFilters = (course, filters) => {
         let score = 0;
         let shouldKeep = true;
+        const matchingTags = []; // Array to collect requirement tags
         
         // Get all requirement filters
         const requirementFilters = Object.entries(filters.majorRequirements || {});
         if (requirementFilters.length === 0) {
-            return { score, shouldKeep };
+            return { score, shouldKeep, tags: matchingTags };
         }
         
         // Check for any "only" filters
@@ -165,27 +165,38 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
             // Course must be in at least one of the "only" requirements
             const matchesAnyOnly = onlyFilters.some(([reqId]) => {
                 const requirement = academicData?.requirements?.[reqId];
-                return requirement && isCourseInRequirement(course.id, requirement);
+                const matches = requirement && isCourseInRequirement(course.id, requirement);
+                
+                // If matching and has tag, collect it
+                if (matches && requirement.tag) {
+                    matchingTags.push(requirement.tag);
+                }
+                
+                return matches;
             });
             
-            // If course doesn't match any "only" requirement, exclude it
             if (!matchesAnyOnly) {
                 shouldKeep = false;
-                return { score, shouldKeep };
+                return { score, shouldKeep, tags: matchingTags };
             }
         }
-        
-        // Apply "prefer" filters - add points for each matching requirement
+    
+        // Apply "prefer" filters - add points and collect tags
         const preferFilters = requirementFilters.filter(([_, filter]) => filter.prefer);
         preferFilters.forEach(([reqId]) => {
             const requirement = academicData?.requirements?.[reqId];
             if (requirement && isCourseInRequirement(course.id, requirement)) {
-                // Significant score boost (10 points) for matching a preferred requirement
+                // Add score
                 score += 10;
+                
+                // Collect tag if it exists and isn't already in the list
+                if (requirement.tag && !matchingTags.includes(requirement.tag)) {
+                    matchingTags.push(requirement.tag);
+                }
             }
         });
         
-        return { score, shouldKeep };
+        return { score, shouldKeep, tags: matchingTags };
     };
 
     // Load and filter courses - modified to only run when explicitly triggered
@@ -289,7 +300,8 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
                         }
                         
                         // Apply requirement filters *** NEW CODE ***
-                        const { score: reqScore, shouldKeep: reqShouldKeep } = applyRequirementFilters(course, activeFilters);
+                        const { score: reqScore, shouldKeep: reqShouldKeep, tags: reqTags } = 
+                        applyRequirementFilters(course, activeFilters);
                         score += reqScore;
                         if (!reqShouldKeep) {
                             shouldKeep = false;
@@ -300,16 +312,14 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
                         if (shouldKeep) {
                             courseResults.push({
                                 course: course,
-                                score: score
+                                score: score,
+                                requirementTags: reqTags
                             });
                         }
                     }
                     
                     // Sort courses by score (highest first)
                     courseResults.sort((a, b) => b.score - a.score);
-                    
-                    // Store all course data for reference
-                    setCoursesWithData(validCourseData);
                     
                     // Store completed courses
                     setCompletedCourses(completedCoursesList);
@@ -318,8 +328,8 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
                     // Store full course objects in sorted order
                     const sortedCourses = courseResults.map(result => result.course);
                     
-                    // Store the sorted courses in state
-                    setFilteredCourses(sortedCourses);
+                    // Store the entire object with course and tags:
+                    setFilteredCourses(courseResults);
                     
                     // Reset trigger flag and set initial load as complete
                     filterTriggerRef.current.shouldFilter = false;
@@ -487,12 +497,12 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
                 </div>
             ) : (
                 <div className={styles.electiveCoursesGrid}>
-                    {/* Pass full course object instead of just ID */}
-                    {currentCourses.map((course) => (
+                    {currentCourses.map((courseResult) => (
                         <ElectiveCourseCard 
-                            key={course.id} 
-                            course={course}  
+                            key={courseResult.course.id} 
+                            course={courseResult.course}  
                             selectedSemester={selectedSemester}
+                            tags={courseResult.requirementTags}
                         />
                     ))}
                 </div>
