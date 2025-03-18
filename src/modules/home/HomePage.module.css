@@ -1,0 +1,103 @@
+/* HomePage.module.css */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+  }
+  
+  .welcomeSection {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  .welcomeTitle {
+    font-size: 2.5rem;
+    margin-bottom: 24px;
+    color: #1f2937;
+  }
+  
+  .exploreSection {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 40px 0;
+    flex-wrap: wrap;
+  }
+  
+  .exploreLink {
+    display: inline-block;
+    padding: 16px 24px;
+    background-color: #b31b1b; /* Cornell red */
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    text-align: center;
+  }
+  
+  .exploreLink:hover {
+    background-color: #921616;
+    transform: translateY(-2px);
+  }
+  
+  .authSection {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 40px;
+  }
+  
+  .authLink {
+    display: inline-block;
+    padding: 12px 32px;
+    background-color: #f3f4f6;
+    color: #4b5563;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    text-align: center;
+    border: 1px solid #e5e7eb;
+  }
+  
+  .authLink:hover {
+    background-color: #e5e7eb;
+    transform: translateY(-2px);
+  }
+  
+  .loginLink {
+    background-color: #e3f2fd;
+    color: #1976d2;
+    border: 1px solid #bbdefb;
+  }
+  
+  .loginLink:hover {
+    background-color: #bbdefb;
+  }
+  
+  /* Media queries for responsiveness */
+  @media (max-width: 768px) {
+    .exploreSection {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .exploreLink {
+      width: 100%;
+      max-width: 300px;
+    }
+    
+    .authSection {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .authLink {
+      width: 100%;
+      max-width: 300px;
+    }
+  }

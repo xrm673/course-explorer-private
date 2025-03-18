@@ -1,0 +1,84 @@
+/* CoursePicks.module.css - based on MajorRequirement.module.css */
+.container {
+  width: 94%;
+  margin: 0 auto 60px auto;
+  max-width: 1200px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.titleSection {
+  display: flex;
+  align-items: center;
+}
+
+.sectionTitle {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.headerControls {
+  display: flex;
+  align-items: center;
+}
+
+.refreshIcon {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.refreshIcon:hover {
+  transform: scale(1.1);
+}
+
+.spinning {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.courseGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  width: 100%;
+}
+
+/* Loading, Error, Empty states */
+.loadingMessage, .errorMessage, .noCoursesMessage {
+  padding: 40px 0;
+  text-align: center;
+  color: #666;
+  font-size: 16px;
+  width: 100%;
+}
+
+.errorMessage {
+  color: #e53935;
+}
+
+.noCoursesMessage {
+  padding: 40px 0;
+  text-align: center;
+  color: #666;
+  font-size: 16px;
+  width: 100%;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  border: 1px dashed #ddd;
+}

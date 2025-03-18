@@ -246,15 +246,6 @@ const formatMissingPrereqs = () => {
                     )}
                 </div>
             </div>
-
-            {/* Tags Section */}
-            <div className={styles.tagsContainer}>
-                {tags.map((tag, index) => (
-                    <span key={index} className={styles.tag}>
-                        {tag}
-                    </span>
-                ))}
-            </div>
         </div>
     )
 }

@@ -1,330 +1,295 @@
-import React, { useState, useEffect } from 'react';
-import HomeCourseCard from './HomeCourseCard';
-import FilterModal from '../../filterModal/FilterModal';
+import React, { useState, useEffect, useContext, useRef } from 'react';
+import { UserContext } from '../../../context/UserContext';
+import { useAcademic } from '../../../context/AcademicContext';
+import { getCourseById } from '../../../firebase/services/courseService';
+import { checkCourseEligibility, getCourseStatus } from '../../../utils/courseUtils';
+import { isCourseAvailableInSemester } from "../../../utils/semesterUtils";
 import { useSidebar } from '../../core/MainLayout';
+import { 
+  addCourseToSchedule, 
+  markCourseAsTaken, 
+  removeCourseFromSchedule 
+} from '../../../utils/courseUtils';
+import refreshIcon from '../../../assets/refresh.svg';
+import HomeCourseCard from './HomeCourseCard';
+import styles from './CoursePicks.module.css';
 
 export default function CoursePicks() {
-  // Get the sidebar context functions
-  const { openSidebar, addCourseToSchedule, removeCourseFromSchedule } = useSidebar();
-  
-  // Mock semester data
-  const currentSemester = "Fall 2025";
-  
-  // Mock course data
-  const [courses, setCourses] = useState([
-    {
-      id: 1,
-      code: "CS 1110",
-      title: "Introduction to Computing Using Python",
-      tags: ["FWS", "Distribution I", "4 Credits", "In-Person", "High-Rate Instructor"],
-      state: "normal",
-    },
-    {
-      id: 2,
-      code: "INFO 1200",
-      title: "Information Ethics, Law, and Policy",
-      tags: ["Distribution II", "3 Credits", "In-Person", "Light Workload"],
-      state: "normal",
-    },
-    {
-      id: 3,
-      code: "CS 2110",
-      title: "Object-Oriented Programming and Data Structures",
-      tags: ["4 Credits", "In-Person", "Moderate Workload", "Two Prelims"],
-      state: "ineligible",
-      ineligibleReason: "Prerequisite: CS 1110 or equivalent",
-    },
-    {
-      id: 4,
-      code: "MATH 1120",
-      title: "Calculus II",
-      tags: ["Distribution I", "4 Credits", "In-Person", "Moderate Workload"],
-      state: "normal",
-    },
-    {
-      id: 5,
-      code: "PHYS 1112",
-      title: "Physics I: Mechanics and Heat",
-      tags: ["PBS", "4 Credits", "Lab", "Moderate Difficulty"],
-      state: "normal",
-    },
-    {
-      id: 6,
-      code: "ECON 1110",
-      title: "Introductory Microeconomics",
-      tags: ["Distribution III", "3 Credits", "Large Lecture", "Easy"],
-      state: "normal",
-    },
-  ]);
-  
-  // Listen for course removal events from the sidebar
-  useEffect(() => {
-    const handleCourseRemoved = (event) => {
-      const { courseCode } = event.detail;
-      
-      // Find the course in our state and reset it to 'normal'
-      setCourses(prevCourses => 
-        prevCourses.map(course => 
-          course.code === courseCode 
-            ? { ...course, state: 'normal' } 
-            : course
-        )
-      );
-    };
+    const { user, setUser } = useContext(UserContext);
+    const { academicData } = useAcademic();
+    const { openSidebar } = useSidebar();
+    const [recommendedCourses, setRecommendedCourses] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [isRefreshing, setIsRefreshing] = useState(false);
+    const [refreshTrigger, setRefreshTrigger] = useState(0);
     
-    // Add event listener
-    document.addEventListener('courseRemoved', handleCourseRemoved);
+    // Current semester for planning
+    const currentSemester = "FA25"; // Fall 2025
     
-    // Clean up event listener on unmount
-    return () => {
-      document.removeEventListener('courseRemoved', handleCourseRemoved);
-    };
-  }, []);
-  
-  // Filter modal state
-  const [showFilterModal, setShowFilterModal] = useState(false);
-  
-  // Active filters state (using the enhanced structure)
-  const [activeFilters, setActiveFilters] = useState({
-    level: {
-      1000: { only: false, prefer: false },
-      2000: { only: false, prefer: false },
-      3000: { only: false, prefer: true }, // Example: Prefer 3000-level courses
-      4000: { only: false, prefer: false },
-      5000: { only: false, prefer: false }
-    },
-    enrollment: {
-      eligible: { only: true, prefer: false }, // Example: Only show eligible courses
-      ineligible: { only: false, prefer: false }
-    },
-    instructionMode: {
-      inPerson: { only: false, prefer: true }, // Example: Prefer in-person courses
-      onlineRecording: { only: false, prefer: false },
-      onlineLive: { only: false, prefer: false },
-      hybrid: { only: false, prefer: false },
-      others: { only: false, prefer: false }
-    },
-    majorRequirements: {} // Will be populated dynamically
-  });
-  
-  // Handle planning a course
-  const handlePlanCourse = (course) => {
-    console.log(`Planning course: ${course.code}`);
+    // Track course statuses
+    const [courseStatuses, setCourseStatuses] = useState({});
     
-    // Update the local state to show the course as planned
-    setCourses(prevCourses => 
-      prevCourses.map(c => 
-        c.id === course.id ? {...c, state: 'planned'} : c
-      )
-    );
-    
-    // Add the course to the schedule
-    if (addCourseToSchedule) {
-      addCourseToSchedule(course, currentSemester, 'planned');
-    }
-    
-    // Open the Schedule Sidebar automatically with the current semester expanded
-    if (openSidebar) {
-      openSidebar(currentSemester);
-    } else {
-      console.log('Schedule sidebar function not provided. Would open sidebar for:', currentSemester);
-    }
-  };
-  
-  // Handle marking a course as taken
-  const handleTakenCourse = (course) => {
-    console.log(`Marking course as taken: ${course.code}`);
-    
-    // Update the local state to show the course as taken
-    setCourses(prevCourses => 
-      prevCourses.map(c => 
-        c.id === course.id ? {...c, state: 'taken'} : c
-      )
-    );
-    
-    // Add the course to the taken list
-    if (addCourseToSchedule) {
-      addCourseToSchedule(course, "Ungrouped Courses", 'taken');
-    }
-  };
-  
-  // Handle removing a course
-  const handleRemoveCourse = (course) => {
-    console.log(`Removing course: ${course.code}`);
-    
-    // Update the local state to show the course as normal
-    setCourses(prevCourses => 
-      prevCourses.map(c => 
-        c.id === course.id ? {...c, state: 'normal'} : c
-      )
-    );
-    
-    // Remove the course from the schedule
-    if (removeCourseFromSchedule) {
-      removeCourseFromSchedule(course.code);
-    }
-  };
-  
-  // Toggle filter modal
-  const toggleFilterModal = () => {
-    setShowFilterModal(!showFilterModal);
-  };
-  
-  // Handler for applying filters
-  const handleApplyFilters = (newFilters) => {
-    console.log("Applied filters:", newFilters);
-    
-    // Save the filter state
-    setActiveFilters(newFilters);
-    
-    // In a real implementation, this would filter the courses based on the selected filters
-    // This could involve:
-    // 1. Making an API call with the filter parameters
-    // 2. Client-side filtering of the course data
-    // 3. Updating the displayed courses
-    
-    // For now, we'll just log the filter state
-    applyMockFilters(newFilters);
-  };
-  
-  // Mock function to simulate filtering courses based on filter state
-  const applyMockFilters = (filters) => {
-    // This is just a simplified example of how you might filter courses
-    // In a real implementation, you would have more complex logic
-    
-    // Example: Filter by level and eligibility
-    const filteredCourses = courses.map(course => {
-      let isVisible = true;
-      let matchScore = 0;
-      
-      // Extract course level from code (e.g., 1110 -> 1000)
-      const courseCode = course.code.split(" ")[1];
-      const courseLevel = Math.floor(parseInt(courseCode) / 1000) * 1000;
-      
-      // Check for "only" filters which are exclusive
-      Object.keys(filters.level).forEach(level => {
-        if (filters.level[level].only && parseInt(level) !== courseLevel) {
-          isVisible = false;
-        }
-      });
-      
-      // Check eligibility
-      if (filters.enrollment.eligible.only && course.state === 'ineligible') {
-        isVisible = false;
-      }
-      
-      // Calculate preference match score for sorting
-      Object.keys(filters.level).forEach(level => {
-        if (filters.level[level].prefer && parseInt(level) === courseLevel) {
-          matchScore += 1;
-        }
-      });
-      
-      if (filters.instructionMode.inPerson.prefer && 
-          course.tags.includes('In-Person')) {
-        matchScore += 1;
-      }
-      
-      return {
-        ...course,
-        isVisible,
-        matchScore
-      };
+    // Ref to track whether we should refresh recommendations
+    const refreshTriggerRef = useRef({
+        shouldRefresh: true,
+        initialLoadComplete: false
     });
     
-    // Apply visibility and sort by match score
-    setCourses(
-      filteredCourses
-        .sort((a, b) => b.matchScore - a.matchScore)
-        .map(({isVisible, matchScore, ...rest}) => rest)
+    // Function to trigger refreshing of recommendations
+    const triggerRefresh = () => {
+        setIsRefreshing(true);
+        refreshTriggerRef.current.shouldRefresh = true;
+        setRefreshTrigger(prev => prev + 1);
+    };
+    
+    // Update course status in our component state
+    const updateCourseStatus = (courseId, newStatus) => {
+        setCourseStatuses(prev => ({
+            ...prev,
+            [courseId]: newStatus
+        }));
+    };
+    
+    // Handle adding course to schedule
+    const handleAddCourse = (course) => {
+        if (!course || !user) return;
+        
+        const success = addCourseToSchedule(course, currentSemester, user, setUser, openSidebar);
+        
+        if (success) {
+            updateCourseStatus(course.id, { isPlanned: true, isTaken: false, semester: currentSemester });
+        }
+    };
+    
+    // Handle marking course as taken
+    const handleMarkAsTaken = (course) => {
+        if (!course || !user) return;
+        
+        const success = markCourseAsTaken(course, user, setUser, openSidebar);
+        
+        if (success) {
+            updateCourseStatus(course.id, { isPlanned: false, isTaken: true, semester: "Ungrouped Courses" });
+        }
+    };
+    
+    // Handle removing course from schedule
+    const handleRemoveCourse = (course) => {
+        if (!course || !user) return;
+        
+        const success = removeCourseFromSchedule(course.id, user, setUser);
+        
+        if (success) {
+            updateCourseStatus(course.id, { isPlanned: false, isTaken: false, semester: null });
+        }
+    };
+    
+    // Main effect to fetch and process recommended courses
+    useEffect(() => {
+        if (!user || !academicData || !academicData.requirements) {
+            setLoading(false);
+            return;
+        }
+        
+        // Only refresh if explicitly triggered or on initial load
+        if (!refreshTriggerRef.current.shouldRefresh) {
+            return;
+        }
+        
+        setLoading(true);
+        
+        const fetchRecommendedCourses = async () => {
+            try {
+                // Get all taken courses for quick lookup
+                const takenCoursesSet = new Set();
+                if (user.scheduleData && user.scheduleData.taken) {
+                    Object.values(user.scheduleData.taken).forEach(semester => {
+                        semester.forEach(course => {
+                            if (course && course.code) {
+                                takenCoursesSet.add(course.code);
+                            }
+                        });
+                    });
+                }
+                
+                // Also include planned courses
+                const plannedCoursesSet = new Set();
+                if (user.scheduleData && user.scheduleData.planned) {
+                    Object.values(user.scheduleData.planned).forEach(semester => {
+                        semester.forEach(course => {
+                            if (course && course.code) {
+                                plannedCoursesSet.add(course.code);
+                            }
+                        });
+                    });
+                }
+                
+                // Find all core requirements
+                const coreRequirementIds = [];
+                Object.entries(academicData.requirements).forEach(([reqId, requirement]) => {
+                    if (requirement.courseGrps && Array.isArray(requirement.courseGrps)) {
+                        coreRequirementIds.push(reqId);
+                    }
+                });
+                
+                // Collect all course IDs from core requirements
+                const coursePromises = [];
+                const courseToRequirementMap = new Map(); // Maps course ID to requirement info
+                
+                for (const reqId of coreRequirementIds) {
+                    const requirement = academicData.requirements[reqId];
+                    if (!requirement || !requirement.courseGrps) continue;
+                    
+                    requirement.courseGrps.forEach(group => {
+                        if (!group.courses || !Array.isArray(group.courses)) return;
+                        
+                        group.courses.forEach(courseId => {
+                            // Skip if already taken or planned
+                            if (takenCoursesSet.has(courseId) || plannedCoursesSet.has(courseId)) return;
+                            
+                            // Store mapping of course to requirement
+                            if (!courseToRequirementMap.has(courseId)) {
+                                courseToRequirementMap.set(courseId, {
+                                    reqId,
+                                    reqName: requirement.name,
+                                    tag: requirement.tag || null
+                                });
+                                
+                                // Add to fetch queue
+                                coursePromises.push(getCourseById(courseId));
+                            }
+                        });
+                    });
+                }
+                
+                // Fetch all course data
+                const coursesData = await Promise.all(coursePromises);
+                
+                // Filter out nulls and check eligibility
+                const eligibleCourses = [];
+                const newCourseStatuses = {};
+                
+                for (const course of coursesData) {
+                    if (!course) continue;
+                    
+                    // Check if user is eligible for this course
+                    const eligibility = checkCourseEligibility(course, user);
+                    
+                    // Get course status (planned/taken)
+                    const status = getCourseStatus(course.id, user);
+                    newCourseStatuses[course.id] = status;
+                    let availableSemester = true
+                    
+                    // Check semester availability
+                    if (!isCourseAvailableInSemester(course, currentSemester)) {
+                        availableSemester = false 
+                        continue
+                    }
+                    // Only include eligible courses that aren't already taken/planned
+                    if (eligibility.isEligible && !status.isTaken 
+                        && !status.isPlanned && availableSemester) {
+                        // Get requirement info
+                        const requirementInfo = courseToRequirementMap.get(course.id);
+                        
+                        // Generate tags based on requirement info
+                        const tags = [];
+                        if (requirementInfo && requirementInfo.tag) {
+                            tags.push(requirementInfo.tag);
+                        }
+                        
+                        // Add course to eligible list with tags
+                        eligibleCourses.push({
+                            course,
+                            tags
+                        });
+                    }
+                }
+                
+                // Sort by level (lower levels first) to help new students
+                eligibleCourses.sort((a, b) => {
+                    const levelA = a.course.lvl || 9; // Default to high level if not specified
+                    const levelB = b.course.lvl || 9;
+                    return levelA - levelB;
+                });
+                
+                // Limit to exactly 6 courses for display
+                const limitedCourses = eligibleCourses.slice(0, 6);
+                
+                // Update state
+                setRecommendedCourses(limitedCourses);
+                setCourseStatuses(prev => ({ ...prev, ...newCourseStatuses }));
+                setLoading(false);
+                setIsRefreshing(false);
+                
+                // Reset refresh flag
+                refreshTriggerRef.current.shouldRefresh = false;
+                refreshTriggerRef.current.initialLoadComplete = true;
+                
+            } catch (err) {
+                console.error("Error fetching recommended courses:", err);
+                setError("Failed to load course recommendations");
+                setLoading(false);
+                setIsRefreshing(false);
+                refreshTriggerRef.current.shouldRefresh = false;
+            }
+        };
+        
+        fetchRecommendedCourses();
+        
+    }, [user, academicData, refreshTrigger]);
+    
+    // Handle refresh click
+    const handleRefreshClick = () => {
+        if (isRefreshing) return; // Prevent multiple clicks while refreshing
+        triggerRefresh();
+    };
+    
+    return (
+        <div className={styles.container}>
+            <div className={styles.header}>
+                <div className={styles.titleSection}>
+                    <h2 className={styles.sectionTitle}>
+                        Courses You May Want to Take in {currentSemester}
+                    </h2>
+                </div>
+                
+                <div className={styles.headerControls}>
+                    <img 
+                        src={refreshIcon} 
+                        alt="Refresh recommendations"
+                        className={`${styles.refreshIcon} ${isRefreshing ? styles.spinning : ''}`}
+                        onClick={handleRefreshClick}
+                        style={{ cursor: isRefreshing ? 'wait' : 'pointer' }}
+                        title="Refresh recommendations"
+                    />
+                </div>
+            </div>
+            
+            {loading ? (
+                <div className={styles.loadingMessage}>Loading course recommendations...</div>
+            ) : error ? (
+                <div className={styles.errorMessage}>{error}</div>
+            ) : recommendedCourses.length === 0 ? (
+                <div className={styles.noCoursesMessage}>
+                    No course recommendations available at this time. 
+                    Please check your major requirements for suggested courses.
+                </div>
+            ) : (
+                <div className={styles.courseGrid}>
+                    {recommendedCourses.map(({ course, tags }) => (
+                        <HomeCourseCard
+                            key={course.id}
+                            course={course}
+                            tags={tags}
+                            status={courseStatuses[course.id] || { isPlanned: false, isTaken: false }}
+                            onAddCourse={handleAddCourse}
+                            onMarkAsTaken={handleMarkAsTaken}
+                            onRemoveCourse={handleRemoveCourse}
+                            rating="4.2"
+                        />
+                    ))}
+                </div>
+            )}
+        </div>
     );
-  };
-  
-  // Container styles
-  const containerStyles = {
-    marginBottom: '48px',
-    padding: '24px',
-    backgroundColor: 'white',
-    borderRadius: '12px',
-    boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)'
-  };
-  
-  // Header styles
-  const headerContainerStyles = {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: '24px',
-    paddingBottom: '16px',
-    borderBottom: '1px solid #e5e7eb'
-  };
-  
-  const headerTitleStyles = {
-    fontSize: '24px',
-    fontWeight: 'bold',
-    color: '#1f2937'
-  };
-  
-  const filterButtonStyles = {
-    display: 'flex',
-    alignItems: 'center',
-    padding: '10px 16px',
-    backgroundColor: '#b31b1b', // Cornell red
-    color: 'white',
-    borderRadius: '8px',
-    border: 'none',
-    fontWeight: '500',
-    cursor: 'pointer',
-    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
-  };
-  
-  // Grid container styles
-  const gridContainerStyles = {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
-    gap: '24px'
-  };
-
-  return (
-    <div style={containerStyles}>
-      {/* Section header */}
-      <div style={headerContainerStyles}>
-        <h2 style={headerTitleStyles}>
-          Courses You May Want to Take in {currentSemester}
-        </h2>
-        <button
-          onClick={toggleFilterModal}
-          style={filterButtonStyles}
-          aria-label="Filter courses"
-        >
-          <span style={{ marginRight: '8px' }}>Filter</span>
-          <svg xmlns="http://www.w3.org/2000/svg" style={{ width: '20px', height: '20px' }} viewBox="0 0 20 20" fill="currentColor">
-            <path fillRule="evenodd" d="M3 3a1 1 0 011-1h12a1 1 0 011 1v3a1 1 0 01-.293.707L12 11.414V15a1 1 0 01-.293.707l-2 2A1 1 0 018 17v-5.586L3.293 6.707A1 1 0 013 6V3z" clipRule="evenodd" />
-          </svg>
-        </button>
-      </div>
-      
-      {/* Course grid */}
-      <div style={gridContainerStyles}>
-        {courses.map((course) => (
-          <HomeCourseCard
-            key={course.id}
-            course={course}
-            initialState={course.state}
-            onPlan={handlePlanCourse}
-            onTaken={handleTakenCourse}
-            onRemove={handleRemoveCourse}
-          />
-        ))}
-      </div>
-      
-      {/* Enhanced Filter Modal */}
-      <FilterModal
-        isOpen={showFilterModal}
-        onClose={() => setShowFilterModal(false)}
-        activeFilters={activeFilters}
-        onApplyFilters={handleApplyFilters}
-      />
-    </div>
-  );
 }
