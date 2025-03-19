@@ -201,7 +201,7 @@ const formatMissingPrereqs = () => {
                 <div className={styles.courseInfo}>
                     <div className={styles.courseCodeContainer}>
                         <p className={styles.courseCode}>
-                            {course.id}
+                            {course.sbj} {course.nbr}
                         </p>
                         {/* Review Score */}
                         <div className={styles.reviewScore}>

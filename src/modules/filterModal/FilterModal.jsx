@@ -36,12 +36,11 @@ const FilterModal = ({
     enrollment: {
       eligible: { only: false, prefer: false },
     },
-    instructionMode: {
-      inPerson: { only: false, prefer: false },
-      onlineRecording: { only: false, prefer: false },
-      onlineLive: { only: false, prefer: false },
-      hybrid: { only: false, prefer: false },
-      others: { only: false, prefer: false }
+    collegeDistributions: {
+      "ETM-AS": {only: false, prefer: true},
+      "GLC-AS": {only: false, prefer: true},
+      "PHS-AS": {only: false, prefer: true},
+      "SCD-AS": {only: false, prefer: true}
     },
     // Major requirements will be populated dynamically
     majorRequirements: {}
@@ -127,6 +126,7 @@ const FilterModal = ({
         level: { ...prev.level, ...(activeFilters.level || {}) },
         enrollment: { ...prev.enrollment, ...(activeFilters.enrollment || {}) },
         instructionMode: { ...prev.instructionMode, ...(activeFilters.instructionMode || {}) },
+        collegeDistributions: { ...prev.collegeDistributions, ...(activeFilters.collegeDistributions || {}) },
         // We'll preserve our requirement display metadata in the main effect above
       }));
     }
@@ -284,33 +284,28 @@ const FilterModal = ({
             </div>
           )}
 
-          {/* Instruction Mode Section */}
-          {Object.keys(filters.instructionMode).length > 0 && (
+          {/* College Distributions Section */}
+          {Object.keys(filters.collegeDistributions).length > 0 && (
             <div className={styles.filterSection}>
-              <h3>Instruction Mode</h3>
+              <h3>College Distributions</h3>
               <div className={styles.filterOptions}>
-                {Object.keys(filters.instructionMode).map(mode => (
-                  <div key={`mode-${mode}`} className={styles.filterOption}>
-                    <div className={styles.optionLabel}>
-                      {mode === 'inPerson' ? 'In-Person' :
-                       mode === 'onlineRecording' ? 'Online (Recording)' :
-                       mode === 'onlineLive' ? 'Online (Live)' :
-                       mode === 'hybrid' ? 'Hybrid' : 'Others'}
-                    </div>
+                {Object.keys(filters.collegeDistributions).map(dist => (
+                  <div key={`dist-${dist}`} className={styles.filterOption}>
+                    <div className={styles.optionLabel}>{dist}</div>
                     <div className={styles.checkboxGroup}>
                       <label className={styles.checkboxLabel}>
                         <input
                           type="checkbox"
-                          checked={filters.instructionMode[mode].only}
-                          onChange={() => handleCheckboxChange('instructionMode', mode, 'only')}
+                          checked={filters.collegeDistributions[dist].only}
+                          onChange={() => handleCheckboxChange('collegeDistributions', dist, 'only')}
                         />
                         Only
                       </label>
                       <label className={styles.checkboxLabel}>
                         <input
                           type="checkbox"
-                          checked={filters.instructionMode[mode].prefer}
-                          onChange={() => handleCheckboxChange('instructionMode', mode, 'prefer')}
+                          checked={filters.collegeDistributions[dist].prefer}
+                          onChange={() => handleCheckboxChange('collegeDistributions', dist, 'prefer')}
                         />
                         Prefer
                       </label>

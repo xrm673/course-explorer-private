@@ -2,7 +2,7 @@ import { useState, useEffect, useContext, useRef } from "react";
 import { getRequirementById } from "../../firebase/services/requirementService";
 import { getCourseById } from "../../firebase/services/courseService";
 import { isCourseAvailableInSemester } from "../../utils/semesterUtils";
-import { checkCourseEligibility, isCourseInRequirement } from "../../utils/courseUtils";
+import { checkCourseEligibility, isCourseInRequirement, courseHasDistribution } from "../../utils/courseUtils";
 import { UserContext } from "../../context/UserContext";
 import { useAcademic } from "../../context/AcademicContext";
 import styles from "./MajorRequirement.module.css";
@@ -26,7 +26,7 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
     const [isRefreshing, setIsRefreshing] = useState(false); // State for refresh animation
     const [refreshTrigger, setRefreshTrigger] = useState(0); // New state to force refresh
     const [completionStatus, setCompletionStatus] = useState("");
-    const coursesPerPage = 9;
+    const coursesPerPage = 6;
 
     // Track when filtering should occur
     const filterTriggerRef = useRef({
@@ -46,12 +46,11 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
         enrollment: {
           eligible: { only: false, prefer: true },
         },
-        instructionMode: {
-          inPerson: { only: false, prefer: false },
-          onlineRecording: { only: false, prefer: false },
-          onlineLive: { only: false, prefer: false },
-          hybrid: { only: false, prefer: false },
-          others: { only: false, prefer: false }
+        collegeDistributions: {
+            "ETM-AS": {only: false, prefer: true},
+            "GLC-AS": {only: false, prefer: true},
+            "PHS-AS": {only: false, prefer: true},
+            "SCD-AS": {only: false, prefer: true}
         },
         majorRequirements: {}
     });
@@ -135,17 +134,6 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
         setCompletionStatus(`(${completedCount}/${requiredCount})`);
     }, [req, user]);
 
-    // Helper function to get mode key
-    const getModeKey = (mode) => {
-        if (!mode) return 'others';
-        
-        const modeStr = String(mode).toLowerCase();
-        if (modeStr.includes('in-person')) return 'inPerson';
-        if (modeStr.includes('online') && modeStr.includes('recording')) return 'onlineRecording';
-        if (modeStr.includes('online') && modeStr.includes('live')) return 'onlineLive';
-        if (modeStr.includes('hybrid')) return 'hybrid';
-        return 'others';
-    };
 
     // Apply requirement filters and collect tags in one pass
     const applyRequirementFilters = (course, filters) => {
@@ -199,6 +187,50 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
         return { score, shouldKeep, tags: matchingTags };
     };
 
+    const applyDistributionFilters = (course, filters) => {
+        let score = 0;
+        let shouldKeep = true;
+        const matchingTags = [];
+        const hasDistOnlyFilter = Object.entries(filters.collegeDistributions)
+                                     .some(([_, value]) => value.only);
+        // Early return if course has no distributions
+        if (!course.distr || !Array.isArray(course.distr)) {
+            if (hasDistOnlyFilter) {
+                shouldKeep = false;
+            }
+            return { score, shouldKeep, tags: matchingTags };
+        }
+        
+        if (hasDistOnlyFilter) {
+            // Find all matching distribution codes
+            const matchingDists = course.distr.filter(dist => 
+                dist && filters.collegeDistributions[dist]?.only
+            );
+            
+            if (matchingDists.length === 0) {
+                shouldKeep = false;
+            } else {
+                // Add the actual matching distribution codes as tags
+                matchingTags.push(...matchingDists);
+            }
+        }
+        
+        // Apply "prefer" scoring regardless of "only" filter result
+        course.distr.forEach(dist => {
+            if (dist && filters.collegeDistributions[dist]?.prefer) {
+                console.log(course.id)
+                score += 5;
+                
+                // Only add to tags if not already included
+                if (!matchingTags.includes(dist)) {
+                    matchingTags.push(dist);
+                }
+            }
+        });
+        
+        return { score, shouldKeep, tags: matchingTags };
+    };
+
     // Load and filter courses - modified to only run when explicitly triggered
     useEffect(() => {
         if (!req || !req.courses || !selectedSemester || !academicData) return;
@@ -242,6 +274,7 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
                         
                         let score = 0;
                         let shouldKeep = true;
+                        let tags = [];
                         
                         // Check semester availability
                         if (!isCourseAvailableInSemester(course, selectedSemester)) {
@@ -281,25 +314,18 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
                                 score += 5;
                             }
                         }
-                        
-                        // Check instruction mode filters
-                        if (course.instructionMode) {
-                            const modeKey = getModeKey(course.instructionMode);
-                            
-                            // Apply "only" filter
-                            const hasModeOnlyFilter = Object.values(activeFilters.instructionMode).some(mode => mode.only);
-                            if (hasModeOnlyFilter && !activeFilters.instructionMode[modeKey]?.only) {
-                                shouldKeep = false;
-                                continue;
-                            }
-                            
-                            // Apply "prefer" filter
-                            if (activeFilters.instructionMode[modeKey]?.prefer) {
-                                score += 3;
-                            }
+
+                        // Apply distribution filters
+                        const { score: distrScore, shouldKeep: distrKeep, tags: distrTags } = 
+                        applyDistributionFilters(course, activeFilters);
+                        score += distrScore;
+                        if (!distrKeep) {
+                            shouldKeep = false;
+                            continue;
                         }
-                        
-                        // Apply requirement filters *** NEW CODE ***
+                        tags.push(...distrTags)
+
+                        // Apply requirement filters
                         const { score: reqScore, shouldKeep: reqShouldKeep, tags: reqTags } = 
                         applyRequirementFilters(course, activeFilters);
                         score += reqScore;
@@ -307,13 +333,14 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
                             shouldKeep = false;
                             continue;
                         }
+                        tags.push(...reqTags)
                         
                         // If course passed all filters, add it to results
                         if (shouldKeep) {
                             courseResults.push({
                                 course: course,
                                 score: score,
-                                requirementTags: reqTags
+                                requirementTags: tags
                             });
                         }
                     }

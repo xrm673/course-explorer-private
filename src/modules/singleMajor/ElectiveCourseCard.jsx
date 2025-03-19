@@ -156,7 +156,7 @@ export default function ElectiveCourseCard({ course, selectedSemester, onStatusC
           {/* Course Info */}
           <div className={styles.courseInfo}>
             <p className={styles.courseCode}>
-              {course.id}
+              {course.sbj} {course.nbr}
             </p>
             <h3 className={styles.courseTitle}>
                 <Link 
@@ -198,16 +198,18 @@ export default function ElectiveCourseCard({ course, selectedSemester, onStatusC
         </div>
   
         {/* Tags Section */}
-        <div className={styles.tagsContainer}> 
-          {tags.map((tag, i) => (
-            <span 
-              key={i}
-              className={styles.tag}
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
+        {tags.length > 0 && (
+          <div className={styles.tagsContainer}> 
+            {tags.map((tag, i) => (
+              <span 
+                key={i}
+                className={styles.tag}
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
   
         {/* Review Score */}
         <div className={styles.reviewScore}>
