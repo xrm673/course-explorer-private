@@ -126,7 +126,7 @@ export default function CoreCourseGroup({ courseGrp, selectedSemester }) {
           <div className={styles.additionalCourses}>
             <div className={styles.additionalCoursesHeader}>
               <div>
-                <strong>Also: </strong> 
+                <strong>See Also: </strong> 
                 {loading ? "Loading..." : (
                   <span>
                     {additionalCourses.map((course, i) => (

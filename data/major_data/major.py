@@ -64,7 +64,12 @@ def commit_ARTH():
         "name": "Core Courses",
         "tag": "ARTH Core",
         "tagDescr": "This is a core course of Art History major",
-        "descr": None,
+        "descr": [
+            "The History of Art major requires the completion of all three courses listed below.",
+            "Students must receive a grade of B or higher in ARTH 1100.",
+            "If students have not taken ARTH 1100 by the spring of sophomore year, they must complete a 4000-level tutorial course and receive a grade of B or higher in order to qualify for the major.",
+            "A grade of B- or higher is required of all other courses to receive credit toward the major.",
+        ],
         "number": 3,
         "courseGrps": [
             {"id": 1, "courses": ["ARTH1100"]},
@@ -82,7 +87,7 @@ def commit_ARTH():
         "name": "2000 Level",
         "tag": "2000 ARTH",
         "tagDescr": "This is a 2000 level Art History course.",
-        "descr": None,
+        "descr": ["Take at least one ARTH course at the 2000-level."],
         "number": 1,
         "courses": req2_courses,
     }
@@ -96,7 +101,7 @@ def commit_ARTH():
         "name": "3000 Level",
         "tag": "3000 ARTH",
         "tagDescr": "This is a 3000 level Art History course.",
-        "descr": None,
+        "descr": ["Take at least one ARTH course at the 3000-level."],
         "number": 1,
         "courses": req3_courses,
     }
@@ -110,7 +115,7 @@ def commit_ARTH():
         "name": "4000 Level",
         "tag": "4000 ARTH",
         "tagDescr": "This is a 4000 level Art History course.",
-        "descr": None,
+        "descr": ["Take at least one ARTH course at the 4000-level."],
         "number": 2,
         "courses": req4_courses,
     }
@@ -126,7 +131,7 @@ def commit_ARTH():
         "name": "Electives",
         "tag": "ARTH Electives",
         "tagDescr": "This can be counted as an elective for Art History major.",
-        "descr": None,
+        "descr": ["Take three additional ARTH electives at the 3000-level or higher."],
         "number": 3,
         "courses": req5_courses,
     }
@@ -203,7 +208,6 @@ def commit_INFO():
         "tagDescr": "This is a core course of Information Science major",
         "descr": [
             "Information Science student must take at lease one course from each of the course group listed below.",
-            "The core curriculum help students build the foundation of the Information Science major.",
         ],
         "Note": "Data Science (DS) concentrators should take INFO 2950: Introduction to Data"
         " Science with Python during the fall semester, if possible. Otherwise, "
@@ -273,7 +277,7 @@ def commit_INFO():
         "tag": "INFO Programming",
         "tagDescr": "This can be counted as a programming course for Information Science major",
         "descr": [
-            "All Information Science majors are required to take CS 1110 or CS 1112 for a letter grade."
+            "Take CS 1110 or CS 1112 for letter grade to fulfill the programming requirement."
         ],
         "number": 1,
         "courseGrps": [{"id": 1, "courses": ["CS1110", "CS1112"]}],
@@ -288,7 +292,7 @@ def commit_INFO():
         "tag": "INFO Math",
         "tagDescr": "This can be counted as a math course for Information Science major",
         "descr": [
-            "Info Science students are required to take a Calculus I course (MATH 1106, MATH 1110, or MATH 1910). ",
+            "Take a Calculus I course (MATH 1106, MATH 1110, or MATH 1910) for letter grade to fulfill the math requirement. ",
             "AP credits can fulfill this requirement.",
         ],
         "number": 1,
@@ -304,7 +308,7 @@ def commit_INFO():
         "tag": "INFO Stats",
         "tagDescr": "This can be counted as a statistic course for Information Science major",
         "descr": [
-            "Take one of the following statistics courses provided below. ",
+            "Take one of the statistics courses provided below. ",
             "AP credits may NOT be used to fulfill this requirement.",
         ],
         "number": 1,
@@ -362,11 +366,7 @@ def commit_INFO():
         "name": "Understanding Social Behavior",
         "tag": "INFO Social Behavior",
         "tagDescr": "This can be counted as a Social Behavior course for the Behavioral Science concentration in Information Science major.",
-        "descr": [
-            "Take two of the courses among INFO 3460, INFO 4430, INFO 4450, "
-            "INFO 4490, INFO 4500, INFO4505, INFO4800, INFO4940 (Building Inclusive Computing Organizations),"
-            " INFO 4940 (Technology and Underserved Communities) COMM4380, and PSYCH3800."
-        ],
+        "descr": ["Take two of the courses listed below."],
         "number": 2,
         "courses": [
             "INFO3460",
@@ -390,7 +390,7 @@ def commit_INFO():
         "name": "Social Data Analytics",
         "tag": "INFO Behavioral Data",
         "tagDescr": "This can be counted as a Social Data Analytics course for the Behavioral Science concentration in Information Science major.",
-        "descr": None,
+        "descr": ["Take one of the courses listed below"],
         "number": 1,
         "courses": [
             "INFO3300",
@@ -413,7 +413,7 @@ def commit_INFO():
         "name": "Behavior in Sociological Context",
         "tag": "INFO Sociological Behavior",
         "tagDescr": "This can be counted as a Behavior in Sociological Context course for the Behavioral Science concentration in Information Science major.",
-        "descr": None,
+        "descr": ["Take one of the courses listed below."],
         "number": 1,
         "courses": [
             "INFO3200",
@@ -450,7 +450,7 @@ def commit_INFO():
         "name": "Behavior in Network Context",
         "tag": "INFO Network Behavior",
         "tagDescr": "This can be counted as a Behavior in Network Context course for the Behavioral Science concentration in Information Science major.",
-        "descr": None,
+        "descr": ["Take one of the courses listed below."],
         "number": 1,
         "courses": [
             "INFO4360",
@@ -484,7 +484,7 @@ def commit_INFO():
         "name": "Behavior in Design Context",
         "tag": "INFO Behavior Design",
         "tagDescr": "This can be counted as a Behavior in Design Context course for the Behavioral Science concentration in Information Science major.",
-        "descr": None,
+        "descr": ["Take one of the courses listed below."],
         "number": 1,
         "courses": ["INFO3450", "INFO4240", "INFO4400", "INFO4940"],
         "parallel": [
@@ -514,7 +514,7 @@ def commit_INFO():
         "name": "Data Analysis",
         "tag": "INFO Data Analysis",
         "tagDescr": "This can be counted as a Data Analysis course for the Data Science concentration in Information Science major.",
-        "descr": None,
+        "descr": ["Take one of the courses listed below."],
         "number": 1,
         "courses": [
             "INFO3300",
@@ -538,7 +538,7 @@ def commit_INFO():
         "name": "Domain Expertise",
         "tag": "INFO Data Domain",
         "tagDescr": "This can be counted as a Domain Expertise course for the Data Science concentration in Information Science major.",
-        "descr": None,
+        "descr": ["Take one of the courses listed below."],
         "number": 1,
         "courses": [
             "INFO2770",
@@ -562,7 +562,7 @@ def commit_INFO():
         "name": "Big Data Ethics, Policy and Society",
         "tag": "INFO Data Ethics",
         "tagDescr": "This can be counted as a Big Data Ethics, Policy and Society course for the Data Science concentration in Information Science major.",
-        "descr": None,
+        "descr": ["Take one of the courses listed below."],
         "number": 1,
         "courses": [
             "INFO3200",
@@ -591,7 +591,7 @@ def commit_INFO():
         "name": "Data Communication",
         "tag": "INFO Data Communication",
         "tagDescr": "This can be counted as a Data Communication course for the Data Science concentration in Information Science major.",
-        "descr": None,
+        "descr": ["Take one of the courses listed below."],
         "number": 1,
         "courses": [
             "INFO3312",
@@ -609,5 +609,5 @@ def commit_INFO():
 
 
 if __name__ == "__main__":
-    # commit_ARTH()
+    commit_ARTH()
     commit_INFO()

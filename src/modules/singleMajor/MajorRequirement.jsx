@@ -15,6 +15,7 @@ import filterIcon from "../../assets/filterIcon.svg";
 import refreshIcon from "../../assets/refresh.svg"
 
 export default function MajorRequirement({ reqId, selectedSemester }) {
+    console.log(reqId)
     const { user } = useContext(UserContext);
     const { academicData } = useAcademic(); // Added academicData
     const [req, setReq] = useState(null);
