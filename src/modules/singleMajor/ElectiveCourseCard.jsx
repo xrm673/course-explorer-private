@@ -7,6 +7,7 @@ import {
   getCourseStatus,
   checkCourseEligibility
 } from "../../utils/courseUtils"
+import { isCourseAvailableInSemester } from "../../utils/semesterUtils";
 import { UserContext } from "../../context/UserContext"
 import { useSidebar } from "../../modules/core/MainLayout"
 import add from "../../assets/add.svg"
@@ -107,6 +108,7 @@ export default function ElectiveCourseCard({ course, selectedSemester, onStatusC
     // Apply different card style based on status and eligibility
     // Note the priority: taken > planned > ineligible > default
     let cardClassName = styles.courseCard;
+    let semesterAvailable = isCourseAvailableInSemester(course, selectedSemester)
     
     if (courseStatus.isTaken) {
         cardClassName = `${cardClassName} ${styles.takenCourse}`;
@@ -114,6 +116,8 @@ export default function ElectiveCourseCard({ course, selectedSemester, onStatusC
         cardClassName = `${cardClassName} ${styles.plannedCourse}`;
     } else if (!eligibility.isEligible) {
         cardClassName = `${cardClassName} ${styles.ineligibleCourse}`;
+    } else if (!semesterAvailable) {
+        cardClassName = `${cardClassName} ${styles.notProvidedCourse}`
     }
     
     // Format missing prerequisites for display
@@ -150,6 +154,13 @@ export default function ElectiveCourseCard({ course, selectedSemester, onStatusC
                 {formatMissingPrereqs()}
             </div>
         )}
+
+        {/* Semester Warning */}
+        {!courseStatus.isTaken && !semesterAvailable && (
+            <div className={styles.seasonWarning}>
+                May not be provided in this semester
+            </div>
+        )}        
         
         {/* Header Section */}
         <div className={styles.header}>

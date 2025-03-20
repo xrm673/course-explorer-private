@@ -44,8 +44,8 @@ export const mapToAvailableSemester = (futureSemester) => {
       return { availableInFall: false, availableInSpring: false };
     }
     
-    const availableInFall = course.smst.some(semester => semester.startsWith("FA"));
-    const availableInSpring = course.smst.some(semester => semester.startsWith("SP"));
+    const availableInFall = course.smst.includes("FA24");
+    const availableInSpring = course.smst.includes("SP25");
     
     return { availableInFall, availableInSpring };
   };

@@ -285,8 +285,7 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
                         
                         // Check semester availability
                         if (!isCourseAvailableInSemester(course, selectedSemester)) {
-                            shouldKeep = false;
-                            continue;
+                            score -= 50;
                         }
                         
                         // Apply level filters

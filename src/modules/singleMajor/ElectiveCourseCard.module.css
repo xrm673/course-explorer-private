@@ -163,3 +163,26 @@
   text-overflow: ellipsis;
   max-height: 40px; /* Limit height to prevent oversized warnings */
 }
+
+/* Not Provided styles */
+.notProvidedCourse {
+  background-color: #d1d0d0; /* Light red background */
+  border: 1px solid #d3d2d0;
+}
+
+/* Update this existing CSS section for season warning */
+.seasonWarning {
+  background-color: #fff3cd;
+  color: #856404;
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  font-size: 12px;
+  text-align: center;
+  font-weight: 500;
+  border: 1px solid #ef9a9a;
+  word-wrap: break-word; /* Allow long text to wrap */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 40px; /* Limit height to prevent oversized warnings */
+}

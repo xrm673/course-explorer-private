@@ -127,14 +127,12 @@ export default function CoreCourseCard({ courseId, selectedSemester, availabilit
 
     if (loading) return <div className={styles.loading}>Loading...</div>;
     if (error) return <div className={styles.error}>{error}</div>;
-
-    const tags = ["Tag 1", "Tag 2", "Tag 3", "Tag 4", "Tag 5"];
     
     // Determine availability based on selected semester
     const { availableInFall, availableInSpring } = courseAvailability || {};
     const isAvailableInSelectedSeason = isFallSemester ? availableInFall : isSpringBySemester ? availableInSpring : true;
     const availabilityMessage = !isAvailableInSelectedSeason ? 
-        `Only offered in ${availableInFall ? 'Fall' : 'Spring'} semester` : '';
+        `May not be offered in this semester` : '';
 
     // Determine if we need to show a warning for this course
     const showSeasonWarning = !isAvailableInSelectedSeason;
