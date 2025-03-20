@@ -2,13 +2,14 @@ import { useState, useEffect, useContext, useRef } from "react";
 import { getRequirementById } from "../../firebase/services/requirementService";
 import { getCourseById } from "../../firebase/services/courseService";
 import { isCourseAvailableInSemester } from "../../utils/semesterUtils";
-import { checkCourseEligibility, isCourseInRequirement, courseHasDistribution } from "../../utils/courseUtils";
+import { checkCourseEligibility, isCourseInRequirement } from "../../utils/courseUtils";
 import { UserContext } from "../../context/UserContext";
 import { useAcademic } from "../../context/AcademicContext";
 import styles from "./MajorRequirement.module.css";
 
 import ElectiveCourseCard from "./ElectiveCourseCard";
 import CoreCourseGroup from "./CoreCourseGroup";
+import { RequirementDescription } from "./RequirementDescription";
 import FilterModal from "../filterModal/FilterModal";
 import filterIcon from "../../assets/filterIcon.svg";
 import refreshIcon from "../../assets/refresh.svg"
@@ -47,10 +48,16 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
           eligible: { only: false, prefer: true },
         },
         collegeDistributions: {
-            "ETM-AS": {only: false, prefer: true},
-            "GLC-AS": {only: false, prefer: true},
-            "PHS-AS": {only: false, prefer: true},
-            "SCD-AS": {only: false, prefer: true}
+            "ALC-AS": {only: false, prefer: false},
+            "BIO-AS": {only: false, prefer: false},
+            "ETM-AS": {only: false, prefer: false},
+            "GLC-AS": {only: false, prefer: false},
+            "HST-AS": {only: false, prefer: false},
+            "PHS-AS": {only: false, prefer: false},
+            "SCD-AS": {only: false, prefer: false},
+            "SSC-AS": {only: false, prefer: false},
+            "SDS-AS": {only: false, prefer: false},
+            "SMR-AS": {only: false, prefer: false}
         },
         majorRequirements: {}
     });
@@ -175,7 +182,7 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
             const requirement = academicData?.requirements?.[reqId];
             if (requirement && isCourseInRequirement(course.id, requirement)) {
                 // Add score
-                score += 10;
+                score += 20;
                 
                 // Collect tag if it exists and isn't already in the list
                 if (requirement.tag && !matchingTags.includes(requirement.tag)) {
@@ -218,8 +225,7 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
         // Apply "prefer" scoring regardless of "only" filter result
         course.distr.forEach(dist => {
             if (dist && filters.collegeDistributions[dist]?.prefer) {
-                console.log(course.id)
-                score += 5;
+                score += 10;
                 
                 // Only add to tags if not already included
                 if (!matchingTags.includes(dist)) {
@@ -311,7 +317,7 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
                             
                             // Apply "prefer" filter
                             if (activeFilters.enrollment.eligible?.prefer && eligibility.isEligible) {
-                                score += 5;
+                                score += 20;
                             }
                         }
 
@@ -491,6 +497,8 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
                     )}
                 </div>
             </div>
+
+            {req.descr && <RequirementDescription descriptions={req.descr} />}
             
             {/* Display completed courses for elective requirements */}
             {!isCoreReq && completedCourses.length > 0 && (

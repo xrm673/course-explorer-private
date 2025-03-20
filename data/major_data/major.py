@@ -201,7 +201,14 @@ def commit_INFO():
         "name": "Core Courses",
         "tag": "INFO Core",
         "tagDescr": "This is a core course of Information Science major",
-        "descr": None,
+        "descr": [
+            "Information Science student must take at lease one course from each of the course group listed below.",
+            "The core curriculum help students build the foundation of the Information Science major.",
+        ],
+        "Note": "Data Science (DS) concentrators should take INFO 2950: Introduction to Data"
+        " Science with Python during the fall semester, if possible. Otherwise, "
+        "DS concentrators should plan to build upon their Python programming skills in preparation "
+        "for upper-level DS courses.",
         "number": 5,
         "courseGrps": [
             {"id": 1, "courses": ["INFO1200", "INFO1260"]},
@@ -265,7 +272,9 @@ def commit_INFO():
         "name": "Programming Requirement",
         "tag": "INFO Programming",
         "tagDescr": "This can be counted as a programming course for Information Science major",
-        "descr": None,
+        "descr": [
+            "All Information Science majors are required to take CS 1110 or CS 1112 for a letter grade."
+        ],
         "number": 1,
         "courseGrps": [{"id": 1, "courses": ["CS1110", "CS1112"]}],
     }
@@ -278,7 +287,10 @@ def commit_INFO():
         "name": "Math Requirement",
         "tag": "INFO Math",
         "tagDescr": "This can be counted as a math course for Information Science major",
-        "descr": None,
+        "descr": [
+            "Info Science students are required to take a Calculus I course (MATH 1106, MATH 1110, or MATH 1910). ",
+            "AP credits can fulfill this requirement.",
+        ],
         "number": 1,
         "courseGrps": [{"id": 1, "courses": ["MATH1106", "MATH1110", "MATH1910"]}],
     }
@@ -291,7 +303,10 @@ def commit_INFO():
         "name": "Statistics Requirement",
         "tag": "INFO Stats",
         "tagDescr": "This can be counted as a statistic course for Information Science major",
-        "descr": None,
+        "descr": [
+            "Take one of the following statistics courses provided below. ",
+            "AP credits may NOT be used to fulfill this requirement.",
+        ],
         "number": 1,
         "courses": [
             "AEM2100",
@@ -325,7 +340,16 @@ def commit_INFO():
         "name": "Electives",
         "tag": "INFO Electives",
         "tagDescr": "This can be counted as an elective for Information Science major",
-        "descr": None,
+        "descr": [
+            "Complete three electives from any INFO 3000+ course (including INFO 4900 but excluding INFO 4998 and INFO 4910).",
+            "INFO 2300/2310 (one of them), CS 2110/2112, CS 3110, and CS 3410 may also be counted.",
+            "Up to two courses from qualifying study abroad programs may be transfered to Cornell and applied as major "
+            "elective credit. Please review the Study Abroad guidelines for details. ",
+            "Electives must be taken for a letter grade, each must earn three or more credit hours, and "
+            "must be completed with a grade of C- or higher (a grade of C or higher is required for "
+            "courses taken abroad).",
+            "Students may only fulfill one of their electives with INFO 4900.",
+        ],
         "number": 3,
         "courses": req6_courses,
     }
@@ -338,7 +362,11 @@ def commit_INFO():
         "name": "Understanding Social Behavior",
         "tag": "INFO Social Behavior",
         "tagDescr": "This can be counted as a Social Behavior course for the Behavioral Science concentration in Information Science major.",
-        "descr": None,
+        "descr": [
+            "Take two of the courses among INFO 3460, INFO 4430, INFO 4450, "
+            "INFO 4490, INFO 4500, INFO4505, INFO4800, INFO4940 (Building Inclusive Computing Organizations),"
+            " INFO 4940 (Technology and Underserved Communities) COMM4380, and PSYCH3800."
+        ],
         "number": 2,
         "courses": [
             "INFO3460",
@@ -581,5 +609,5 @@ def commit_INFO():
 
 
 if __name__ == "__main__":
-    commit_ARTH()
+    # commit_ARTH()
     commit_INFO()

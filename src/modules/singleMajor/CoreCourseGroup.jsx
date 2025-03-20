@@ -131,7 +131,7 @@ export default function CoreCourseGroup({ courseGrp, selectedSemester }) {
                   <span>
                     {additionalCourses.map((course, i) => (
                       <span key={i} className={styles.courseIdSpan}>
-                        {course.id}
+                        {course.sbj} {course.nbr};
                       </span>
                     ))}
                   </span>

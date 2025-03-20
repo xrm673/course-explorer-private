@@ -110,6 +110,21 @@
   line-height: 1;
 }
 
+.distrContainer {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 6px;
+  flex-wrap: wrap;
+}
+
+.distr {
+  padding: 3px 6px;
+  border: 1px solid #ddd;
+  border-radius: 14px;
+  font-size: 14px;
+  background-color: #f8f8f8;
+}
+
 .loading, .error {
   width: 100%;
   padding: 20px;

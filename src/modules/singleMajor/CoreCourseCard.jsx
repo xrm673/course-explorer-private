@@ -246,6 +246,19 @@ const formatMissingPrereqs = () => {
                     )}
                 </div>
             </div>
+
+            {course.distr && (
+                <div className={styles.distrContainer}> 
+                {course.distr.map((distrCategory,i) => (
+                    <span 
+                    key={i}
+                    className={styles.distr}
+                    >
+                    {distrCategory}
+                    </span>
+                ))}
+                </div>
+            )}
         </div>
     )
 }

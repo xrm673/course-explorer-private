@@ -1,0 +1,47 @@
+.requirementDescription {
+  margin: 1rem 0;
+  position: relative;
+}
+
+.descriptionList {
+  font-size: 18px;
+  color: #333;
+  line-height: 1.6;
+  padding-left: 1.5rem;
+  margin: 0;
+}
+
+.descriptionList.collapsed {
+  /* Fixed display approach instead of animations */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.descriptionList li {
+  margin-bottom: 0.75rem;
+}
+
+.fadeOverlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2.5em;
+  background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,1));
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.toggleButton {
+  background: none;
+  border: none;
+  color: #4285f4;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0.5rem 0;
+  font-size: 16px;
+  margin-top: 0.5rem;
+  display: block;
+}

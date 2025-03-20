@@ -416,25 +416,6 @@ export const checkCourseEligibility = (course, user) => {
 };
 
 /**
- * Checks if a course has a distribution category
- * 
- * @param {Object} course - The course object with distr field
- * @param {string} distribution - The distribution category to check against
- * @returns {boolean} - Whether the course has the distribution category
- */
-export const courseHasDistribution = (course, distribution) => {
-  if (!course.distr) {
-    return false;
-  }
-  for (const distr_category of course.distr) {
-    if (distr_category === distribution) {
-      return true
-    }
-  } 
-  return false
-}
-
-/**
  * Checks if a course is part of a requirement
  * 
  * @param {string} courseId - The course ID to check
