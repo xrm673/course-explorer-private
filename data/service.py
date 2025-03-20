@@ -22,10 +22,11 @@ def get_courses_by_subject(subject, min_credit=0, excluded=[], included=[]):
     results = query.stream()
     course_ids = []
     for doc in results:
+        doc_data = doc.to_dict()
         if doc.id in excluded:
             continue
         qualified = False
-        for credit in doc.creditsTotal:
+        for credit in doc_data["creditsTotal"]:
             if credit >= min_credit:
                 qualified = True
                 break

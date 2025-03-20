@@ -202,14 +202,16 @@ const formatMissingPrereqs = () => {
                             {course.sbj} {course.nbr}
                         </p>
                         {/* Review Score */}
-                        <div className={styles.reviewScore}>
-                            <span className={styles.score}>
-                                4.2
-                            </span>
-                            <span className={styles.ratingLabel}>
-                                Rating
-                            </span>
-                        </div>
+                        {course.ov && (
+                            <div className={styles.reviewScore}>
+                                <span className={styles.score}>
+                                    {course.ov}
+                                </span>
+                                <span className={styles.ratingLabel}>
+                                    Rating
+                                </span>
+                            </div>
+                        )}
                     </div>
                     <Link to={`/courses/${course.id}`} className={styles.courseTitle}>
                         {course.ttl}

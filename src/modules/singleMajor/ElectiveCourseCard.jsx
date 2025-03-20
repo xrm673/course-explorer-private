@@ -223,14 +223,16 @@ export default function ElectiveCourseCard({ course, selectedSemester, onStatusC
         )}
   
         {/* Review Score */}
-        <div className={styles.reviewScore}>
-          <span className={styles.score}>
-            4.2
-          </span>
-          <span className={styles.ratingLabel}>
-            Course Rating
-          </span>
-        </div>
+        {course.ov && (
+          <div className={styles.reviewScore}>
+            <span className={styles.score}>
+              {course.ov}
+            </span>
+            <span className={styles.ratingLabel}>
+              Course Rating
+            </span>
+          </div>
+        )}
       </div>
     );
 }

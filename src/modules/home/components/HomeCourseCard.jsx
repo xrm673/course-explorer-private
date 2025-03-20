@@ -113,10 +113,10 @@ const HomeCourseCard = ({
       )}
       
       {/* Review Score */}
-      {rating && (
+      {course.ov && (
         <div className={styles.reviewScore}>
           <span className={styles.score}>
-            {rating}
+            {course.ov}
           </span>
           <span className={styles.ratingLabel}>
             Course Rating
