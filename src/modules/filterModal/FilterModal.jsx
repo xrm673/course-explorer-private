@@ -33,6 +33,9 @@ const FilterModal = ({
       4000: { only: false, prefer: false },
       5000: { only: false, prefer: false }
     },
+    overallScore: {
+      "High Overall Score": { only: false, prefer: true}
+    },
     enrollment: {
       eligible: { only: false, prefer: false },
     },
@@ -124,8 +127,8 @@ const FilterModal = ({
       setFilters(prev => ({
         ...prev,
         level: { ...prev.level, ...(activeFilters.level || {}) },
+        overallScore: { ...prev.overallScore, ...(activeFilters.overallScore || {}) },
         enrollment: { ...prev.enrollment, ...(activeFilters.enrollment || {}) },
-        instructionMode: { ...prev.instructionMode, ...(activeFilters.instructionMode || {}) },
         collegeDistributions: { ...prev.collegeDistributions, ...(activeFilters.collegeDistributions || {}) },
         // We'll preserve our requirement display metadata in the main effect above
       }));
@@ -172,12 +175,12 @@ const FilterModal = ({
         acc[level] = { only: false, prefer: false };
         return acc;
       }, {}),
-      enrollment: Object.keys(filters.enrollment).reduce((acc, option) => {
+      overallScore: Object.keys(filters.overallScore).reduce((acc, option) => {
         acc[option] = { only: false, prefer: false };
         return acc;
       }, {}),
-      instructionMode: Object.keys(filters.instructionMode).reduce((acc, mode) => {
-        acc[mode] = { only: false, prefer: false };
+      enrollment: Object.keys(filters.enrollment).reduce((acc, option) => {
+        acc[option] = { only: false, prefer: false };
         return acc;
       }, {}),
       majorRequirements: Object.entries(filters.majorRequirements).reduce((acc, [key, value]) => {
@@ -240,6 +243,37 @@ const FilterModal = ({
                           type="checkbox"
                           checked={filters.level[level].prefer}
                           onChange={() => handleCheckboxChange('level', level, 'prefer')}
+                        />
+                        Prefer
+                      </label>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {Object.keys(filters.overallScore).length > 0 && (
+            <div className={styles.filterSection}>
+              <h3>Overall Score</h3>
+              <div className={styles.filterOptions}>
+                {Object.keys(filters.overallScore).map(option => (
+                  <div key={`score-${option}`} className={styles.filterOption}>
+                    <div className={styles.optionLabel}>{option}</div>
+                    <div className={styles.checkboxGroup}>
+                      <label className={styles.checkboxLabel}>
+                        <input
+                          type="checkbox"
+                          checked={filters.overallScore[option].only}
+                          onChange={() => handleCheckboxChange('overallScore', option, 'only')}
+                        />
+                        Only
+                      </label>
+                      <label className={styles.checkboxLabel}>
+                        <input
+                          type="checkbox"
+                          checked={filters.overallScore[option].prefer}
+                          onChange={() => handleCheckboxChange('overallScore', option, 'prefer')}
                         />
                         Prefer
                       </label>

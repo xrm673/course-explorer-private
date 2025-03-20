@@ -15,7 +15,6 @@ import filterIcon from "../../assets/filterIcon.svg";
 import refreshIcon from "../../assets/refresh.svg"
 
 export default function MajorRequirement({ reqId, selectedSemester }) {
-    console.log(reqId)
     const { user } = useContext(UserContext);
     const { academicData } = useAcademic(); // Added academicData
     const [req, setReq] = useState(null);
@@ -44,6 +43,9 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
           3000: { only: false, prefer: true },
           4000: { only: false, prefer: true },
           5000: { only: false, prefer: false }
+        },
+        overallScore: {
+            "High Overall Score": { only: false, prefer: true}
         },
         enrollment: {
           eligible: { only: false, prefer: true },
@@ -302,6 +304,23 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
                             // Apply "prefer" filter
                             if (activeFilters.level[levelKey]?.prefer) {
                                 score += 5;
+                            }
+                        }
+
+                        // Apply Overall Score filters
+                        // Apply "only" filter
+                        if (activeFilters.overallScore["High Overall Score"]?.only) {
+                            if (!course.ov || course.ov < 3.5) {
+                                shouldKeep = false;
+                                continue;
+                            }
+                        }
+                        // Apply "prefer" filter
+                        if (activeFilters.overallScore["High Overall Score"]?.prefer) {
+                            if (course.ov && course.ov >= 3.5) {
+                                score += 5 * course.ov
+                            } else if (course.ov && course.ov < 2.0) {
+                                score -= (2-course.ov) * 10
                             }
                         }
                         

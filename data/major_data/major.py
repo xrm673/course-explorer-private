@@ -152,35 +152,35 @@ def commit_INFO():
                 "college": "CAS",
                 "requirements": [
                     "INFO_req1",
+                    "INFO_req2",
                     "INFO_req3",
                     "INFO_req4",
                     "INFO_req5",
-                    "INFO_req6",
                 ],
             },
             {
                 "college": "CALS",
                 "requirements": [
                     "INFO_req1",
+                    "INFO_req2",
                     "INFO_req3",
                     "INFO_req4",
                     "INFO_req5",
-                    "INFO_req6",
                 ],
             },
         ],
         "concentrations": [
             {
                 "concentration": "Behavioral Science",
-                "requirements": ["INFO_req7", "INFO_req8", "INFO_req9"],
+                "requirements": ["INFO_req6", "INFO_req7", "INFO_req8"],
             },
             {
                 "concentration": "Data Science",
                 "requirements": [
+                    "INFO_req11",
                     "INFO_req12",
                     "INFO_req13",
                     "INFO_req14",
-                    "INFO_req15",
                 ],
             },
         ],
@@ -207,7 +207,7 @@ def commit_INFO():
         "tag": "INFO Core",
         "tagDescr": "This is a core course of Information Science major",
         "descr": [
-            "Information Science student must take at lease one course from each of the course group listed below.",
+            "Information Science students must take at lease one course from each of the course group listed below.",
         ],
         "Note": "Data Science (DS) concentrators should take INFO 2950: Introduction to Data"
         " Science with Python during the fall semester, if possible. Otherwise, "
@@ -221,56 +221,12 @@ def commit_INFO():
             {"id": 4, "courses": ["INFO2450"]},
             {"id": 5, "courses": ["INFO2950", "INFO2951"]},
         ],
-        "parallel": [
-            {
-                "category": "concentration",
-                "condition": "Other Concentrations",
-                "reqId": "INFO_req1",
-            },
-            {
-                "category": "concentration",
-                "condition": "Data Science",
-                "reqId": "INFO_req2",
-            },
-        ],
         "note": "Data Science (DS) concentrators should take INFO 2950 during the fall semester, if possible. Otherwise, DS concentrators should plan to build upon their Python programming skills in preparation for upper-level DS courses.",
     }
     add_requirement(req1)
 
-    # This is the core requirement for Data Science concentration (no INFO2951)
     req2 = {
         "id": "INFO_req2",
-        "type": "C",
-        "major": "INFO",
-        "name": "Core Courses (Data Science)",
-        "tag": "INFO Core",
-        "tagDescr": "This is a core course of Information Science major",
-        "descr": None,
-        "number": 5,
-        "courseGrps": [
-            {"id": 1, "courses": ["INFO1200", "INFO1260"]},
-            {"id": 2, "courses": ["INFO1300"]},
-            {"id": 3, "courses": ["INFO2040"]},
-            {"id": 4, "courses": ["INFO2450"]},
-            {"id": 5, "courses": ["INFO2950"]},
-        ],
-        "parallel": [
-            {
-                "category": "concentration",
-                "condition": "Other Concentrations",
-                "reqId": "INFO_req1",
-            },
-            {
-                "category": "concentration",
-                "condition": "Data Science",
-                "reqId": "INFO_req2",
-            },
-        ],
-    }
-    add_requirement(req2)
-
-    req3 = {
-        "id": "INFO_req3",
         "type": "C",
         "major": "INFO",
         "name": "Programming Requirement",
@@ -282,11 +238,11 @@ def commit_INFO():
         "number": 1,
         "courseGrps": [{"id": 1, "courses": ["CS1110", "CS1112"]}],
     }
-    add_requirement(req3)
+    add_requirement(req2)
 
-    req4 = {
-        "id": "INFO_req4",
-        "type": "C",
+    req3 = {
+        "id": "INFO_req3",
+        "type": "E",
         "major": "INFO",
         "name": "Math Requirement",
         "tag": "INFO Math",
@@ -296,12 +252,12 @@ def commit_INFO():
             "AP credits can fulfill this requirement.",
         ],
         "number": 1,
-        "courseGrps": [{"id": 1, "courses": ["MATH1106", "MATH1110", "MATH1910"]}],
+        "courses": ["MATH1106", "MATH1110", "MATH1910"],
     }
-    add_requirement(req4)
+    add_requirement(req3)
 
-    req5 = {
-        "id": "INFO_req5",
+    req4 = {
+        "id": "INFO_req4",
         "type": "E",
         "major": "INFO",
         "name": "Statistics Requirement",
@@ -329,16 +285,16 @@ def commit_INFO():
             "STSCI2200",
         ],
     }
-    add_requirement(req5)
+    add_requirement(req4)
 
-    req6_courses = get_courses_by_subject_min_level(
+    req5_courses = get_courses_by_subject_min_level(
         "INFO",
         3,
         excluded=["INFO4998", "INFO4910", "INFO5900"],
         included=["INFO2300", "INFO2310", "CS2110", "CS2112", "CS3110", "CS3410"],
     )
-    req6 = {
-        "id": "INFO_req6",
+    req5 = {
+        "id": "INFO_req5",
         "type": "E",
         "major": "INFO",
         "name": "Electives",
@@ -355,12 +311,12 @@ def commit_INFO():
             "Students may only fulfill one of their electives with INFO 4900.",
         ],
         "number": 3,
-        "courses": req6_courses,
+        "courses": req5_courses,
     }
-    add_requirement(req6)
+    add_requirement(req5)
 
-    req7 = {
-        "id": "INFO_req7",
+    req6 = {
+        "id": "INFO_req6",
         "type": "E",
         "major": "INFO",
         "name": "Understanding Social Behavior",
@@ -381,16 +337,18 @@ def commit_INFO():
             "PSYCH3800",
         ],
     }
-    add_requirement(req7)
+    add_requirement(req6)
 
-    req8 = {
-        "id": "INFO_req8",
+    req7 = {
+        "id": "INFO_req7",
         "type": "E",
         "major": "INFO",
         "name": "Social Data Analytics",
         "tag": "INFO Behavioral Data",
         "tagDescr": "This can be counted as a Social Data Analytics course for the Behavioral Science concentration in Information Science major.",
-        "descr": ["Take one of the courses listed below"],
+        "descr": [
+            "Take one of the courses listed below",
+        ],
         "number": 1,
         "courses": [
             "INFO3300",
@@ -404,16 +362,18 @@ def commit_INFO():
             "CS3780",
         ],
     }
-    add_requirement(req8)
+    add_requirement(req7)
 
-    req9 = {
-        "id": "INFO_req9",
+    req8 = {
+        "id": "INFO_req8",
         "type": "E",
         "major": "INFO",
         "name": "Behavior in Sociological Context",
         "tag": "INFO Sociological Behavior",
         "tagDescr": "This can be counted as a Behavior in Sociological Context course for the Behavioral Science concentration in Information Science major.",
-        "descr": ["Take one of the courses listed below."],
+        "descr": [
+            "Take one of the courses listed below.",
+        ],
         "number": 1,
         "courses": [
             "INFO3200",
@@ -427,30 +387,32 @@ def commit_INFO():
             {
                 "category": "sub-concentration",
                 "condition": "Sociological Behavior",
-                "reqId": "INFO_req9",
+                "reqId": "INFO_req8",
             },
             {
                 "category": "sub-concentration",
                 "condition": "Network Behavior",
-                "reqId": "INFO_req10",
+                "reqId": "INFO_req9",
             },
             {
                 "category": "sub-concentration",
                 "condition": "Behavior in Design",
-                "reqId": "INFO_req11",
+                "reqId": "INFO_req10",
             },
         ],
     }
-    add_requirement(req9)
+    add_requirement(req8)
 
-    req10 = {
-        "id": "INFO_req10",
+    req9 = {
+        "id": "INFO_req9",
         "type": "E",
         "major": "INFO",
         "name": "Behavior in Network Context",
         "tag": "INFO Network Behavior",
         "tagDescr": "This can be counted as a Behavior in Network Context course for the Behavioral Science concentration in Information Science major.",
-        "descr": ["Take one of the courses listed below."],
+        "descr": [
+            "Take one of the courses listed below.",
+        ],
         "number": 1,
         "courses": [
             "INFO4360",
@@ -461,24 +423,24 @@ def commit_INFO():
             {
                 "category": "sub-concentration",
                 "condition": "Sociological Behavior",
-                "reqId": "INFO_req9",
+                "reqId": "INFO_req8",
             },
             {
                 "category": "sub-concentration",
                 "condition": "Network Behavior",
-                "reqId": "INFO_req10",
+                "reqId": "INFO_req9",
             },
             {
                 "category": "sub-concentration",
                 "condition": "Behavior in Design",
-                "reqId": "INFO_req11",
+                "reqId": "INFO_req10",
             },
         ],
     }
-    add_requirement(req10)
+    add_requirement(req9)
 
-    req11 = {
-        "id": "INFO_req11",
+    req10 = {
+        "id": "INFO_req10",
         "type": "E",
         "major": "INFO",
         "name": "Behavior in Design Context",
@@ -491,30 +453,33 @@ def commit_INFO():
             {
                 "category": "sub-concentration",
                 "condition": "Sociological Behavior",
-                "reqId": "INFO_req9",
+                "reqId": "INFO_req8",
             },
             {
                 "category": "sub-concentration",
                 "condition": "Network Behavior",
-                "reqId": "INFO_req10",
+                "reqId": "INFO_req9",
             },
             {
                 "category": "sub-concentration",
                 "condition": "Behavior in Design",
-                "reqId": "INFO_req11",
+                "reqId": "INFO_req10",
             },
         ],
     }
-    add_requirement(req11)
+    add_requirement(req10)
 
-    req12 = {
-        "id": "INFO_req12",
+    req11 = {
+        "id": "INFO_req11",
         "type": "E",
         "major": "INFO",
         "name": "Data Analysis",
         "tag": "INFO Data Analysis",
         "tagDescr": "This can be counted as a Data Analysis course for the Data Science concentration in Information Science major.",
-        "descr": ["Take one of the courses listed below."],
+        "descr": [
+            "Consists of advanced courses in machine learning, data mining, and analytics across departments.",
+            "Take one of the courses listed below.",
+        ],
         "number": 1,
         "courses": [
             "INFO3300",
@@ -529,16 +494,19 @@ def commit_INFO():
             "STSCI3740",
         ],
     }
-    add_requirement(req12)
+    add_requirement(req11)
 
-    req13 = {
-        "id": "INFO_req13",
+    req12 = {
+        "id": "INFO_req12",
         "type": "E",
         "major": "INFO",
         "name": "Domain Expertise",
         "tag": "INFO Data Domain",
         "tagDescr": "This can be counted as a Domain Expertise course for the Data Science concentration in Information Science major.",
-        "descr": ["Take one of the courses listed below."],
+        "descr": [
+            "Features specialized courses applying data science across diverse fields including sustainability, language processing, and social science.",
+            "Take one of the courses listed below.",
+        ],
         "number": 1,
         "courses": [
             "INFO2770",
@@ -553,16 +521,19 @@ def commit_INFO():
             "PUBPOL2130",
         ],
     }
-    add_requirement(req13)
+    add_requirement(req12)
 
-    req14 = {
-        "id": "INFO_req14",
+    req13 = {
+        "id": "INFO_req13",
         "type": "E",
         "major": "INFO",
         "name": "Big Data Ethics, Policy and Society",
         "tag": "INFO Data Ethics",
         "tagDescr": "This can be counted as a Big Data Ethics, Policy and Society course for the Data Science concentration in Information Science major.",
-        "descr": ["Take one of the courses listed below."],
+        "descr": [
+            "Includes courses examining the social, ethical, legal, and policy implications of data science and technology.",
+            "Take one of the courses listed below.",
+        ],
         "number": 1,
         "courses": [
             "INFO3200",
@@ -582,16 +553,19 @@ def commit_INFO():
             "STS3440",
         ],
     }
-    add_requirement(req14)
+    add_requirement(req13)
 
-    req15 = {
-        "id": "INFO_req15",
+    req14 = {
+        "id": "INFO_req14",
         "type": "E",
         "major": "INFO",
         "name": "Data Communication",
         "tag": "INFO Data Communication",
         "tagDescr": "This can be counted as a Data Communication course for the Data Science concentration in Information Science major.",
-        "descr": ["Take one of the courses listed below."],
+        "descr": [
+            "Covers courses in data visualization, information communication, and data-oriented research methods.",
+            "Take one of the courses listed below.",
+        ],
         "number": 1,
         "courses": [
             "INFO3312",
@@ -605,7 +579,7 @@ def commit_INFO():
             "SOC3580",
         ],
     }
-    add_requirement(req15)
+    add_requirement(req14)
 
 
 if __name__ == "__main__":
