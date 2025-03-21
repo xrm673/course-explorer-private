@@ -89,6 +89,14 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
         fetchRequirement();
     }, [reqId]);
 
+    // Add this useEffect in MajorRequirement.jsx
+    useEffect(() => {
+        // When reqId changes (which happens during concentration change)
+        if (filterTriggerRef.current.initialLoadComplete) {
+            triggerFiltering();
+        }
+    }, [reqId]); // Depend on reqId changes
+
     // Calculate completion status
     useEffect(() => {
         if (!req || !user || !user.scheduleData || !user.scheduleData.taken) {

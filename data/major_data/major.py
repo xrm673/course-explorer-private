@@ -183,6 +183,37 @@ def commit_INFO():
                     "INFO_req14",
                 ],
             },
+            {
+                "concentration": "Digital Culture and Production",
+                "requirements": ["INFO_req15", "INFO_req16", "INFO_req17"],
+            },
+            {
+                "concentration": "Information Ethics, Law, and Policy",
+                "requirements": [
+                    "INFO_req18",
+                    "INFO_req19",
+                    "INFO_req20",
+                    "INFO_req21",
+                ],
+            },
+            {
+                "concentration": "Interactive Technology",
+                "requirements": [
+                    "INFO_req22",
+                    "INFO_req23",
+                    "INFO_req24",
+                    "INFO_req25",
+                ],
+            },
+            {
+                "concentration": "UX Design",
+                "requirements": [
+                    "INFO_req26",
+                    "INFO_req27",
+                    "INFO_req28",
+                    "INFO_req29",
+                ],
+            },
         ],
         "init": [
             "INFO1200",
@@ -320,7 +351,7 @@ def commit_INFO():
         "type": "E",
         "major": "INFO",
         "name": "Understanding Social Behavior",
-        "tag": "INFO Social Behavior",
+        "tag": "Social Behavior",
         "tagDescr": "This can be counted as a Social Behavior course for the Behavioral Science concentration in Information Science major.",
         "descr": ["Take two of the courses listed below."],
         "number": 2,
@@ -332,7 +363,6 @@ def commit_INFO():
             "INFO4500",
             "INFO4505",
             "INFO4800",
-            "INFO4940",
             "COMM4380",
             "PSYCH3800",
         ],
@@ -344,7 +374,7 @@ def commit_INFO():
         "type": "E",
         "major": "INFO",
         "name": "Social Data Analytics",
-        "tag": "INFO Behavioral Data",
+        "tag": "Behavioral Data",
         "tagDescr": "This can be counted as a Social Data Analytics course for the Behavioral Science concentration in Information Science major.",
         "descr": [
             "Take one of the courses listed below",
@@ -356,7 +386,6 @@ def commit_INFO():
             "INFO4100",
             "INFO4300",
             "INFO4350",
-            "INFO4940",
             "COMM4242",
             "CS4740",
             "CS3780",
@@ -369,7 +398,7 @@ def commit_INFO():
         "type": "E",
         "major": "INFO",
         "name": "Behavior in Sociological Context",
-        "tag": "INFO Sociological Behavior",
+        "tag": "Sociological Behavior",
         "tagDescr": "This can be counted as a Behavior in Sociological Context course for the Behavioral Science concentration in Information Science major.",
         "descr": [
             "Take one of the courses listed below.",
@@ -379,8 +408,6 @@ def commit_INFO():
             "INFO3200",
             "INFO3561",
             "INFO4650",
-            "INFO4940",
-            "INFO4940",
             "STS3440",
         ],
         "parallel": [
@@ -408,7 +435,7 @@ def commit_INFO():
         "type": "E",
         "major": "INFO",
         "name": "Behavior in Network Context",
-        "tag": "INFO Network Behavior",
+        "tag": "Network Behavior",
         "tagDescr": "This can be counted as a Behavior in Network Context course for the Behavioral Science concentration in Information Science major.",
         "descr": [
             "Take one of the courses listed below.",
@@ -416,7 +443,6 @@ def commit_INFO():
         "number": 1,
         "courses": [
             "INFO4360",
-            "COMM4940",
             "SOC3350",
         ],
         "parallel": [
@@ -444,11 +470,11 @@ def commit_INFO():
         "type": "E",
         "major": "INFO",
         "name": "Behavior in Design Context",
-        "tag": "INFO Behavior Design",
+        "tag": "Behavior in Design",
         "tagDescr": "This can be counted as a Behavior in Design Context course for the Behavioral Science concentration in Information Science major.",
         "descr": ["Take one of the courses listed below."],
         "number": 1,
-        "courses": ["INFO3450", "INFO4240", "INFO4400", "INFO4940"],
+        "courses": ["INFO3450", "INFO4240", "INFO4400"],
         "parallel": [
             {
                 "category": "sub-concentration",
@@ -474,7 +500,7 @@ def commit_INFO():
         "type": "E",
         "major": "INFO",
         "name": "Data Analysis",
-        "tag": "INFO Data Analysis",
+        "tag": "Data Analysis",
         "tagDescr": "This can be counted as a Data Analysis course for the Data Science concentration in Information Science major.",
         "descr": [
             "Consists of advanced courses in machine learning, data mining, and analytics across departments.",
@@ -485,7 +511,6 @@ def commit_INFO():
             "INFO3300",
             "INFO3900",
             "INFO3950",
-            "INFO4940",
             "CS3780",
             "CS4786",
             "ORIE3120",
@@ -501,7 +526,7 @@ def commit_INFO():
         "type": "E",
         "major": "INFO",
         "name": "Domain Expertise",
-        "tag": "INFO Data Domain",
+        "tag": "Data Domain",
         "tagDescr": "This can be counted as a Domain Expertise course for the Data Science concentration in Information Science major.",
         "descr": [
             "Features specialized courses applying data science across diverse fields including sustainability, language processing, and social science.",
@@ -516,7 +541,6 @@ def commit_INFO():
             "INFO4120",
             "INFO4300",
             "INFO4350",
-            "INFO4940",
             "CS4740",
             "PUBPOL2130",
         ],
@@ -528,7 +552,7 @@ def commit_INFO():
         "type": "E",
         "major": "INFO",
         "name": "Big Data Ethics, Policy and Society",
-        "tag": "INFO Data Ethics",
+        "tag": "Data Ethics",
         "tagDescr": "This can be counted as a Big Data Ethics, Policy and Society course for the Data Science concentration in Information Science major.",
         "descr": [
             "Includes courses examining the social, ethical, legal, and policy implications of data science and technology.",
@@ -546,7 +570,6 @@ def commit_INFO():
             "INFO4270",
             "INFO4390",
             "INFO4561",
-            "INFO4940",
             "COMM4242",
             "ENGL3778",
             "PUBPOL3460",
@@ -560,7 +583,7 @@ def commit_INFO():
         "type": "E",
         "major": "INFO",
         "name": "Data Communication",
-        "tag": "INFO Data Communication",
+        "tag": "Data Communication",
         "tagDescr": "This can be counted as a Data Communication course for the Data Science concentration in Information Science major.",
         "descr": [
             "Covers courses in data visualization, information communication, and data-oriented research methods.",
@@ -574,14 +597,339 @@ def commit_INFO():
             "COMM3189",
             "COMM4200",
             "COMM4860",
-            "COMM4940",
             "GOVT2169",
             "SOC3580",
         ],
     }
     add_requirement(req14)
 
+    req15 = {
+        "id": "INFO_req15",
+        "type": "E",
+        "major": "INFO",
+        "name": "Digital Culture and History",
+        "tag": "Digital Culture",
+        "tagDescr": "This can be counted as a Digital Culture and History course for the Digital Culture and Production concentration in Information Science major.",
+        "descr": [
+            "You can choose to take 1 course in this section and 2 courses in the Design section."
+            "You can also choose to take 3 courses in this section and 0 course in the Design section."
+        ],
+        "number": 1,
+        "courses": [
+            "INFO2921",
+            "INFO3200",
+            "INFO3561",
+            "INFO4260",
+            "STS3440",
+            "STS4040",
+        ],
+    }
+    add_requirement(req15)
+
+    req16 = {
+        "id": "INFO_req16",
+        "type": "E",
+        "major": "INFO",
+        "name": "Digital Production",
+        "tag": "Digital Production",
+        "tagDescr": "This can be counted as a Digital Production course for the Digital Culture and Production concentration in Information Science major.",
+        "descr": ["Take one course in this section."],
+        "number": 1,
+        "courses": [
+            "​INFO2300",
+            "INFO2310",
+            "INFO3152",
+            "INFO3300",
+            "INFO4320",
+            "CS3758",
+            "CS4620",
+        ],
+    }
+    add_requirement(req16)
+
+    req17 = {
+        "id": "INFO_req17",
+        "type": "E",
+        "major": "INFO",
+        "name": "Media, Art, Design",
+        "tag": "Media Design",
+        "tagDescr": "This can be counted as a Media, Art, Design course for the Digital Culture and Production concentration in Information Science major.",
+        "descr": [
+            "Take two courses in this section.",
+            "You do not need to take course in this section if you plan to take three courses in the Digital Culture and History section.",
+        ],
+        "number": 2,
+        "courses": [
+            "INFO2750",
+            "INFO3450",
+            "INFO3660",
+            "INFO4152",
+            "INFO4240",
+            "INFO4400",
+            "INFO4420",
+            "ART3705",
+            "ARTH4151",
+            "ARTH4154",
+            "COML3115",
+            "HIST2293",
+        ],
+    }
+    add_requirement(req17)
+
+    req18 = {
+        "id": "INFO_req18",
+        "type": "E",
+        "major": "INFO",
+        "name": "Frameworks and Institutions",
+        "tag": "Ethics Frameworks",
+        "tagDescr": "This can be counted as a Frameworks and Institutions course for the Information Ethics, Law, and Policy concentration in Information Science major.",
+        "descr": ["Take one course in this section."],
+        "number": 1,
+        "courses": [
+            "INFO4113",
+            "INFO4200",
+            "INFO4250",
+            "INFO4301",
+            "HADM4890",
+            "PUBPOL3460",
+            "STS2761",
+        ],
+    }
+    add_requirement(req18)
+
+    req19 = {
+        "id": "INFO_req19",
+        "type": "E",
+        "major": "INFO",
+        "name": "Methods and Analysis",
+        "tag": "Ethics Methods",
+        "tagDescr": "This can be counted as a Methods and Analysis course for the Information Ethics, Law, and Policy concentration in Information Science major.",
+        "descr": ["Take one course in this section."],
+        "number": 1,
+        "courses": [
+            "INFO2921",
+            "INFO4240",
+            "INFO4800",
+            "COMM4242",
+            "CRP3210",
+            "PUBPOL2300",
+        ],
+    }
+    add_requirement(req19)
+
+    req20 = {
+        "id": "INFO_req20",
+        "type": "E",
+        "major": "INFO",
+        "name": "Cases / Topics",
+        "tag": "Ethics Cases",
+        "tagDescr": "This can be counted as a Cases / Topics course for the Information Ethics, Law, and Policy concentration in Information Science major.",
+        "descr": ["Take one course in this section."],
+        "number": 1,
+        "courses": [
+            "INFO3200",
+            "INFO3460",
+            "INFO3561",
+            "INFO4145",
+            "INFO4260",
+            "INFO4270",
+            "INFO4390",
+            "INFO4561",
+            "STS3440",
+            "STS4040",
+        ],
+    }
+    add_requirement(req20)
+
+    req21 = {
+        "id": "INFO_req21",
+        "type": "E",
+        "major": "INFO",
+        "name": "Tools and Technical Domains",
+        "tag": "Ethics Tools",
+        "tagDescr": "This can be counted as a Tools and Technical Domains course for the Information Ethics, Law, and Policy concentration in Information Science major.",
+        "descr": [
+            "Take one course in this section.",
+            "Students may petition the Director of Undergraduate Studies to allow any upper-level (3000 or above) technical IS course relevant to their work in ELP to satisfy this category.",
+        ],
+        "number": 1,
+        "courses": [
+            "INFO3300",
+            "INFO3350",
+            "INFO3370",
+            "INFO4100",
+            "INFO4120",
+            "INFO4300",
+            "INFO4350",
+        ],
+    }
+    add_requirement(req21)
+
+    req22 = {
+        "id": "INFO_req22",
+        "type": "C",
+        "major": "INFO",
+        "name": "Required Course",
+        "tag": "IT Core",
+        "tagDescr": "This is a core course for the Interactive Technologies concentration in Information Science major.",
+        "descr": [
+            "CS 2110 is a required course for this concentration.",
+        ],
+        "number": 1,
+        "courseGrps": [{"id": 1, "courses": ["CS2110"]}],
+    }
+    add_requirement(req22)
+
+    req23 = {
+        "id": "INFO_req23",
+        "type": "E",
+        "major": "INFO",
+        "name": "Building with Hardware",
+        "tag": "IT Hardware",
+        "tagDescr": "This can be counted as a Building with Hardware course for the Interactive Technologies concentration in Information Science major.",
+        "descr": [
+            "Take one of the three courses for this requirement.",
+        ],
+        "number": 1,
+        "courses": ["INFO4120", "INFO4320", "CS4758"],
+    }
+    add_requirement(req23)
+
+    req24 = {
+        "id": "INFO_req24",
+        "type": "E",
+        "major": "INFO",
+        "name": "Working with Data/Software",
+        "tag": "IT Software",
+        "tagDescr": "This can be counted as a Working with Data/Software course for the Interactive Technologies concentration in Information Science major.",
+        "descr": [
+            "Take one of the courses for this requirement.",
+        ],
+        "number": 1,
+        "courses": [
+            "INFO3300",
+            "INFO4340",
+            "INFO4555",
+            "CS4620",
+            "CS3780",
+            "CS4786",
+            "CS5150",
+            "ORIE3120",
+            "ORIE4740",
+            "ORIE3741",
+            "STSCI3740",
+        ],
+    }
+    add_requirement(req24)
+
+    req25 = {
+        "id": "INFO_req25",
+        "type": "E",
+        "major": "INFO",
+        "name": "Context/Application Domains",
+        "tag": "IT Context",
+        "tagDescr": "This can be counted as a Context/Application Domains course for the Interactive Technologies concentration in Information Science major.",
+        "descr": [
+            "Take one of the courses for this requirement.",
+        ],
+        "number": 1,
+        "courses": [
+            "INFO4152",
+            "INFO4154",
+            "INFO4275",
+            "INFO4310",
+            "INFO4410",
+            "INFO4430",
+            "INFO4505",
+            "INFO4940",
+            "INFO4940",
+            "CS4752",
+        ],
+    }
+    add_requirement(req25)
+
+    req26 = {
+        "id": "INFO_req26",
+        "type": "E",
+        "major": "INFO",
+        "name": "Core Principles of Design",
+        "tag": "UX Principles",
+        "tagDescr": "This can be counted as a Core Principle course for the UX Design concentration in Information Science major.",
+        "descr": [
+            "Take one of the courses for this requirement.",
+        ],
+        "number": 1,
+        "courses": [
+            "INFO3450",
+            "INFO4400",
+            "INFO4410",
+        ],
+    }
+    add_requirement(req26)
+
+    req27 = {
+        "id": "INFO_req27",
+        "type": "E",
+        "major": "INFO",
+        "name": "Design in Context",
+        "tag": "UX Context",
+        "tagDescr": "This can be counted as a Context course for the UX Design concentration in Information Science major.",
+        "descr": [
+            "Take one of the courses for this requirement.",
+        ],
+        "number": 1,
+        "courses": ["INFO2921", "INFO4240", "INFO4420", "INFO4505"],
+    }
+    add_requirement(req27)
+
+    req28 = {
+        "id": "INFO_req28",
+        "type": "E",
+        "major": "INFO",
+        "name": "Knowing the User",
+        "tag": "UX User",
+        "tagDescr": "This can be counted as a Knowing the User course for the UX Design concentration in Information Science major.",
+        "descr": [
+            "Take one of the courses for this requirement.",
+        ],
+        "number": 1,
+        "courses": [
+            "INFO3460",
+            "INFO4125",
+            "INFO4430",
+            "INFO4450",
+            "INFO4490",
+            "COMM4380",
+            "PSYCH3420",
+        ],
+    }
+    add_requirement(req28)
+
+    req29 = {
+        "id": "INFO_req29",
+        "type": "E",
+        "major": "INFO",
+        "name": "Knowing the Technology",
+        "tag": "UX Technology",
+        "tagDescr": "This can be counted as a Knowing the Technology course for the UX Design concentration in Information Science major.",
+        "descr": [
+            "Take one of the courses for this requirement.",
+        ],
+        "number": 1,
+        "courses": [
+            "INFO3152",
+            "INFO4152",
+            "INFO4154",
+            "INFO4275",
+            "INFO4310",
+            "INFO4320",
+            "INFO4340",
+            "CS5150",
+        ],
+    }
+    add_requirement(req29)
+
 
 if __name__ == "__main__":
-    commit_ARTH()
+    # commit_ARTH()
     commit_INFO()
