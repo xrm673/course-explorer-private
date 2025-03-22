@@ -9,6 +9,7 @@ import { useAcademic } from "../../context/AcademicContext";
 import styles from "./MajorRequirement.module.css";
 
 import { useRequirement } from "../hooks/useRequirement"
+import { useFilter } from "../hooks/useFilter";
 
 import ElectiveCourseCard from "./ElectiveCourseCard";
 import CoreCourseGroup from "./CoreCourseGroup";
@@ -36,34 +37,6 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
     });
 
     const [showFilterModal, setShowFilterModal] = useState(false);
-    const [activeFilters, setActiveFilters] = useState({
-        level: {
-          1000: { only: false, prefer: false },
-          2000: { only: false, prefer: false },
-          3000: { only: false, prefer: false },
-          4000: { only: false, prefer: false },
-          5000: { only: false, prefer: false }
-        },
-        overallScore: {
-            "High Overall Score": { only: false, prefer: false}
-        },
-        enrollment: {
-          eligible: { only: false, prefer: false },
-        },
-        collegeDistributions: {
-            "ALC-AS": {only: false, prefer: false},
-            "BIO-AS": {only: false, prefer: false},
-            "ETM-AS": {only: false, prefer: false},
-            "GLC-AS": {only: false, prefer: false},
-            "HST-AS": {only: false, prefer: false},
-            "PHS-AS": {only: false, prefer: false},
-            "SCD-AS": {only: false, prefer: false},
-            "SSC-AS": {only: false, prefer: false},
-            "SDS-AS": {only: false, prefer: false},
-            "SMR-AS": {only: false, prefer: false}
-        },
-        majorRequirements: {}
-    });
 
     // Enhanced function to explicitly trigger filtering with visual feedback
     const triggerFiltering = () => {
@@ -76,6 +49,9 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
 
     // Fetch requirement data
     const { req, loading, error } = useRequirement(reqId);
+
+    // Get filters data
+    const { filters, applyFilters } = useFilter(showFilterModal, user, academicData);
 
     // Add this useEffect in MajorRequirement.jsx
     useEffect(() => {
@@ -184,10 +160,12 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
                         let score = 0;
                         let shouldKeep = true;
                         let tags = [];
+                        let status = "Normal";
                         
                         // Check semester availability
                         if (!isCourseAvailableInSemester(course, selectedSemester)) {
                             score -= 50;
+                            status = "Not Provided"
                         }
                         
                         // Apply level filters
@@ -195,28 +173,28 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
                             const levelKey = (course.lvl * 1000).toString();
                             
                             // Apply "only" filter
-                            const hasLevelOnlyFilter = Object.values(activeFilters.level).some(level => level.only);
-                            if (hasLevelOnlyFilter && !activeFilters.level[levelKey]?.only) {
+                            const hasLevelOnlyFilter = Object.values(filters.level).some(level => level.only);
+                            if (hasLevelOnlyFilter && !filters.level[levelKey]?.only) {
                                 shouldKeep = false;
                                 continue;
                             }
                             
                             // Apply "prefer" filter
-                            if (activeFilters.level[levelKey]?.prefer) {
+                            if (filters.level[levelKey]?.prefer) {
                                 score += 5;
                             }
                         }
 
                         // Apply Overall Score filters
                         // Apply "only" filter
-                        if (activeFilters.overallScore["High Overall Score"]?.only) {
+                        if (filters.overallScore["High Overall Score"]?.only) {
                             if (!course.ov || course.ov < 3.5) {
                                 shouldKeep = false;
                                 continue;
                             }
                         }
                         // Apply "prefer" filter
-                        if (activeFilters.overallScore["High Overall Score"]?.prefer) {
+                        if (filters.overallScore["High Overall Score"]?.prefer) {
                             if (course.ov && course.ov >= 3.5) {
                                 score += 5 * course.ov
                             } else if (course.ov && course.ov < 2.0) {
@@ -229,20 +207,20 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
                             const eligibility = checkCourseEligibility(course, user);
                             
                             // Apply "only" filter
-                            if (activeFilters.enrollment.eligible?.only && !eligibility.isEligible) {
+                            if (filters.enrollment.eligible?.only && !eligibility.isEligible) {
                                 shouldKeep = false;
                                 continue;
                             }
                             
                             // Apply "prefer" filter
-                            if (activeFilters.enrollment.eligible?.prefer && eligibility.isEligible) {
+                            if (filters.enrollment.eligible?.prefer && eligibility.isEligible) {
                                 score += 20;
                             }
                         }
 
                         // Apply distribution filters
                         const { score: distrScore, shouldKeep: distrKeep, tags: distrTags } = 
-                        applyDistributionFilters(course, activeFilters);
+                        applyDistributionFilters(course, filters);
                         score += distrScore;
                         if (!distrKeep) {
                             shouldKeep = false;
@@ -252,7 +230,7 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
 
                         // Apply requirement filters
                         const { score: reqScore, shouldKeep: reqShouldKeep, tags: reqTags } = 
-                        applyRequirementFilters(course, activeFilters);
+                        applyRequirementFilters(course, filters);
                         score += reqScore;
                         if (!reqShouldKeep) {
                             shouldKeep = false;
@@ -298,7 +276,7 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
 
             filterCourses();
         }
-    }, [req, selectedSemester, activeFilters, user, refreshTrigger, academicData]); // Added academicData to dependencies
+    }, [req, selectedSemester, filters, user, refreshTrigger, academicData]); // Added academicData to dependencies
 
     // Re-trigger filtering when semester changes
     useEffect(() => {
@@ -320,11 +298,11 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
     };
 
     // Handle applying filters - updated to trigger filtering
-    const handleApplyFilters = (filters) => {
-        setActiveFilters(filters);
-        triggerFiltering(); // Set flag to trigger filtering
+    const handleApplyFilters = (newFilters) => {
+        applyFilters(newFilters);
+        triggerFiltering();
         setShowFilterModal(false);
-    };
+      };
 
     if (loading) return <div className={styles.loading}>Loading...</div>;
     if (error) return <div className={styles.error}>{error}</div>;
@@ -380,7 +358,7 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
                             <img 
                                 src={filterIcon} 
                                 alt="Filter courses"
-                                className={`${styles.filterIcon} ${Object.values(activeFilters).some(
+                                className={`${styles.filterIcon} ${Object.values(filters).some(
                                     category => Object.values(category).some(
                                         option => option.only || option.prefer
                                     )
@@ -480,7 +458,7 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
             <FilterModal 
                 isOpen={showFilterModal}
                 onClose={() => setShowFilterModal(false)}
-                activeFilters={activeFilters}
+                filters={filters}
                 onApplyFilters={handleApplyFilters} 
             />
         </div>
