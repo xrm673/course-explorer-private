@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 import { useParams } from "react-router"
 import { useContext } from 'react';
 import { UserContext } from '../../context/UserContext';
+import { useMajor } from '../hooks/useMajor';
 
-import { getMajorById } from '../../firebase/services/majorService'
 import MajorRequirement from './MajorRequirement';
 import SemesterSelector from './SemesterSelector';
 import ConcentrationSelector from './ConcentrationSelector';
@@ -11,35 +11,12 @@ import styles from './SingleMajorPage.module.css';
 
 export default function SingleMajorPage() {
     const { user, isLoggedIn } = useContext(UserContext);
-    const [major, setMajor] = useState(null);
-    const [selectedCollegeId, setSelectedCollegeId] = useState('');
     const [selectedSemester, setSelectedSemester] = useState('FA25'); // Default to Fall 2025
     const [selectedConcentration, setSelectedConcentration] = useState('')
     const [allConcentrations, setAllConcentrations] = useState([])
     const { majorId } = useParams();
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
 
-    useEffect(() => {
-        const fetchMajor = async () => {
-            try {
-                const majorData = await getMajorById(majorId);
-                setMajor(majorData);
-                
-                if (majorData.colleges && majorData.colleges.length > 0) {
-                    setSelectedCollegeId(majorData.colleges[0].id);
-                }
-                
-                setLoading(false);
-            } catch (err) {
-                console.error(`Error fetching major ${majorId}:`, err);
-                setError("Failed to load major data");
-                setLoading(false);
-            }
-        };
-        
-        fetchMajor();
-    }, [majorId]);
+    const { major, selectedCollegeId, loading, error } = useMajor(majorId);
 
     let hasConcentrations = false
     let firstConcentration = null
@@ -50,7 +27,7 @@ export default function SingleMajorPage() {
     }
 
     useEffect(() => {
-        if (major && Array.isArray(major.concentrations) && major.concentrations.length > 0) {
+        if (major && hasConcentrations) {
             // Extract all concentration names into an array
             setAllConcentrations(major.concentrations.map(item => item.concentration));
         }

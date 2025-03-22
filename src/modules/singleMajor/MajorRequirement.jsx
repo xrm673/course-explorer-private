@@ -3,9 +3,12 @@ import { getRequirementById } from "../../firebase/services/requirementService";
 import { getCourseById } from "../../firebase/services/courseService";
 import { isCourseAvailableInSemester } from "../../utils/semesterUtils";
 import { checkCourseEligibility, isCourseInRequirement } from "../../utils/courseUtils";
+import { applyRequirementFilters, applyDistributionFilters } from "../../utils/filterUtils";
 import { UserContext } from "../../context/UserContext";
 import { useAcademic } from "../../context/AcademicContext";
 import styles from "./MajorRequirement.module.css";
+
+import { useRequirement } from "../hooks/useRequirement"
 
 import ElectiveCourseCard from "./ElectiveCourseCard";
 import CoreCourseGroup from "./CoreCourseGroup";
@@ -17,9 +20,6 @@ import refreshIcon from "../../assets/refresh.svg"
 export default function MajorRequirement({ reqId, selectedSemester }) {
     const { user } = useContext(UserContext);
     const { academicData } = useAcademic(); // Added academicData
-    const [req, setReq] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
     const [filteredCourses, setFilteredCourses] = useState([]);
     const [completedCourses, setCompletedCourses] = useState([]);
@@ -75,19 +75,7 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
     };
 
     // Fetch requirement data
-    useEffect(() => {
-        const fetchRequirement = async () => {
-            try {
-                const reqData = await getRequirementById(reqId);
-                setReq(reqData);
-                setLoading(false);
-            } catch (err) {
-                setError("Failed to load");
-                setLoading(false);
-            }
-        };
-        fetchRequirement();
-    }, [reqId]);
+    const { req, loading, error } = useRequirement(reqId);
 
     // Add this useEffect in MajorRequirement.jsx
     useEffect(() => {
@@ -151,102 +139,6 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
         // Format the completion status
         setCompletionStatus(`(${completedCount}/${requiredCount})`);
     }, [req, user]);
-
-
-    // Apply requirement filters and collect tags in one pass
-    const applyRequirementFilters = (course, filters) => {
-        let score = 0;
-        let shouldKeep = true;
-        const matchingTags = []; // Array to collect requirement tags
-        
-        // Get all requirement filters
-        const requirementFilters = Object.entries(filters.majorRequirements || {});
-        if (requirementFilters.length === 0) {
-            return { score, shouldKeep, tags: matchingTags };
-        }
-        
-        // Check for any "only" filters
-        const onlyFilters = requirementFilters.filter(([_, filter]) => filter.only);
-        if (onlyFilters.length > 0) {
-            // Course must be in at least one of the "only" requirements
-            const matchesAnyOnly = onlyFilters.some(([reqId]) => {
-                const requirement = academicData?.requirements?.[reqId];
-                const matches = requirement && isCourseInRequirement(course.id, requirement);
-                
-                // If matching and has tag, collect it
-                if (matches && requirement.tag) {
-                    matchingTags.push(requirement.tag);
-                }
-                
-                return matches;
-            });
-            
-            if (!matchesAnyOnly) {
-                shouldKeep = false;
-                return { score, shouldKeep, tags: matchingTags };
-            }
-        }
-    
-        // Apply "prefer" filters - add points and collect tags
-        const preferFilters = requirementFilters.filter(([_, filter]) => filter.prefer);
-        preferFilters.forEach(([reqId]) => {
-            const requirement = academicData?.requirements?.[reqId];
-            if (requirement && isCourseInRequirement(course.id, requirement)) {
-                // Add score
-                score += 20;
-                
-                // Collect tag if it exists and isn't already in the list
-                if (requirement.tag && !matchingTags.includes(requirement.tag)) {
-                    matchingTags.push(requirement.tag);
-                }
-            }
-        });
-        
-        return { score, shouldKeep, tags: matchingTags };
-    };
-
-    const applyDistributionFilters = (course, filters) => {
-        let score = 0;
-        let shouldKeep = true;
-        const matchingTags = [];
-        const hasDistOnlyFilter = Object.entries(filters.collegeDistributions)
-                                     .some(([_, value]) => value.only);
-        // Early return if course has no distributions
-        if (!course.distr || !Array.isArray(course.distr)) {
-            if (hasDistOnlyFilter) {
-                shouldKeep = false;
-            }
-            return { score, shouldKeep, tags: matchingTags };
-        }
-        
-        if (hasDistOnlyFilter) {
-            // Find all matching distribution codes
-            const matchingDists = course.distr.filter(dist => 
-                dist && filters.collegeDistributions[dist]?.only
-            );
-            
-            if (matchingDists.length === 0) {
-                shouldKeep = false;
-            } else {
-                // Add the actual matching distribution codes as tags
-                matchingTags.push(...matchingDists);
-            }
-        }
-        
-        // Apply "prefer" scoring regardless of "only" filter result
-        course.distr.forEach(dist => {
-            if (dist && filters.collegeDistributions[dist]?.prefer) {
-                score += 10;
-                
-                // Only add to tags if not already included
-                if (!matchingTags.includes(dist)) {
-                    matchingTags.push(dist);
-                }
-            }
-        });
-        
-        return { score, shouldKeep, tags: matchingTags };
-    };
 
     // Load and filter courses - modified to only run when explicitly triggered
     useEffect(() => {
