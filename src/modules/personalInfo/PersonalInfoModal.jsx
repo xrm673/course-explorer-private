@@ -7,11 +7,11 @@ import { Link } from 'react-router-dom';
 export default function PersonalInfoModal({ onClose }) {
     // Sample user data - in a real app, this would come from props or context
     const userData = {
-        credits: 60,
-        graduationYear: 2026,
+        credits: 58,
+        graduationYear: 2027,
         college: "College of Arts & Sciences",
-        majors: [{ name: "Computer Science", progress: 45 }],
-        minors: [{ name: "Information Science", progress: 30 }]
+        majors: [{ name: "Information Science", progress: 45 }],
+        minors: [{ name: "Computer Science", progress: 30 }]
     };
     const { user, isLoggedIn, setUser } = useContext(UserContext);
     const handleLogout = () => {
@@ -66,7 +66,7 @@ export default function PersonalInfoModal({ onClose }) {
                         {userData.majors.map((major, index) => (
                             <article key={index} className={styles.progressContainer}>
                                 <div className={styles.progressHeader}>
-                                    <a href={`/major/${major.name.toLowerCase().replace(/\s+/g, '-')}`} className={styles.progressLink}>
+                                    <a href={`/majors/INFO`} className={styles.progressLink}>
                                         {major.name}
                                     </a>
                                     <span>{major.progress}%</span>
@@ -83,7 +83,7 @@ export default function PersonalInfoModal({ onClose }) {
                         {userData.minors.map((minor, index) => (
                             <article key={index} className={styles.progressContainer}>
                                 <div className={styles.progressHeader}>
-                                    <a href={`/minor/${minor.name.toLowerCase().replace(/\s+/g, '-')}`} className={styles.progressLink}>
+                                    <a href={`/majors/CS`} className={styles.progressLink}>
                                         {minor.name}
                                     </a>
                                     <span>{minor.progress}%</span>

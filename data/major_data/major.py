@@ -240,10 +240,6 @@ def commit_INFO():
         "descr": [
             "Information Science students must take at lease one course from each of the course group listed below.",
         ],
-        "Note": "Data Science (DS) concentrators should take INFO 2950: Introduction to Data"
-        " Science with Python during the fall semester, if possible. Otherwise, "
-        "DS concentrators should plan to build upon their Python programming skills in preparation "
-        "for upper-level DS courses.",
         "number": 5,
         "courseGrps": [
             {"id": 1, "courses": ["INFO1200", "INFO1260"]},
@@ -930,6 +926,229 @@ def commit_INFO():
     add_requirement(req29)
 
 
+def commit_CS():
+    major = {
+        "id": "CS",
+        "name": "Computer Science",
+        "colleges": [
+            {"id": "CAS", "name": "Arts and Sciences"},
+            {"id": "COE", "name": "Cornell Engineering"},
+        ],
+        "requiredCourses": None,
+        "basicRequirements": [
+            {
+                "college": "CAS",
+                "requirements": [
+                    "CS_req1",
+                    "CS_req2",
+                    "CS_req4",
+                    "CS_req6",
+                ],
+            },
+            {
+                "college": "COE",
+                "requirements": [
+                    "CS_req1",
+                    "CS_req2",
+                    "CS_req4",
+                    "CS_req6",
+                ],
+            },
+        ],
+        "init": [
+            "CS1110",
+            "CS1112",
+            "CS2110",
+            "CS2800",
+            "CS3110",
+            "MATH1120",
+            "MATH2210",
+            "MATH1910",
+            "MATH1920",
+        ],
+    }
+    add_major(major)
+
+    req1 = {
+        "id": "CS_req1",
+        "type": "C",
+        "major": "CS",
+        "name": "Introductory Programming",
+        "tag": "Intro Programming",
+        "tagDescr": "This is a Introductory Programming course of Computer Science major",
+        "descr": [
+            "Take two introductory programming courses CS 111X and CS 2110 (or equivalent).",
+        ],
+        "number": 2,
+        "courseGrps": [
+            {"id": 1, "courses": ["CS1110", "CS1112"]},
+            {"id": 2, "courses": ["CS2110", "CS2112"]},
+        ],
+        "note": None,
+    }
+    add_requirement(req1)
+
+    req2 = {
+        "id": "CS_req2",
+        "type": "C",
+        "major": "CS",
+        "name": "Calculus",
+        "tag": "CS Calculus",
+        "tagDescr": "This is a calculus course of Computer Science major",
+        "descr": [
+            "Take a calculus sequence of 3 courses.",
+            "A&S students can take either MATH 1110-1120-2210 sequence or MATH 1910-1920-2940 sequence.",
+        ],
+        "number": 3,
+        "courseGrps": [
+            {"id": 1, "courses": ["MATH1110", "MATH1910"]},
+            {"id": 2, "courses": ["MATH1120", "MATH1920"]},
+            {"id": 3, "courses": ["MATH2210", "MATH2940"]},
+        ],
+        "parallel": [
+            {
+                "category": "college",
+                "condition": "A&S",
+                "reqId": "CS_req2",
+            },
+            {
+                "category": "college",
+                "condition": "ENGR and A&S",
+                "reqId": "CS_req3",
+            },
+        ],
+        "note": None,
+    }
+    add_requirement(req2)
+
+    req3 = {
+        "id": "CS_req3",
+        "type": "C",
+        "major": "CS",
+        "name": "Calculus",
+        "tag": "CS Calculus",
+        "tagDescr": "This is a calculus course of Computer Science major",
+        "descr": [
+            "Take a calculus sequence of 3 courses.",
+            "Engineering students can only take MATH 1910-1920-2940 sequence.",
+        ],
+        "number": 3,
+        "courseGrps": [
+            {"id": 1, "courses": ["MATH1910"]},
+            {"id": 2, "courses": ["MATH1920"]},
+            {"id": 3, "courses": ["MATH2940"]},
+        ],
+        "parallel": [
+            {
+                "category": "college",
+                "condition": "A&S",
+                "reqId": "CS_req2",
+            },
+            {
+                "category": "college",
+                "condition": "COE",
+                "reqId": "CS_req3",
+            },
+        ],
+        "note": None,
+    }
+    add_requirement(req3)
+
+    req4 = {
+        "id": "CS_req4",
+        "type": "C",
+        "major": "CS",
+        "name": "Core Courses",
+        "tag": "CS Core",
+        "tagDescr": "This is a core course of Computer Science major",
+        "descr": [
+            "All FA24 and later matriculants must take one course from each of the following course group listed below.",
+        ],
+        "number": 6,
+        "courseGrps": [
+            {"id": 1, "courses": ["CS2800", "CS2802"]},
+            {"id": 2, "courses": ["CS3110"]},
+            {"id": 3, "courses": ["CS3410", "CS3420"]},
+            {"id": 4, "courses": ["CS3700", "CS3780"]},
+            {"id": 5, "courses": ["CS4410", "CS4414"]},
+            {"id": 6, "courses": ["CS4820"]},
+        ],
+        "parallel": [
+            {
+                "category": "year",
+                "condition": "FA24 matriculants and later",
+                "reqId": "CS_req4",
+            },
+            {
+                "category": "year",
+                "condition": "Pre FA24 matriculants",
+                "reqId": "CS_req5",
+            },
+        ],
+        "note": None,
+    }
+    add_requirement(req4)
+
+    req5 = {
+        "id": "CS_req5",
+        "type": "C",
+        "major": "CS",
+        "name": "Core Courses",
+        "tag": "CS Core",
+        "tagDescr": "This is a core course of Computer Science major",
+        "descr": [
+            "All Pre FA24 matriculants must take one course from each of the following course group listed below.",
+        ],
+        "number": 5,
+        "courseGrps": [
+            {"id": 1, "courses": ["CS2800", "CS2802"]},
+            {"id": 2, "courses": ["CS3110"]},
+            {"id": 3, "courses": ["CS3410", "CS3420"]},
+            {"id": 4, "courses": ["CS4410", "CS4414"]},
+            {"id": 5, "courses": ["CS4820"]},
+        ],
+        "parallel": [
+            {
+                "category": "year",
+                "condition": "FA24 matriculants and later",
+                "reqId": "CS_req4",
+            },
+            {
+                "category": "year",
+                "condition": "Pre FA24 matriculants",
+                "reqId": "CS_req5",
+            },
+        ],
+        "note": None,
+    }
+    add_requirement(req5)
+
+    req6_courses = get_courses_by_subject_min_level(
+        "CS",
+        min_level=4,
+        min_credit=3,
+        excluded=["CS4090", "CS4998", "CS4999"],
+        included=["CS3700", "CS3780"],
+    )
+    req6 = {
+        "id": "CS_req6",
+        "type": "C",
+        "major": "CS",
+        "name": "Electives",
+        "tag": "CS Electives",
+        "tagDescr": "This can be counted as an elective course for Computer Science major",
+        "descr": [
+            "All FA24 and later matriculants must take two CS 4000+ courses (3+ credits each).",
+            "CS 4090, CS 4998, and CS 4999 are NOT allowed. CS 3700 or CS 3780 allowed if not used in CS core.",
+        ],
+        "number": 2,
+        "courses": req6_courses,
+        "note": None,
+    }
+    add_requirement(req6)
+
+
 if __name__ == "__main__":
     # commit_ARTH()
     commit_INFO()
+    commit_CS()

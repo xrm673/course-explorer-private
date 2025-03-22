@@ -38,17 +38,17 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
     const [showFilterModal, setShowFilterModal] = useState(false);
     const [activeFilters, setActiveFilters] = useState({
         level: {
-          1000: { only: false, prefer: true },
-          2000: { only: false, prefer: true },
-          3000: { only: false, prefer: true },
-          4000: { only: false, prefer: true },
+          1000: { only: false, prefer: false },
+          2000: { only: false, prefer: false },
+          3000: { only: false, prefer: false },
+          4000: { only: false, prefer: false },
           5000: { only: false, prefer: false }
         },
         overallScore: {
-            "High Overall Score": { only: false, prefer: true}
+            "High Overall Score": { only: false, prefer: false}
         },
         enrollment: {
-          eligible: { only: false, prefer: true },
+          eligible: { only: false, prefer: false },
         },
         collegeDistributions: {
             "ALC-AS": {only: false, prefer: false},
