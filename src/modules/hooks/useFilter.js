@@ -13,7 +13,7 @@ export function useFilter(showFilterModal, user, academicData) {
         "High Overall Score": { only: false, prefer: false}
     },
     enrollment: {
-      eligible: { only: false, prefer: false },
+      "Eligible": { only: false, prefer: false },
     },
     collegeDistributions: {
         "ALC-AS": {only: false, prefer: false},
@@ -29,6 +29,15 @@ export function useFilter(showFilterModal, user, academicData) {
     },
     majorRequirements: {}
   });
+
+    // Map of internal keys to display names
+    const categoryNames = {
+      level: "Level",
+      overallScore: "Overall Score",
+      enrollment: "Enrollment",
+      collegeDistributions: "College Distributions",
+      majorRequirements: "Major Requirements"
+    };
 
   // Process requirements for all user's majors when modal opens
   useEffect(() => {
@@ -100,11 +109,11 @@ export function useFilter(showFilterModal, user, academicData) {
       ...prev,
       majorRequirements: majorRequirements
     }));
-  }, [user, academicData, filters, showFilterModal]); // Added showFilterModal to dependencies
+  }, [user, academicData, showFilterModal]); // Added showFilterModal to dependencies
   
   const applyFilters = (newFilters) => {
     setFilters(newFilters);
   };
 
-  return { filters, applyFilters }
+  return { filters, categoryNames, applyFilters }
 }

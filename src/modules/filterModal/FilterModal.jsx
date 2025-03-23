@@ -2,29 +2,8 @@ import React, { useState, useEffect } from 'react';
 import styles from './FilterModal.module.css';
 import FilterCategory from "./FilterCategory"
 
-/**
- * FilterModal component for filtering courses
- * 
- * @param {boolean} isOpen - Whether the modal is visible
- * @param {Object} filters - The current active filters
- * @param {Function} onClose - Function to call when closing the modal
- * @param {Function} onApplyFilters - Function to call when applying filters
- */
-const FilterModal = ({ 
-  isOpen, 
-  filters,
-  onClose,
-  onApplyFilters
-}) => {
-
-  // Map of internal keys to display names
-  const categoryDisplayNames = {
-    level: "Level",
-    overallScore: "Overall Score",
-    enrollment: "Enrollment",
-    collegeDistributions: "College Distributions",
-    majorRequirements: "Major Requirements"
-  };
+export default function FilterModal(
+  { isOpen, filters, categoryNames, onClose, onApplyFilters }){
 
   // Initialize local state (will be empty initially)
   const [localFilters, setLocalFilters] = useState({});
@@ -101,7 +80,7 @@ const FilterModal = ({
                 key={category}
                 categoryKey={category}
                 categoryData={categoryData}
-                title={categoryDisplayNames[category] || category}
+                title={categoryNames[category] || category}
                 onCheckboxChange={handleCheckboxChange}
               />
             );
@@ -116,5 +95,3 @@ const FilterModal = ({
     </div>
   );
 };
-
-export default FilterModal;

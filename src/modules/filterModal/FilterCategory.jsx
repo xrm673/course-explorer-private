@@ -4,7 +4,7 @@ import styles from './FilterModal.module.css';
 
 export default function FilterCategory({ categoryKey, categoryData, title, onCheckboxChange }){
     // For normal categories
-    if (categoryKey !== 'Requirements') {
+    if (categoryKey !== 'majorRequirements') {
       return (
         <div className={styles.filterSection}>
           <h3>{title}</h3>
@@ -12,9 +12,7 @@ export default function FilterCategory({ categoryKey, categoryData, title, onChe
             {Object.keys(categoryData).map(option => (
               <div key={`${categoryKey}-${option}`} className={styles.filterOption}>
                 <div className={styles.optionLabel}>
-                  {categoryKey === 'enrollment' 
-                    ? option.charAt(0).toUpperCase() + option.slice(1) 
-                    : option}
+                  { option }
                 </div>
                 <div className={styles.checkboxGroup}>
                   <label className={styles.checkboxLabel}>
@@ -40,7 +38,7 @@ export default function FilterCategory({ categoryKey, categoryData, title, onChe
         </div>
       );
     }
-    
+
     // Special handling for major requirements
     const groupedRequirements = Object.entries(categoryData).reduce((acc, [key, req]) => {
       const majorId = req.majorId;
@@ -53,7 +51,6 @@ export default function FilterCategory({ categoryKey, categoryData, title, onChe
       acc[majorId].requirements[key] = req;
       return acc;
     }, {});
-    
     return (
       <div className={styles.filterSection}>
         <h3>Major Requirements</h3>

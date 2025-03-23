@@ -51,7 +51,8 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
     const { req, loading, error } = useRequirement(reqId);
 
     // Get filters data
-    const { filters, applyFilters } = useFilter(showFilterModal, user, academicData);
+    const { filters, categoryNames, applyFilters } = useFilter(
+        showFilterModal, user, academicData);
 
     // Add this useEffect in MajorRequirement.jsx
     useEffect(() => {
@@ -207,13 +208,13 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
                             const eligibility = checkCourseEligibility(course, user);
                             
                             // Apply "only" filter
-                            if (filters.enrollment.eligible?.only && !eligibility.isEligible) {
+                            if (filters.enrollment.Eligible?.only && !eligibility.isEligible) {
                                 shouldKeep = false;
                                 continue;
                             }
                             
                             // Apply "prefer" filter
-                            if (filters.enrollment.eligible?.prefer && eligibility.isEligible) {
+                            if (filters.enrollment.Eligible?.prefer && eligibility.isEligible) {
                                 score += 20;
                             }
                         }
@@ -457,8 +458,9 @@ export default function MajorRequirement({ reqId, selectedSemester }) {
             
             <FilterModal 
                 isOpen={showFilterModal}
-                onClose={() => setShowFilterModal(false)}
                 filters={filters}
+                categoryNames={categoryNames}
+                onClose={() => setShowFilterModal(false)}
                 onApplyFilters={handleApplyFilters} 
             />
         </div>
