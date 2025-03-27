@@ -27,5 +27,5 @@ export function useMajor(majorId) {
         
         fetchMajor();
     }, [majorId]);
-    return { major, selectedCollegeId, loading, error };
+    return { major, selectedCollegeId, setSelectedCollegeId, loading, error };
 }

@@ -3,6 +3,8 @@ import { useParams } from "react-router"
 import { useContext } from 'react';
 import { UserContext } from '../../context/UserContext';
 import { useMajor } from '../hooks/useMajor';
+import { useBasicRequirements } from '../hooks/useRequirement';
+import { getRequirementById } from '../../firebase/services/requirementService';
 
 import MajorRequirement from './MajorRequirement';
 import SemesterSelector from './SemesterSelector';
@@ -10,13 +12,20 @@ import ConcentrationSelector from './ConcentrationSelector';
 import styles from './SingleMajorPage.module.css';
 
 export default function SingleMajorPage() {
+    const { majorId } = useParams();
     const { user, isLoggedIn } = useContext(UserContext);
-    const [selectedSemester, setSelectedSemester] = useState('FA25'); // Default to Fall 2025
+    const [takenCourses, setTakenCourses] = useState(new Set());
+    const [selectedSemester, setSelectedSemester] = useState('FA25');
+
+
+    const [concentrationRequirements, setConcentrationRequirements] = useState([])
     const [selectedConcentration, setSelectedConcentration] = useState('')
     const [allConcentrations, setAllConcentrations] = useState([])
-    const { majorId } = useParams();
 
-    const { major, selectedCollegeId, loading, error } = useMajor(majorId);
+    const[endRequirements, setEndRequirements] = useState([])
+
+    // get major data
+    const { major, selectedCollegeId, setSelectedCollegeId, loading, error } = useMajor(majorId);
 
     let hasConcentrations = false
     let firstConcentration = null
@@ -59,10 +68,39 @@ export default function SingleMajorPage() {
         }
       }, [major, user, majorId]);
 
+    // Set taken courses
+    useEffect(
+        () => {
+            if (!user || !user.scheduleData || !user.scheduleData.taken) {
+                return;
+            }
+            // Set has efficient look up
+            const takenCoursesSet = new Set();
+            // Object.values convert the values of a map to an array
+            Object.values(user.scheduleData.taken).forEach(semester => {
+                semester.forEach(course => {
+                    if (course && course.code) {
+                        takenCoursesSet.add(course.code);
+                    }
+                });
+            });
+            setTakenCourses(takenCoursesSet)
+        }, [user]
+    )
+
     // Handler for college selection change
     const handleCollegeChange = (e) => {
         setSelectedCollegeId(e.target.value);
     };
+
+    const { 
+        requirements: basicRequirements, 
+        usedCourses: basicUsedCourses, 
+        loading: basicReqLoading, 
+        error: basicReqError 
+    } = useBasicRequirements(major, selectedCollegeId, takenCourses);
+    console.log(basicRequirements)
+    console.log(basicUsedCourses)
 
     // Handler for semester selection change
     const handleSemesterChange = (semester) => {
